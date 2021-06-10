@@ -1,9 +1,8 @@
 package com.example.foodorderingsystem.Entity;
 
 public class Account {
-    private int aID;
-    public Account() {
 
+    public Account() {
     }
 
     public Account(int aID, int roleID, String aEmail, String aPassword, Double aCoins, String aFirstname, String aLastName, String aPhone, String aAddress, int aStatus) {
@@ -18,10 +17,6 @@ public class Account {
         this.aAddress = aAddress;
         this.aStatus = aStatus;
     }
-
-    private int roleID;
-    private String aEmail;
-    private String aPassword;
 
     public int getaID() {
         return aID;
@@ -103,6 +98,10 @@ public class Account {
         this.aStatus = aStatus;
     }
 
+    private int aID;
+    private int roleID;
+    private String aEmail;
+    private String aPassword;
     private Double aCoins;
     private String aFirstname;
     private String aLastName;
