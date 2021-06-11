@@ -1,4 +1,4 @@
-package com.example.foodorderingsystem.Entity;
+package com.example.foodorderingsystem.Model;
 
 public class Account {
 
