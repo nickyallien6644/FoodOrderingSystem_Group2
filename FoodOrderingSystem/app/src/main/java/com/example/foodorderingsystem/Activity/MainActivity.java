@@ -1,11 +1,10 @@
-package com.example.foodorderingsystem;
+package com.example.foodorderingsystem.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import com.example.foodorderingsystem.R;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
