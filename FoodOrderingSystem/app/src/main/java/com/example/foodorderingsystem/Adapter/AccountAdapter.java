@@ -1,4 +1,4 @@
-package com.example.foodorderingsystem;
+package com.example.foodorderingsystem.Adapter;
 
 import android.accounts.Account;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.foodorderingsystem.R;
 
 import java.util.List;
 
