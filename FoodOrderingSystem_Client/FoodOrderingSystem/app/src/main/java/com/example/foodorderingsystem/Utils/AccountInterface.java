@@ -1,9 +1,7 @@
 package com.example.foodorderingsystem.Utils;
 
-import android.accounts.Account;
-
+import com.example.foodorderingsystem.Model.Account;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
