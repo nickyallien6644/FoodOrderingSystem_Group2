@@ -1,6 +1,8 @@
 package com.example.foodorderingsystem.Model;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
 
     public Account() {
     }
