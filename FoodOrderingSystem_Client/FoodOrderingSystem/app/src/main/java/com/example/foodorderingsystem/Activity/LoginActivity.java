@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtras (bundle);
             startActivity (intent);
         }else {
-            Toast.makeText (LoginActivity.this, "nhu cat",Toast.LENGTH_SHORT).show();
+            Toast.makeText (LoginActivity.this, "likecat",Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundall"
     tools:context=".Register">
-
     <EditText
         android:id="@+id/RetxtLastName"
         android:layout_width="162dp"
@@ -106,12 +105,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/Naviga"
             android:layout_width="397dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginTop="55dp"
+            android:background="@drawable/box"
             app:itemTextColor="@color/Cam"
             app:menu="@menu/menu" />
 
@@ -147,15 +148,17 @@
         android:id="@+id/btnRegister"
         android:layout_width="262dp"
         android:layout_height="59dp"
+        android:background="@drawable/box"
+        android:onClick="btnResgister"
         android:radius="30dp"
         android:text="Register"
         app:backgroundTint="#FA4A0C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintVertical_bias="0.991" />
 
     <EditText

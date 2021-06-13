@@ -1,10 +1,10 @@
 package com.example.apimysql.Controller;
 
+import com.example.apimysql.Model.Account;
 import com.example.apimysql.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +22,14 @@ public class AccountController {
     @GetMapping("/getid")
     public List<Map<String, Object>> listAccounts(int aID) {
         return service.listAccounts();
+    }
+
+    @PostMapping("/add")
+    public String add(@RequestBody Account account) {
+        int id=service.add(account);
+        if(id==0) {
+            return "No se pudo Regsitrar!";
+        }
+        return "Se registró con éxito!";
     }
 }
