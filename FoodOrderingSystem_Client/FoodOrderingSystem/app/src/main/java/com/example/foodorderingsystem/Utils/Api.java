@@ -1,8 +1,8 @@
 package com.example.foodorderingsystem.Utils;
 
-public class Service {
+public class Api {
     //create string url
-    public static final String URL="http://192.168.1.45:8080/user/";
+    public static final String URL="http://192.168.1.19:8080/account/";
 
     public static AccountInterface getClients(){
         //return element of url
