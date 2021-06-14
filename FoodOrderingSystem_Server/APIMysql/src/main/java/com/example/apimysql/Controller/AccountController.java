@@ -28,8 +28,8 @@ public class AccountController {
     public String add(@RequestBody Account account) {
         int id=service.add(account);
         if(id==0) {
-            return "No se pudo Regsitrar!";
+            return "Faile Add Account   ";
         }
-        return "Se registró con éxito!";
+        return "Add acount is success";
     }
 }
