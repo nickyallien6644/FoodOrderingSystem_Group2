@@ -3,27 +3,23 @@ package com.example.foodorderingsystem.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.R;
-import com.example.foodorderingsystem.Utils.AccountInterface;
+import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    AccountInterface accountService;
+    ApiInterface accountService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

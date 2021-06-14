@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.R;
-import com.example.foodorderingsystem.Utils.AccountInterface;
+import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    AccountInterface accountService;
+    ApiInterface accountService;
     private List<Account> listAccounts;
     Account user;
 
