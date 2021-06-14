@@ -1,4 +1,4 @@
-var optionsProfileVisit = {
+var optionsProfileVisitWeek = {
 	annotations: {
 		position: 'back'
 	},
@@ -15,12 +15,64 @@ var optionsProfileVisit = {
 	plotOptions: {
 	},
 	series: [{
-		name: 'sales',
-		data: [9,20,30,20,10,20,30,20,10,20,30,20]
+		name: 'Orders',
+		data: [3,2,10,20,10,20,15,19,10,21,25,20]
 	}],
 	colors: '#435ebe',
 	xaxis: {
 		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
+	},
+}
+
+var optionsProfileVisitMonth = {
+	annotations: {
+		position: 'back'
+	},
+	dataLabels: {
+		enabled:false
+	},
+	chart: {
+		type: 'bar',
+		height: 300
+	},
+	fill: {
+		opacity:1
+	},
+	plotOptions: {
+	},
+	series: [{
+		name: 'Orders',
+		data: [53,20,30,20,20,20,30,30,10,20,30,60]
+	}],
+	colors: '#435ebe',
+	xaxis: {
+		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
+	},
+}
+
+var optionsProfileVisitYear = {
+	annotations: {
+		position: 'back'
+	},
+	dataLabels: {
+		enabled:false
+	},
+	chart: {
+		type: 'bar',
+		height: 300
+	},
+	fill: {
+		opacity:1
+	},
+	plotOptions: {
+	},
+	series: [{
+		name: 'Orders',
+		data: [63,70,60,70,80]
+	}],
+	colors: '#435ebe',
+	xaxis: {
+		categories: ["2017","2018","2019","2020","2021"],
 	},
 }
 let optionsVisitorsProfile  = {
@@ -103,7 +155,10 @@ let optionsIndonesia = {
 
 
 
-var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-visit"), optionsProfileVisit);
+var chartProfileVisitWeek = new ApexCharts(document.querySelector("#chart-profile-visit-Week"), optionsProfileVisitWeek);
+var chartProfileVisitMonth = new ApexCharts(document.querySelector("#chart-profile-visit-Month"), optionsProfileVisitMonth);
+var chartProfileVisitYear = new ApexCharts(document.querySelector("#chart-profile-visit-Year"), optionsProfileVisitYear);
+
 var chartVisitorsProfile = new ApexCharts(document.getElementById('chart-visitors-profile'), optionsVisitorsProfile)
 var chartEurope = new ApexCharts(document.querySelector("#chart-europe"), optionsEurope);
 var chartAmerica = new ApexCharts(document.querySelector("#chart-america"), optionsAmerica);
@@ -112,5 +167,7 @@ var chartIndonesia = new ApexCharts(document.querySelector("#chart-indonesia"), 
 chartIndonesia.render();
 chartAmerica.render();
 chartEurope.render();
-chartProfileVisit.render();
+chartProfileVisitWeek.render();
+chartProfileVisitMonth.render();
+chartProfileVisitYear.render();
 chartVisitorsProfile.render()
