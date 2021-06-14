@@ -32,15 +32,15 @@
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
-                    <form action="login.jsp">
+                    <form action="Signin" id="SigninForm" method="POST">
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Username">
+                            <input type="text" class="form-control form-control-xl" name="SigninName"placeholder="Username">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password">
+                            <input type="password" name="SigninPassword" class="form-control form-control-xl" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
