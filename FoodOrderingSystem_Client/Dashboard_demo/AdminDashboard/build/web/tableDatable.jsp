@@ -45,13 +45,13 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item active ">
+                            <li class="sidebar-item  ">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item  ">
+                            <li class="sidebar-item active">
                                 <a href="tableDatable.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     <span>Datatable</span>
