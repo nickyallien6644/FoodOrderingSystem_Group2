@@ -8,7 +8,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +28,16 @@
         <link rel="stylesheet" href="css/app.css">
 
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     </head>
 
     <body>
+        <c:if test="${sessionScope.LoginUser == null}">
+            <%
+                response.sendRedirect("login.jsp");
+            %>
+        </c:if>
         <div id="app">
             <div id="sidebar" class="active">
                 <div class="sidebar-wrapper active">
@@ -141,8 +147,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <h6 class="text-muted font-semibold">Profile Views</h6>
-                                                    <h6 class="font-extrabold mb-0">112.000</h6>
+                                                    <h6 class="text-muted font-semibold">Orders of Customer</h6>
+                                                    <h6 class="font-extrabold mb-0">999</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,8 +164,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <h6 class="text-muted font-semibold">Followers</h6>
-                                                    <h6 class="font-extrabold mb-0">183.000</h6>
+                                                    <h6 class="text-muted font-semibold">Staff accounts</h6>
+                                                    <h6 class="font-extrabold mb-0">60</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -175,8 +181,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <h6 class="text-muted font-semibold">Following</h6>
-                                                    <h6 class="font-extrabold mb-0">80.000</h6>
+                                                    <h6 class="text-muted font-semibold">Restaurants</h6>
+                                                    <h6 class="font-extrabold mb-0">110</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -204,10 +210,37 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4>Profile Visit</h4>
+                                            <h4>Order statistics</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div id="chart-profile-visit"></div>
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
+                                                       role="tab" aria-controls="home" aria-selected="true">Week</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
+                                                       role="tab" aria-controls="profile" aria-selected="false">Month</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
+                                                       role="tab" aria-controls="contact" aria-selected="false">Year</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                                     aria-labelledby="home-tab">
+                                                    <div id="chart-profile-visit-Week"></div>
+                                                </div>
+                                                <div class="tab-pane fade" id="profile" role="tabpanel"
+                                                     aria-labelledby="profile-tab">
+                                                    <div id="chart-profile-visit-Month"></div>
+                                                </div>
+                                                <div class="tab-pane fade" id="contact" role="tabpanel"
+                                                     aria-labelledby="contact-tab">
+                                                    <div id="chart-profile-visit-Year" ></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -335,8 +368,8 @@
                                             <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
                                         </div>
                                         <div class="ms-3 name">
-                                            <h5 class="font-bold">John Duck</h5>
-                                            <h6 class="text-muted mb-0">@johnducky</h6>
+                                            <h5 class="font-bold">Admin01</h5>
+                                            <h6 class="text-muted mb-0">@ThinhBNP</h6>
                                         </div>
                                     </div>
                                 </div>
