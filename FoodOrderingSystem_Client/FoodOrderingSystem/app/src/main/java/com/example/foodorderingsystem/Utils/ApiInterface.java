@@ -1,7 +1,6 @@
 package com.example.foodorderingsystem.Utils;
 
 import com.example.foodorderingsystem.Model.Account;
-import com.example.foodorderingsystem.Model.Image;
 import com.example.foodorderingsystem.Model.Product;
 
 import java.util.List;
@@ -17,6 +16,6 @@ public interface ApiInterface {
     @POST("add")
     Call<Account>addPersona(@Body Account account);
 
-    @GET("listProduct")
-    Call<List<Product>> getAllProduct();
+    @GET("listProducts")
+    Call<List<Product>> getProducts();
 }
