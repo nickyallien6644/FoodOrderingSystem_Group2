@@ -1,6 +1,8 @@
 package com.example.foodorderingsystem.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,15 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btnLogin = findViewById (R.id.btnLogin);
-
-        TextView txtuser = findViewById (R.id.test);
-        Bundle bundleUser = getIntent().getExtras();
-        if(bundleUser != null){
-            Account account = (Account) bundleUser.get ("Oject_User");
-            if (account != null){
-                txtuser.setText (account.toString());
+        btnLogin.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MainActivity.this,LoginActivity.class);
+                startActivity (intent);
             }
-       }
+        });
+        TextView txtuser = findViewById (R.id.test);
+
     }
 
 }
