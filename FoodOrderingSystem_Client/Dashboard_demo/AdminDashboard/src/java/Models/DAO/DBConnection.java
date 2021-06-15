@@ -28,7 +28,7 @@ public class DBConnection {
     public DBConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //use com.mysql.jdbc.Driver to connect to MySQL Server
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/foodbooking1", "root", ""); //Connects to MySQL Server base on URL, UID, PWD
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/be0knzrgmal0ti7orl6j", "uobol8sky4xqltix", "TFYvbuHyW0V23VkZTS9K"); //Connects to MySQL Server base on URL, UID, PWD
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
