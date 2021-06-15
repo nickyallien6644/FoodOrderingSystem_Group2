@@ -8,7 +8,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +28,16 @@
         <link rel="stylesheet" href="css/app.css">
 
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     </head>
 
     <body>
+        <c:if test="${sessionScope.LoginUser == null}">
+            <%
+                response.sendRedirect("login.jsp");
+            %>
+        </c:if>
         <div id="app">
             <div id="sidebar" class="active">
                 <div class="sidebar-wrapper active">
