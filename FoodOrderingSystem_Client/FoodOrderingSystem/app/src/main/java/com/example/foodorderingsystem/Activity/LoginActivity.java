@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.R;
-import com.example.foodorderingsystem.Utils.AccountInterface;
+import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    AccountInterface accountService;
+    ApiInterface accountService;
     private List<Account> listAccounts;
     Account user;
 
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void Login(){
         email = txtMail.getText ().toString ().trim ();
-        password  = txtpass.getText ().toString ().trim ();
+        password  = md5 (txtpass.getText ().toString ().trim ());
         if(listAccounts == null || listAccounts.isEmpty ()){
             return;
         }
@@ -91,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())){
                 isAcount = true;
                 user = account;
+                Toast.makeText (LoginActivity.this, "Yes",Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -103,5 +106,29 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             Toast.makeText (LoginActivity.this, "likecat",Toast.LENGTH_SHORT).show();
         }
+    }
+    public static String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

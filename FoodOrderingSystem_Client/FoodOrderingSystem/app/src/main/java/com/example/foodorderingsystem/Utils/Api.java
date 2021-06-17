@@ -2,10 +2,10 @@ package com.example.foodorderingsystem.Utils;
 
 public class Api {
     //create string url
-    public static final String URL="http://192.168.1.40:8080/account/";
+    public static final String URL="http://192.168.1.32:8080/product/";
 
-    public static AccountInterface getClients(){
+    public static ApiInterface getClients(){
         //return element of url
-        return Client.getRetrofit(URL).create(AccountInterface.class);
+        return Client.getRetrofit(URL).create(ApiInterface.class);
     }
 }

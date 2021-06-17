@@ -13,9 +13,7 @@
         android:theme="@style/Theme.FoodOrderingSystem"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.OderHistory"
-            android:label="ORDER HISTORY"  android:background="#FFFFFF" android:textColor="#000000" android:gravity="center"
-            >
-
+            android:label="ORDER HISTORY"  android:background="#FFFFFF" android:textColor="#000000" android:gravity="center">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
@@ -23,6 +21,7 @@
 <!--            </intent-filter>-->
         </activity>
 <!--        <activity android:name=".Activity.LoginActivity" />-->
+        <activity android:name=".Activity.LoginActivity"/>
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.RegisterActivity">
             <intent-filter>
