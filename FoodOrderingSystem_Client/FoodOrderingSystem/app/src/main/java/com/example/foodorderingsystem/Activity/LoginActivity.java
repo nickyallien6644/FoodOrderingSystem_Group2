@@ -110,11 +110,11 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent (LoginActivity.this, MainActivity.class);
             Bundle bundle = new Bundle ();
             bundle.putSerializable ("Oject_User",user);
-          intent.putExtras (bundle);
+             intent.putExtras (bundle);
             startActivity (intent);
             overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
         }else {
-            Toast.makeText (LoginActivity.this, "likecat",Toast.LENGTH_SHORT).show();
+            Toast.makeText (LoginActivity.this, "Incorrect email or password",Toast.LENGTH_SHORT).show();
         }
     }
     public static String md5(final String s) {
