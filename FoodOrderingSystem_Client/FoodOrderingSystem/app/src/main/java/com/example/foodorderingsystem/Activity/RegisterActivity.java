@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,15 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Button btnSignin = findViewById (R.id.btn_Signin);
+        btnSignin.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+                overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
     }
 
     public void btnResgister(View view){
