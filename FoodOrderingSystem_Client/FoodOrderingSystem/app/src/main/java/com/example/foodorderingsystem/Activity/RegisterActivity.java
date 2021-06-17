@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.R;
+import com.example.foodorderingsystem.Utils.AccountInterface;
 import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
 
@@ -19,7 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    ApiInterface accountService;
+    AccountInterface accountService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void addPersona(Account p){
-        accountService = Api.getClients();
+        accountService = Api.getClients1();
         Call<Account> call= accountService.addPersona(p);
         call.enqueue(new Callback<Account>() {
             @Override

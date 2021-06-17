@@ -13,7 +13,7 @@ public interface ApiInterface {
     @GET("list")
     Call<List<Account>> getAccounts();
 
-    @POST("add")
+    @POST("product/add")
     Call<Account>addPersona(@Body Account account);
 
     @GET("listProducts")
