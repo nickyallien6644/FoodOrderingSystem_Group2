@@ -108,9 +108,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (isAcount){
             Intent intent = new Intent (LoginActivity.this, MainActivity.class);
-//            Bundle bundle = new Bundle ();
-//            bundle.putSerializable ("Oject_User",user);
-//            intent.putExtras (bundle);
+            Bundle bundle = new Bundle ();
+            bundle.putSerializable ("Oject_User",user);
+          intent.putExtras (bundle);
             startActivity (intent);
             overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
         }else {
