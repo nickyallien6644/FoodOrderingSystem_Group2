@@ -49,6 +49,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,13 +73,7 @@
                     android:layout_height="105dp"
                     android:text="Sign in"
                     android:textColor="@color/Cam"
-                    app:backgroundTint="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.801"
-                    />
+                    app:backgroundTint="@color/white" />
                 <LinearLayout
                     android:layout_marginTop="-6dp"
                     android:layout_width="match_parent"
@@ -89,21 +84,15 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="205dp"
-                android:orientation="vertical"
                 android:layout_height="match_parent">
                 <Button
+                    android:layout_marginTop="-5dp"
                     android:id="@+id/btn_SignUp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/Cam"
                     app:backgroundTint="@color/white"
-                    android:text="Sign Up"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.801"
-                    />
+                    android:text="Sign Up" />
             </LinearLayout>
         </LinearLayout>
 
