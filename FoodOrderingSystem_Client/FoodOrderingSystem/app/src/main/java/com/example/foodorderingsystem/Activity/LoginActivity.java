@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     String email, password;
     boolean isAcount = false;
     Button btnSignIn;
+    Button btnSignUp;
     EditText txtMail;
     EditText txtpass;
 
@@ -48,7 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.hide();
         txtMail = (EditText) findViewById(R.id.editTextTextEmailAddress);
         txtpass = (EditText) findViewById(R.id.editTextTextPassword);
-
+        btnSignUp = findViewById (R.id.btn_SignUp);
+        btnSignUp.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (LoginActivity.this, RegisterActivity.class);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
         btnSignIn = (Button) findViewById(R.id.btnSignin);
         getUser();
 
@@ -99,10 +108,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (isAcount){
             Intent intent = new Intent (LoginActivity.this, MainActivity.class);
-            Bundle bundle = new Bundle ();
-            bundle.putSerializable ("Oject_User",user);
-            intent.putExtras (bundle);
+//            Bundle bundle = new Bundle ();
+//            bundle.putSerializable ("Oject_User",user);
+//            intent.putExtras (bundle);
             startActivity (intent);
+            overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
         }else {
             Toast.makeText (LoginActivity.this, "likecat",Toast.LENGTH_SHORT).show();
         }
