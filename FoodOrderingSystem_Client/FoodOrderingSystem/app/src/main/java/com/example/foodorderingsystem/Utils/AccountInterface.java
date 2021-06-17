@@ -14,9 +14,9 @@ import retrofit2.http.POST;
 
 public interface AccountInterface {
     Gson gson = new GsonBuilder ().setDateFormat ("yyyy-MM-dd HH:mm:ss").create ();
-    AccountInterface apiService  = new Retrofit.Builder().baseUrl ("http://localhost:8080/account/")
+    AccountInterface apiService  = new Retrofit.Builder().baseUrl ("http://localhost:8080/")
             .addConverterFactory (GsonConverterFactory.create (gson)).build ().create (AccountInterface.class);
-    @GET("list")
+    @GET("account/list")
     Call<List<Account>> getAccounts();
 
     @POST("account/add")

@@ -11,21 +11,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Food Ordering System - Admin Dashboard</title>
+        <title>Food Ordering System - Dashboard</title>
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/css/bootstrap.css">
 
         <!--    <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/iconly/bold.css">-->
-        <link rel="stylesheet" href="css/bold.css">
+        <link rel="stylesheet" href="../css/bold.css">
 
 
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
         <!--<link rel="stylesheet" href="css/perfect-scrollbar.css">-->
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/bootstrap-icons/bootstrap-icons.css">
         <!--    <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/css/app.css">-->
-        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="../css/app.css">
 
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
       
@@ -39,7 +39,7 @@
                     <div class="sidebar-header">
                         <div class="d-flex justify-content-between">
                             <div class="logo">
-                                <a href="index.jsp"><img src="img/logo.png" alt="Logo" srcset=""></a>
+                                <a href="index.jsp"><img src="../img/logo.png" alt="Logo" class="w-50 h-50" srcset=""></a>
                                 <h2 class="page-heading">FOOD ORDERING MANAGEMENTS</h2>
                             </div>
                             <div class="toggler">
@@ -54,44 +54,14 @@
                             <li class="sidebar-item active ">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Dashboard</span>
+                                    <span>Staff dashboard</span>
                                 </a>
                             </li>
-<!--                            <li class="sidebar-item  ">
-                                <a href="tableDatable.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Datatable</span>
-                                </a>
-                            </li>-->
-
-                            <li class="sidebar-title">Pages</li>
-
+                            
                             <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-email.html" class='sidebar-link'>
+                                <a href="UpdateRestaurant.jsp" class='sidebar-link'>
                                     <i class="bi bi-envelope-fill"></i>
-                                    <span>Email Application</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-chat.html" class='sidebar-link'>
-                                    <i class="bi bi-chat-dots-fill"></i>
-                                    <span>Chat Application</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-gallery.html" class='sidebar-link'>
-                                    <i class="bi bi-image-fill"></i>
-                                    <span>Photo Gallery</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-title">Raise Support</li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
-                                    <i class="bi bi-life-preserver"></i>
-                                    <span>Documentation</span>
+                                    <span>Restaurant information</span>
                                 </a>
                             </li>
                         </ul>
@@ -99,10 +69,6 @@
                     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
                 </div>
             </div>
-
-            <!--            //*******************************************************-->
-            <!--            //*******************************************************-->
-            <!--            //*******************************************************-->
             <div id="main">
                 <header class="mb-3">
                     <a href="#" class="burger-btn d-block d-xl-none">
@@ -270,21 +236,21 @@
                                                 </ol>
                                                 <div class="carousel-inner">
                                                     <div class="carousel-item active">
-                                                        <img src="img/SANDWICH-TRUNG-MAYO.jpg" class="d-block w-100" alt="...">
+                                                        <img src="../img/SANDWICH-TRUNG-MAYO.jpg" class="d-block w-100" alt="...">
                                                         <div class="carousel-caption d-none d-md-block">
                                                             <h5 class="bg-dark">Sandwich Egg & Mayonnaise</h5>
                                                             <p class="bg-dark">30.000 đ</p>
                                                         </div>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <img  src="img/BANH-MI-NEM-NUONG.jpg" class="d-block w-100" alt="...">
+                                                        <img  src="../img/BANH-MI-NEM-NUONG.jpg" class="d-block w-100" alt="...">
                                                         <div class="carousel-caption d-none d-md-block">
                                                             <h5 class="bg-dark">Vietnamese Sausages Bread</h5>
                                                             <p class="bg-dark">25.000 đ</p>
                                                         </div>
                                                     </div>
                                                     <div class="carousel-item">
-                                                        <img  src="img/MI-TRON-XUC-XICH.jpg" class="d-block w-100" alt="...">
+                                                        <img  src="../img/MI-TRON-XUC-XICH.jpg" class="d-block w-100" alt="...">
                                                         <div class="carousel-caption d-none d-md-block">
                                                             <h5 class="bg-dark">Mixed Noodles with Sausages</h5>
                                                             <p class="bg-dark">32.000 đ</p>
@@ -315,7 +281,7 @@
                                             <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
                                         </div>
                                         <div class="ms-3 name">
-                                            <h5 class="font-bold">Admin01</h5>
+                                            <h5 class="font-bold">STAFF01</h5>
                                             <h6 class="text-muted mb-0">@ThinhBNP</h6>
                                         </div>
                                     </div>
@@ -385,20 +351,20 @@
             </div>
         </div>
         <!--<script src="https://zuramai.github.io/mazer/demo/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>-->
-        <script src="js/perfect-scrollbar.min.js"></script>
+        <script src="../js/perfect-scrollbar.min.js"></script>
 
         <!--<script src="https://zuramai.github.io/mazer/demo/assets/js/bootstrap.bundle.min.js"></script>-->
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
 
 
         <!--<script src="https://zuramai.github.io/mazer/demo/assets/vendors/apexcharts/apexcharts.js"></script>-->
-        <script src="js/apexcharts.js"></script>
+        <script src="../js/apexcharts.js"></script>
         <!--<script src="https://zuramai.github.io/mazer/demo/assets/js/pages/dashboard.js"></script>-->
-        <script src="js/dashboard.js"></script>
+        <script src="../js/dashboard.js"></script>
 
 
         <!--<script src="https://zuramai.github.io/mazer/demo/assets/js/main.js"></script>-->
-        <script src="js/main.js"></script>
+        <script src="../js/main.js"></script>
 
     </body>
 
