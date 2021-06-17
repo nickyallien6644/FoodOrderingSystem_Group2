@@ -19,6 +19,6 @@ public interface AccountInterface {
     @GET("list")
     Call<List<Account>> getAccounts();
 
-    @POST("add")
+    @POST("account/add")
     Call<Account>addPersona(@Body Account account);
 }
