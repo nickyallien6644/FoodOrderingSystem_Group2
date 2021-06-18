@@ -4,6 +4,8 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.Account"%>
+<%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
@@ -52,19 +54,30 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <hr>
+                         
                             <form class="form" action="indexAdmin.jsp" method="post" id="registrationForm">
+                                   <%
+                                int id = 0;
+                                if (request.getParameter("id")!=null) {
+                                       id = Integer.parseInt(request.getParameter("id")); 
+                                   }
+                                if (id!=0) {
+                                        AccountDAO accountDAO = new AccountDAO();
+                                        Account account = accountDAO.getAccountById(id);
+                                    
+                            %>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control first_name" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                        <input type="text" value="<%=account.getaFirstname()%>"  class="form-control first_name" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
                                     </div>
                                 </div>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                        <input type="text" value="<%=account.getaLastname() %>" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
                                     </div>
                                 </div>
 
@@ -72,14 +85,14 @@
 
                                     <div class="col-xs-6">
                                         <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                        <input type="text" value="<%=account.getaPhone() %>" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
                                     </div>
                                 </div>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                        <input type="email" value="<%=account.getAemail() %>" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
                                     </div>
                                 </div>
                                 <div class="form-group" >
@@ -92,6 +105,10 @@
                                         </select>
                                     </div>
                                 </div>
+                                <%
+                                
+                                }
+                                %>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
