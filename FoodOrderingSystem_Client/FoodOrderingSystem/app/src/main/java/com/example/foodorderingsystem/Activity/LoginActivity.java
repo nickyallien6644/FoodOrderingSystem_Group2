@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     String email, password;
     boolean isAcount = false;
     Button btnSignIn;
+    Button btnSignUp;
     EditText txtMail;
     EditText txtpass;
 
@@ -43,12 +44,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         listAccounts = new ArrayList<> ();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         txtMail = (EditText) findViewById(R.id.editTextTextEmailAddress);
         txtpass = (EditText) findViewById(R.id.editTextTextPassword);
-
+        btnSignUp = findViewById (R.id.btn_SignUp);
+        btnSignUp.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (LoginActivity.this, RegisterActivity.class);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
         btnSignIn = (Button) findViewById(R.id.btnSignin);
         getUser();
 
@@ -93,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())){
                 isAcount = true;
                 user = account;
-                Toast.makeText (LoginActivity.this, "Yes",Toast.LENGTH_SHORT).show();
+                Toast.makeText (LoginActivity.this, "Sign in successful",Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -101,10 +111,11 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent (LoginActivity.this, MainActivity.class);
             Bundle bundle = new Bundle ();
             bundle.putSerializable ("Oject_User",user);
-            intent.putExtras (bundle);
+             intent.putExtras (bundle);
             startActivity (intent);
+            overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
         }else {
-            Toast.makeText (LoginActivity.this, "likecat",Toast.LENGTH_SHORT).show();
+            Toast.makeText (LoginActivity.this, "Incorrect email or password",Toast.LENGTH_SHORT).show();
         }
     }
     public static String md5(final String s) {

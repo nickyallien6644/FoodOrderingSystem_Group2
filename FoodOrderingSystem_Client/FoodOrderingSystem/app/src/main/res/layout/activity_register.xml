@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundall"
     tools:context=".Register">
+
     <EditText
         android:id="@+id/RetxtLastName"
-        android:layout_width="162dp"
+        android:layout_width="170dp"
         android:layout_height="37dp"
+        android:layout_marginStart="212dp"
         android:ems="10"
+        android:hint="LastName"
         android:inputType="textPersonName"
-        android:text="LastName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.628" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <TextView
         android:id="@+id/textView7"
@@ -27,10 +27,10 @@
         android:text="Last Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/RetxtLastName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        app:layout_constraintVertical_bias="0.542" />
 
     <TextView
         android:id="@+id/textView6"
@@ -39,10 +39,10 @@
         android:text="Address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <TextView
         android:id="@+id/textView5"
@@ -51,10 +51,10 @@
         android:text="Phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.666" />
 
     <TextView
         android:id="@+id/textView4"
@@ -63,10 +63,10 @@
         android:text="Frist Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        app:layout_constraintVertical_bias="0.543" />
 
     <TextView
         android:id="@+id/textView"
@@ -78,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.425" />
 
     <TextView
         android:id="@+id/textView2"
@@ -87,34 +87,55 @@
         android:text="Email Address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:background="@drawable/box"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
+        <LinearLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_marginTop="-5dp"
+                android:id="@+id/btn_Signin"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:text="Sign in"
+                android:textColor="@color/Cam"
+                app:backgroundTint="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="205dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_marginTop="-5dp"
+                android:id="@+id/btn_SignUp"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:text="Sign Up"
+                android:textColor="@color/Cam"
+                app:backgroundTint="@color/white" />
+            <LinearLayout
+                android:layout_marginTop="-6dp"
+                android:layout_width="match_parent"
+                android:background="@color/Cam"
+                android:layout_height="match_parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/Naviga"
-            android:layout_width="397dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="55dp"
-            android:background="@drawable/box"
-            app:itemTextColor="@color/Cam"
-            app:menu="@menu/menu" />
+            </LinearLayout>
+        </LinearLayout>
+
 
 
     </LinearLayout>
@@ -126,23 +147,23 @@
         android:text="Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <EditText
         android:id="@+id/RetxtEmail"
-        android:layout_width="311dp"
+        android:layout_width="360dp"
         android:layout_height="45dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.245" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -151,80 +172,80 @@
         android:background="@drawable/box"
         android:onClick="btnResgister"
         android:radius="30dp"
-        android:text="Register"
+        android:text="Sign Up"
         app:backgroundTint="#FA4A0C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.469"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <EditText
         android:id="@+id/RetxtPhone"
-        android:layout_width="315dp"
+        android:layout_width="360dp"
         android:layout_height="47dp"
         android:ems="10"
         android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintVertical_bias="0.752" />
 
     <EditText
         android:id="@+id/RetxtConfirPass"
-        android:layout_width="312dp"
+        android:layout_width="360dp"
         android:layout_height="41dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.252"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintVertical_bias="0.366" />
 
     <EditText
         android:id="@+id/RetxtPass"
-        android:layout_width="316dp"
+        android:layout_width="360dp"
         android:layout_height="46dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <EditText
         android:id="@+id/RetxtFirstName"
         android:layout_width="182dp"
         android:layout_height="40dp"
         android:ems="10"
+        android:hint="FirstName"
         android:inputType="textPersonName"
-        android:text="FirstName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <EditText
         android:id="@+id/RetxtAddress"
-        android:layout_width="310dp"
+        android:layout_width="360dp"
         android:layout_height="48dp"
         android:ems="10"
+        android:hint="Address"
         android:inputType="textPersonName"
-        android:text="Address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
+        app:layout_constraintVertical_bias="0.881" />
 </androidx.constraintlayout.widget.ConstraintLayout>
