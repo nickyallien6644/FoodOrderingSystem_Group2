@@ -2,13 +2,11 @@ package com.example.foodorderingsystem.Activity;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,18 +30,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
     ApiInterface accountService;
     private List<Account> listAccounts;
     Account user;
 
     String email, password;
     boolean isAcount = false;
-    Button btnSignUp;
     TextInputLayout etxtMail;
     TextInputLayout etxtpass;
     TextView txtError;
-    TextInputLayout txtInpLayout;
     SessionManagement sessionManagement;
 
 
@@ -51,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signin);
 
 
         listAccounts = new ArrayList<> ();
@@ -59,15 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.hide();
         getUser ();
         checkSession();
-        btnSignUp = findViewById (R.id.btn_SignUp);
-        btnSignUp.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (LoginActivity.this, RegisterActivity.class);
-                startActivity (intent);
-                overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
 
     }
     private boolean validateEmail(){
@@ -132,20 +119,20 @@ public class LoginActivity extends AppCompatActivity {
                 if (email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())) {
                     isAcount = true;
                     user = account;
-                    Toast.makeText (LoginActivity.this, "Yes", Toast.LENGTH_SHORT).show ();
+                    Toast.makeText (SignInActivity.this, "Yes", Toast.LENGTH_SHORT).show ();
                     break;
                 }
             }
             if (isAcount) {
-                Intent intent = new Intent (LoginActivity.this, MainActivity.class);
-                sessionManagement = new SessionManagement (LoginActivity.this) ;
+                Intent intent = new Intent (SignInActivity.this, MainActivity.class);
+                sessionManagement = new SessionManagement (SignInActivity.this) ;
                 sessionManagement.saveSession (user);
 
                 startActivity (intent);
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
                 txtError.setVisibility (View.VISIBLE);
-                Toast.makeText (LoginActivity.this, "Error", Toast.LENGTH_SHORT).show ();
+                Toast.makeText (SignInActivity.this, "Error", Toast.LENGTH_SHORT).show ();
             }
         }
     }
@@ -176,12 +163,18 @@ public class LoginActivity extends AppCompatActivity {
     public static final Pattern EMAIL_ADDRESS =
             Pattern.compile ("[a-zA-Z0-9_]{5,20}@(Gmail|gmail|email|Email)(.com|.edu)(.edu|.vn)*$");
     public void checkSession(){
-        SessionManagement sessionManagement = new SessionManagement (LoginActivity.this);
+        SessionManagement sessionManagement = new SessionManagement (SignInActivity.this);
         int uID = sessionManagement.getSession ();
         if (uID !=-1){
-            Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent (SignInActivity.this, MainActivity.class);
             startActivity (intent);
         }
+    }
+    public void btnSignup(View v){
+
+        Intent intent =new Intent(SignInActivity.this, SignUpActivity.class);
+        startActivity(intent);
+        overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
 }
