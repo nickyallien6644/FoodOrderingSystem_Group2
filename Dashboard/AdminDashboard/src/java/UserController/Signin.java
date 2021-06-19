@@ -54,9 +54,13 @@ public class Signin extends HttpServlet {
             session.setAttribute("LoginUser", user);
             session.setMaxInactiveInterval(60*15);
             
-               if(user.getRoleID() ==  2 || user.getRoleID() == 3 || user.getRoleID()== 4){
+               if(user.getRoleID() ==  2){
                    System.out.println("ADMIN");
-                   response.sendRedirect("index.jsp");
+                   response.sendRedirect("Admin/index.jsp");
+               }else if(user.getRoleID() == 3){
+                   response.sendRedirect("Employee/index.jsp");
+               }else if(user.getRoleID()== 4){
+                   response.sendRedirect("Staff/index.jsp");
                }
                else {
                    System.out.println("NOT");

@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this,"AAA",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,"Register successful",Toast.LENGTH_LONG).show();
                 }
             }
             @Override

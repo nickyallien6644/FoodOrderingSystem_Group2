@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         listAccounts = new ArrayList<> ();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             if(email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())){
                 isAcount = true;
                 user = account;
-                Toast.makeText (LoginActivity.this, "Yes",Toast.LENGTH_SHORT).show();
+                Toast.makeText (LoginActivity.this, "Sign in successful",Toast.LENGTH_SHORT).show();
                 break;
             }
         }
