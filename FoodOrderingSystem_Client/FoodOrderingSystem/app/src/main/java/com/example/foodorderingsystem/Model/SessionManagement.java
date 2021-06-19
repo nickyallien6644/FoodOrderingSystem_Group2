@@ -12,6 +12,8 @@ public class SessionManagement {
         sharedPreferences = context.getSharedPreferences (SHARED_PREF_NAME,Context.MODE_PRIVATE);
         editor =sharedPreferences.edit ();
     }
+
+
     public void saveSession(Account account){
         int uId = account.getaID ();
         editor.putInt (SESSION_KEY,uId).commit ();
