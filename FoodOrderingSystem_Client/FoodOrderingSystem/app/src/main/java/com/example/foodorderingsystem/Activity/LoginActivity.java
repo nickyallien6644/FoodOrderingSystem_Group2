@@ -2,25 +2,31 @@ package com.example.foodorderingsystem.Activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,10 +39,13 @@ public class LoginActivity extends AppCompatActivity {
 
     String email, password;
     boolean isAcount = false;
-    Button btnSignIn;
     Button btnSignUp;
-    EditText txtMail;
-    EditText txtpass;
+    TextInputLayout etxtMail;
+    TextInputLayout etxtpass;
+    TextView txtError;
+    TextInputLayout txtInpLayout;
+    SessionManagement sessionManagement;
+
 
 
     @Override
@@ -48,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         listAccounts = new ArrayList<> ();
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        txtMail = (EditText) findViewById(R.id.editTextTextEmailAddress);
-        txtpass = (EditText) findViewById(R.id.editTextTextPassword);
+        getUser ();
+        checkSession();
         btnSignUp = findViewById (R.id.btn_SignUp);
         btnSignUp.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -59,17 +68,34 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
-        btnSignIn = (Button) findViewById(R.id.btnSignin);
-        getUser();
 
-        btnSignIn.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                Login ();
-            }
-        });
+    }
+    private boolean validateEmail(){
+        String inputEmail = etxtMail.getEditText().getText ().toString ().trim ();
+        if (inputEmail.isEmpty ()){
+            etxtMail.setError ("Email not empty");
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher (inputEmail).matches ()){
+            etxtMail.setError ("Email invaluable please input again");
+            return false;
+        }
+        else {
+            etxtMail.setError (null);
+            return true;
+        }
+    }
+    private boolean validatePass(){
+        if (etxtpass.getEditText().getText ().toString ().trim ().isEmpty ()){
+            etxtpass.setError ("Pass not empty");
+            return false;
+        }
+        else {
+            etxtpass.setError (null);
+            return true;
+        }
     }
     public void getUser() {
+        listAccounts = new ArrayList<> ();
         accountService= Api.getClients ();  // call Api get PersonService
         Call<List<Account>> call=accountService.getAccounts (); // call list get Student
         call.enqueue(new Callback<List<Account>> () {
@@ -92,30 +118,35 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    public void Login(){
-        email = txtMail.getText ().toString ().trim ();
-        password  = md5 (txtpass.getText ().toString ().trim ());
-        if(listAccounts == null || listAccounts.isEmpty ()){
-            return;
-        }
-        for ( Account account: listAccounts){
+    public void btnSignin(View v){
 
-            if(email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())){
-                isAcount = true;
-                user = account;
-                Toast.makeText (LoginActivity.this, "Sign in successful",Toast.LENGTH_SHORT).show();
-                break;
-            }
-        }
-        if (isAcount){
-            Intent intent = new Intent (LoginActivity.this, MainActivity.class);
-            Bundle bundle = new Bundle ();
-            bundle.putSerializable ("Oject_User",user);
-             intent.putExtras (bundle);
-            startActivity (intent);
-            overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+        txtError = findViewById (R.id.txtError);
+        etxtMail = findViewById(R.id.inputLayoutEmail);
+        etxtpass = findViewById(R.id.inputLayoutPass);
+        if(!validateEmail () |!validatePass () | listAccounts == null || listAccounts.isEmpty ()){
+            return;
         }else {
-            Toast.makeText (LoginActivity.this, "Incorrect email or password",Toast.LENGTH_SHORT).show();
+            email = etxtMail.getEditText ().getText ().toString ().trim ();
+            password = md5 (etxtpass.getEditText ().getText ().toString ().trim ());
+            for (Account account : listAccounts) {
+                if (email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())) {
+                    isAcount = true;
+                    user = account;
+                    Toast.makeText (LoginActivity.this, "Yes", Toast.LENGTH_SHORT).show ();
+                    break;
+                }
+            }
+            if (isAcount) {
+                Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+                sessionManagement = new SessionManagement (LoginActivity.this) ;
+                sessionManagement.saveSession (user);
+
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                txtError.setVisibility (View.VISIBLE);
+                Toast.makeText (LoginActivity.this, "Error", Toast.LENGTH_SHORT).show ();
+            }
         }
     }
     public static String md5(final String s) {
@@ -142,4 +173,15 @@ public class LoginActivity extends AppCompatActivity {
         }
         return "";
     }
+    public static final Pattern EMAIL_ADDRESS =
+            Pattern.compile ("[a-zA-Z0-9_]{5,20}@(Gmail|gmail|email|Email)(.com|.edu)(.edu|.vn)*$");
+    public void checkSession(){
+        SessionManagement sessionManagement = new SessionManagement (LoginActivity.this);
+        int uID = sessionManagement.getSession ();
+        if (uID !=-1){
+            Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+            startActivity (intent);
+        }
+    }
+
 }
