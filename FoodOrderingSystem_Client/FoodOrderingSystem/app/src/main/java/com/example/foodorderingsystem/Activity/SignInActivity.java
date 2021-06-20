@@ -51,8 +51,6 @@ public class SignInActivity extends AppCompatActivity {
 
 
         listAccounts = new ArrayList<> ();
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
         getUser ();
         checkSession();
 
@@ -174,7 +172,7 @@ public class SignInActivity extends AppCompatActivity {
 
         Intent intent =new Intent(SignInActivity.this, SignUpActivity.class);
         startActivity(intent);
-        overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
+        overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
 }

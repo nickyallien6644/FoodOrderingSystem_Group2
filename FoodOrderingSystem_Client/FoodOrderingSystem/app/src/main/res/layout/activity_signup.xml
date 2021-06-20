@@ -94,7 +94,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ipLastname"
+                android:id="@+id/ipFirstname"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -102,7 +102,7 @@
                 app:helperText=" "
                 app:helperTextTextColor="@color/Cam"
                 app:boxStrokeColor="@color/Cam"
-                android:hint="Last Name"
+                android:hint="First Name"
                 app:hintTextColor="@color/Cam"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
@@ -115,11 +115,11 @@
                     android:drawablePadding="12dp"
                     tools:layout_editor_absoluteX="200dp"
                     android:textSize="18dp"
-                    android:inputType="text">
+                    android:inputType="textPersonName">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ipFirthname"
+                android:id="@+id/ipLastname"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -127,7 +127,7 @@
                 app:helperText=" "
                 app:helperTextTextColor="@color/Cam"
                 app:boxStrokeColor="@color/Cam"
-                android:hint="Firth Name"
+                android:hint="Last Name"
                 app:hintTextColor="@color/Cam"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp">
@@ -140,7 +140,7 @@
                     android:drawablePadding="12dp"
                     tools:layout_editor_absoluteX="200dp"
                     android:textSize="18dp"
-                    android:inputType="textEmailAddress">
+                    android:inputType="textPersonName">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
