@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundall"
+    android:orientation="vertical"
+    tools:context=".Activity.SignInActivity">
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.083"
+            tools:srcCompat="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <LinearLayout
+                android:layout_width="205dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_Signin1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="0dp"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="Sign in"
+                    android:textColor="@color/Cam"
+                    app:backgroundTint="@color/white" />
+
+                <LinearLayout
+                    android:layout_marginTop="-3dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/Cam"
+                    android:layout_height="3dp">
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent">
+                <Button
+                    android:onClick="btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/Cam"
+                    app:backgroundTint="@color/white"
+                    android:text="Sign Up" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@id/headerLayout"
+        android:id="@+id/bodylayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txtError"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:text="Incorrect email or password"
+            android:textColor="@color/Cam"
+            android:paddingTop="10dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:helperText=" "
+            app:startIconDrawable="@drawable/ic_baseline_email_24"
+            app:helperTextTextColor="@color/Cam"
+            app:boxStrokeColor="@color/Cam"
+            android:hint="Email Address"
+            app:hintTextColor="@color/Cam"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:drawablePadding="12dp"
+                tools:layout_editor_absoluteX="200dp"
+                android:textSize="18dp"
+                android:inputType="textEmailAddress">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/Cam"
+            android:hint="Password"
+            app:helperText=" "
+            app:helperTextTextColor="@color/Cam"
+            app:hintTextColor="@color/Cam"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            android:layout_marginEnd="20dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:ems="15"
+                android:textSize="18dp"
+                android:inputType="textPassword">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtForgotPass"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/Cam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot password?" />
+        <Button
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:onClick="btnSignin"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            app:backgroundTint="@color/Cam"
+            android:text="Sign in"
+            android:background="@drawable/buttom_radius"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
