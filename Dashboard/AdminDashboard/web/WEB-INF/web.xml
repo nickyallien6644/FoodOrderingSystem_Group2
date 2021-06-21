@@ -8,6 +8,18 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>UserController.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAccount</servlet-name>
+        <servlet-class>UserController.UpdateAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>indexAdmin</servlet-name>
+        <servlet-class>UserController.indexAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAccount</servlet-name>
+        <servlet-class>UserController.AddAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
         <url-pattern>/Signin</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccount</servlet-name>
+        <url-pattern>/UpdateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>indexAdmin</servlet-name>
+        <url-pattern>/indexAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAccount</servlet-name>
+        <url-pattern>/AddAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
