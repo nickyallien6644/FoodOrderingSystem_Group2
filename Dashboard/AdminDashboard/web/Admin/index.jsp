@@ -36,7 +36,7 @@
                     <div class="sidebar-header">
                         <div class="d-flex justify-content-between">
                             <div class="logo">
-                                <a href="index.jsp"><img src="img/logo.png" alt="Logo" srcset=""></a>
+                                <a href="index.jsp"><img  src="../img/logo.png" alt="Logo" srcset=""></a>
                                 <h2 class="page-heading">FOOD ORDERING MANAGEMENTS</h2>
                             </div>
                             <div class="toggler">
@@ -115,14 +115,13 @@
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
-                                        <!--                                        <li class="breadcrumb-item"><a href="index.jsp">Dashboard</a></li>-->
-                                        <li class="breadcrumb-item active" aria-current="page">List Account</li>
+                                        <div class="breadcrumb-item">
+                                            <a href="AddAccount.jsp"><button class="btn bg-light-success font-bold mx-2">Add new account</button></a>
+                                        </div>
                                     </ol>
                                 </nav>
-                                <div class="float-end ">
-                                    <a href="UpdateProfile.jsp"><button class="btn bg-light-success font-bold mx-2 btn-block">Add new account</button></a>
-                                </div>
                             </div>
+
                         </div>
                     </div>
                     <section class="section">
@@ -138,7 +137,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>City</th>
+                                            <th>Address</th>
                                             <th>Role</th>
                                             <th>Status</th>
                                         </tr>
@@ -151,7 +150,7 @@
                                             for (int i = 0; i < listAccount.size(); i++) {
                                         %>
                                         <tr>
-                                            <td class="use-address id" ><%=listAccount.get(i).getaID() %></td>
+                                            <td class="use-address id" ><%=listAccount.get(i).getaID()%></td>
                                             <td class="use-address"><%=listAccount.get(i).getaFirstname()%></td>
                                             <td class="use-address"><%=listAccount.get(i).getAemail()%></td>
                                             <td class="use-address"><%=listAccount.get(i).getaPhone()%></td>
@@ -165,20 +164,29 @@
 
                                             %>
                                             <td class="use-address">Admin</td>
-                                            <% 
-                                            } else if (listAccount.get(i).getRoleID() == 3) {
+                                            <%                                            } else if (listAccount.get(i).getRoleID() == 3) {
                                             %>
                                             <td class="use-address">Employee</td>
                                             <%
-                                                }else if (listAccount.get(i).getRoleID() == 4) {
+                                            } else if (listAccount.get(i).getRoleID() == 4) {
                                             %>
                                             <td class="use-address">Staff</td>
                                             <%
                                                 }
+                                                if (listAccount.get(i).getaStatus() == 1) {
+
                                             %>
                                             <td class="use-address">
                                                 <span class="badge bg-success">Active</span>
                                             </td>
+                                            <%                                            } else if (listAccount.get(i).getaStatus() == 0) {
+                                            %>
+                                            <td class="use-address">
+                                                <span class="badge bg-danger">Inactive</span>
+                                            </td>
+                                            <%
+                                                }
+                                            %>
                                         </tr>
                                         <%
                                             }

@@ -96,4 +96,39 @@ public class AccountDAO {
         }
         return account;
     }
+    
+    public boolean updateAccount(int id, String first_name, String last_name, String phone, String email, String address, int status){
+    
+        try {
+            PreparedStatement pst = (PreparedStatement)con.prepareStatement("UPDATE `account` SET `aEmail`=?,`aFirstname`=?,`aLastname`=?,`aPhone`=?,`aAddress`=?,`aStatus`=? WHERE `aID`=?");
+            pst.setString(1, email);
+            pst.setString(2, first_name);
+            pst.setString(3,  last_name);
+            pst.setString(4,  phone);
+            pst.setString(5,  address);
+            pst.setInt(6,  status);
+            pst.setInt(7, id);
+            return pst.executeUpdate()>0;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
+    public boolean insertAccount(String first_name, String last_name, String phone, String email, String address, int role, String password){
+    
+        try {
+            PreparedStatement pst = (PreparedStatement)con.prepareStatement("INSERT INTO `account`(`roleID`, `aEmail`, `aPassword`, `aFirstname`, `aLastname`, `aPhone`, `aAddress`) VALUES (?,?,MD5(?),?,?,?,?)");
+            pst.setInt(1, role);
+            pst.setString(2, email);
+            pst.setString(3, password);
+            pst.setString(4, first_name);
+            pst.setString(5, last_name);
+            pst.setString(6, phone);
+            pst.setString(7, address);
+            return pst.executeUpdate()>0;
+        } catch (Exception e) {
+        }
+ 
+    return false;
+    }
 }
