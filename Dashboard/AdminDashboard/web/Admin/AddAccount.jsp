@@ -20,7 +20,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!------ Include the above in your HEAD tag ---------->
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/choices.js/choices.min.css" />
-        <title>Update Profile Page</title>
+        <title>Add Account Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,7 +31,7 @@
         <hr>
         <div class="container bootstrap snippet">
             <div class="row">
-                <div class="col-sm-10"><h1>UPDATE ACCOUNT </h1></div>
+                <div class="col-sm-10"><h1>ADD NEW ACCOUNT</h1></div>
                 <div class="col-sm-2"><a href="../Admin/index.jsp" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
             </div>
             <div class="row">
@@ -48,30 +48,20 @@
                         <div class="tab-pane active wrapper" id="home">
                             <hr>
 
-                            <form class="form" action="${pageContext.request.contextPath}/UpdateAccount" method="post" id="registrationForm">
-                                <%
-                                    int id = 0;
-                                    if (request.getParameter("id") != null) {
-                                        id = Integer.parseInt(request.getParameter("id"));
-                                    }
-                                    if (id != 0) {
-                                        AccountDAO accountDAO = new AccountDAO();
-                                        Account account = accountDAO.getAccountById(id);
-
-                                %>
+                            <form class="form" action="${pageContext.request.contextPath}/AddAccount" method="post" id="registrationForm" name="add">
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="first_name"><h4>First name</h4></label>
-                                        <input type="number" hidden="" value="<%=account.getaID()%>" class="form-control id" name="id"/>
-                                        <input type="text" value="<%=account.getaFirstname()%>"  class="form-control first_name" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any." required />
+                                        <input type="number" hidden="" value="" class="form-control id" name="id"/>
+                                        <input type="text" value=""  class="form-control first_name" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any." required />
                                     </div>
                                 </div>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" value="<%=account.getaLastname()%>" class="form-control last_name" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any." required />
+                                        <input type="text" value="" class="form-control last_name" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any." required />
                                     </div>
                                 </div>
 
@@ -79,51 +69,50 @@
 
                                     <div class="col-xs-6">
                                         <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" value="<%=account.getaPhone()%>" class="form-control phone" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." required />
+                                        <input type="text" value=""  class="form-control phone" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any." required />
                                     </div>
                                 </div>
-                                    <div class="form-group">
+                                <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="address"><h4>Address</h4></label>
-                                        <input type="text" value="<%=account.getaAddress() %>" class="form-control address" name="address" id="phone" placeholder="enter phone" title="enter your address number if any." required />
+                                        <input type="text" value="" class="form-control address" name="address" id="phone" placeholder="enter address" title="enter your address number if any." required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="password"><h4>Password</h4></label>
+                                        <input type="password" value="" class="form-control email" name="password" id="password" placeholder="enter your password" title="enter your password." required />
                                     </div>
                                 </div>
                                 <div class="form-group">
 
                                     <div class="col-xs-6">
                                         <label for="email"><h4>Email</h4></label>
-                                        <input type="email" value="<%=account.getAemail()%>" class="form-control email" name="email" id="email" placeholder="you@email.com" title="enter your email." required />
+                                        <input type="email" value="" class="form-control email" name="email" id="email" placeholder="you@email.com" title="enter your email." required />
+                                        <label id="email_error"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="confirmPassword"><h4>Confirm Password</h4></label>
+                                        <input type="password" value="" class="form-control email" name="confirmPassword" id="email" placeholder="confirm your password" title="enter your confirm password." required />
                                     </div>
                                 </div>
                                 <div class="form-group" >
-                                    <div class="col-xs-2" style="margin-top: 20px" >
-                                        <label class="input-group-text "
-                                               for="inputGroupSelect01">Status</label>
-                                        <select class="form-select " style="padding-right: 28px" id="inputGroupSelect01" name="selectStatus">
-                                            <%
-                                                if (account.getaStatus() == 1) {
-                                            %>
-                                            <option selected>Active</option>
-                                            <option value="0">Inactive</option>
-                                            <%
-                                            } else {
-                                            %>
-                                            <option value="1">Active</option>
-                                            <option selected>Inactive</option>
-                                            <%
-                                                }
-                                            %>
+                                    <div class="col-xs-2" style="margin-top: 45px" >
+                                        <label class="input-group-text"style="font-size: 15px"
+                                               for="inputGroupSelect01">Role</label>
+                                        <select class="form-select " style="padding-right: 22px" id="inputGroupSelect01" name="selectStatus">
+                                            <option value="4" selected>Staff</option>
+                                            <option value="3">Employee</option>
                                         </select>
                                     </div>
                                 </div>
-                                <%
-                                    }
-                                %>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
-                                        <button class="btn btn-lg btn-success saveData" name="saveData" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                        <button class="btn btn-lg btn-success saveData" id="addData" name="addData" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Add</button>
                                         <a href="/AdminDashboard/indexAdmin"><button class="btn btn-lg" type="button"><i class="glyphicon glyphicon-repeat"></i> Back</button></a>
                                     </div>
                                 </div>
@@ -134,6 +123,49 @@
                 </div><!--/tab-content-->
             </div><!--/col-9-->
         </div><!--/row-->
+        <!--        <script>
+                    $(document).ready(function () {
+        
+        
+                        var readURL = function (input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+        
+                                reader.onload = function (e) {
+                                    $('.avatar').attr('src', e.target.result);
+                                }
+        
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        $(".file-upload").on('change', function () {
+                            readURL(this);
+                        });
+                    });
+                </script>-->
+        <script>
+//            function validateEmail(email) {
+//                const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//                return re.test(email);
+//            }
+//
+//            function validate() {
+//                const $result = $("#email_error");
+//                const email = $("#email").val();
+//                $result.text("");
+//
+//                if (validateEmail(email)) {
+//                    $result.text("Looks good!");
+//                    $result.css("color", "green");
+//                } else {
+//                    $result.text(email + " Looks bad!");
+//                    $result.css("color", "red");
+//                }
+//                return false;
+//            }
+//            
+//            $("#addData").on("click", validate);
+        </script>
         <script src="https://zuramai.github.io/mazer/demo/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script src="https://zuramai.github.io/mazer/demo/assets/js/bootstrap.bundle.min.js"></script>
 
