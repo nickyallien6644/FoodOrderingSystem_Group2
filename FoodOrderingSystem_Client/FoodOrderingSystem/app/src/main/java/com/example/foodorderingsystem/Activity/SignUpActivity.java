@@ -10,12 +10,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
 import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -31,11 +34,16 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputLayout etxtCpass;
     TextInputLayout etxtPhone;
     TextInputLayout etxtAdress;
+    List<Account> listAccounts;
+    boolean checkaccount;
+    Account user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        listAccounts = new ArrayList<>();
+        CheckDuplicateperson();
+        checkaccount = false;
     }
 
     public void btnSignUp(View view){
@@ -59,12 +67,22 @@ public class SignUpActivity extends AppCompatActivity {
             account.setaStatus(1);
             account.setRoleID(1);
             account.setaPhone(etxtPhone.getEditText ().getText().toString());
-            addPersona(account);
-            Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
-            startActivity(intent);
-            overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+            for(int i=0 ;i<listAccounts.size();i++){
+                if (listAccounts.get(i).getaEmail().equals(account.getaEmail())){
+                    checkaccount = true;
+                    etxtEmail.setError("Account have exist!!!");
+                    break;
+                }
+            }
+            if (!checkaccount){
+                addPersona(account);
+                Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
+                startActivity(intent);
+                overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+            }else{
+                return;
+            }
         }
-
     }
     public void addPersona(Account p){
         accountService = Api.getClients ();
@@ -84,6 +102,24 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
         startActivity(intent);
         overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+    public void CheckDuplicateperson(){
+        accountService = Api.getClients();
+        Call<List<Account>> call = accountService.getAccounts();
+        call.enqueue(new Callback<List<Account>>() {
+            @Override
+            public void onResponse(Call<List<Account>> call, Response<List<Account>> response) {
+                if(response.isSuccessful()){
+                    listAccounts = response.body();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Account>> call, Throwable t) {
+                Log.e("Error:",t.getMessage());
+            }
+        });
     }
     private boolean validateEmail(){
     String inputEmail = etxtEmail.getEditText().getText ().toString ().trim ();
