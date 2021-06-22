@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void btnSignUp(View view){
         etxtEmail = findViewById (R.id.ipEmail);
         etxtLname= findViewById (R.id.ipLastname);
-        etxtFname= findViewById (R.id.ipFirthname);
+        etxtFname= findViewById (R.id.ipFirstname);
         etxtPassword= findViewById (R.id.ipPassword);
         etxtCpass= findViewById (R.id.inConfirmPass);
         etxtPhone= findViewById (R.id.ipPhone);
@@ -88,10 +88,10 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateEmail(){
     String inputEmail = etxtEmail.getEditText().getText ().toString ().trim ();
     if (inputEmail.isEmpty ()){
-        etxtEmail.setError ("Email not empty");
+        etxtEmail.setError ("Email is not empty");
         return false;
     }else if (!Patterns.EMAIL_ADDRESS.matcher (inputEmail).matches ()){
-        etxtEmail.setError ("Email invaluable please input again");
+        etxtEmail.setError ("Invalid email");
         return false;
     }
     else {
@@ -101,8 +101,11 @@ public class SignUpActivity extends AppCompatActivity {
 }
     private boolean validateLastName(){
         String inputLname = etxtLname.getEditText().getText ().toString ().trim ();
-        if (inputLname.isEmpty ()){
-            etxtLname.setError ("Last name not empty");
+        if (inputLname.isEmpty()){
+            etxtLname.setError ("Last name is not empty");
+            return false;
+        }else if(!Pattern.compile("^([a-zA-Z]{1,})$").matcher (inputLname).matches ()){
+            etxtLname.setError ("Invalid last name");
             return false;
         } else {
             etxtLname.setError (null);
@@ -112,7 +115,10 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateFirstName(){
         String inputFname = etxtFname.getEditText().getText ().toString ().trim ();
         if (inputFname.isEmpty ()){
-            etxtFname.setError ("Name is not empty");
+            etxtFname.setError ("First name is not empty");
+            return false;
+        }else if(!Pattern.compile("^([a-zA-Z]{2,}(\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)?)").matcher (inputFname).matches ()){
+            etxtFname.setError ("Invalid first name");
             return false;
         } else {
             etxtFname.setError (null);
@@ -122,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validatePass(){
         String inputPass = etxtPassword.getEditText().getText ().toString ().trim ();
         if (inputPass.isEmpty ()){
-            etxtPassword.setError ("Password not empty");
+            etxtPassword.setError ("Password is not empty");
             return false;
         }
         else {
@@ -135,23 +141,23 @@ public class SignUpActivity extends AppCompatActivity {
         String password = etxtPassword.getEditText().getText ().toString ().trim ();
 
         if (inputCpass.isEmpty ()){
-            etxtCpass.setError ("Confirm Password not empty");
+            etxtCpass.setError ("Confirm Password is not empty");
             return false;
-        }else if (!inputCpass.equals (password)) {
-            etxtCpass.setError ("Confirm Password not equals Password");
+        }if (!inputCpass.equals (password)) {
+            etxtCpass.setError ("Confirm Password is not equals Password");
             return false;
         } else {
-            etxtCpass.setError ("Confirm Password not empty");
+            etxtCpass.setError (null);
             return true;
         }
     }
     private boolean validatePhone(){
         String inputPhone = etxtPhone.getEditText ().getText ().toString ().trim ();
         if (inputPhone.isEmpty ()){
-            etxtPhone.setError ("Phone not empty");
+            etxtPhone.setError ("Phone number is not empty");
             return false;
         }else if(inputPhone.length ()>10){
-            etxtPhone.setError ("Phone Number qua lon ");
+            etxtPhone.setError ("Invalid phone number");
             return false;
         }
         else {
@@ -160,11 +166,14 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
     private boolean validateAddress(){
-        if (etxtAdress.getEditText().getText ().toString ().trim ().isEmpty ()){
-            etxtAdress.setError ("Address not empty");
+        String address = etxtAdress.getEditText().getText ().toString ().trim ();
+        if (address.isEmpty ()){
+            etxtAdress.setError ("Address is not empty");
             return false;
-        }
-        else {
+        }else if(!Pattern.compile("^\\d+(\\s[A-z]+)+").matcher (address).matches ()){
+            etxtAdress.setError ("Invalid address");
+            return false;
+        }else {
             etxtAdress.setError (null);
             return true;
         }
