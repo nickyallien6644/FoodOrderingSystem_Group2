@@ -35,7 +35,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecommendedAdapter.RecommendedViewHolder holder, int position) {
             holder.recommendedName.setText(recommendedList.get(position).getpName());
-            holder.recommendedPrice.setText(String.valueOf(recommendedList.get(position).getpPrice()));
+            holder.recommendedPrice.setText(String.valueOf(recommendedList.get(position).getpPrice()) + " VND");
         Glide.with(context).load(recommendedList.get(position).getiURL()).into(holder.recommendedImage);
 
     }

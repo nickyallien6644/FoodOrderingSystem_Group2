@@ -14,14 +14,20 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.SignUpActivity"
             android:label="ORDER HISTORY"  android:background="#FFFFFF" android:textColor="#000000" android:gravity="center">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".Activity.SignInActivity" />
+        <activity android:name=".Activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SignInActivity" />
-        <activity android:name=".Activity.MainActivity" />
     </application>
 
 </manifest>
