@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 //import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -242,6 +243,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent =new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
         overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == event.KEYCODE_BACK) {
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

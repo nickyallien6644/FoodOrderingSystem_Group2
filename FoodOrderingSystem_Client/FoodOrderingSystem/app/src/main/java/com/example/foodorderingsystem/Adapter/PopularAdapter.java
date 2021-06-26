@@ -46,6 +46,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("name", popularList.get(position).getpName());
+                intent.putExtra("price", popularList.get(position).getpPrice());
+                intent.putExtra("description", popularList.get(position).getpDescription());
+                intent.putExtra("image", popularList.get(position).getiURL());
                 context.startActivity(intent);
             }
         });

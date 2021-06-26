@@ -2,7 +2,7 @@ package com.example.foodorderingsystem.Utils;
 
 public class Api {
     //create string url
-    public static final String URL="http:/192.168.100.8:8081/";
+    public static final String URL="http:/192.168.1.5:8081/";
 
     public static ApiInterface getClients(){
         //return element of url

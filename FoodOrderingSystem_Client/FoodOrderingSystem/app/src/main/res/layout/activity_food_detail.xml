@@ -8,11 +8,12 @@
     tools:context=".Activity.FoodDetail">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgReturnHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:onClick="outProductDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
@@ -38,7 +39,7 @@
 
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/pDetailName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -48,13 +49,13 @@
             android:textColor="@android:color/background_dark"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/pDetailPrice"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/pDetailPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -62,28 +63,28 @@
             android:textColor="#FA4A0C"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintBottom_toBottomOf="@+id/pDetailName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+            app:layout_constraintTop_toTopOf="@+id/pDetailName" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/pDetailDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:lineSpacingExtra="2dp"
             android:text="A moisturizing body with a sweet and refreshing aroma of Japanese cherry blossom, peony, musk, and strawberry. Will make the skin feel moist and smooth. The combination also makes long-lasting fragrance."
             android:textColor="@android:color/background_dark"
-            app:layout_constraintEnd_toEndOf="@+id/textView12"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintEnd_toEndOf="@+id/pDetailPrice"
+            app:layout_constraintStart_toStartOf="@+id/pDetailName"
+            app:layout_constraintTop_toBottomOf="@+id/pDetailName" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintStart_toStartOf="@+id/pDetailDescription"
             app:layout_constraintTop_toTopOf="@+id/button2"
             app:srcCompat="@drawable/ic_minus" />
 
@@ -127,7 +128,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/pDetailImage"
         android:layout_width="256dp"
         android:layout_height="447dp"
         android:layout_marginTop="16dp"
