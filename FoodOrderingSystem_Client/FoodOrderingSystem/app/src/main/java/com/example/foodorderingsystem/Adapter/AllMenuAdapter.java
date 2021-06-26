@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Activity.FoodDetail;
 import com.example.foodorderingsystem.Model.Image;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
@@ -37,9 +39,20 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuV
     @Override
     public void onBindViewHolder(@NonNull AllMenuAdapter.AllMenuViewHolder holder, int position) {
             holder.allMenuName.setText(allMenuList.get(position).getpName());
-            holder.allMenuPrice.setText(String.valueOf(allMenuList.get(position).getpPrice()) + " VND");
+            holder.allMenuPrice.setText(String.valueOf(allMenuList.get(position).getpPrice()) + " Bcoins");
 
         Glide.with(context).load(allMenuList.get(position).getiURL()).into(holder.allMenuImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("name", allMenuList.get(position).getpName());
+                intent.putExtra("price", allMenuList.get(position).getpPrice());
+                intent.putExtra("description", allMenuList.get(position).getpDescription());
+                intent.putExtra("image", allMenuList.get(position).getiURL());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -65,12 +65,13 @@
 
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/box2"
+            android:textColor="@color/white"
             android:text="ADD ONE"
             android:textSize="16sp" />
 

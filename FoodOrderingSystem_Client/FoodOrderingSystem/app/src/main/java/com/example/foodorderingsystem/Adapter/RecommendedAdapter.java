@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Activity.FoodDetail;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 
@@ -35,8 +37,19 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecommendedAdapter.RecommendedViewHolder holder, int position) {
             holder.recommendedName.setText(recommendedList.get(position).getpName());
-            holder.recommendedPrice.setText(String.valueOf(recommendedList.get(position).getpPrice()) + " VND");
+            holder.recommendedPrice.setText(String.valueOf(recommendedList.get(position).getpPrice()) + " Bcoins");
         Glide.with(context).load(recommendedList.get(position).getiURL()).into(holder.recommendedImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("name", recommendedList.get(position).getpName());
+                intent.putExtra("price", recommendedList.get(position).getpPrice());
+                intent.putExtra("description", recommendedList.get(position).getpDescription());
+                intent.putExtra("image", recommendedList.get(position).getiURL());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
