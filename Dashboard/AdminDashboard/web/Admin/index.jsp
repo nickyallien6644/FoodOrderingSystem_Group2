@@ -36,7 +36,7 @@
                     <div class="sidebar-header">
                         <div class="d-flex justify-content-between">
                             <div class="logo">
-                                <a href="index.jsp"><img  src="../img/logo.png" alt="Logo" srcset=""></a>
+                                <a href="index.jsp"><img  src="../img/logo.png" alt="Logo" class="w-50 h-50" srcset=""></a>
                                 <h2 class="page-heading">FOOD ORDERING MANAGEMENTS</h2>
                             </div>
                             <div class="toggler">
@@ -48,48 +48,13 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <!--                            <li class="sidebar-item  ">
-                                                            <a href="index.jsp" class='sidebar-link'>
-                                                                <i class="bi bi-grid-fill"></i>
-                                                                <span>Dashboard</span>
-                                                            </a>
-                                                        </li>-->
                             <li class="sidebar-item active">
                                 <a href="indexAdmin.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     <span>Datatable</span>
                                 </a>
                             </li>
-                            <li class="sidebar-title">Pages</li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-email.html" class='sidebar-link'>
-                                    <i class="bi bi-envelope-fill"></i>
-                                    <span>Email Application</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-chat.html" class='sidebar-link'>
-                                    <i class="bi bi-chat-dots-fill"></i>
-                                    <span>Chat Application</span>
-                                </a>
-                            </li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/demo/application-gallery.html" class='sidebar-link'>
-                                    <i class="bi bi-image-fill"></i>
-                                    <span>Photo Gallery</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-title">Raise Support</li>
-
-                            <li class="sidebar-item  ">
-                                <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
-                                    <i class="bi bi-life-preserver"></i>
-                                    <span>Documentation</span>
-                                </a>
-                            </li>
+                           
 
                         </ul>
                     </div>
@@ -109,10 +74,28 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h2>ADMIN PAGE</h2>
+                                <h2>ACCOUNT MANAGEMENT</h2>
                                 <p class="text-subtitle text-muted">Let the admin check the system's account list</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
+                                <div class="card d-flex align-items-center" style="float: right; padding-bottom: 20px; padding-right: 20px;padding-left: 20px;padding-top: 20px;">
+                                    <div class="avatar avatar-xl">
+                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
+                                    </div>
+                                    <div class="ms-3 name">
+                                        <h5 class="font-bold">STAFF01</h5>
+                                        <h6 class="text-muted mb-0">@ThinhBNP</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="section">
+                        <div class="card">
+                            <div class="card-header">
+                                Admin can edit profile as status, name, email, phone, city 
+                            </div>
+                            <div class="card-right" style="padding-right: 25px">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <div class="breadcrumb-item">
@@ -120,14 +103,6 @@
                                         </div>
                                     </ol>
                                 </nav>
-                            </div>
-
-                        </div>
-                    </div>
-                    <section class="section">
-                        <div class="card">
-                            <div class="card-header">
-                                Admin can edit profile as status, name, email, phone, city 
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="table1">
@@ -201,7 +176,7 @@
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2021 &copy; Mazer</p>
+                            <p>2021 &copy; GROUP 2</p>
                         </div>
                         <div class="float-end">
                             <p>Create<span class="text-danger"><i class="bi bi-heart"></i></span> by <a

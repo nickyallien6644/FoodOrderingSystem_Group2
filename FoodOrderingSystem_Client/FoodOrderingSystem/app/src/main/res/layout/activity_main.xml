@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Khang"
     tools:context=".Activity.MainActivity">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,6 +27,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/search_bg"
+                android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/ic_baseline_search_24"
                 android:drawablePadding="16dp"
                 android:ems="10"
@@ -44,9 +47,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="sans-serif"
-                android:text="Popular this Week"
-                android:textColor="#333333"
-                android:textSize="16sp"
+                android:text="Popular this week"
+                android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
@@ -67,9 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="Recommended for You"
-                android:textColor="#333333"
-                android:textSize="16sp"
+                android:text="Recommended for you"
+                android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/popular_recycler" />
@@ -89,9 +92,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="All Menu Items"
-                android:textColor="#333333"
-                android:textSize="16sp"
+                android:text="All menu items"
+                android:textColor="#000000"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recommended_recycler" />
@@ -109,7 +112,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
