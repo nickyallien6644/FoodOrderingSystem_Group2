@@ -5,14 +5,17 @@ import android.os.Bundle;
 
 //import android.view.MenuItem;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.PopularAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
@@ -21,6 +24,8 @@ import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
 import com.example.foodorderingsystem.Utils.ApiInterface;
+import com.example.foodorderingsystem.fragment.BcoinsFragment;
+import com.example.foodorderingsystem.fragment.HistoryFragment;
 import com.example.foodorderingsystem.fragment.HomeFragment;
 import com.example.foodorderingsystem.fragment.NotificationFragment;
 import com.example.foodorderingsystem.fragment.PrivacyFragment;
@@ -33,6 +38,8 @@ import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +47,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     List<Product> listProducts ;
-
+    private MeowBottomNavigation bnv_Home;
     RecyclerView popularRecyclerView;
     PopularAdapter popularAdapter;
 
@@ -87,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         menuItems.add(new MenuItem("Privacy Policy",R.drawable.security_bg));
         menuItems.add(new MenuItem("Support",R.drawable.supppor_bg));
         menuItems.add(new MenuItem("Sign out",R.drawable.exit_bg));
-
         //then add them to navigation drawer
 
         sNavigationDrawer.setMenuItemList(menuItems);
@@ -113,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position){
                     case 0:{
-                        fragmentClass = HomeFragment.class;
+                        Intent intent =new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
                         break;
                     }
                     case 1:{
@@ -186,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     public void signout(){
@@ -203,5 +211,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 
 }

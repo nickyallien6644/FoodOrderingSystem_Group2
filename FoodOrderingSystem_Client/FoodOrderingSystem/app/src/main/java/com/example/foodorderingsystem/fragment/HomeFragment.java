@@ -3,6 +3,8 @@ package com.example.foodorderingsystem.fragment;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.foodorderingsystem.Activity.MainActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.PopularAdapter;
@@ -23,6 +26,8 @@ import com.example.foodorderingsystem.Utils.ApiInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,19 +40,17 @@ public class HomeFragment extends Fragment {
 
     ApiInterface apiInterface;
     List<Product> listProducts ;
-
     RecyclerView popularRecyclerView;
     PopularAdapter popularAdapter;
-
+    private MeowBottomNavigation bnv_Home;
     RecyclerView recommendedRecyclerView;
     RecommendedAdapter recommendedAdapter;
 
     RecyclerView allMenuRecyclerView;
     AllMenuAdapter allMenuAdapter;
 
-
-
     public HomeFragment() {
+
         // Required empty public constructor
     }
 
@@ -59,8 +62,15 @@ public class HomeFragment extends Fragment {
         popularRecyclerView = v.findViewById(R.id.popular_recycler);
         recommendedRecyclerView = v.findViewById(R.id.recommended_recycler);
         allMenuRecyclerView = v.findViewById(R.id.allMenu_recycler);
+        bnv_Home = v.findViewById(R.id.bnv_Main);
+        bnv_Home.add(new MeowBottomNavigation.Model(1,R.drawable.outline_paid_24));
+        bnv_Home.add(new MeowBottomNavigation.Model(2,R.drawable.home));
+        bnv_Home.add(new MeowBottomNavigation.Model(3,R.drawable.outline_history_24));
+        bnv_Home.show(2,true);
+       setUpNav();
         listProducts = new ArrayList<>();
         listProducts();
+
         // Inflate the layout for this fragment
         return v;
     }
@@ -108,5 +118,33 @@ public class HomeFragment extends Fragment {
         allMenuRecyclerView.setLayoutManager(layoutManager);
         allMenuRecyclerView.setAdapter(allMenuAdapter);
     }
+    public void setUpNav(){
+        bnv_Home.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+            @Override
+            public Unit invoke(MeowBottomNavigation.Model model) {
+                switch (model.getId()){
+                    case 1:
+                        replace(new BcoinsFragment());
+                        break;
+
+                    case 2:
+                        replace(new HomeFragment());
+
+                        break;
+
+                    case 3:
+                        replace(new HistoryFragment());
+                        break;
+                }
+                return null;
+            }
+        });
+    }
+    private void replace(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.hearder1,fragment);
+        transaction.commit();
+    }
+
 
 }
