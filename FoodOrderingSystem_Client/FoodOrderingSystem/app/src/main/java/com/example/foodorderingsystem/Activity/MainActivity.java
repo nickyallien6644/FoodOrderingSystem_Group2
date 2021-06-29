@@ -60,59 +60,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
-        listProducts = new ArrayList<>();
-        listProducts();
 
         initation();
 
 
-    }
-
-    public void listProducts() {
-        apiInterface = Api.getClients();
-
-        Call<List<Product>> call = apiInterface.getProducts ();
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                listProducts = response.body();
-               getPopularData();
-               getRecommendedData();
-               getAllMenuData();
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Server is not responding.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getPopularData() {
-        popularRecyclerView = findViewById(R.id.popular_recycler);
-        popularAdapter = new PopularAdapter(this, listProducts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-        popularRecyclerView.setLayoutManager(layoutManager);
-        popularRecyclerView.setAdapter(popularAdapter);
-    }
-
-    private void getRecommendedData() {
-        recommendedRecyclerView = findViewById(R.id.recommended_recycler);
-        recommendedAdapter = new RecommendedAdapter(this, listProducts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-        recommendedRecyclerView.setLayoutManager(layoutManager);
-        recommendedRecyclerView.setAdapter(recommendedAdapter);
-    }
-
-    private void getAllMenuData() {
-        allMenuRecyclerView = findViewById(R.id.allMenu_recycler);
-        allMenuAdapter = new AllMenuAdapter(this, listProducts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        allMenuRecyclerView.setLayoutManager(layoutManager);
-        allMenuRecyclerView.setAdapter(allMenuAdapter);
     }
 
     private void initation(){
