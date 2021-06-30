@@ -6,14 +6,14 @@ public class Order {
     private int oID;
     private int aID;
     private int rID;
-    private double oAmountTotal;
+    private int oAmountTotal;
     private Date oDateCreate;
     private int oStatus;
 
     public Order() {
     }
 
-    public Order(int oID, int aID, int rID, double oAmountTotal, Date oDateCreate, int oStatus) {
+    public Order(int oID, int aID, int rID, int oAmountTotal, Date oDateCreate, int oStatus) {
         this.oID = oID;
         this.aID = aID;
         this.rID = rID;
@@ -46,11 +46,11 @@ public class Order {
         this.rID = rID;
     }
 
-    public double getoAmountTotal() {
+    public int getoAmountTotal() {
         return oAmountTotal;
     }
 
-    public void setoAmountTotal(double oAmountTotal) {
+    public void setoAmountTotal(int oAmountTotal) {
         this.oAmountTotal = oAmountTotal;
     }
 

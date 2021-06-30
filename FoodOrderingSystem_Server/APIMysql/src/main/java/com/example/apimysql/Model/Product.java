@@ -3,14 +3,14 @@ package com.example.apimysql.Model;
 public class Product {
    private int pID;
    private String pName;
-   private double pPrice;
+   private int pPrice;
    private String pDescription;
    private int cID;
 
     public Product() {
     }
 
-    public Product(int pID, String pName, double pPrice, String pDescription, int cID) {
+    public Product(int pID, String pName, int pPrice, String pDescription, int cID) {
         this.pID = pID;
         this.pName = pName;
         this.pPrice = pPrice;
@@ -38,7 +38,7 @@ public class Product {
         return pPrice;
     }
 
-    public void setpPrice(double pPrice) {
+    public void setpPrice(int pPrice) {
         this.pPrice = pPrice;
     }
 

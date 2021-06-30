@@ -4,7 +4,7 @@ public class OrderDetail {
     private int oID;
     private int pID;
     private int oQuantity;
-    private double oPrice;
+    private int oPrice;
     private String oPaymentMethod;
     private String oNote;
     private String oCode;
@@ -12,7 +12,7 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(int oID, int pID, int oQuantity, double oPrice, String oPaymentMethod, String oNote, String oCode) {
+    public OrderDetail(int oID, int pID, int oQuantity, int oPrice, String oPaymentMethod, String oNote, String oCode) {
         this.oID = oID;
         this.pID = pID;
         this.oQuantity = oQuantity;
@@ -50,7 +50,7 @@ public class OrderDetail {
         return oPrice;
     }
 
-    public void setoPrice(double oPrice) {
+    public void setoPrice(int oPrice) {
         this.oPrice = oPrice;
     }
 

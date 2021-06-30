@@ -17,7 +17,7 @@ public class Product {
 
     @SerializedName("pPrice")
     @Expose
-    private double pPrice;
+    private int pPrice;
 
     @SerializedName("pDescription")
     @Expose
@@ -48,11 +48,11 @@ public class Product {
         this.pName = pName;
     }
 
-    public double getpPrice() {
+    public int getpPrice() {
         return pPrice;
     }
 
-    public void setpPrice(double pPrice) {
+    public void setpPrice(int pPrice) {
         this.pPrice = pPrice;
     }
 
