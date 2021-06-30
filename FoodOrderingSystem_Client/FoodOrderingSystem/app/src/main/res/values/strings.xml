@@ -16,5 +16,10 @@
     <string name="action_coins">BCoins</string>
     <string name="action_home">Home</string>
     <string name="action_history">History</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recharge_bcoins">Recharge Bcoins</string>
+    <string name="_0_bcoins">0 Bcoins</string>
+    <string name="input_bcoins">Input Bcoins</string>
 
 </resources>
