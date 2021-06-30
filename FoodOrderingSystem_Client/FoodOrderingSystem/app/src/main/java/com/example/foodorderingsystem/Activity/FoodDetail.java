@@ -27,7 +27,7 @@ public class FoodDetail extends AppCompatActivity {
         Intent intent = getIntent();
 
         pName = intent.getStringExtra("name");
-        pPrice = intent.getDoubleExtra("price", 0);
+        pPrice = intent.getIntExtra("price", 0);
         pDescription = intent.getStringExtra("description");
         iURL = intent.getStringExtra("image");
 
