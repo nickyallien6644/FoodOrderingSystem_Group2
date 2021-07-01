@@ -5,14 +5,14 @@ public class Account {
     private int roleID;
     private String aEmail;
     private String aPassword;
-    private double aCoins;
+    private int aCoins;
     private String aFirstname;
     private String aLastname;
     private String aPhone;
     private String aAddress;
     private int aStatus;
 
-    public Account(int aID, int roleID, String aEmail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
+    public Account(int aID, int roleID, String aEmail, String aPassword, int aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
         this.aID = aID;
         this.roleID = roleID;
         this.aEmail = aEmail;
@@ -64,7 +64,7 @@ public class Account {
         return aCoins;
     }
 
-    public void setaCoins(double aCoins) {
+    public void setaCoins(int aCoins) {
         this.aCoins = aCoins;
     }
 

@@ -84,35 +84,19 @@
                         <div class="col-12 col-lg-9">
                             <div class="row" >
                                 <div class="col-6 col-lg-6 col-md-6">
-                                    <div class="card" >
-                                        <div class="card-body "style="margin-bottom: 6px">
-                                            <div class="row" style="padding-top: 7px">
-                                                <div class="col-md-4 ">
-                                                    <div class="stats-icon purple">
-                                                        <i class="iconly-boldShow"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8" >
-                                                    <h6 class="text-muted font-semibold">Orders of Customer complete</h6>
-                                                    <h6 class="font-extrabold mb-0">999</h6>
-                                                </div>
+                                    <div class="card" style="padding-bottom: 10px">
+                                        <div class="card-body ">
+                                            <div class="" style="margin-top: 20px">
+                                                <h6 class="text-muted font-semibold">Orders of Customer complete: <b style="color: black">999</b></h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-6 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body"  style="margin-bottom: 6px">
-                                            <div class="row" style="padding-top: 7px">
-                                                <div class="col-md-4">
-                                                    <div class="stats-icon blue">
-                                                        <i class="iconly-boldProfile"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <h6 class="text-muted font-semibold">Orders of Customer incomplete</h6>
-                                                    <h6 class="font-extrabold mb-0">10</h6>
-                                                </div>
+                                    <div class="card" style="padding-bottom: 8px">
+                                        <div class="card-body" >
+                                            <div class="" style="margin-top: 20px">
+                                                <h5  class="text-muted font-semibold">Orders of Customer incomplete: <b style="color: black">10</b></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -159,12 +143,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-xl-4">
-                                    <div class="card" style="padding-bottom: 20px">
+                                    <div class="card" >
                                         <div class="card-header">
                                             <h4>Orders of the day</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row " style="margin-top: 50px">
+                                            <div class="row " >
                                                 <div class="col-6">
                                                     <div class="d-flex align-items-center">
                                                         <svg class="bi text-primary" width="32" height="32" fill="blue"
@@ -182,7 +166,7 @@
                                                     <div id="chart-europe"></div>
                                                 </div>
                                             </div>
-                                            <div class="row "style="margin-top: 50px">
+                                            <div class="row ">
                                                 <div class="col-6">
                                                     <div class="d-flex align-items-center">
                                                         <svg class="bi text-success" width="32" height="32" fill="blue"
@@ -200,7 +184,7 @@
                                                     <div id="chart-america"></div>
                                                 </div>
                                             </div>
-                                            <div class="row " style="margin-top: 50px">
+                                            <div class="row ">
                                                 <div class="col-6">
                                                     <div class="d-flex align-items-center">
                                                         <svg class="bi text-danger" width="32" height="32" fill="blue"
@@ -221,7 +205,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl-8">
+                                <div class="col-12 col-xl-8" >
                                     <div class="card">
                                         <div class="card-header">
                                             <h4>Most ordered food / drink of the day</h4>
@@ -287,44 +271,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--                            <div class="card">
-                                                            <div class="card-header">
-                                                                <h4>Recent Messages</h4>
-                                                            </div>
-                                                            <div class="card-content pb-4">
-                                                                <div class="recent-message d-flex px-4 py-3">
-                                                                    <div class="avatar avatar-lg">
-                                                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/4.jpg">
-                                                                    </div>
-                                                                    <div class="name ms-4">
-                                                                        <h5 class="mb-1">Hank Schrader</h5>
-                                                                        <h6 class="text-muted mb-0">@johnducky</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="recent-message d-flex px-4 py-3">
-                                                                    <div class="avatar avatar-lg">
-                                                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/5.jpg">
-                                                                    </div>
-                                                                    <div class="name ms-4">
-                                                                        <h5 class="mb-1">Dean Winchester</h5>
-                                                                        <h6 class="text-muted mb-0">@imdean</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="recent-message d-flex px-4 py-3">
-                                                                    <div class="avatar avatar-lg">
-                                                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg">
-                                                                    </div>
-                                                                    <div class="name ms-4">
-                                                                        <h5 class="mb-1">John Dodol</h5>
-                                                                        <h6 class="text-muted mb-0">@dodoljohn</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="px-4">
-                                                                    <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                                                        Conversation</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
                             <div class="card" style="margin-top: 70 px; padding-bottom: 32px">
                                 <div class="card-header">
                                     <h4>The branch that orders the most</h4>

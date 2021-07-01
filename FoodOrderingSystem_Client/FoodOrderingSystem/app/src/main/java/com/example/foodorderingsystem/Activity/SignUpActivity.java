@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
             Account account = new Account();
             account.setaEmail(etxtEmail.getEditText ().getText().toString());
             account.setaAddress(etxtAdress.getEditText ().getText().toString());
-            account.setaCoins(0.0);
+            account.setaCoins(0);
             account.setaFirstname(etxtFname.getEditText ().getText().toString());
             account.setaLastName(etxtLname.getEditText ().getText().toString());
             account.setaPassword(etxtPassword.getEditText ().getText().toString());

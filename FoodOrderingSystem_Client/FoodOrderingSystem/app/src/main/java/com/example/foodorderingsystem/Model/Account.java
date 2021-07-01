@@ -7,7 +7,7 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(int aID, int roleID, String aEmail, String aPassword, Double aCoins, String aFirstname, String aLastName, String aPhone, String aAddress, int aStatus) {
+    public Account(int aID, int roleID, String aEmail, String aPassword, int aCoins, String aFirstname, String aLastName, String aPhone, String aAddress, int aStatus) {
         this.aID = aID;
         this.roleID = roleID;
         this.aEmail = aEmail;
@@ -52,11 +52,11 @@ public class Account implements Serializable {
         this.aPassword = aPassword;
     }
 
-    public Double getaCoins() {
+    public int getaCoins() {
         return aCoins;
     }
 
-    public void setaCoins(Double aCoins) {
+    public void setaCoins(int aCoins) {
         this.aCoins = aCoins;
     }
 
@@ -104,7 +104,7 @@ public class Account implements Serializable {
     private int roleID;
     private String aEmail;
     private String aPassword;
-    private Double aCoins;
+    private int aCoins;
     private String aFirstname;
     private String aLastName;
     private String aPhone;
