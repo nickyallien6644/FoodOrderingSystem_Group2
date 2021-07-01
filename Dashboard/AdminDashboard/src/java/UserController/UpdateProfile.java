@@ -38,7 +38,7 @@ public class UpdateProfile extends HttpServlet {
         String id = request.getParameter("id").toString();
 
         request.setAttribute("id", id);
-        request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("./Admin/UpdateProfile.jsp").forward(request, response);
                 
 //        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/AdminDashboard/UpdateProfile.jsp");
 
