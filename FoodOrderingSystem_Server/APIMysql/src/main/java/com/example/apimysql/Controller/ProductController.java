@@ -18,4 +18,9 @@ public class ProductController {
     public List<Map<String, Object>> listProducts() {
         return productService.listProducts();
     }
+
+    @GetMapping("/listProductSearch")
+    public List<Map<String, Object>> listProductSearch(String nameProduct){
+        return productService.listProductSearch(nameProduct);
+    }
 }
