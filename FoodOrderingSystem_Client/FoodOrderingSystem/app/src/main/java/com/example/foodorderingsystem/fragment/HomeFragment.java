@@ -67,10 +67,9 @@ public class HomeFragment extends Fragment {
         bnv_Home.add(new MeowBottomNavigation.Model(2,R.drawable.home));
         bnv_Home.add(new MeowBottomNavigation.Model(3,R.drawable.outline_history_24));
         bnv_Home.show(2,true);
-       setUpNav();
         listProducts = new ArrayList<>();
         listProducts();
-
+        setUpNav();
         // Inflate the layout for this fragment
         return v;
     }
