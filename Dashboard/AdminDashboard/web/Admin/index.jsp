@@ -51,7 +51,7 @@
                             <li class="sidebar-item active">
                                 <a href="indexAdmin.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Account management</span>
+                                    <span>Datatable</span>
                                 </a>
                             </li>
                            
