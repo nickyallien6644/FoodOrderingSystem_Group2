@@ -7,6 +7,8 @@ import java.util.Map;
 
 public interface ProductInterface {
     public List<Map<String, Object>> listProducts();
+    public List<Map<String, Object>> listProductSearch(String nameProduct);
+
 
 
 }
