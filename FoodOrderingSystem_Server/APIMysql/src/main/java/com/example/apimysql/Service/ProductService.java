@@ -22,4 +22,9 @@ public class ProductService implements ProductInterface {
     public List<Map<String, Object>> listProductSearch(String nameProduct) {
         return productDAO.listProductSearch(nameProduct);
     }
+
+    @Override
+    public List<Map<String, Object>> listProductForRecommended() {
+        return productDAO.listProductForRecommended();
+    }
 }

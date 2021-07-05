@@ -29,6 +29,9 @@ public interface ApiInterface {
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
 
+    @GET("product/listProductForRecommended")
+    Call<List<Product>> getProductForRecommended();
+
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();
 

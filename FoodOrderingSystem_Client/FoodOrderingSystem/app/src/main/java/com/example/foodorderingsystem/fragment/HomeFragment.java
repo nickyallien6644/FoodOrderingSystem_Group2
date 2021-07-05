@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
 
     ApiInterface apiInterface;
     List<Product> listProducts ;
+    List<Product> listProductForRecommended;
     List<Product> listProductSearch;
     RecyclerView popularRecyclerView;
     PopularAdapter popularAdapter;
@@ -75,10 +76,12 @@ public class HomeFragment extends Fragment {
         bnv_Home.show(2, true);
         txtSearchProduct = (SearchView) v.findViewById(R.id.txtSearchProducts);
         searchProduct();
+
         setUpNav();
         listProducts = new ArrayList<>();
         listProducts();
-
+        listProductForRecommended = new ArrayList<>();
+        listProductForRecommended();
 
         // Inflate the layout for this fragment
         return v;
@@ -93,8 +96,25 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 listProducts = response.body();
                 getPopularData();
-                getRecommendedData();
+
                 getAllMenuData();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Server is not responding.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void listProductForRecommended() {
+        apiInterface = Api.getClients();
+        Call<List<Product>> call = apiInterface.getProductForRecommended();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                listProductForRecommended = response.body();
+                getRecommendedData();
             }
 
             @Override
@@ -113,7 +133,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getRecommendedData() {
-        recommendedAdapter = new RecommendedAdapter(getContext(), listProducts);
+        recommendedAdapter = new RecommendedAdapter(getContext(), listProductForRecommended);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
         recommendedRecyclerView.setLayoutManager(layoutManager);
