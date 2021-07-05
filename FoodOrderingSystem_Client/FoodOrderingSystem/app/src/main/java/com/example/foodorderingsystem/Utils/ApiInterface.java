@@ -3,6 +3,7 @@ package com.example.foodorderingsystem.Utils;
 import android.graphics.ColorSpace;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
 import com.google.gson.Gson;
@@ -37,6 +38,13 @@ public interface ApiInterface {
     Call<Account>updateBcoins( @Path("aID") int id ,@Body Account account);
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
+
+    @GET("product/listProductForRecommended")
+    Call<List<Product>> getProductForRecommended();
+
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();
+
+    @GET("frequentlyAskedQuestion/listFrequentlyAskedQuestion")
+    Call<List<FrequentlyAskedQuestion>> getFrequentlyAskedQuestion();
 }
