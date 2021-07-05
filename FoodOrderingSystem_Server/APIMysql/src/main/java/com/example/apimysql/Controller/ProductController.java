@@ -14,6 +14,7 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     ProductService productService;
+
     @GetMapping("/listProducts")
     public List<Map<String, Object>> listProducts() {
         return productService.listProducts();
@@ -22,5 +23,10 @@ public class ProductController {
     @GetMapping("/listProductSearch")
     public List<Map<String, Object>> listProductSearch(String nameProduct){
         return productService.listProductSearch(nameProduct);
+    }
+
+    @GetMapping("/listProductForRecommended")
+    public List<Map<String, Object>> listProductForRecommended() {
+        return productService.listProductForRecommended();
     }
 }
