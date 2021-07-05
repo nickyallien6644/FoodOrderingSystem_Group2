@@ -19,7 +19,7 @@ public class AccountController {
         return service.listAccounts();
     }
 
-    @GetMapping("/getid")
+    @GetMapping("/listbyid")
     public List<Map<String, Object>> listAccounts(int aID) {
         return service.listAccounts();
     }
@@ -32,4 +32,20 @@ public class AccountController {
         }
         return "Add acount is success";
     }
+    @RequestMapping(value="/updateCoins/{aID}", method=RequestMethod.PUT)
+    public @ResponseBody Account update(@PathVariable("aID") int id ,@RequestBody Account account){
+        account.setaID(id);
+        service.updateConis(account);
+
+        return account;
+    }
+//    @PostMapping("/updateCoins/{aID}")
+//    public String updateCoins(@RequestBody Account account , @PathVariable int id) {
+//        account.setaID(id);
+//        int coins = service.updateConis(account);
+//        if(coins==0) {
+//            return "Faile update       ";
+//        }
+//        return "update coins is success";
+//    }
 }
