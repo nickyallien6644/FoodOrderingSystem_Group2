@@ -1,7 +1,9 @@
 package com.example.foodorderingsystem.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.foodorderingsystem.Activity.MainActivity;
+import com.example.foodorderingsystem.Activity.SearchActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.PopularAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
@@ -40,11 +44,13 @@ public class HomeFragment extends Fragment {
 
     ApiInterface apiInterface;
     List<Product> listProducts ;
+    List<Product> listProductSearch;
     RecyclerView popularRecyclerView;
     PopularAdapter popularAdapter;
     private MeowBottomNavigation bnv_Home;
     RecyclerView recommendedRecyclerView;
     RecommendedAdapter recommendedAdapter;
+    SearchView txtSearchProduct;
 
     RecyclerView allMenuRecyclerView;
     AllMenuAdapter allMenuAdapter;
@@ -63,13 +69,17 @@ public class HomeFragment extends Fragment {
         recommendedRecyclerView = v.findViewById(R.id.recommended_recycler);
         allMenuRecyclerView = v.findViewById(R.id.allMenu_recycler);
         bnv_Home = v.findViewById(R.id.bnv_Main);
-        bnv_Home.add(new MeowBottomNavigation.Model(1,R.drawable.outline_paid_24));
-        bnv_Home.add(new MeowBottomNavigation.Model(2,R.drawable.home));
-        bnv_Home.add(new MeowBottomNavigation.Model(3,R.drawable.outline_history_24));
-        bnv_Home.show(2,true);
+        bnv_Home.add(new MeowBottomNavigation.Model(1, R.drawable.outline_paid_24));
+        bnv_Home.add(new MeowBottomNavigation.Model(2, R.drawable.home));
+        bnv_Home.add(new MeowBottomNavigation.Model(3, R.drawable.outline_history_24));
+        bnv_Home.show(2, true);
+        txtSearchProduct = (SearchView) v.findViewById(R.id.txtSearchProducts);
+        searchProduct();
+        setUpNav();
         listProducts = new ArrayList<>();
         listProducts();
-        setUpNav();
+
+
         // Inflate the layout for this fragment
         return v;
     }
@@ -139,10 +149,29 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void replace(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.hearder1,fragment);
         transaction.commit();
+    }
+
+    public void searchProduct() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getActivity().getBaseContext(), SearchActivity.class);
+                intent.putExtra("search", query);
+                getActivity().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 

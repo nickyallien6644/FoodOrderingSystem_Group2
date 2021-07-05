@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Utils;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,4 +27,7 @@ public interface ApiInterface {
 
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
+
+    @GET("privacyPolicy/listPrivacyPolicy")
+    Call<List<PrivacyPolicy>> getPrivacyPolicy();
 }
