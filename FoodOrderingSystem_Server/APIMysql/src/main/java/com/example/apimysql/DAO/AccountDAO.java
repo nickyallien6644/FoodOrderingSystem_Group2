@@ -1,5 +1,6 @@
 package com.example.apimysql.DAO;
 
+
 import com.example.apimysql.Interface.AccountInterface;
 import com.example.apimysql.Model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,11 @@ public class AccountDAO implements AccountInterface {
     public int add(Account account) {
         String sql = "insert into account(roleID,aEmail,aPassword,aCoins,aFirstname,aLastname,aPhone,aAddress,aStatus)values(?,?,MD5(?),?,?,?,?,?,?)";
         return template.update(sql, account.getRoleID(), account.getaEmail(),account.getaPassword(), account.getaCoins(), account.getaFirstname(), "Nguyen" ,account.getaPhone(), account.getaAddress(),account.getaStatus());
+    }
+
+    @Override
+    public int updateConis(Account account) {
+        String sql = "update account set aCoins = ? where aID = ?";
+        return template.update(sql, account.getaCoins(),account.getaID());
     }
 }
