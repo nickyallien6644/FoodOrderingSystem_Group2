@@ -29,4 +29,9 @@ public class ProductController {
     public List<Map<String, Object>> listProductForRecommended() {
         return productService.listProductForRecommended();
     }
+
+    @GetMapping("/listCategory")
+    public List<Map<String, Object>> listCategory() {
+        return productService.listCategory();
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Utils;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
@@ -31,6 +32,9 @@ public interface ApiInterface {
 
     @GET("product/listProductForRecommended")
     Call<List<Product>> getProductForRecommended();
+
+    @GET("product/listCategory")
+    Call<List<Category>> getCategory();
 
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();

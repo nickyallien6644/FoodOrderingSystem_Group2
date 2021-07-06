@@ -27,4 +27,9 @@ public class ProductService implements ProductInterface {
     public List<Map<String, Object>> listProductForRecommended() {
         return productDAO.listProductForRecommended();
     }
+
+    @Override
+    public List<Map<String, Object>> listCategory() {
+        return productDAO.listCategory();
+    }
 }
