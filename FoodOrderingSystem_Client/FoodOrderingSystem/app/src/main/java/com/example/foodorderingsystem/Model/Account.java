@@ -1,24 +1,12 @@
 package com.example.foodorderingsystem.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class Account implements Serializable {
+public class Account {
 
-    public Account() {
-    }
-
-    public Account(int aID, int roleID, String aEmail, String aPassword, int aCoins, String aFirstname, String aLastName, String aPhone, String aAddress, int aStatus) {
-        this.aID = aID;
-        this.roleID = roleID;
-        this.aEmail = aEmail;
-        this.aPassword = aPassword;
-        this.aCoins = aCoins;
-        this.aFirstname = aFirstname;
-        this.aLastName = aLastName;
-        this.aPhone = aPhone;
-        this.aAddress = aAddress;
-        this.aStatus = aStatus;
-    }
 
     public int getaID() {
         return aID;
@@ -52,13 +40,9 @@ public class Account implements Serializable {
         this.aPassword = aPassword;
     }
 
-    public int getaCoins() {
-        return aCoins;
-    }
+    public int getaCoins() { return aCoins; }
 
-    public void setaCoins(int aCoins) {
-        this.aCoins = aCoins;
-    }
+    public void setaCoins(int aCoins) { this.aCoins = aCoins; }
 
     public String getaFirstname() {
         return aFirstname;
@@ -99,16 +83,35 @@ public class Account implements Serializable {
     public void setaStatus(int aStatus) {
         this.aStatus = aStatus;
     }
-
+    @SerializedName("aID")
+    @Expose
     private int aID;
+    @SerializedName("roleID")
+    @Expose
     private int roleID;
+    @SerializedName("aEmail")
+    @Expose
     private String aEmail;
+    @SerializedName("aPassword")
+    @Expose
     private String aPassword;
+    @SerializedName("aCoins")
+    @Expose
     private int aCoins;
+    @SerializedName("aFirstname")
+    @Expose
     private String aFirstname;
+    @SerializedName("aLastName")
+    @Expose
     private String aLastName;
+    @SerializedName("aPhone")
+    @Expose
     private String aPhone;
+    @SerializedName("aAddress")
+    @Expose
     private String aAddress;
+    @SerializedName("aStatus")
+    @Expose
     private int aStatus;
 
 
