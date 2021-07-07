@@ -3,6 +3,7 @@ package com.example.foodorderingsystem.Utils;
 import android.graphics.ColorSpace;
 
 import com.example.foodorderingsystem.Model.Account;
+import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
@@ -36,11 +37,24 @@ public interface ApiInterface {
     Call<Account>addPersona(@Body Account account);
     @PUT("updateCoins/{aID}")
     Call<Account>updateBcoins( @Path("aID") int id ,@Body Account account);
+
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
 
+    @GET("product/listProductByFood")
+    Call<List<Product>> getProductByFood();
+
+    @GET("product/listProductByDrink")
+    Call<List<Product>> getProductByDrink();
+
+    @GET("product/listProductByCake")
+    Call<List<Product>> getProductByCake();
+
     @GET("product/listProductForRecommended")
     Call<List<Product>> getProductForRecommended();
+
+    @GET("product/listCategory")
+    Call<List<Category>> getCategory();
 
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();

@@ -9,10 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.MenuAdapter;
-import com.example.foodorderingsystem.Adapter.PopularAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
