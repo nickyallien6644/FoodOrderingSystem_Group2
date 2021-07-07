@@ -52,4 +52,9 @@ public class ProductService implements ProductInterface {
     public List<Map<String, Object>> listProductsByRID(String rID) {
         return productDAO.listProductsByRID(rID);
     }
+
+    @Override
+    public List<Map<String, Object>> listProductsByRIDSeeAll(String rID) {
+        return productDAO.listProductsByRIDSeeAll(rID);
+    }
 }

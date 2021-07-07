@@ -21,24 +21,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MenuResAdapter extends RecyclerView.Adapter<MenuResAdapter.MenuResViewHolder> {
+public class SeeAllResAdapter extends RecyclerView.Adapter<SeeAllResAdapter.SeeAllResViewHolder> {
     private Context context;
     private List<Product> menuList;
 
-    public MenuResAdapter(Context context, List<Product> menuList) {
+    public SeeAllResAdapter(Context context, List<Product> menuList) {
         this.context = context;
         this.menuList = menuList;
     }
     @NonNull
     @NotNull
     @Override
-    public MenuResAdapter.MenuResViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public SeeAllResAdapter.SeeAllResViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_menus, parent, false);
-        return new MenuResAdapter.MenuResViewHolder(view);
+        return new SeeAllResAdapter.SeeAllResViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull MenuResAdapter.MenuResViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull SeeAllResAdapter.SeeAllResViewHolder holder, int position) {
         holder.menuName.setText(menuList.get(position).getpName());
         holder.menubcoin.setText(String.valueOf(menuList.get(position).getpPrice()) + " Bcoins");
         Glide.with(context).load(menuList.get(position).getiURL()).into(holder.menuImage);
@@ -61,12 +61,12 @@ public class MenuResAdapter extends RecyclerView.Adapter<MenuResAdapter.MenuResV
         if(menuList != null) return menuList.size();
         return 0;
     }
-    public static class MenuResViewHolder extends RecyclerView.ViewHolder {
+    public static class SeeAllResViewHolder extends RecyclerView.ViewHolder {
         ImageView menuImage;
         TextView menuName, menubcoin;
         Button menuAddCart;
 
-        public MenuResViewHolder(@NonNull View itemView) {
+        public SeeAllResViewHolder(@NonNull View itemView) {
             super(itemView);
             menuImage = itemView.findViewById(R.id.iv_food);
             menuName = itemView.findViewById(R.id.tv_foodName);
