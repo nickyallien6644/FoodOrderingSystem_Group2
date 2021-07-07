@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Activity.ProductByFood;
 import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.R;
 
@@ -37,19 +39,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Popula
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.PopularViewHolder holder, int position) {
         holder.categoryName.setText(categoryList.get(position).getcName());
-
+        
         Glide.with(context).load(categoryList.get(position).getcURL()).error(R.drawable.ic_launcher_foreground).into(holder.categoryImage);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, FoodDetail.class);
-//                intent.putExtra("name", popularList.get(position).getpName());
-//                intent.putExtra("price", popularList.get(position).getpPrice());
-//                intent.putExtra("description", popularList.get(position).getpDescription());
-//                intent.putExtra("image", popularList.get(position).getiURL());
-//                context.startActivity(intent);
-//            }
-//        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductByFood.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

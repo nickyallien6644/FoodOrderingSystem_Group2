@@ -34,4 +34,19 @@ public class ProductController {
     public List<Map<String, Object>> listCategory() {
         return productService.listCategory();
     }
+
+    @GetMapping("/listProductByFood")
+    public List<Map<String, Object>> listProductByFood() {
+        return productService.listProductByFood();
+    }
+
+    @GetMapping("/listProductByDrink")
+    public List<Map<String, Object>> listProductByDrink() {
+        return productService.listProductByDrink();
+    }
+
+    @GetMapping("/listProductByCake")
+    public List<Map<String, Object>> listProductByCake() {
+        return productService.listProductByCake();
+    }
 }

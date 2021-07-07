@@ -15,7 +15,7 @@ public class ProductDAO implements ProductInterface {
 
     @Override
     public List<Map<String, Object>> listProducts() {
-        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID");
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID LIMIT 10");
         return query;
     }
 //    SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID WHERE `pName` LIKE 'D%';
@@ -35,6 +35,24 @@ public class ProductDAO implements ProductInterface {
     @Override
     public List<Map<String, Object>> listCategory() {
         List<Map<String, Object>> query = template.queryForList("SELECT * FROM `category`");
+        return query;
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByFood() {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID WHERE p.cID = 1");
+        return query;
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByDrink() {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID WHERE p.cID = 2");
+        return query;
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByCake() {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID WHERE p.cID = 3");
         return query;
     }
 }

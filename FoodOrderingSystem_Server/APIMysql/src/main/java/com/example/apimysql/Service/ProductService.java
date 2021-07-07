@@ -32,4 +32,19 @@ public class ProductService implements ProductInterface {
     public List<Map<String, Object>> listCategory() {
         return productDAO.listCategory();
     }
+
+    @Override
+    public List<Map<String, Object>> listProductByFood() {
+        return productDAO.listProductByFood();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByDrink() {
+        return productDAO.listProductByDrink();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByCake() {
+        return productDAO.listProductByCake();
+    }
 }
