@@ -13,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.foodorderingsystem.Activity.AllProduct;
+import com.example.foodorderingsystem.Activity.AllProductForRecommended;
 import com.example.foodorderingsystem.Activity.SearchActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.CategoryAdapter;
@@ -56,6 +59,8 @@ public class HomeFragment extends Fragment {
     RecyclerView allMenuRecyclerView;
     AllMenuAdapter allMenuAdapter;
 
+    TextView seeAllProductForRecommended, seeAllProduct;
+
     public HomeFragment() {
 
         // Required empty public constructor
@@ -76,6 +81,12 @@ public class HomeFragment extends Fragment {
         bnv_Home.show(2, true);
         txtSearchProduct = (SearchView) v.findViewById(R.id.txtSearchProducts);
         searchProduct();
+
+        seeAllProductForRecommended = v.findViewById(R.id.txtSeeAllRecommended);
+        seeAllProductForRecommended.setOnClickListener(seeAllProductForRecommended());
+
+        seeAllProduct = v.findViewById(R.id.txtSeeAllProduct);
+        seeAllProduct.setOnClickListener(seeAllProduct());
 
         setUpNav();
         listCategory = new ArrayList<>();
@@ -212,5 +223,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private View.OnClickListener seeAllProductForRecommended() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AllProductForRecommended.class);
+                startActivity(intent);
+            }
+        };
+    }
+
+    private View.OnClickListener seeAllProduct() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AllProduct.class);
+                startActivity(intent);
+            }
+        };
+    }
 
 }

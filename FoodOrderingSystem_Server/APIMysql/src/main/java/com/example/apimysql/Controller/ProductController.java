@@ -20,6 +20,11 @@ public class ProductController {
         return productService.listProducts();
     }
 
+    @GetMapping("/listAllProductForAllCategory")
+    public List<Map<String, Object>> listAllProductForAllCategory() {
+        return productService.listAllProductForAllCategory();
+    }
+
     @GetMapping("/listProductSearch")
     public List<Map<String, Object>> listProductSearch(String nameProduct){
         return productService.listProductSearch(nameProduct);
@@ -28,6 +33,11 @@ public class ProductController {
     @GetMapping("/listProductForRecommended")
     public List<Map<String, Object>> listProductForRecommended() {
         return productService.listProductForRecommended();
+    }
+
+    @GetMapping("/listAllProductForRecommended")
+    public List<Map<String, Object>> listAllProductForRecommended() {
+        return productService.listAllProductForRecommended();
     }
 
     @GetMapping("/listCategory")

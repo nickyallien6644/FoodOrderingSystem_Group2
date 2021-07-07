@@ -28,7 +28,9 @@
             android:label="ORDER HISTORY"
             android:textColor="#000000" />
         <activity android:name=".Activity.SignInActivity" />
-        <activity android:name=".Activity.ProductByFood" />
+        <activity android:name=".Activity.ProductByCategory" />
+        <activity android:name=".Activity.AllProduct" />
+        <activity android:name=".Activity.AllProductForRecommended" />
         <activity android:name=".Activity.MainActivity">
 
         </activity>

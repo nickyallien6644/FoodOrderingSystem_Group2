@@ -13,4 +13,6 @@ public interface ProductInterface {
     public List<Map<String, Object>> listProductByFood();
     public List<Map<String, Object>> listProductByDrink();
     public List<Map<String, Object>> listProductByCake();
+    public List<Map<String, Object>> listAllProductForRecommended();
+    public List<Map<String, Object>> listAllProductForAllCategory();
 }

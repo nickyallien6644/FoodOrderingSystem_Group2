@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodorderingsystem.Activity.ProductByFood;
+import com.example.foodorderingsystem.Activity.ProductByCategory;
+import com.example.foodorderingsystem.Common.Common;
 import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.R;
+import com.example.foodorderingsystem.Utils.ItemClickListener;
 
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Popula
 
     private Context context;
     private List<Category> categoryList;
+    int row_index = -1;
 
     public CategoryAdapter(Context context, List<Category> categoryList) {
         this.context = context;
@@ -39,16 +42,28 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Popula
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.PopularViewHolder holder, int position) {
         holder.categoryName.setText(categoryList.get(position).getcName());
-        
-        Glide.with(context).load(categoryList.get(position).getcURL()).error(R.drawable.ic_launcher_foreground).into(holder.categoryImage);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context).load(categoryList.get(position).getcURL()).error(R.drawable.ic_launcher_foreground).into(holder.categoryImage);
+        holder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ProductByFood.class);
-                context.startActivity(intent);
+            public void onClick(View view, int position) {
+                row_index = position;
+                Common.currentCategory = categoryList.get(position);
+                notifyDataSetChanged();
             }
         });
+
+        if (row_index == position) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ProductByCategory.class);
+                    intent.putExtra("position", position);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -56,14 +71,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Popula
         return categoryList.size();
     }
 
-    public static class PopularViewHolder extends RecyclerView.ViewHolder {
+    public static class PopularViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView categoryImage;
         TextView categoryName;
+
+        ItemClickListener itemClickListener;
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
 
         public PopularViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryName = itemView.findViewById(R.id.category_name);
             categoryImage = itemView.findViewById(R.id.category_image);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition());
         }
     }
 }
