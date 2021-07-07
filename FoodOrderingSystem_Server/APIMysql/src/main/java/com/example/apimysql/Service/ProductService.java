@@ -47,4 +47,9 @@ public class ProductService implements ProductInterface {
     public List<Map<String, Object>> listProductByCake() {
         return productDAO.listProductByCake();
     }
+
+    @Override
+    public List<Map<String, Object>> listProductsByRID(String rID) {
+        return productDAO.listProductsByRID(rID);
+    }
 }

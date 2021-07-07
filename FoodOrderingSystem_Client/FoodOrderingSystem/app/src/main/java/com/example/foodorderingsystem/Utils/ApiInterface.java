@@ -7,6 +7,7 @@ import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
+import com.example.foodorderingsystem.Model.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -56,9 +57,17 @@ public interface ApiInterface {
     @GET("product/listCategory")
     Call<List<Category>> getCategory();
 
+    @GET("product/listProductByRID/{rID}")
+    Call<List<Product>> getProductByRID(@Path("rID") int rID);
+
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();
 
     @GET("frequentlyAskedQuestion/listFrequentlyAskedQuestion")
     Call<List<FrequentlyAskedQuestion>> getFrequentlyAskedQuestion();
+
+    @GET("restaurant/info/{rID}")
+    Call<List<Restaurant>> getRestaurantInfo(@Path("rID") int rID);
+
+
 }
