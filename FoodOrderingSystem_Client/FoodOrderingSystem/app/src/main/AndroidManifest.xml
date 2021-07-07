@@ -20,9 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.MainActivity"/>
         <activity android:name=".Activity.FoodDetail" />
-        <activity
-            android:name=".Activity.SignUpActivity"
+        <activity android:name=".Activity.SignUpActivity"
             android:background="#FFFFFF"
             android:gravity="center"
             android:label="ORDER HISTORY"
@@ -34,6 +34,7 @@
         <activity android:name=".Activity.MainActivity">
 
         </activity>
+        <activity android:name=".Activity.RestaurantActivity"/>
     </application>
 
 </manifest>

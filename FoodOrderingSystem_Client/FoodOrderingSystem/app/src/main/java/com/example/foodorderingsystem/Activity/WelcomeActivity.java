@@ -13,7 +13,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        final Intent i = new Intent(this, MainActivity.class);
+        final Intent i = new Intent(this, SignInActivity.class);
         Thread timer = new Thread(){
             @Override
             public void run() {
