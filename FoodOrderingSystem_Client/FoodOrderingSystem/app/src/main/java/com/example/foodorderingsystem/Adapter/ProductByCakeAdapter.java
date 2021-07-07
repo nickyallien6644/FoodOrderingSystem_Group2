@@ -1,6 +1,7 @@
 package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Activity.FoodDetail;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 
@@ -41,17 +43,18 @@ public class ProductByCakeAdapter extends RecyclerView.Adapter<ProductByCakeAdap
         holder.productByCategoryPrice.setText(String.valueOf(productList.get(position).getpPrice()) + " Bcoins");
 
         Glide.with(context).load(productList.get(position).getiURL()).into(holder.productByCategoryImage);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, FoodDetail.class);
-//                intent.putExtra("name", productList.get(position).getpName());
-//                intent.putExtra("price", productList.get(position).getpPrice());
-//                intent.putExtra("description", productList.get(position).getpDescription());
-//                intent.putExtra("image", productList.get(position).getiURL());
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("name", productList.get(position).getpName());
+                intent.putExtra("price", productList.get(position).getpPrice());
+                intent.putExtra("description", productList.get(position).getpDescription());
+                intent.putExtra("image", productList.get(position).getiURL());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -47,22 +47,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Popula
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                row_index = position;
                 Common.currentCategory = categoryList.get(position);
                 notifyDataSetChanged();
+                Intent intent = new Intent(context, ProductByCategory.class);
+                intent.putExtra("position", position);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
-
-        if (row_index == position) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ProductByCategory.class);
-                    intent.putExtra("position", position);
-                    context.startActivity(intent);
-                }
-            });
-        }
 
     }
 
