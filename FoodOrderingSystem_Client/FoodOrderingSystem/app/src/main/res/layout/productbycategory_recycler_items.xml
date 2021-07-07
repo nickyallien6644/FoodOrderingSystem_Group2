@@ -7,7 +7,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/productByFood_linear"
+        android:id="@+id/productByCategory_linear"
         android:layout_width="377dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/productByFood_image"
+            android:id="@+id/productByCategory_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:paddingLeft="13dp"
@@ -36,7 +36,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/productByFood_name"
+                android:id="@+id/productByCategory_name"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
                 android:layout_gravity="center_vertical"
@@ -50,7 +50,7 @@
                 tools:layout_editor_absoluteY="36dp" />
 
             <TextView
-                android:id="@+id/productByFood_price"
+                android:id="@+id/productByCategory_price"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:layout_gravity="center"

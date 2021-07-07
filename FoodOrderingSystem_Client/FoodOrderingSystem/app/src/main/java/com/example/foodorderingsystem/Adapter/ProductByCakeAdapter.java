@@ -1,7 +1,6 @@
 package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodorderingsystem.Activity.FoodDetail;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 
@@ -20,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdapter.ProductByFoodViewHolder> {
+public class ProductByCakeAdapter extends RecyclerView.Adapter<ProductByCakeAdapter.ProductByCakeViewHolder> {
     private Context context;
     private List<Product> productList;
 
-    public ProductByFoodAdapter(Context context, List<Product> productList) {
+    public ProductByCakeAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -32,28 +30,28 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
     @NonNull
     @NotNull
     @Override
-    public ProductByFoodViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public ProductByCakeViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.productbycategory_recycler_items, parent, false);
-        return new ProductByFoodViewHolder(v);
+        return new ProductByCakeViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull ProductByFoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull ProductByCakeViewHolder holder, int position) {
         holder.productByCategoryName.setText(productList.get(position).getpName());
         holder.productByCategoryPrice.setText(String.valueOf(productList.get(position).getpPrice()) + " Bcoins");
 
         Glide.with(context).load(productList.get(position).getiURL()).into(holder.productByCategoryImage);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, FoodDetail.class);
-                intent.putExtra("name", productList.get(position).getpName());
-                intent.putExtra("price", productList.get(position).getpPrice());
-                intent.putExtra("description", productList.get(position).getpDescription());
-                intent.putExtra("image", productList.get(position).getiURL());
-                context.startActivity(intent);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, FoodDetail.class);
+//                intent.putExtra("name", productList.get(position).getpName());
+//                intent.putExtra("price", productList.get(position).getpPrice());
+//                intent.putExtra("description", productList.get(position).getpDescription());
+//                intent.putExtra("image", productList.get(position).getiURL());
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -61,11 +59,11 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
         return productList.size();
     }
 
-    public static class ProductByFoodViewHolder extends RecyclerView.ViewHolder{
+    public static class ProductByCakeViewHolder extends RecyclerView.ViewHolder{
         ImageView productByCategoryImage;
         TextView productByCategoryName, productByCategoryPrice;
 
-        public ProductByFoodViewHolder(@NonNull @NotNull View itemView) {
+        public ProductByCakeViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             productByCategoryImage = itemView.findViewById(R.id.productByCategory_image);
