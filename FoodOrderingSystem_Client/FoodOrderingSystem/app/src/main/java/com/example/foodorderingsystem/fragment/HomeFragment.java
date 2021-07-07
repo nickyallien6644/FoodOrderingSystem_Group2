@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +16,11 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.foodorderingsystem.Activity.MainActivity;
 import com.example.foodorderingsystem.Activity.SearchActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
-import com.example.foodorderingsystem.Adapter.PopularAdapter;
+import com.example.foodorderingsystem.Adapter.CategoryAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
+import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
@@ -45,9 +44,10 @@ public class HomeFragment extends Fragment {
     ApiInterface apiInterface;
     List<Product> listProducts ;
     List<Product> listProductForRecommended;
+    List<Category> listCategory;
     List<Product> listProductSearch;
-    RecyclerView popularRecyclerView;
-    PopularAdapter popularAdapter;
+    RecyclerView categoryRecyclerView;
+    CategoryAdapter categoryAdapter;
     private MeowBottomNavigation bnv_Home;
     RecyclerView recommendedRecyclerView;
     RecommendedAdapter recommendedAdapter;
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main,container,false);
-        popularRecyclerView = v.findViewById(R.id.popular_recycler);
+        categoryRecyclerView = v.findViewById(R.id.category_recycler);
         recommendedRecyclerView = v.findViewById(R.id.recommended_recycler);
         allMenuRecyclerView = v.findViewById(R.id.allMenu_recycler);
         bnv_Home = v.findViewById(R.id.bnv_Main);
@@ -78,6 +78,8 @@ public class HomeFragment extends Fragment {
         searchProduct();
 
         setUpNav();
+        listCategory = new ArrayList<>();
+        listCategory();
         listProducts = new ArrayList<>();
         listProducts();
         listProductForRecommended = new ArrayList<>();
@@ -95,13 +97,29 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 listProducts = response.body();
-                getPopularData();
-
                 getAllMenuData();
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Server is not responding.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void listCategory() {
+        apiInterface = Api.getClients();
+
+        Call<List<Category>> call = apiInterface.getCategory ();
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                listCategory = response.body();
+                getCategoryData();
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
                 Toast.makeText(getContext(), "Server is not responding.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -124,12 +142,12 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void getPopularData() {
-        popularAdapter = new PopularAdapter(getContext(), listProducts);
+    private void getCategoryData() {
+        categoryAdapter = new CategoryAdapter(getContext(), listCategory);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        popularRecyclerView.setLayoutManager(layoutManager);
-        popularRecyclerView.setAdapter(popularAdapter);
+        categoryRecyclerView.setLayoutManager(layoutManager);
+        categoryRecyclerView.setAdapter(categoryAdapter);
     }
 
     private void getRecommendedData() {
