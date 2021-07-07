@@ -55,4 +55,10 @@ public class ProductDAO implements ProductInterface {
         List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID WHERE p.cID = 3");
         return query;
     }
+
+    @Override
+    public List<Map<String, Object>> listProductsByRID(String rID) {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `product` WHERE rID = "+rID);
+        return query;
+    }
 }

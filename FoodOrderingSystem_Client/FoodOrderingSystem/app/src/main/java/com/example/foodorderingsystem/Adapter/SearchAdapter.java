@@ -2,6 +2,7 @@ package com.example.foodorderingsystem.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Activity.FoodDetail;
+import com.example.foodorderingsystem.Activity.RestaurantActivity;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 
@@ -42,7 +45,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.txtNameProduct.setText(products.get(position).getpName());
         holder.txtPrice.setText(String.valueOf(products.get(position).getpPrice())+" Bcoin");
         Glide.with(context).load(products.get(position).getiURL()).into(holder.imgSearch);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RestaurantActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                int temp = products.get(position).getrID();
+                intent.putExtra("rID", products.get(position).getrID());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
