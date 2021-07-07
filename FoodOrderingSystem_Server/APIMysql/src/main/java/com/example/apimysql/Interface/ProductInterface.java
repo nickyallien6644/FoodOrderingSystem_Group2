@@ -13,6 +13,8 @@ public interface ProductInterface {
     public List<Map<String, Object>> listProductByFood();
     public List<Map<String, Object>> listProductByDrink();
     public List<Map<String, Object>> listProductByCake();
+    public List<Map<String, Object>> listAllProductForRecommended();
+    public List<Map<String, Object>> listAllProductForAllCategory();
     public List<Map<String, Object>> listProductsByRID(String rID);
     public List<Map<String, Object>> listProductsByRIDSeeAll(String rID);
 }

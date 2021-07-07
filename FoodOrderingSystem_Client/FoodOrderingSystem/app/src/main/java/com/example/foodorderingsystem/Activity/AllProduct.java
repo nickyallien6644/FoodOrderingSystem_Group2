@@ -3,16 +3,15 @@ package com.example.foodorderingsystem.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.foodorderingsystem.Adapter.AllProductAdapter;
+import com.example.foodorderingsystem.Adapter.ProductByCakeAdapter;
+import com.example.foodorderingsystem.Adapter.ProductByDrinkAdapter;
 import com.example.foodorderingsystem.Adapter.ProductByFoodAdapter;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
@@ -26,34 +25,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductByFood extends AppCompatActivity {
+public class AllProduct extends AppCompatActivity {
 
     ApiInterface apiInterface;
-    List<Product> listProductByFood;
-    RecyclerView productByFoodReCycler;
-    ProductByFoodAdapter productByFoodAdapter;
+    RecyclerView allProductRecycler;
 
-    ImageView imageView;
-    TextView itemName, itemPrice;
+    List<Product> listAllProduct;
+    AllProductAdapter allProductAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_productbyfood);
+        setContentView(R.layout.activity_all_product);
 
-        productByFoodReCycler = findViewById(R.id.listProductByFoodRecycler);
-        listProductByFood = new ArrayList<>();
-        listProductByFood();
+        allProductRecycler = findViewById(R.id.listAllProductRecycler);
+        listAllProduct = new ArrayList<>();
+        listAllProduct();
     }
 
-    private void listProductByFood() {
+    private void listAllProduct() {
         apiInterface = Api.getClients();
-        Call<List<Product>> call = apiInterface.getProductByFood();
+        Call<List<Product>> call = apiInterface.getAllProductForAllCategory();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                listProductByFood = response.body();
-                getProductByFoodData();
+                listAllProduct = response.body();
+                getAllProductData();
             }
 
             @Override
@@ -63,12 +60,12 @@ public class ProductByFood extends AppCompatActivity {
         });
     }
 
-    private void getProductByFoodData() {
-        productByFoodAdapter = new ProductByFoodAdapter(getApplicationContext(), listProductByFood);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+    private void getAllProductData() {
+        allProductAdapter = new AllProductAdapter(getApplicationContext(), listAllProduct);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
-        productByFoodReCycler.setLayoutManager(layoutManager);
-        productByFoodReCycler.setAdapter(productByFoodAdapter);
+        allProductRecycler.setLayoutManager(layoutManager);
+        allProductRecycler.setAdapter(allProductAdapter);
     }
 
 //    @Override
@@ -84,4 +81,5 @@ public class ProductByFood extends AppCompatActivity {
 //        }
 //        return super.onKeyDown(keyCode, event);
 //    }
+
 }

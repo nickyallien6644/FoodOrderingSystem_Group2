@@ -42,6 +42,12 @@ public interface ApiInterface {
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
 
+    @GET("product/listAllProductForAllCategory")
+    Call<List<Product>> getAllProductForAllCategory();
+
+    @GET("product/listAllProductForRecommended")
+    Call<List<Product>> getAllProductForRecommended();
+
     @GET("product/listProductByFood")
     Call<List<Product>> getProductByFood();
 
