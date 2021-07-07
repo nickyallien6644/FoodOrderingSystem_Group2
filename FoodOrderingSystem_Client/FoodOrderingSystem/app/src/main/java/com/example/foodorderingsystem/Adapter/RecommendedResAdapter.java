@@ -18,7 +18,7 @@ import com.example.foodorderingsystem.R;
 
 import java.util.List;
 
-public class RecommendedResAdapter extends RecyclerView.Adapter<RecommendedResAdapter.RecommendedViewHolder> {
+public class RecommendedResAdapter extends RecyclerView.Adapter<RecommendedResAdapter.RecommendedResViewHolder> {
     private Context context;
     private List<Product> recommendedList;
 
@@ -29,13 +29,13 @@ public class RecommendedResAdapter extends RecyclerView.Adapter<RecommendedResAd
 
     @NonNull
     @Override
-    public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecommendedResViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.recommended_recycler_items, parent, false);
-        return new RecommendedViewHolder(view);
+        return new RecommendedResViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendedResAdapter.RecommendedViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecommendedResAdapter.RecommendedResViewHolder holder, int position) {
             holder.recommendedName.setText(recommendedList.get(position).getpName());
             holder.recommendedPrice.setText(String.valueOf(recommendedList.get(position).getpPrice()) + " Bcoins");
         Glide.with(context).load(recommendedList.get(position).getiURL()).into(holder.recommendedImage);
@@ -59,11 +59,11 @@ public class RecommendedResAdapter extends RecyclerView.Adapter<RecommendedResAd
         return recommendedList.size();
     }
 
-    public static class RecommendedViewHolder extends RecyclerView.ViewHolder {
+    public static class RecommendedResViewHolder extends RecyclerView.ViewHolder {
         ImageView recommendedImage;
         TextView recommendedName, recommendedPrice;
 
-        public RecommendedViewHolder(@NonNull View itemView) {
+        public RecommendedResViewHolder(@NonNull View itemView) {
             super(itemView);
             recommendedImage = itemView.findViewById(R.id.recommended_image);
             recommendedName = itemView.findViewById(R.id.recommended_name);

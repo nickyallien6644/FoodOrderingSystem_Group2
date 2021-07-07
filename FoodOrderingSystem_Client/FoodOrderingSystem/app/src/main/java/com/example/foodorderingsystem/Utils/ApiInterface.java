@@ -60,6 +60,9 @@ public interface ApiInterface {
     @GET("product/listProductByRID/{rID}")
     Call<List<Product>> getProductByRID(@Path("rID") int rID);
 
+    @GET("product/listProductByRIDSeeAll/{rID}")
+    Call<List<Product>> getProductByRIDSeeAll(@Path("rID") int rID);
+
     @GET("privacyPolicy/listPrivacyPolicy")
     Call<List<PrivacyPolicy>> getPrivacyPolicy();
 

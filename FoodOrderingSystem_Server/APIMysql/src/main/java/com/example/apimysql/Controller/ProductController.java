@@ -55,4 +55,9 @@ public class ProductController {
     public List<Map<String, Object>> listProductsByRID(@PathVariable("rID")String rID) {
         return productService.listProductsByRID(rID);
     }
+
+    @GetMapping("/listProductByRIDSeeAll/{rID}")
+    public List<Map<String, Object>> listProductsByRIDSeeAll(@PathVariable("rID")String rID) {
+        return productService.listProductsByRIDSeeAll(rID);
+    }
 }
