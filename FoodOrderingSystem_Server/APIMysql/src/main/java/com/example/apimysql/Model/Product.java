@@ -6,16 +6,17 @@ public class Product {
    private int pPrice;
    private String pDescription;
    private int cID;
-
+    private int rID;
     public Product() {
     }
 
-    public Product(int pID, String pName, int pPrice, String pDescription, int cID) {
+    public Product(int pID, String pName, int pPrice, String pDescription, int cID, int rID) {
         this.pID = pID;
         this.pName = pName;
         this.pPrice = pPrice;
         this.pDescription = pDescription;
         this.cID = cID;
+        this.rID = rID;
     }
 
     public int getpID() {
@@ -56,5 +57,13 @@ public class Product {
 
     public void setcID(int cID) {
         this.cID = cID;
+    }
+
+    public int getRID() {
+        return rID;
+    }
+
+    public void setRID(int rID) {
+        this.rID = rID;
     }
 }
