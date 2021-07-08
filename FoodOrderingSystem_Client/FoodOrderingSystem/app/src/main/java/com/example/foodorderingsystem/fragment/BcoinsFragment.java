@@ -40,10 +40,11 @@ public class BcoinsFragment extends Fragment {
     List<Account> listAccounts;
     ApiInterface accountService;
     CheckBox cbbank;
-    Account account ;
+    Account account;
     Button btnRecharge;
     TextView txtBconins;
     TextInputLayout etxtBcoins;
+    int uID;
     public BcoinsFragment() {
 
     }
@@ -54,8 +55,8 @@ public class BcoinsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_bcoins, container, false);
         listAccounts = new ArrayList<>();
-        session = new SessionManagement (getActivity().getApplication()) ;
-        int uID = session.getSession ();
+        session = new SessionManagement (getActivity().getApplication());
+        uID = session.getSession();
         cbbank = v.findViewById(R.id.cb_bank);
         btnRecharge = v.findViewById(R.id.btn_Recharge);
         txtBconins = v.findViewById(R.id.txt_Bicons);
@@ -79,7 +80,8 @@ public class BcoinsFragment extends Fragment {
                 int rechager =  Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
                 int total = coins + rechager;
                 account.setaCoins(total);
-                UpdateCoins(account,uID);
+                account.setaID(uID);
+                UpdateCoins(account);
 
             }
         });
@@ -89,14 +91,16 @@ public class BcoinsFragment extends Fragment {
 
     }
 
-    public void UpdateCoins(Account account , int id){
+    public void UpdateCoins(Account account){
         accountService = Api.getClients ();
-        Call<Account> call= accountService.updateBcoins(id,account);
+        Call<Account> call= accountService.updateBcoins(account);
         call.enqueue(new Callback<Account> () {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(getActivity(),"Add coins successful",Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getActivity(), "Add coins fail", Toast.LENGTH_LONG).show();
                 }
             }
             @Override

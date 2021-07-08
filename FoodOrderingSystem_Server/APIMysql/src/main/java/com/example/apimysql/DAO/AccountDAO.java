@@ -34,7 +34,7 @@ public class AccountDAO implements AccountInterface {
 
     @Override
     public int updateConis(Account account) {
-        String sql = "update account set aCoins = ? where aID = ?";
+        String sql = "update `account` set aCoins = ? where aID = ?";
         return template.update(sql, account.getaCoins(),account.getaID());
     }
 }
