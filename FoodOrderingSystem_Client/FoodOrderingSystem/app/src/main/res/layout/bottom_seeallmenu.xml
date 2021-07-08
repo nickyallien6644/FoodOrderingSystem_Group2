@@ -28,6 +28,12 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:background="@color/Cam"/>
+            <SearchView
+                android:id="@+id/searchSeeAll"
+                android:layout_width="329dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="44dp"
+                android:layout_gravity="center_horizontal"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seeall_ryc"
                 android:layout_width="match_parent"

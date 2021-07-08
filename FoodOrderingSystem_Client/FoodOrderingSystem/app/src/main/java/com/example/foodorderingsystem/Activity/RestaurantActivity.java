@@ -2,11 +2,13 @@ package com.example.foodorderingsystem.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,12 +46,14 @@ public class RestaurantActivity extends AppCompatActivity {
     RecommendedResAdapter recommendedAdapter;
     SeeAllResAdapter seeAllResAdapter;
     MenuResAdapter menuResAdapter;
+    SearchView searchSeeAll;
 
     View bottomSheetView;
 
     TextView tv_restaurant, tv_timeOpen, tv_timeClose, tv_address,tv_phone;
     ImageView iv_restaurant;
 
+    int rID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +61,7 @@ public class RestaurantActivity extends AppCompatActivity {
         bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_seeallmenu,(LinearLayout)findViewById(R.id.bottom_menu));
 
         Intent intent = getIntent();
-        int rID  = intent.getIntExtra("rID",0);
+        rID  = intent.getIntExtra("rID",0);
         resInfo = new ArrayList<>();
         getRestaurantInfo(rID);
         listProducts = new ArrayList<>();
@@ -77,6 +81,27 @@ public class RestaurantActivity extends AppCompatActivity {
 
     private void getRestaurantMenuSeeAll() {
         MenuSeeAllRecyclerView = bottomSheetView.findViewById(R.id.seeall_ryc);
+        searchSeeAll = bottomSheetView.findViewById(R.id.searchSeeAll);
+        searchSeeAll.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals("")){
+                    listSeeAll.clear();
+                    listSeeAll = new ArrayList<>();
+                    listSeeAll(rID);
+                }else{
+                    listSeeAll.clear();
+                    listSeeAll = new ArrayList<>();
+                    listSeeAllSearch(newText,rID);
+                }
+                return false;
+            }
+        });
         seeAllResAdapter = new SeeAllResAdapter(this.getApplicationContext(), listSeeAll);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RestaurantActivity.this, LinearLayoutManager.VERTICAL, false);
 
@@ -154,6 +179,23 @@ public class RestaurantActivity extends AppCompatActivity {
     public void listSeeAll(int rID){
         apiInterface = Api.getClients();
         Call<List<Product>> call = apiInterface.getProductByRIDSeeAll(rID);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                listSeeAll = response.body();
+                getRestaurantMenuSeeAll();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(RestaurantActivity.this, "Server is not responding.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void listSeeAllSearch(String search, int rID){
+        apiInterface = Api.getClients();
+        Call<List<Product>> call = apiInterface.getAllProductForAllCategory(search,rID);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

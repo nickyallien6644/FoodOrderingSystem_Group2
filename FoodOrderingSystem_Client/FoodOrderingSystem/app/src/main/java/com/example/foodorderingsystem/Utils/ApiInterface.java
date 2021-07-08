@@ -45,6 +45,9 @@ public interface ApiInterface {
     @GET("product/listAllProductForAllCategory")
     Call<List<Product>> getAllProductForAllCategory();
 
+    @GET("product/listProductSearchSeeAll/{search}/{rID}")
+    Call<List<Product>> getAllProductForAllCategory(@Path("search") String search,@Path("rID") int rID);
+
     @GET("product/listAllProductForRecommended")
     Call<List<Product>> getAllProductForRecommended();
 

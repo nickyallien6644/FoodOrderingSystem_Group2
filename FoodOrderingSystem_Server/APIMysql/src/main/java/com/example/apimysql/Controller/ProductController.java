@@ -31,6 +31,11 @@ public class ProductController {
         return productService.listProductSearch(nameProduct);
     }
 
+    @GetMapping("/listProductSearchSeeAll/{search}/{rID}")
+    public List<Map<String, Object>> listProductSearchSeeAll(@PathVariable("search")String nameProduct,@PathVariable("rID") String rID){
+        return productService.listProductSearchSeeAll(nameProduct, rID);
+    }
+
     @GetMapping("/listProductForRecommended")
     public List<Map<String, Object>> listProductForRecommended() {
         return productService.listProductForRecommended();
