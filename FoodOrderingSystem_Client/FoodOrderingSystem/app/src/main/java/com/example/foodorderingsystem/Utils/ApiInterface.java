@@ -80,6 +80,7 @@ public interface ApiInterface {
 
     @GET("restaurant/info/{rID}")
     Call<List<Restaurant>> getRestaurantInfo(@Path("rID") int rID);
-
+    @GET("restaurant/getAll")
+    Call<List<Restaurant>> getAllRestaurantInfo();
 
 }
