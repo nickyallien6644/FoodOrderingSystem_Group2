@@ -24,7 +24,52 @@ public class ProductService implements ProductInterface {
     }
 
     @Override
+    public List<Map<String, Object>> listProductSearchSeeAll(String nameProduct, String rID) {
+        return productDAO.listProductSearchSeeAll(nameProduct,rID);
+    }
+
+    @Override
     public List<Map<String, Object>> listProductForRecommended() {
         return productDAO.listProductForRecommended();
+    }
+
+    @Override
+    public List<Map<String, Object>> listAllProductForRecommended() {
+        return productDAO.listAllProductForRecommended();
+    }
+
+    @Override
+    public List<Map<String, Object>> listAllProductForAllCategory() {
+        return productDAO.listAllProductForAllCategory();
+    }
+
+    @Override
+    public List<Map<String, Object>> listCategory() {
+        return productDAO.listCategory();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByFood() {
+        return productDAO.listProductByFood();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByDrink() {
+        return productDAO.listProductByDrink();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductByCake() {
+        return productDAO.listProductByCake();
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductsByRID(String rID) {
+        return productDAO.listProductsByRID(rID);
+    }
+
+    @Override
+    public List<Map<String, Object>> listProductsByRIDSeeAll(String rID) {
+        return productDAO.listProductsByRIDSeeAll(rID);
     }
 }

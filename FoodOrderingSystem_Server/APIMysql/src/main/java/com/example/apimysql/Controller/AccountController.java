@@ -28,7 +28,7 @@ public class AccountController {
     public String add(@RequestBody Account account) {
         int id=service.add(account);
         if(id==0) {
-            return "Faile Add Account   ";
+            return "Faile Add Account";
         }
         return "Add acount is success";
     }
