@@ -36,8 +36,8 @@ public interface ApiInterface {
     Call<List<Account>> getAccountsId();
     @POST("account/add")
     Call<Account>addPersona(@Body Account account);
-    @PUT("updateCoins/{aID}")
-    Call<Account>updateBcoins( @Path("aID") int id ,@Body Account account);
+    @PUT("account/updateCoins")
+    Call<Account>updateBcoins(@Body Account account);
 
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
