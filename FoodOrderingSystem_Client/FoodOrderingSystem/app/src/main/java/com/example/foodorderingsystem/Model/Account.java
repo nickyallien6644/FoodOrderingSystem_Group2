@@ -101,7 +101,7 @@ public class Account {
     @SerializedName("aFirstname")
     @Expose
     private String aFirstname;
-    @SerializedName("aLastName")
+    @SerializedName("aLastname")
     @Expose
     private String aLastName;
     @SerializedName("aPhone")

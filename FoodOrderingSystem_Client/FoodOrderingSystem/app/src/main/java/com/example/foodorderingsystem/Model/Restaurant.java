@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Restaurant {
-    @SerializedName("pID")
+    @SerializedName("rID")
     @Expose
     private int rID;
     @SerializedName("rName")
     @Expose
     private String rName;
-    @SerializedName("rTimeDOpen")
+    @SerializedName("rTimeOpen")
     @Expose
-    private String rTimeDOpen;
+    private String rTimeOpen;
     @SerializedName("rTimeClose")
     @Expose
     private String rTimeClose;
@@ -24,13 +24,17 @@ public class Restaurant {
     @Expose
     private String rPhone;
 
+    @SerializedName("rImage")
+    @Expose
+    private String rImage;
+
     public Restaurant() {
     }
 
-    public Restaurant(int rID, String rName, String rTimeDOpen, String rTimeClose, String rAddress, String rPhone) {
+    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone) {
         this.rID = rID;
         this.rName = rName;
-        this.rTimeDOpen = rTimeDOpen;
+        this.rTimeOpen = rTimeOpen;
         this.rTimeClose = rTimeClose;
         this.rAddress = rAddress;
         this.rPhone = rPhone;
@@ -52,12 +56,12 @@ public class Restaurant {
         this.rName = rName;
     }
 
-    public String getrTimeDOpen() {
-        return rTimeDOpen;
+    public String getrTimeOpen() {
+        return rTimeOpen;
     }
 
     public void setrTimeDOpen(String rTimeDOpen) {
-        this.rTimeDOpen = rTimeDOpen;
+        this.rTimeOpen = rTimeDOpen;
     }
 
     public String getrTimeClose() {
@@ -82,5 +86,13 @@ public class Restaurant {
 
     public void setrPhone(String rPhone) {
         this.rPhone = rPhone;
+    }
+
+    public String getrImage() {
+        return rImage;
+    }
+
+    public void setrImage(String rImage) {
+        this.rImage = rImage;
     }
 }

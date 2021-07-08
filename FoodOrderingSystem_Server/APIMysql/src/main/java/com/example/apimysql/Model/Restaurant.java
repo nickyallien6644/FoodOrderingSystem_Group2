@@ -1,27 +1,24 @@
 package com.example.apimysql.Model;
 
-import java.sql.Date;
 
 public class Restaurant {
     private int rID;
     private String rName;
-    private Date rDateOpen;
-    private Date rDateClose;
+    private String rTimeOpen;
+    private String rTimeClose;
     private String rAddress;
     private String rPhone;
-    private int pID;
 
     public Restaurant() {
     }
 
-    public Restaurant(int rID, String rName, Date rDateOpen, Date rDateClose, String rAddress, String rPhone, int pID) {
+    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone, int pID) {
         this.rID = rID;
         this.rName = rName;
-        this.rDateOpen = rDateOpen;
-        this.rDateClose = rDateClose;
+        this.rTimeOpen = rTimeOpen;
+        this.rTimeClose = rTimeClose;
         this.rAddress = rAddress;
         this.rPhone = rPhone;
-        this.pID = pID;
     }
 
     public int getrID() {
@@ -40,20 +37,20 @@ public class Restaurant {
         this.rName = rName;
     }
 
-    public Date getrDateOpen() {
-        return rDateOpen;
+    public String getrTimeOpen() {
+        return rTimeOpen;
     }
 
-    public void setrDateOpen(Date rDateOpen) {
-        this.rDateOpen = rDateOpen;
+    public void setrTimeOpen(String rTimeOpen) {
+        this.rTimeOpen = rTimeOpen;
     }
 
-    public Date getrDateClose() {
-        return rDateClose;
+    public String getrTimeClose() {
+        return rTimeClose;
     }
 
-    public void setrDateClose(Date rDateClose) {
-        this.rDateClose = rDateClose;
+    public void setrTimeClose(String rTimeClose) {
+        this.rTimeClose = rTimeClose;
     }
 
     public String getrAddress() {
@@ -70,13 +67,5 @@ public class Restaurant {
 
     public void setrPhone(String rPhone) {
         this.rPhone = rPhone;
-    }
-
-    public int getpID() {
-        return pID;
-    }
-
-    public void setpID(int pID) {
-        this.pID = pID;
     }
 }
