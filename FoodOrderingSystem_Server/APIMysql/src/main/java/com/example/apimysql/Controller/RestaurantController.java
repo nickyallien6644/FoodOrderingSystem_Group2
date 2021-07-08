@@ -15,6 +15,11 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
+    @GetMapping("/getAll")
+    public List<Map<String, Object>> getAllRestaurantInfo() {
+        return restaurantService.getAllRestaurantInfo();
+    }
+
     @GetMapping("/info/{rID}")
     public List<Map<String, Object>> restaurantInfo(@PathVariable("rID") String rID) {
         return restaurantService.restaurantInfo(rID);

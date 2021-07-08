@@ -42,9 +42,9 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:text="TextView âsssaassasaas"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="#333333"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="132dp"
                 tools:layout_editor_absoluteY="36dp" />
