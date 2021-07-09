@@ -3,12 +3,16 @@ package com.example.foodorderingsystem.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,7 +26,10 @@ import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
 import com.example.foodorderingsystem.Utils.ApiInterface;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +50,11 @@ public class BcoinsFragment extends Fragment {
     Account account;
     Button btnRecharge;
     TextView txtBconins;
+    TextView txtTotal;
     TextInputLayout etxtBcoins;
+    TextInputEditText etxtCoins;
     int uID;
+    int total;
     public BcoinsFragment() {
 
     }
@@ -61,6 +71,34 @@ public class BcoinsFragment extends Fragment {
         btnRecharge = v.findViewById(R.id.btn_Recharge);
         txtBconins = v.findViewById(R.id.txt_Bicons);
         etxtBcoins = v.findViewById(R.id.eText_Recharge);
+        txtTotal = v.findViewById(R.id.txt_Total);
+        etxtCoins = v.findViewById(R.id.etxt_Bcoins);
+        int coins= session.getBcoins();
+        txtTotal.setText(coins + " Bcoins");
+
+        etxtCoins.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (s.length() != 0){
+            int rechager =  Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
+            total= coins + rechager;
+            String strTotal = String.valueOf(total);
+            txtTotal.setText(strTotal + " Bcoins");
+            }else {
+                txtTotal.setText(coins + " Bcoins");
+            }
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         checkSession(uID);
         cbbank.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -76,11 +114,10 @@ public class BcoinsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 account = new Account();
-                int coins= session.getBcoins();
-                int rechager =  Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
-                int total = coins + rechager;
+
                 account.setaCoins(total);
                 account.setaID(uID);
+
                 UpdateCoins(account);
 
             }
