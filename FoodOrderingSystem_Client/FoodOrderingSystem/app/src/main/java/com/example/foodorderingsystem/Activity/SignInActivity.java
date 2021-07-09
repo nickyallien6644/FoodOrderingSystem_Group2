@@ -169,7 +169,7 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
     public void btnSignup(View v){
-        Intent intent =new Intent(SignInActivity.this, MainActivity.class);
+        Intent intent =new Intent(SignInActivity.this, SignUpActivity.class);
         startActivity(intent);
         overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
     }
