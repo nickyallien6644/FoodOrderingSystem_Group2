@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrderingSystem"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.ForgotPassword"></activity>
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.MainActivity"/>
+        <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.FoodDetail" />
-        <activity android:name=".Activity.SignUpActivity"
+        <activity
+            android:name=".Activity.SignUpActivity"
             android:background="#FFFFFF"
             android:gravity="center"
             android:label="ORDER HISTORY"
@@ -31,7 +33,7 @@
         <activity android:name=".Activity.ProductByCategory" />
         <activity android:name=".Activity.AllProduct" />
         <activity android:name=".Activity.AllProductForRecommended" />
-        <activity android:name=".Activity.RestaurantActivity"/>
+        <activity android:name=".Activity.RestaurantActivity" />
     </application>
 
 </manifest>

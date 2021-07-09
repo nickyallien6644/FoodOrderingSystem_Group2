@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,15 +85,21 @@ public class BcoinsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.length() != 0){
-            int rechager =  Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
-            total= coins + rechager;
-            String strTotal = String.valueOf(total);
-            txtTotal.setText(strTotal + " Bcoins");
-            }else {
-                txtTotal.setText(coins + " Bcoins");
-            }
+                if (s.length() != 0) {
+                    int rechager = Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
+                    if (Pattern.compile("^[1-9]+").matcher (etxtBcoins.getEditText().getText().toString().trim()).matches ()) {
+                        etxtBcoins.setError(null);
+                        total = coins + rechager;
+                        String strTotal = String.valueOf(total);
+                        txtTotal.setText(strTotal + " Bcoins");
+                    }
+                    else {
+                        etxtBcoins.setError("Bcoins must be more than zero");
+                    }
 
+                } else {
+                    txtTotal.setText(coins + " Bcoins");
+                }
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -163,5 +170,6 @@ public class BcoinsFragment extends Fragment {
         }
         txtBconins.setText(uBcoins + " Bcoins");
     }
+
 
 }
