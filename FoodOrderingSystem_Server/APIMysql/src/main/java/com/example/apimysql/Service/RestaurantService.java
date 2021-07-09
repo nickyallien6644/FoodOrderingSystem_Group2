@@ -14,7 +14,10 @@ import java.util.Map;
 public class RestaurantService implements RestaurantInterface {
     @Autowired
     RestaurantDAO restaurantDAO;
-
+    @Override
+    public List<Map<String, Object>> getAllRestaurantInfo() {
+        return restaurantDAO.getAllRestaurantInfo();
+    }
     @Override
     public List<Map<String, Object>> restaurantInfo(String rID) {
         return restaurantDAO.restaurantInfo(rID);

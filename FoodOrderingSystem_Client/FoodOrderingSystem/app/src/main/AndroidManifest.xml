@@ -31,9 +31,6 @@
         <activity android:name=".Activity.ProductByCategory" />
         <activity android:name=".Activity.AllProduct" />
         <activity android:name=".Activity.AllProductForRecommended" />
-        <activity android:name=".Activity.MainActivity">
-
-        </activity>
         <activity android:name=".Activity.RestaurantActivity"/>
     </application>
 

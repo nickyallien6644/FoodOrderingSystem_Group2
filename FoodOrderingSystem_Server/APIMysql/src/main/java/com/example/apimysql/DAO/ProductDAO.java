@@ -13,11 +13,6 @@ public class ProductDAO implements ProductInterface {
     @Autowired
     JdbcTemplate template;
 
-    @Override
-    public List<Map<String, Object>> listProducts() {
-        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID LIMIT 10");
-        return query;
-    }
 
     @Override
     public List<Map<String, Object>> listAllProductForAllCategory() {
@@ -33,11 +28,22 @@ public class ProductDAO implements ProductInterface {
     }
 
     @Override
+    public List<Map<String, Object>> listProductSearchSeeAll(String nameProduct, String rID) {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN (select * from `product`WHERE rID = "+rID+") as p on i.pID = p.pID WHERE `pName` LIKE '%"+nameProduct+"%'");
+        return query;
+    }
+
+    @Override
     public List<Map<String, Object>> listProductForRecommended() {
         List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID ORDER BY p.pID DESC LIMIT 8");
         return query;
     }
 
+    @Override
+    public List<Map<String, Object>> listProducts() {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID");
+        return query;
+    }
     @Override
     public List<Map<String, Object>> listAllProductForRecommended() {
         List<Map<String, Object>> query = template.queryForList("SELECT * FROM `image` as i INNER JOIN product as p on i.pID = p.pID ORDER BY p.pID DESC");

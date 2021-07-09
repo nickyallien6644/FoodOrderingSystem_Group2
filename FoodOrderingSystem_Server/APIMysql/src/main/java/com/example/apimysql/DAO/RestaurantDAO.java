@@ -12,6 +12,13 @@ public class RestaurantDAO implements RestaurantInterface
 {
     @Autowired
     JdbcTemplate template;
+
+    @Override
+    public List<Map<String, Object>> getAllRestaurantInfo() {
+        List<Map<String, Object>> query = template.queryForList("SELECT * FROM `restaurant`");
+        return query;
+    }
+
     @Override
     public List<Map<String, Object>> restaurantInfo(String rID) {
         List<Map<String, Object>> query = template.queryForList("SELECT * FROM `restaurant` WHERE rID = "+rID+"");

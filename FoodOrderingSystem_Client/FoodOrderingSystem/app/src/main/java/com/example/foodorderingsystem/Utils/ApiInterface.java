@@ -36,14 +36,17 @@ public interface ApiInterface {
     Call<List<Account>> getAccountsId();
     @POST("account/add")
     Call<Account>addPersona(@Body Account account);
-    @PUT("updateCoins/{aID}")
-    Call<Account>updateBcoins( @Path("aID") int id ,@Body Account account);
+    @PUT("account/updateCoins")
+    Call<Account>updateBcoins(@Body Account account);
 
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
 
     @GET("product/listAllProductForAllCategory")
     Call<List<Product>> getAllProductForAllCategory();
+
+    @GET("product/listProductSearchSeeAll/{search}/{rID}")
+    Call<List<Product>> getAllProductForAllCategory(@Path("search") String search,@Path("rID") int rID);
 
     @GET("product/listAllProductForRecommended")
     Call<List<Product>> getAllProductForRecommended();
@@ -77,6 +80,7 @@ public interface ApiInterface {
 
     @GET("restaurant/info/{rID}")
     Call<List<Restaurant>> getRestaurantInfo(@Path("rID") int rID);
-
+    @GET("restaurant/getAll")
+    Call<List<Restaurant>> getAllRestaurantInfo();
 
 }

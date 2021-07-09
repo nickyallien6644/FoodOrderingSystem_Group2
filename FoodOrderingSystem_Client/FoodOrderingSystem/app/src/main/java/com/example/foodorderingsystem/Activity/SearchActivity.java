@@ -9,6 +9,7 @@ import com.example.foodorderingsystem.Model.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -30,34 +31,61 @@ public class SearchActivity extends AppCompatActivity {
     SearchView searchView;
     List<Product> searchProduct;
     List<Product> resultSearch;
+    List<Restaurant> getAllRes;
+    boolean checkResult = false, checkChangeText = false;
+    String search = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getAllRes();
         List<Product> listProductSearch;
-        listProductSearch = new ArrayList<>();
         setContentView(R.layout.activity_search);
         searchView = (SearchView) findViewById(R.id.resultSearch);
         searchProduct = new ArrayList<>();
+        getAllRes = new ArrayList<>();
         listProductSearch = new ArrayList<>();
         getResult(listProductSearch);
 
     }
+    public void getAllRes(){
+        apiInterface = Api.getClients();
+        Call<List<Restaurant>> call = apiInterface.getAllRestaurantInfo();
+        call.enqueue(new Callback<List<Restaurant>>() {
+            @Override
+            public void onResponse(Call<List<Restaurant>> call, Response<List<Restaurant>> response) {
+                getAllRes = (ArrayList)response.body();
+            }
+            @Override
+            public void onFailure(Call<List<Restaurant>> call, Throwable t) {
 
+            }
+        });
+
+    }
     public void getResult(List<Product> listProductSearch) {
         apiInterface = Api.getClients();
 
         resultSearch = new ArrayList<>();
         Intent intent = getIntent();
-        String search = intent.getStringExtra("search");
+        if (intent.getStringExtra("search") != null) {
+            search = intent.getStringExtra("search");
+        }
         Call<List<Product>> call = apiInterface.getProducts();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 resultSearch = (ArrayList) response.body();
-                for (Product product : resultSearch) {
-                    if (product.getpName().toLowerCase().contains(search.toLowerCase())) {
-                        listProductSearch.add(product);
+                if (!search.equals(null)) {
+                    searchView.setQuery(search, false);
+                    for (Product product : resultSearch) {
+                        if (product.getpName().toLowerCase().contains(search.toLowerCase())) {
+                            listProductSearch.add(product);
+                            checkResult = true;
+                        }
+                    }
+                    if (listProductSearch.size() == 0) {
+                        Toast.makeText(SearchActivity.this, "Couldn't find the matching result you were searching for!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -70,38 +98,32 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         searchProduct.clear();
-                        if (listProductSearch.size() != 0)
-                            for (Product product : listProductSearch) {
+                        if (resultSearch.size() != 0) {
+                            for (Product product : resultSearch) {
                                 if (product.getpName().toLowerCase().contains(newText.toLowerCase())) {
+                                    searchProduct.add(product);
+                                } else if (newText.equals("")) {
                                     searchProduct.add(product);
                                 }
                             }
-                        searchResult(searchProduct);
+                            checkChangeText = true;
+                            searchResult(searchProduct);
+                        }
                         return false;
                     }
-
                 });
-                if (!(searchProduct.size() == 0)) {
-                    listProductSearch.clear();
-                    for (int i = 0; i < searchProduct.size(); i++) {
-                        listProductSearch.set(i, searchProduct.get(i));
-                    }
+                if (checkResult == true) {
+                    searchResult(listProductSearch);
+                    checkResult = false;
                 }
 
-                RecyclerView recyclerView = findViewById(R.id.ListRecycleSearch);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                SearchAdapter searchAdapter = new SearchAdapter(getApplicationContext(), listProductSearch);
-                recyclerView.setAdapter(searchAdapter);
             }
 
             public void searchResult(List<Product> listResult) {
                 RecyclerView recyclerView = findViewById(R.id.ListRecycleSearch);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-                SearchAdapter searchAdapter = new SearchAdapter(getApplicationContext(), listResult);
+                SearchAdapter searchAdapter = new SearchAdapter(getApplicationContext(), listResult, getAllRes);
                 recyclerView.setAdapter(searchAdapter);
             }
 
@@ -110,5 +132,11 @@ public class SearchActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Server is not responding.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void main(View v) {
+//        finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.removeExtra("search");
+        startActivity(intent);
     }
 }

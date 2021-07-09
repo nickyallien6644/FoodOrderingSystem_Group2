@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Activity.FoodDetail;
+import com.example.foodorderingsystem.Activity.ProductByCategory;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 
@@ -51,6 +52,7 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
                 intent.putExtra("price", productList.get(position).getpPrice());
                 intent.putExtra("description", productList.get(position).getpDescription());
                 intent.putExtra("image", productList.get(position).getiURL());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
