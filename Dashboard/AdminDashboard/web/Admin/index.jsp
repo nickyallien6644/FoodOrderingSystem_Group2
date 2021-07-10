@@ -49,13 +49,11 @@
                             <li class="sidebar-title">Menu</li>
 
                             <li class="sidebar-item active">
-                                <a href="indexAdmin.jsp" class='sidebar-link'>
+                                <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     <span>Datatable</span>
                                 </a>
                             </li>
-                           
-
                         </ul>
                     </div>
                     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -82,9 +80,19 @@
                                     <div class="avatar avatar-xl">
                                         <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
                                     </div>
-                                    <div class="ms-3 name">
+                                    <div class="ms-2 name">
                                         <h5 class="font-bold">STAFF01</h5>
                                         <h6 class="text-muted mb-0">@ThinhBNP</h6>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Information
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Account</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

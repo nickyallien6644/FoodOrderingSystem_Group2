@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingsystem.Adapter.AllProductAdapter;
-import com.example.foodorderingsystem.Adapter.ProductByCakeAdapter;
-import com.example.foodorderingsystem.Adapter.ProductByDrinkAdapter;
-import com.example.foodorderingsystem.Adapter.ProductByFoodAdapter;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
