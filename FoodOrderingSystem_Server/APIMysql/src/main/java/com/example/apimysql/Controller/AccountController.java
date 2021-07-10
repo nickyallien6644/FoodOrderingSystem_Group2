@@ -32,20 +32,13 @@ public class AccountController {
         }
         return "Add acount is success";
     }
-    @RequestMapping(value="/updateCoins/{aID}", method=RequestMethod.PUT)
-    public @ResponseBody Account update(@PathVariable("aID") int id ,@RequestBody Account account){
-        account.setaID(id);
-        service.updateConis(account);
 
-        return account;
+    @RequestMapping ("/updateCoins")
+    public String updateConis(@RequestBody Account account) {
+        int coins = service.updateConis(account);
+        if(coins==0) {
+            return "Faile update";
+        }
+        return "update coins is success";
     }
-//    @PostMapping("/updateCoins/{aID}")
-//    public String updateCoins(@RequestBody Account account , @PathVariable int id) {
-//        account.setaID(id);
-//        int coins = service.updateConis(account);
-//        if(coins==0) {
-//            return "Faile update       ";
-//        }
-//        return "update coins is success";
-//    }
 }
