@@ -87,7 +87,7 @@ public class BcoinsFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     int rechager = Integer.parseInt(etxtBcoins.getEditText().getText().toString().trim());
-                    if (Pattern.compile("^[1-9]+").matcher (etxtBcoins.getEditText().getText().toString().trim()).matches ()) {
+                    if (Pattern.compile("^[1-9]+([0-9]+)?").matcher (etxtBcoins.getEditText().getText().toString().trim()).matches ()) {
                         etxtBcoins.setError(null);
                         total = coins + rechager;
                         String strTotal = String.valueOf(total);

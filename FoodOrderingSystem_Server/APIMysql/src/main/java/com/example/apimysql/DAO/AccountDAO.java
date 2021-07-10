@@ -37,4 +37,9 @@ public class AccountDAO implements AccountInterface {
         String sql = "update `account` set aCoins = ? where aID = ?";
         return template.update(sql, account.getaCoins(),account.getaID());
     }
+    @Override
+    public int forgotPassword(Account account) {
+        String sql = "update `account` set  aPassword= MD5(?) where aID = ?";
+        return template.update(sql, account.getaPassword(),account.getaID());
+    }
 }
