@@ -35,6 +35,9 @@ public class Product {
     @Expose
     private String iURL;
 
+    @SerializedName("rID")
+    @Expose
+    private int rID;
 
     public void setpID(int pID) {
         this.pID = pID;
@@ -86,5 +89,13 @@ public class Product {
 
     public void setiURL(String iURL) {
         this.iURL = iURL;
+    }
+
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
     }
 }

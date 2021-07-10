@@ -28,4 +28,12 @@ public class AccountService implements AccountInterface {
     public int add(Account p) {
         return dao.add(p);
     }
+
+    @Override
+    public int updateConis(Account account) {
+        return dao.updateConis(account);
+    }
+
+
+
 }

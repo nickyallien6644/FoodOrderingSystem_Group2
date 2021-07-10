@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                 addPersona(account);
                 Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
                 startActivity(intent);
-                overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+                overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
             }else{
                 return;
             }
@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
         Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
         startActivity(intent);
-        overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+        overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
     }
     public void CheckDuplicateperson(){
         accountService = Api.getClients();
@@ -166,6 +166,9 @@ public class SignUpActivity extends AppCompatActivity {
         if (inputPass.isEmpty ()){
             etxtPassword.setError ("Password is not empty");
             return false;
+        }else if(!Pattern.compile("^[A-Z]+[a-z0-9]{7,15}+").matcher (inputPass).matches ()){
+            etxtPassword.setError ("Password must have 8-16 character, have uppercase character and special character");
+            return false;
         }
         else {
             etxtPassword.setError (null);
@@ -220,7 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
         sessionManagement.removeSession ();
         Intent intent =new Intent(SignUpActivity.this, SignInActivity.class);
         startActivity(intent);
-        overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+        overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
     }
     public static final Pattern EMAIL_ADDRESS =
             Pattern.compile ("[a-zA-Z0-9_]{5,20}@(Gmail|gmail|email|Email)(.com|.edu)(.edu|.vn)*$");

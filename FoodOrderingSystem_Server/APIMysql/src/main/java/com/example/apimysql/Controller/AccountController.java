@@ -19,7 +19,7 @@ public class AccountController {
         return service.listAccounts();
     }
 
-    @GetMapping("/getid")
+    @GetMapping("/listbyid")
     public List<Map<String, Object>> listAccounts(int aID) {
         return service.listAccounts();
     }
@@ -28,8 +28,17 @@ public class AccountController {
     public String add(@RequestBody Account account) {
         int id=service.add(account);
         if(id==0) {
-            return "Faile Add Account   ";
+            return "Faile Add Account";
         }
         return "Add acount is success";
+    }
+
+    @RequestMapping ("/updateCoins")
+    public String updateConis(@RequestBody Account account) {
+        int coins = service.updateConis(account);
+        if(coins==0) {
+            return "Faile update";
+        }
+        return "update coins is success";
     }
 }

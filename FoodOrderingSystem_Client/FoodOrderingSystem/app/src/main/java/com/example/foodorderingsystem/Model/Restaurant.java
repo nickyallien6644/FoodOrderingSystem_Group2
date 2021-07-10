@@ -1,27 +1,43 @@
 package com.example.foodorderingsystem.Model;
 
-import java.sql.Date;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 public class Restaurant {
+    @SerializedName("rID")
+    @Expose
     private int rID;
+    @SerializedName("rName")
+    @Expose
     private String rName;
-    private Date rDateOpen;
-    private Date rDateClose;
+    @SerializedName("rTimeOpen")
+    @Expose
+    private String rTimeOpen;
+    @SerializedName("rTimeClose")
+    @Expose
+    private String rTimeClose;
+    @SerializedName("rAddress")
+    @Expose
     private String rAddress;
+    @SerializedName("rPhone")
+    @Expose
     private String rPhone;
-    private int pID;
+
+    @SerializedName("rImage")
+    @Expose
+    private String rImage;
 
     public Restaurant() {
     }
 
-    public Restaurant(int rID, String rName, Date rDateOpen, Date rDateClose, String rAddress, String rPhone, int pID) {
+    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone) {
         this.rID = rID;
         this.rName = rName;
-        this.rDateOpen = rDateOpen;
-        this.rDateClose = rDateClose;
+        this.rTimeOpen = rTimeOpen;
+        this.rTimeClose = rTimeClose;
         this.rAddress = rAddress;
         this.rPhone = rPhone;
-        this.pID = pID;
     }
 
     public int getrID() {
@@ -40,20 +56,20 @@ public class Restaurant {
         this.rName = rName;
     }
 
-    public Date getrDateOpen() {
-        return rDateOpen;
+    public String getrTimeOpen() {
+        return rTimeOpen;
     }
 
-    public void setrDateOpen(Date rDateOpen) {
-        this.rDateOpen = rDateOpen;
+    public void setrTimeDOpen(String rTimeDOpen) {
+        this.rTimeOpen = rTimeDOpen;
     }
 
-    public Date getrDateClose() {
-        return rDateClose;
+    public String getrTimeClose() {
+        return rTimeClose;
     }
 
-    public void setrDateClose(Date rDateClose) {
-        this.rDateClose = rDateClose;
+    public void setrTimeClose(String rTimeClose) {
+        this.rTimeClose = rTimeClose;
     }
 
     public String getrAddress() {
@@ -72,11 +88,11 @@ public class Restaurant {
         this.rPhone = rPhone;
     }
 
-    public int getpID() {
-        return pID;
+    public String getrImage() {
+        return rImage;
     }
 
-    public void setpID(int pID) {
-        this.pID = pID;
+    public void setrImage(String rImage) {
+        this.rImage = rImage;
     }
 }
