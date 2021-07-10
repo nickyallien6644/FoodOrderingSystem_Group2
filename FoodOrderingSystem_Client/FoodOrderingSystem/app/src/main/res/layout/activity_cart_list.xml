@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/Khang"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.CartListActivity">
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_bar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            app:title="Cart"
-            android:background="@color/Cam">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cart"
-                android:id="@+id/toolbar_title"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:textStyle="bold"/>
-        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +26,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp">
     </androidx.recyclerview.widget.RecyclerView>
-    
+
     <LinearLayout
         android:id="@+id/layout_cart"
         android:layout_width="match_parent"
@@ -70,7 +57,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:fontFamily="cursive"
                     android:gravity="right"
                     android:text="300 Bcoins"
                     android:textSize="30sp"
@@ -78,7 +64,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ORDER"
@@ -87,9 +73,9 @@
             android:background="@color/Cam"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_alignSelf="flex_start"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold"/>
 
     </LinearLayout>
+</LinearLayout>
+
 </RelativeLayout>

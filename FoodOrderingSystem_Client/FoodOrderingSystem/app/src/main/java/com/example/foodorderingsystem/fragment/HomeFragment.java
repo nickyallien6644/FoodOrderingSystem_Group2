@@ -196,7 +196,7 @@ public class HomeFragment extends Fragment {
                         break;
 
                     case 4:
-                        replace(new HistoryFragment());
+                        replace(new CartFragment());
                         break;
                 }
                 return null;
