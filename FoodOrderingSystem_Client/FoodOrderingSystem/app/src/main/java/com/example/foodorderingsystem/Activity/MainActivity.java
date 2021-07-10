@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         menuItems.add(new MenuItem("Notification",R.drawable.noti_bg));
         menuItems.add(new MenuItem("Frequently asked questions",R.drawable.ques_bg));
         menuItems.add(new MenuItem("Privacy Policy",R.drawable.security_bg));
-        menuItems.add(new MenuItem("Support",R.drawable.supppor_bg));
         menuItems.add(new MenuItem("Sign out",R.drawable.exit_bg));
         //then add them to navigation drawer
 
@@ -126,15 +125,10 @@ public class MainActivity extends AppCompatActivity {
                         fragmentClass = PrivacyFragment.class;
                         break;
                     }
-                    case 5:{
-                        fragmentClass = SupportFragment.class;
-                        break;
-                    }
                     case 6:{
                         signout();
                         break;
                     }
-
                 }
 
                 //Listener for drawer events such as opening and closing.
