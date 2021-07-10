@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffb067"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ConfirmEmail">
 <ScrollView
@@ -63,36 +64,87 @@
             android:layout_width="match_parent"
             android:layout_height="100dp">
             <EditText
+                android:id="@+id/edit_Num1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:id="@+id/edit_Num2"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:id="@+id/edit_Num3"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:id="@+id/edit_Num4"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:id="@+id/edit_Num5"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:maxLength="1"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="60dp"
                 android:layout_height="60dp">
             </EditText>
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/txt_ErrorForgot"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Cam"
+                android:text="Error"
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp">
+            </TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp">
             <Button
-                android:id="@+id/btn_Recharge"
+                android:id="@+id/btn_ConfigmCode"
                 android:gravity="center"
                 app:backgroundTint="@color/Cam"
                 android:layout_width="250dp"
