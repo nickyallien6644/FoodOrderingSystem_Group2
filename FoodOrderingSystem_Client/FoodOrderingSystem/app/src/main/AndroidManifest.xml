@@ -13,6 +13,7 @@
         android:theme="@style/Theme.FoodOrderingSystem"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.ForgotPassword"></activity>
+        <activity android:name=".Activity.CartListActivity"></activity>
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
