@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
         bnv_Home.add(new MeowBottomNavigation.Model(1, R.drawable.outline_paid_24));
         bnv_Home.add(new MeowBottomNavigation.Model(2, R.drawable.home));
         bnv_Home.add(new MeowBottomNavigation.Model(3, R.drawable.outline_history_24));
+        bnv_Home.add(new MeowBottomNavigation.Model(4, R.drawable.outline_shopping_cart_24));
         bnv_Home.show(2, true);
         txtSearchProduct = (SearchView) v.findViewById(R.id.txtSearchProducts);
         searchProduct();
@@ -191,6 +192,10 @@ public class HomeFragment extends Fragment {
                         break;
 
                     case 3:
+                        replace(new HistoryFragment());
+                        break;
+
+                    case 4:
                         replace(new HistoryFragment());
                         break;
                 }
