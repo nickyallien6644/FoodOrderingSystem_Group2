@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentClass = PrivacyFragment.class;
                         break;
                     }
-                    case 6:{
+                    case 5:{
                         signout();
                         break;
                     }
