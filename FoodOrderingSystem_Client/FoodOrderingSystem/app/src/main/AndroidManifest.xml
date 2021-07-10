@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.foodorderingsystem">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrderingSystem"
+        tools:replace="android:theme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ForgotPassword"></activity>
-        <activity android:name=".Activity.CartListActivity"></activity>
+        <activity android:name=".Activity.ForgotPassword"/>
+        <activity android:name=".Activity.CartListActivity"/>
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

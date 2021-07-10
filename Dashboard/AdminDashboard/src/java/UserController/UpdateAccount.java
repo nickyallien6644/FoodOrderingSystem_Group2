@@ -64,8 +64,8 @@ public class UpdateAccount extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         int id = Integer.parseInt(request.getParameter("id"));
-        String first_name = request.getParameter("first_name").toString();
-        String last_name = request.getParameter("last_name").toString();
+        String first_name = request.getParameter("firstName").toString();
+        String last_name = request.getParameter("lastName").toString();
         String phone = request.getParameter("phone").toString();
         String address = request.getParameter("address").toString();
         String email = request.getParameter("email").toString();
@@ -84,12 +84,10 @@ public class UpdateAccount extends HttpServlet {
         }
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Update account success');");
             out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
             out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Update account fail');");
             out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
             out.println("</script>");
         }

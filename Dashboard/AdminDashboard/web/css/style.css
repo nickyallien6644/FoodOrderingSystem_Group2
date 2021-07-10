@@ -25,7 +25,9 @@
 .dataTable-info {
 	margin: 7px 0;
 }
-
+.dropdown-menu {
+    min-width: 3rem;
+}
 
 .dataTable-pagination a {
 	border: 1px solid transparent;
