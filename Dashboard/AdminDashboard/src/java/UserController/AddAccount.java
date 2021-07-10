@@ -61,13 +61,15 @@ public class AddAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String first_name = request.getParameter("first_name").toString();
-        String last_name = request.getParameter("last_name").toString();
+        String first_name = request.getParameter("firstName").toString();
+        String last_name = request.getParameter("lastName").toString();
         String phone = request.getParameter("phone").toString();
         String address = request.getParameter("address").toString();
         String email = request.getParameter("email").toString();
         String password = request.getParameter("password").toString();
-        int role = Integer.parseInt(request.getParameter("selectStatus").toString());
+//        int role = Integer.parseInt(request.getParameter("selectStatus").toString());
+        int role = 3;
+        System.out.println("first_name "+first_name+" email " +email+" last "+last_name+" phone "+phone+ "address " +address+ "Pass " +password);
         AccountDAO accountDAO = new AccountDAO();
         
         boolean checkUpdate = false;
@@ -76,12 +78,10 @@ public class AddAccount extends HttpServlet {
 
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Update account success');");
             out.println("location='./Admin/index.jsp';");
             out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Update account fail');");
             out.println("location='./Admin/AddAccount.jsp';");
             out.println("</script>");
         }
