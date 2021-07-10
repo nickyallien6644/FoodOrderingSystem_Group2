@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffb067"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.ConfirmEmail">
 <ScrollView
@@ -66,6 +66,7 @@
             <EditText
                 android:id="@+id/edit_Num1"
                 android:textSize="24sp"
+                android:importantForAutofill="no"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:inputType="number"
@@ -77,6 +78,7 @@
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:importantForAutofill="no"
                 android:id="@+id/edit_Num2"
                 android:textAlignment="center"
                 android:inputType="number"
@@ -90,6 +92,7 @@
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:importantForAutofill="no"
                 android:id="@+id/edit_Num3"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -103,6 +106,7 @@
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:importantForAutofill="no"
                 android:id="@+id/edit_Num4"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -116,6 +120,7 @@
                 android:layout_height="60dp">
             </EditText>
             <EditText
+                android:importantForAutofill="no"
                 android:id="@+id/edit_Num5"
                 android:textSize="24sp"
                 android:textStyle="bold"

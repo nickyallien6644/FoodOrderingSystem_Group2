@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,6 +34,7 @@ import java.util.regex.Pattern;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
+
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -112,6 +114,13 @@ public class ForgotPassword extends AppCompatActivity {
             txtlayoutEmail.setError ("loi ne 444");
         }
     }
+    public void btnBack(View v){
+        SessionManagement sessionManagement = new SessionManagement (ForgotPassword.this);
+        sessionManagement.removeSession();
+        Intent intent =new Intent(ForgotPassword.this, SignInActivity.class);
+        startActivity(intent);
+        overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
+    }
     public void getUser() {
         listAccounts = new ArrayList<>();
         accountService= Api.getClients ();  // call Api get PersonService
@@ -155,7 +164,7 @@ public class ForgotPassword extends AppCompatActivity {
         String mail = etxtFotgEmail.getText().toString().trim();
         int code ;
         Random random = new Random();
-        code = random.nextInt(89999) + 1000;
+        code = random.nextInt(89999) + 10000;
         String message = "Code: "+code;
         String subject = "Forgot PassWord";
         ExecutorService service = Executors.newSingleThreadExecutor();
@@ -166,6 +175,7 @@ public class ForgotPassword extends AppCompatActivity {
                     @Override
                     public void run() {
                         sessionManagement = new SessionManagement (ForgotPassword.this) ;
+                        sessionManagement.saveSession (user);
                         sessionManagement.save (mail,String.valueOf(code));
                         Toast.makeText(ForgotPassword.this,"Message Sent",Toast.LENGTH_SHORT).show();
                     }

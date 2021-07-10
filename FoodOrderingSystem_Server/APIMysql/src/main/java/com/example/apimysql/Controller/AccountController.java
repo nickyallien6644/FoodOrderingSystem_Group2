@@ -41,4 +41,12 @@ public class AccountController {
         }
         return "update coins is success";
     }
+    @RequestMapping ("/forgotPassword")
+    public String forgotPassword(@RequestBody Account account) {
+        int id = service.forgotPassword(account);
+        if(id==0) {
+            return "Faile ";
+        }
+        return "Create new password is success";
+    }
 }
