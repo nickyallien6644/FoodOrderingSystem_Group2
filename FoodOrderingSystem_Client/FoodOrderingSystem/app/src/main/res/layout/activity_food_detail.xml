@@ -79,48 +79,18 @@
             app:layout_constraintStart_toStartOf="@+id/pDetailName"
             app:layout_constraintTop_toBottomOf="@+id/pDetailName" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/pDetailDescription"
-            app:layout_constraintTop_toTopOf="@+id/button2"
-            app:srcCompat="@drawable/ic_minus" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="50dp"
-            android:layout_height="53dp"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@android:color/background_dark"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
-            app:layout_constraintTop_toTopOf="@+id/imageView8"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toTopOf="@+id/textView14"
-            app:srcCompat="@drawable/ic_plus" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
-            android:layout_width="180dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/detail_page_cart_button_bg"
             android:backgroundTint="@null"
             android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
+            android:gravity="center"
+            android:textStyle="bold"
             android:padding="16dp"
             android:paddingRight="16dp"
-            android:text="Add to Cart"
+            android:text="ADD ONE"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
