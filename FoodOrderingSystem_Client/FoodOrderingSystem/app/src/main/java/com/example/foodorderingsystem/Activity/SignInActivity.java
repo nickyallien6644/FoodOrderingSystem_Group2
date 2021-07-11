@@ -104,7 +104,6 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
     public void btnSignin(View v){
-
         txtError = findViewById (R.id.txtError);
         etxtMail = findViewById(R.id.inputLayoutEmail);
         etxtpass = findViewById(R.id.inputLayoutPass);
@@ -125,7 +124,6 @@ public class SignInActivity extends AppCompatActivity {
                 Intent intent = new Intent (SignInActivity.this, MainActivity.class);
                 sessionManagement = new SessionManagement (SignInActivity.this) ;
                 sessionManagement.saveSession (user);
-
                 startActivity (intent);
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
@@ -133,6 +131,7 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText (SignInActivity.this, "Error", Toast.LENGTH_SHORT).show ();
             }
         }
+
     }
     public static String md5(final String s) {
         final String MD5 = "MD5";
@@ -170,6 +169,11 @@ public class SignInActivity extends AppCompatActivity {
     }
     public void btnSignup(View v){
         Intent intent =new Intent(SignInActivity.this, SignUpActivity.class);
+        startActivity(intent);
+        overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+    public void ForgotPassword(View v){
+        Intent intent =new Intent(SignInActivity.this, ForgotPassword.class);
         startActivity(intent);
         overridePendingTransition (R.anim.slide_in_right,R.anim.slide_out_left);
     }

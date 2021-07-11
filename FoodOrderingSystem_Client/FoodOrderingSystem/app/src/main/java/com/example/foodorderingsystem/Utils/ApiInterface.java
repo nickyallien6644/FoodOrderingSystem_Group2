@@ -38,6 +38,8 @@ public interface ApiInterface {
     Call<Account>addPersona(@Body Account account);
     @PUT("account/updateCoins")
     Call<Account>updateBcoins(@Body Account account);
+    @PUT("account/forgotPassword")
+    Call<Account>forgotPassword(@Body Account account);
 
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
