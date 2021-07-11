@@ -45,17 +45,45 @@
                     android:text="20 Bcoins"
                     android:textSize="20sp"
                     android:textColor="@color/Cam"/>
+                <ImageView
+                    android:id="@+id/img_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/ic_minus" />
 
-                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                    android:id="@+id/txt_quantity"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    app:backGroundColor="@drawable/detail_page_cart_button_bg"
-                    app:finalNumber="100"
-                    app:initialNumber="1"
-                    app:textColor="@color/white"
-                    app:textSize="5sp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+                <TextView
+                    android:id="@+id/quantity_product"
+                    android:layout_width="50dp"
+                    android:layout_height="53dp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    android:textStyle="normal|bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_minus"
+                    app:layout_constraintStart_toEndOf="@+id/img_minus"
+                    app:layout_constraintTop_toTopOf="@+id/img_minus"
+                    app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/img_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/quantity_product"
+                    app:layout_constraintStart_toEndOf="@+id/quantity_product"
+                    app:layout_constraintTop_toTopOf="@+id/quantity_product"
+                    app:srcCompat="@drawable/ic_plus" />
+
+<!--                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->
+<!--                    android:id="@+id/txt_quantity"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    app:backGroundColor="@drawable/detail_page_cart_button_bg"-->
+<!--                    app:finalNumber="100"-->
+<!--                    app:initialNumber="1"-->
+<!--                    app:textColor="@color/white"-->
+<!--                    app:textSize="5sp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>-->
 
             </LinearLayout>
         </LinearLayout>

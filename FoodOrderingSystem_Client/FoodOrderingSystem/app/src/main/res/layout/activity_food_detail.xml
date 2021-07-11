@@ -78,19 +78,48 @@
             app:layout_constraintEnd_toEndOf="@+id/pDetailPrice"
             app:layout_constraintStart_toStartOf="@+id/pDetailName"
             app:layout_constraintTop_toBottomOf="@+id/pDetailName" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/img_plus"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/quantity_product"
+            app:layout_constraintStart_toEndOf="@+id/quantity_product"
+            app:layout_constraintTop_toTopOf="@+id/quantity_product"
+            app:srcCompat="@drawable/ic_plus" />
+        <TextView
+            android:id="@+id/quantity_product"
+            android:layout_width="50dp"
+            android:layout_height="53dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="normal|bold"
+            app:layout_constraintBottom_toBottomOf="@+id/img_minus"
+            app:layout_constraintStart_toEndOf="@+id/img_minus"
+            app:layout_constraintTop_toTopOf="@+id/img_minus"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/img_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pDetailDescription"
+            app:layout_constraintTop_toTopOf="@+id/btnAddToCart"
+            app:srcCompat="@drawable/ic_minus" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="180dp"
+            android:layout_height="80dp"
             android:background="@drawable/detail_page_cart_button_bg"
             android:backgroundTint="@null"
             android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
-            android:gravity="center"
-            android:textStyle="bold"
             android:padding="16dp"
+            android:gravity="center_vertical"
             android:paddingRight="16dp"
-            android:text="ADD ONE"
+            android:text="Add to cart"
+            android:textSize="20sp"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
