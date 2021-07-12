@@ -5,7 +5,6 @@
  */
 package UserController;
 
-import Models.DAO.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-@WebServlet(name = "AddAccount", urlPatterns = {"/AddAccount"})
-public class AddAccount extends HttpServlet {
+@WebServlet(name = "IndexRestaurant", urlPatterns = {"/IndexRestaurant"})
+public class IndexRestaurant extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,6 +31,7 @@ public class AddAccount extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendRedirect("./Admin/indexRestaurant.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,31 +60,7 @@ public class AddAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String first_name = request.getParameter("firstName").toString();
-        String last_name = request.getParameter("lastName").toString();
-        String phone = request.getParameter("phone").toString();
-        String address = request.getParameter("address").toString();
-        String email = request.getParameter("email").toString();
-        String password = request.getParameter("password").toString();
-//        int role = Integer.parseInt(request.getParameter("selectStatus").toString());
-        int role = 3;
-        AccountDAO accountDAO = new AccountDAO();
-        
-        boolean checkUpdate = false;
-
-        checkUpdate = accountDAO.insertAccount(first_name, last_name, phone, email, address, role, password);
-
-        if (checkUpdate == true) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/index.jsp';");
-            out.println("</script>");
-        } else {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/AddAccount.jsp';");
-            out.println("</script>");
-        }
-
+        processRequest(request, response);
     }
 
     /**
