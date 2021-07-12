@@ -33,6 +33,10 @@ public class AccountService implements AccountInterface {
     public int updateConis(Account account) {
         return dao.updateConis(account);
     }
+    @Override
+    public int forgotPassword(Account account) {
+        return dao.forgotPassword(account);
+    }
 
 
 
