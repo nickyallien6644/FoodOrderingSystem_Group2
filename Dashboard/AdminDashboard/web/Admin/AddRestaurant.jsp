@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Food Ordering System - Register</title>
+        <title>Food Ordering System - ADD restaurant</title>
 
         <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="../css/perfect-scrollbar.css">
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/bootstrap-icons/bootstrap-icons.css">
         <link href="../css/custom.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
         <meta name="robots" content="noindex, nofollow">
     </head>
     <body class="nav-md">
@@ -56,7 +58,13 @@
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Datatable</span>
+                                    <span>Accounts</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item active">
+                                <a href="indexRestaurant.jsp" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <span>Restaurants</span>
                                 </a>
                             </li>
 
@@ -71,39 +79,23 @@
                     <div class="">
                         <div class="clearfix row">
                             <div class="col-2">
-                                <a href="/AdminDashboard/indexAdmin"><button type="button" class="btn btn-warning">Back</button></a>
+                                <a href="/AdminDashboard/IndexRestaurant"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                            <h1>SIGN UP ACCOUNT</h1>
+                                <h1>ADD RESTAURANT</h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
                                 <div class="x_panel">
                                     <div class="x_content">
-                                        <form class="" action="${pageContext.request.contextPath}/AddAccount" method="post" novalidate>
+                                        <form class="" action="${pageContext.request.contextPath}/AddRestaurant" method="post" novalidate>
                                             <span class="section"></span>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Name Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control"  data-validate-length-range="3"  name="firstName" placeholder="Ex. John f" required="required" />
+                                                    <input class="form-control"  data-validate-length-range="3"  name="name" placeholder="Ex. Thinh Food, Texas Chicken" required="required" />
                                                 </div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Last Name<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" data-validate-length-range="3"  name="lastName" placeholder="Ex. Kennedy" required="required" />
-                                                </div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" name="email" class='email' title="Ex. john@gmail.com, jenny@gmail.com" placeholder="Ex. john@gmail.com" required="required" type="email" /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm email address<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="email" class='email' name="confirm_email" data-validate-linked='email' required='required' /></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span class="required">*</span></label>
@@ -111,28 +103,24 @@
                                                     <input class="form-control" class='address' name="address" placeholder="Ex. Los Angeles, California" required='required' /></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Time Open<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="password" name="password" title="Ex. john@123, Jenny@123" placeholder="Ex. john@123, jenny@123" required='required' /></div>
+                                                    <input class="form-control" class='time' type="time" name="timeOpen" required='required'></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat password<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Time Close<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="password" name="password2" data-validate-linked='password' required='required' /></div>
+                                                    <input class="form-control" class='time' type="time" name="timeClose" required='required'></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Phone Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
                                                     <input class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Role<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="selectStatus">
-                                                        <option value="4" selected>Staff</option>
-                                                        <option value="3">Employee</option>
-                                                    </select>
-                                                </div>
+                                                    <input class="form-control" type="file" class='file' name="file" required='required' accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
@@ -182,6 +170,8 @@
                 if (this.checked)
                     $('form .alert').remove();
             }).prop('checked', false);
+            
+            
         </script>
 
         <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>
