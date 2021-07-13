@@ -38,6 +38,10 @@ public class AccountService implements AccountInterface {
         return dao.forgotPassword(account);
     }
 
-
+    @Override
+    public int edit(Account p) {
+        // TODO Auto-generated method stub
+        return dao.edit(p);
+    }
 
 }
