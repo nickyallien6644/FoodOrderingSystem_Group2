@@ -121,10 +121,8 @@ public class BcoinsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 account = new Account();
-
                 account.setaCoins(total);
                 account.setaID(uID);
-
                 UpdateCoins(account);
 
             }

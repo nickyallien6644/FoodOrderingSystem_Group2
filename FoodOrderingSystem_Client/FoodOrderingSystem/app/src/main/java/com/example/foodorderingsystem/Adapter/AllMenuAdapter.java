@@ -46,9 +46,11 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("pID", allMenuList.get(position).getpID());
                 intent.putExtra("name", allMenuList.get(position).getpName());
                 intent.putExtra("price", allMenuList.get(position).getpPrice());
                 intent.putExtra("description", allMenuList.get(position).getpDescription());
+                intent.putExtra("iID", allMenuList.get(position).getiID());
                 intent.putExtra("image", allMenuList.get(position).getiURL());
                 context.startActivity(intent);
             }

@@ -39,6 +39,10 @@ public class Product {
     @Expose
     private int rID;
 
+    public int getpID() {
+        return pID;
+    }
+
     public void setpID(int pID) {
         this.pID = pID;
     }
