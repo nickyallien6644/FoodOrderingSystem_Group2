@@ -42,4 +42,9 @@ public class AccountDAO implements AccountInterface {
         String sql = "update `account` set  aPassword= MD5(?) where aID = ?";
         return template.update(sql, account.getaPassword(),account.getaID());
     }
+    @Override
+    public int edit(Account p) {
+        String sql="update account set aPassword=MD5(?), aFirstname=? , aLastname=? , aPhone=?  where aID=?";
+        return template.update(sql,p.getaPassword(),p.getaFirstname(),p.getaLastname(),p.getaPhone(),p.getaID());
+    }
 }

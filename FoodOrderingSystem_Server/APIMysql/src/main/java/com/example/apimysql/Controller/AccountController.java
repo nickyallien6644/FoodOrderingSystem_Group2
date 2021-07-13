@@ -49,4 +49,13 @@ public class AccountController {
         }
         return "Create new password is success";
     }
+    @PostMapping("/update/{id}")
+    public String save(@RequestBody Account p,@PathVariable int id,Model model) {
+        p.setaID(id);
+        int r =service.edit(p);
+        if(r==0) {
+            return "No se pudo Actualizar!";
+        }
+        return "Se actualizó con éxito!";
+    }
 }
