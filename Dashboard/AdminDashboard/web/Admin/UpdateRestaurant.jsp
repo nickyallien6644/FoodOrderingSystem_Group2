@@ -8,7 +8,11 @@
 <%@page import="Models.DAO.RestaurantDAO"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+  <%
+      if (session.getAttribute("LoginUser") == null) {
+              response.sendRedirect("../../AdminDashboard/Login.jsp");
+      }
+  %>
 <!DOCTYPE html><html lang=en>
     <head>
         <meta charset="UTF-8">

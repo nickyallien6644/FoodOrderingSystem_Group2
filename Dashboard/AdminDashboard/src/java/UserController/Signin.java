@@ -35,8 +35,8 @@ public class Signin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          PrintWriter out = response.getWriter();
-         
-        //get User Name and password when Customer inptut
+         HttpSession session = request.getSession(true);
+//        //get User Name and password when Customer inptut
         String username = request.getParameter("SigninName");
         String password = request.getParameter("SigninPassword");
         UserDAO us = new UserDAO(); // constructor User
@@ -45,12 +45,12 @@ public class Signin extends HttpServlet {
             // if null it mean user not have exist and sendirect failed.jsp
            if(user == null ){
                //TODO : MAKE forget password
-               request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
-               getServletContext().getRequestDispatcher("/Failed.jsp").forward(request, response);
+              request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+               getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
            } else {
             
             //set session for login user
-            HttpSession session = request.getSession(true);
+            
             session.setAttribute("LoginUser", user);
             session.setMaxInactiveInterval(60*15);
             
@@ -63,8 +63,8 @@ public class Signin extends HttpServlet {
                    response.sendRedirect("Staff/index.jsp");
                }
                else {
-                   System.out.println("NOT");
-                   response.sendRedirect("login.jsp");
+                    request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+                   getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
                }                  //user
            }
       
