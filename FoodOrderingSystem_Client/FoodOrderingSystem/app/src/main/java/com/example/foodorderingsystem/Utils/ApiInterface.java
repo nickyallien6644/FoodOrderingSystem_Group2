@@ -23,13 +23,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
 
     Gson gson = new GsonBuilder ().setDateFormat ("yyyy-MM-dd HH:mm:ss").create ();
-    ApiInterface apiService  = new Retrofit.Builder().baseUrl ("http://localhost:8081/")
+    ApiInterface apiService  = new Retrofit.Builder().baseUrl ("http://locallhost:8081/")
             .addConverterFactory (GsonConverterFactory.create (gson)).build ().create (ApiInterface.class);
     @GET("account/list")
     Call<List<Account>> getAccounts();
@@ -44,6 +43,9 @@ public interface ApiInterface {
 
     @POST("cart/addCart")
     Call<Cart>addCart(@Body Cart cart);
+
+    @POST("account/update/{id}")
+    Call<Account>updatePersona(@Body Account account,@Path("id") int id);
 
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
