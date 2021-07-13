@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.foodorderingsystem.Activity.AllProduct;
 import com.example.foodorderingsystem.Activity.AllProductForRecommended;
+import com.example.foodorderingsystem.Activity.CartActivity;
 import com.example.foodorderingsystem.Activity.SearchActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.CategoryAdapter;
@@ -61,6 +63,8 @@ public class HomeFragment extends Fragment {
 
     TextView seeAllProductForRecommended, seeAllProduct;
 
+    ImageView shoppingCart;
+
     public HomeFragment() {
 
         // Required empty public constructor
@@ -74,6 +78,7 @@ public class HomeFragment extends Fragment {
         categoryRecyclerView = v.findViewById(R.id.category_recycler);
         recommendedRecyclerView = v.findViewById(R.id.recommended_recycler);
         allMenuRecyclerView = v.findViewById(R.id.allMenu_recycler);
+
         bnv_Home = v.findViewById(R.id.bnv_Main);
         bnv_Home.add(new MeowBottomNavigation.Model(1, R.drawable.outline_paid_24));
         bnv_Home.add(new MeowBottomNavigation.Model(2, R.drawable.home));
@@ -88,6 +93,9 @@ public class HomeFragment extends Fragment {
 
         seeAllProduct = v.findViewById(R.id.txtSeeAllProduct);
         seeAllProduct.setOnClickListener(seeAllProduct());
+
+        shoppingCart = v.findViewById(R.id.shoppingCart);
+        shoppingCart.setOnClickListener(displayCart());
 
         setUpNav();
         listCategory = new ArrayList<>();
@@ -226,6 +234,15 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    private View.OnClickListener displayCart() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CartActivity.class));
+            }
+        };
     }
 
     private View.OnClickListener seeAllProductForRecommended() {
