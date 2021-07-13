@@ -54,8 +54,8 @@ public class AccountController {
         p.setaID(id);
         int r =service.edit(p);
         if(r==0) {
-            return "No se pudo Actualizar!";
+            return "Update Fail!";
         }
-        return "Se actualizó con éxito!";
+        return "Update Success!";
     }
 }

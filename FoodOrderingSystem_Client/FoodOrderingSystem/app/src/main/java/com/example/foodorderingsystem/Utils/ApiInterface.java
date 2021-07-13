@@ -28,7 +28,7 @@ import retrofit2.http.Path;
 public interface ApiInterface {
 
     Gson gson = new GsonBuilder ().setDateFormat ("yyyy-MM-dd HH:mm:ss").create ();
-    ApiInterface apiService  = new Retrofit.Builder().baseUrl ("http://192.168.1.56:8081/")
+    ApiInterface apiService  = new Retrofit.Builder().baseUrl ("http://locallhost:8081/")
             .addConverterFactory (GsonConverterFactory.create (gson)).build ().create (ApiInterface.class);
     @GET("account/list")
     Call<List<Account>> getAccounts();
@@ -36,7 +36,7 @@ public interface ApiInterface {
     Call<List<Account>> getAccountsId();
     @POST("account/add")
     Call<Account>addPersona(@Body Account account);
-    @POST("account/updateCoins")
+    @PUT("account/updateCoins")
     Call<Account>updateBcoins(@Body Account account);
     @PUT("account/forgotPassword")
     Call<Account>forgotPassword(@Body Account account);
