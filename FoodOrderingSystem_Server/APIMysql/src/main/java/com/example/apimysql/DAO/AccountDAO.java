@@ -28,7 +28,7 @@ public class AccountDAO implements AccountInterface {
 
     @Override
     public int add(Account account) {
-        String sql = "insert into account(roleID,aEmail,aPassword,aCoins,aFirstname,aLastname,aPhone,aAddress,aStatus)values(?,?,MD5(?),?,?,?,?,?,?)";
+        String sql = "insert into account(roleID,rID,aEmail,aPassword,aCoins,aFirstname,aLastname,aPhone,aAddress,aStatus)values(?,NULL,?,MD5(?),?,?,?,?,?,?)";
         return template.update(sql, account.getRoleID(), account.getaEmail(),account.getaPassword(), account.getaCoins(), account.getaFirstname(), account.getaLastname() ,account.getaPhone(), account.getaAddress(),account.getaStatus());
     }
 
@@ -41,5 +41,10 @@ public class AccountDAO implements AccountInterface {
     public int forgotPassword(Account account) {
         String sql = "update `account` set  aPassword= MD5(?) where aID = ?";
         return template.update(sql, account.getaPassword(),account.getaID());
+    }
+    @Override
+    public int edit(Account p) {
+        String sql="update account set aPassword=MD5(?), aFirstname=? , aLastname=? , aPhone=?  where aID=?";
+        return template.update(sql,p.getaPassword(),p.getaFirstname(),p.getaLastname(),p.getaPhone(),p.getaID());
     }
 }

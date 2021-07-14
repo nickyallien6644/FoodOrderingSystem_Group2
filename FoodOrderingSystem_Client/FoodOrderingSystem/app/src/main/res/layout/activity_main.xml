@@ -96,11 +96,14 @@
 
                 <SearchView
                     android:id="@+id/txtSearchProducts"
-                    android:layout_width="377dp"
-                    android:layout_height="55dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="310dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/shoppingCart"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="16dp" >
+                    tools:layout_editor_absoluteY="7dp">
 
                     <TextView
                         android:id="@+id/textView"
@@ -141,6 +144,16 @@
                     app:layout_constraintHorizontal_bias="0.932"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/recommended_recycler" />
+
+                <ImageView
+                    android:id="@+id/shoppingCart"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/outline_shopping_cart_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </FrameLayout>

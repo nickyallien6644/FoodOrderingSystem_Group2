@@ -15,5 +15,7 @@ public interface AccountInterface {
 
     public int updateConis(Account account);
 
+    public int edit(Account p);
+
     public int forgotPassword(Account account);
 }

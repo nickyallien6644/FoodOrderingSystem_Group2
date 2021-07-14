@@ -2,6 +2,7 @@ package com.example.apimysql.Model;
 
 public class Account {
     private int aID;
+    private int rID;
     private int roleID;
     private String aEmail;
     private String aPassword;
@@ -12,8 +13,9 @@ public class Account {
     private String aAddress;
     private int aStatus;
 
-    public Account(int aID, int roleID, String aEmail, String aPassword, int aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
+    public Account(int aID, int rID, int roleID, String aEmail, String aPassword, int aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
         this.aID = aID;
+        this.rID = rID;
         this.roleID = roleID;
         this.aEmail = aEmail;
         this.aPassword = aPassword;
@@ -34,6 +36,14 @@ public class Account {
 
     public void setaID(int aID) {
         this.aID = aID;
+    }
+
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
     }
 
     public int getRoleID() {

@@ -11,6 +11,11 @@
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+  <%
+      if (session.getAttribute("LoginUser") == null) {
+              response.sendRedirect("../../AdminDashboard/Login.jsp");
+      }
+  %>
 <html lang="en">
 
     <head>
