@@ -3,6 +3,8 @@ package com.example.foodorderingsystem.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ public class ProductByCategory extends AppCompatActivity {
     ProductByCakeAdapter productByCakeAdapter;
 
     TextView txtTitle;
+    ImageView backCategoryProduct, shoppingCartForCategoryOfProduct;
 
     int position;
 
@@ -65,6 +68,12 @@ public class ProductByCategory extends AppCompatActivity {
             txtTitle.setText("Cake Category");
             listProductByCake();
         }
+
+        backCategoryProduct = findViewById(R.id.backCategoryProduct);
+        backCategoryProduct.setOnClickListener(backProductForCategory());
+
+        shoppingCartForCategoryOfProduct = findViewById(R.id.shoppingCartForCategoryOfProduct);
+        shoppingCartForCategoryOfProduct.setOnClickListener(openCart());
 
     }
 
@@ -141,6 +150,24 @@ public class ProductByCategory extends AppCompatActivity {
 
         productByCategoryReCycler.setLayoutManager(layoutManager);
         productByCategoryReCycler.setAdapter(productByCakeAdapter);
+    }
+
+    private View.OnClickListener openCart() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+            }
+        };
+    }
+
+    private View.OnClickListener backProductForCategory() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
     }
 
 //    @Override
