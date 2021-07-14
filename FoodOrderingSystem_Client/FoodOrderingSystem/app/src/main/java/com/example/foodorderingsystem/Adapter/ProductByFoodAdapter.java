@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Activity.FoodDetail;
 import com.example.foodorderingsystem.Activity.ProductByCategory;
+import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Product;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +28,12 @@ import java.util.List;
 public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdapter.ProductByFoodViewHolder> {
     private Context context;
     private List<Product> productList;
+    private SessionManagement sessionManagement;
 
     public ProductByFoodAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        sessionManagement = new SessionManagement(context);
     }
 
     @NonNull
@@ -58,6 +64,15 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
                 context.startActivity(intent);
             }
         });
+
+        holder.addOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManagement.CheckCartForAddOne(new Cart(1, 1 , productList.get(position).getpID() ,productList.get(position).getpName()
+                        , productList.get(position).getpPrice(), productList.get(position).getiID(), productList.get(position).getiURL(), sessionManagement.getSession() ));
+                Toast.makeText(context, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -68,10 +83,12 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
     public static class ProductByFoodViewHolder extends RecyclerView.ViewHolder{
         ImageView productByCategoryImage;
         TextView productByCategoryName, productByCategoryPrice;
+        Button addOne;
 
         public ProductByFoodViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
+            addOne = itemView.findViewById(R.id.btnAddOneForCategory);
             productByCategoryImage = itemView.findViewById(R.id.productByCategory_image);
             productByCategoryName = itemView.findViewById(R.id.productByCategory_name);
             productByCategoryPrice = itemView.findViewById(R.id.productByCategory_price);
