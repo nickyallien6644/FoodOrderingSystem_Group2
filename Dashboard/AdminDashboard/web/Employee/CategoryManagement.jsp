@@ -4,20 +4,21 @@
     Author     : phuct
 --%>
 
-<%@page import="Models.DAO.RestaurantDAO"%>
-<%@page import="Models.Entity.Restaurant"%>
+<%@page import="Models.Entity.Category"%>
+<%@page import="Models.Entity.Product"%>
+<%@page import="Models.DAO.CategoryDAO"%>
+<%@page import="Models.DAO.ProductDAO"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-  <%
-      if (session.getAttribute("LoginUser") == null) {
+<html lang="en">
+<%
+      if (session.getAttribute("LoginUser") == null || session.getAttribute("rID") == null) {
               response.sendRedirect("../../AdminDashboard/Login.jsp");
       }
   %>
-<html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,6 @@
         <link rel="stylesheet" href="../css/app.css">
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </head>
     </head>
 
     <body>
@@ -59,13 +59,19 @@
                             <li class="sidebar-item">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Accounts</span>
+                                    <span>Order management</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="productManagement.jsp" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <span>Product management</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
-                                <a href="indexRestaurant.jsp" class='sidebar-link'>
+                                <a href="CategoryManagement.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Restaurants</span>
+                                    <span>Category management</span>
                                 </a>
                             </li>
                         </ul>
@@ -86,7 +92,7 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h2>RESTAURANT MANAGEMENT</h2>
+                                <h2>CATEGORY MANAGEMENT</h2>
                                 <p class="text-subtitle text-muted">Let the admin check the system's account list</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -95,8 +101,8 @@
                                         <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
                                     </div>
                                     <div class="ms-2 name">
-                                        <h5 class="font-bold">ADMIN01</h5>
-                                        <h6 class="text-muted mb-0">@ThinhBNP</h6>
+                                        <h5 class="font-bold">EMPLOYEE</h5>
+                                        <h6 class="text-muted mb-0">@VINHHQ</h6>
                                     </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,13 +121,13 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                Admin can edit profile restaurant. 
+                                Admin can edit profile as status, name, email, phone, city 
                             </div>
                             <div class="card-right" style="padding-right: 25px">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <div class="breadcrumb-item">
-                                            <a href="AddRestaurant.jsp"><button class="btn bg-light-success font-bold mx-2">Add new restaurant</button></a>
+                                            <a href="AddCategory.jsp"><button class="btn bg-light-success font-bold mx-2">Add new category</button></a>
                                         </div>
                                     </ol>
                                 </nav>
@@ -131,29 +137,21 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name Restaurant</th>
-                                            <th>Open Time</th>
-                                            <th>Close Time</th>
-                                            <th>Address</th>
-                                            <th>Phone</th>
-                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
-                                            ArrayList<Restaurant> listRestaurant = new ArrayList<Restaurant>();
-                                            listRestaurant = restaurantDAO.getAllRestaurant();
-                                            for (int i = 0; i < listRestaurant.size(); i++) {
+                                            CategoryDAO categoryDAO = new CategoryDAO();
+                                            ArrayList<Category> listCategories = new ArrayList<Category>();
+                                            listCategories = categoryDAO.getAllCategory();
+                                            for (int i = 0; i < listCategories.size(); i++) {
                                         %>
                                         <tr>
-                                            <td class="use-address id" ><%=listRestaurant.get(i).getrId() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrName() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeOpen() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeClose() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrAddress() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrPhone()  %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrImage() %></td>
+                                            <td class="use-address id" ><%=listCategories.get(i).getcID()%></td>
+                                            <td class="use-address"><%=listCategories.get(i).getcName()%></td>
+                                            <td class="use-address"><img src="<%=listCategories.get(i).getcURL()%>"width="100" height="100"></td>
                                         </tr>
                                         <%
                                             }
@@ -193,7 +191,7 @@
                 var $text = $row.find(".id").text(); // Find the text
 
                 if ($text) {
-                    var url = "/AdminDashboard/UpdateRestaurant?id=" + $text;
+                    var url = "/AdminDashboard/UpdateProfile?id=" + $text;
                     window.location.href = url;
                 }
                 // Let's test it out

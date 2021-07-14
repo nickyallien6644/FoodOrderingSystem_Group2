@@ -11,8 +11,9 @@ package Models.Entity;
  */
 public class User implements Cloneable{
 
-    public User(int aID, int roleID, String aEmail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, String aStatus) {
+    public User(int aID, int rID, int roleID, String aEmail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, String aStatus) {
         this.aID = aID;
+        this.rID = rID;
         this.roleID = roleID;
         this.aEmail = aEmail;
         this.aPassword = aPassword;
@@ -26,6 +27,14 @@ public class User implements Cloneable{
 
     public User() {
        
+    }
+
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
     }
 
     public int getaID() {
@@ -113,6 +122,7 @@ public class User implements Cloneable{
         return "User{" + "aID=" + aID + ", roleID=" + roleID + ", aEmail=" + aEmail + ", aPassword=" + aPassword + ", aCoins=" + aCoins + ", aFirstname=" + aFirstname + ", aLastname=" + aLastname + ", aPhone=" + aPhone + ", aAddress=" + aAddress + ", aStatus=" + aStatus + '}';
     }
     private int aID;
+    private int rID;
     private int roleID;
     private String aEmail;
     private String aPassword;

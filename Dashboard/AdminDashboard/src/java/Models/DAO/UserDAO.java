@@ -79,7 +79,7 @@ public class UserDAO extends DBConnection{
                 
                 if (rs.next()) {
                     userSinIn = new User(
-                    rs.getInt("aID"),rs.getInt("roleID"),rs.getString("aEmail"),rs.getString("aPassword"),rs.getDouble("aCoins"),rs.getString("aFirstname"),rs.getString("aLastname"),rs.getString("aPhone"),rs.getString("aAddress"),rs.getString("aStatus"));
+                    rs.getInt("aID"),rs.getInt("rID"),rs.getInt("roleID"),rs.getString("aEmail"),rs.getString("aPassword"),rs.getDouble("aCoins"),rs.getString("aFirstname"),rs.getString("aLastname"),rs.getString("aPhone"),rs.getString("aAddress"),rs.getString("aStatus"));
                     System.out.println("tú tú ");
                     System.out.println(userSinIn);
                 }
