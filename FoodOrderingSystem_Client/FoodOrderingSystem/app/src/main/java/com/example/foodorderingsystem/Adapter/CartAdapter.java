@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -26,11 +27,12 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>{
     private Context context;
     private List<Cart> cartList;
-    int totalPrice;
+    SessionManagement sessionManagement;
 
     public CartAdapter(Context context, List<Cart> cartList) {
         this.context = context;
         this.cartList = cartList;
+        sessionManagement = new SessionManagement(context);
     }
 
     @NonNull
@@ -45,8 +47,37 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.cartName.setText(cartList.get(position).getpName());
         holder.cartPrice.setText(cartList.get(position).getpPrice() + " Bcoins");
         Glide.with(context).load(cartList.get(position).getiURL()).into(holder.imgCart);
+        holder.clickAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManagement.increaseQuantity(cartList.get(position).getpID());
+                cartList = sessionManagement.getDataFromSharedPreferences();
+                holder.cartQuantity.setText(String.valueOf(cartList.get(position).getCartQuantity()));
+                Intent intent = new Intent("clickAdd");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
+        });
+        holder.clickMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               sessionManagement.decreaseQuantity(cartList.get(position).getpID());
+                cartList = sessionManagement.getDataFromSharedPreferences();
+                holder.cartQuantity.setText(String.valueOf(cartList.get(position).getCartQuantity()));
+                Intent intent = new Intent("clickMinus");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
+        });
         holder.cartQuantity.setText(String.valueOf(cartList.get(position).getCartQuantity()));
 
+        holder.deleteItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManagement.deleteProductFromCart(cartList.get(position).getpID());
+                cartList = sessionManagement.getDataFromSharedPreferences();
+                Intent intent = new Intent("deleteItemCart");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
+        });
     }
 
     @Override
@@ -59,12 +90,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgCart;
-        TextView cartName, cartPrice, cartQuantity, finalPrice;
+        ImageView imgCart, clickAdd, clickMinus, deleteItem;
+        TextView cartName, cartPrice, cartQuantity;
 
         public CartViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
+            deleteItem = itemView.findViewById(R.id.img_delete_cart);
+            clickAdd = itemView.findViewById(R.id.img_plus);
+            clickMinus = itemView.findViewById(R.id.img_minus);
             imgCart = itemView.findViewById(R.id.img_product);
             cartName = itemView.findViewById(R.id.txt_product_name);
             cartPrice = itemView.findViewById(R.id.txt_product_price);

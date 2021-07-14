@@ -1,16 +1,11 @@
 package com.example.foodorderingsystem.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
-import com.example.foodorderingsystem.fragment.CartFragment;
-import com.example.foodorderingsystem.fragment.ConfirmEmail;
-import com.example.foodorderingsystem.fragment.CreateNewPassword;
 
 import android.content.Intent;
 import android.os.Bundle;

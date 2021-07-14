@@ -18,7 +18,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                    <androidx.recyclerview.widget.RecyclerView
+                <ImageView
+                    android:id="@+id/backRecommended"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/shoppingCartRecommended"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="156dp"
+                    android:src="@drawable/ic_baseline_shopping_cart_24"
+                    app:layout_constraintBottom_toTopOf="@+id/resultSearch"
+                    app:layout_constraintHorizontal_bias="0.955"
+                    app:layout_constraintLeft_toLeftOf="@+id/backRecommended"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listAllProductForRecommendedRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -32,10 +56,10 @@
                     android:id="@+id/resultSearch"
                     android:layout_width="329dp"
                     android:layout_height="54dp"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/backRecommended" />
 
                 <TextView
                     android:id="@+id/txtTitle"

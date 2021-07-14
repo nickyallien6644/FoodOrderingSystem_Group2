@@ -28,7 +28,7 @@ public class AccountDAO implements AccountInterface {
 
     @Override
     public int add(Account account) {
-        String sql = "insert into account(roleID,aEmail,aPassword,aCoins,aFirstname,aLastname,aPhone,aAddress,aStatus)values(?,?,MD5(?),?,?,?,?,?,?)";
+        String sql = "insert into account(roleID,rID,aEmail,aPassword,aCoins,aFirstname,aLastname,aPhone,aAddress,aStatus)values(?,NULL,?,MD5(?),?,?,?,?,?,?)";
         return template.update(sql, account.getRoleID(), account.getaEmail(),account.getaPassword(), account.getaCoins(), account.getaFirstname(), account.getaLastname() ,account.getaPhone(), account.getaAddress(),account.getaStatus());
     }
 

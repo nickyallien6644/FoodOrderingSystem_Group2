@@ -1,15 +1,20 @@
 package com.example.foodorderingsystem.Activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,18 +68,37 @@ public class CartActivity extends AppCompatActivity {
         iURL = intent.getStringExtra("iURL");
         quantity = intent.getIntExtra("cartQuantity", 0);
         listCart = new ArrayList<>();
-
-               listCart = sessionManagement.getDataFromSharedPreferences();
-               if(listCart != null) {
-                   for (Cart c : listCart) {
-                       totalPrice += c.getpPrice() * c.getCartQuantity();
-                   }
-               } else {
-                   totalPrice = 0;
-               }
+        listCart = sessionManagement.getDataFromSharedPreferences();
+        if(listCart != null) {
+            for (Cart c : listCart) {
+                totalPrice += c.getpPrice() * c.getCartQuantity();
+            }
+        } else {
+            totalPrice = 0;
+        }
         cartTotalPrice.setText(String.valueOf(totalPrice) + " Bcoins");
         getCartData();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("clickAdd"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("clickMinus"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("deleteItemCart"));
     }
+
+    public BroadcastReceiver mQuantityReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            listCart = sessionManagement.getDataFromSharedPreferences();
+            totalPrice = 0;
+            if(listCart != null) {
+                for (Cart c : listCart) {
+                    totalPrice += c.getpPrice() * c.getCartQuantity();
+                }
+            } else {
+                totalPrice = 0;
+            }
+            cartTotalPrice.setText(String.valueOf(totalPrice) + " Bcoins");
+            getCartData();
+        }
+    };
 
     private void getCartData() {
         cartAdapter = new CartAdapter(getApplicationContext(), listCart);
@@ -91,5 +115,7 @@ public class CartActivity extends AppCompatActivity {
             }
         };
     }
+
+
 
 }
