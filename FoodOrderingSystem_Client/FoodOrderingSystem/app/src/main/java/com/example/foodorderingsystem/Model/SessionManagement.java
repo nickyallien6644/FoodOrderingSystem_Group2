@@ -40,7 +40,6 @@ public class SessionManagement {
         editor =sharedPreferences.edit ();
         this.context = context;
     }
-
     public void save(String emailforgot , String code){
         editor.putString (SESSION_EmailForgot,emailforgot).commit ();
         editor.putString (SESSION_CodeForgot,code).commit ();
@@ -85,6 +84,10 @@ public class SessionManagement {
         editor.putString(SESSION_CodeForgot,"").commit();
         editor.putString(PRODUCT_TAG,"").commit();
 
+    }
+
+    public void removeCart(){
+        editor.putString(PRODUCT_TAG,"").commit();
     }
     public List<Cart> getDataFromSharedPreferences(){
         Gson gson = new Gson();
@@ -142,7 +145,6 @@ public class SessionManagement {
             for (Cart c : listCart){
                 if(c.getpID() == cart.getpID() && c.getaID() == getSession()){
                     check = false;
-//                    addInJSONArray(cart);
                     int idx  = listCart.indexOf(c);
                     Cart cart1 = c;
                     quantity= c.getCartQuantity() + cart.getCartQuantity();
@@ -174,26 +176,92 @@ public class SessionManagement {
         }
     }
 
-    public int increase(int idSale){
+    public void CheckCartForAddOne(Cart cart){
         Gson gson = new Gson();
         int quantity=0;
-        List<Cart> list= getDataFromSharedPreferences();
+        boolean check = true;
+        List<Cart> listCart = getDataFromSharedPreferences();
+        JSONArray jsonArrayProduct = new JSONArray();
+        if(listCart != null){
+            for (Cart c : listCart){
+                if(c.getpID() == cart.getpID() && c.getaID() == getSession()){
+                    check = false;
+                    int idx  = listCart.indexOf(c);
+                    Cart cart1 = c;
+                    quantity= c.getCartQuantity() + 1;
+                    cart1.setCartQuantity(quantity);
+                    listCart.set(idx,cart1);
+                    break;
+                }else {
+                    check =true;
+                }
+            }
+            if (check == true){
+                cart.setCartQuantity(cart.getCartQuantity());
+                addInJSONArray(cart);
+            }else {
+                for(Cart c: listCart){
+                    String strAdd = gson.toJson(c);
+                    try {
+                        jsonArrayProduct.put(new JSONObject(strAdd));
+                        editor.putString(PRODUCT_TAG,String.valueOf(jsonArrayProduct));
+                        editor.commit();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }else {
+            cart.setCartQuantity(cart.getCartQuantity());
+            addInJSONArray(cart);
+        }
+    }
+
+    public void deleteProductFromCart(int pID){
+        Gson gson = new Gson();
+        List<Cart> listCards= getDataFromSharedPreferences();
         JSONArray jsonArrayProduct= new JSONArray();
-        for(Cart i :list) {
-            if (i.getCartID() == idSale&& i.getaID()==getSession()) {
-                int index = list.indexOf(i);
-                Cart cart1 = i;
-                quantity=i.getCartQuantity() + 1;
+        for(Cart cart : listCards) {
+            try{
+                if (cart.getpID() == pID && cart.getaID()==getSession() && listCards.size() > 1) {
+                    listCards.remove(cart);
+                    break;
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }for(Cart cart : listCards){
+            String add = gson.toJson(cart);
+            try {
+                jsonArrayProduct.put(new JSONObject(add));
+                editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
+                editor.commit();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public int increaseQuantity(int pID){
+        Gson gson = new Gson();
+        int quantity=0;
+        List<Cart> listCards= getDataFromSharedPreferences();
+        JSONArray jsonArrayProduct= new JSONArray();
+        for(Cart cart : listCards) {
+            if (cart.getpID() == pID && cart.getaID()==getSession()) {
+                int index = listCards.indexOf(cart);
+                Cart cart1 = cart;
+                quantity=cart.getCartQuantity() + 1;
                 cart1.setCartQuantity(quantity);
-                list.set(index, cart1);
+                listCards.set(index, cart1);
 
                 break;
             }
         }
-        for(Cart i :list){
+        for(Cart cart : listCards){
 
             // Type type = new TypeToken<List<Cart>>() {}.getType();
-            String add = gson.toJson(i);
+            String add = gson.toJson(cart);
             try {
                 jsonArrayProduct.put(new JSONObject(add));
                 editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
@@ -204,33 +272,31 @@ public class SessionManagement {
         }
         return quantity;
     }
-    public int decreaseCart(int idSale){
+    public int decreaseQuantity(int pID){
         Gson gson = new Gson();
-        int quantity=0;
-        List<Cart> list= getDataFromSharedPreferences();
+        int quantity = 0;
+        List<Cart> listCards= getDataFromSharedPreferences();
         JSONArray jsonArrayProduct= new JSONArray();
-        for(Cart i :list) {
-            if (i.getCartID() == idSale&& i.getaID()==getSession()) {
-                int index = list.indexOf(i);
-                Cart cart1 = i;
-                quantity=i.getCartQuantity()-1;
-                if(quantity<0){
-                    quantity=0;
+        for(Cart cart : listCards) {
+            if (cart.getpID() == pID && cart.getaID()==getSession()) {
+                int index = listCards.indexOf(cart);
+                Cart cart1 = cart;
+                quantity = cart.getCartQuantity()-1;
+                if(quantity<=0){
+                    quantity=1;
                     cart1.setCartQuantity(quantity);
-                    list.set(index, cart1);
+                    listCards.set(index, cart1);
                 }else{
                     cart1.setCartQuantity(quantity);
-                    list.set(index, cart1);
+                    listCards.set(index, cart1);
                 }
-
-
                 break;
             }
         }
-        for(Cart i :list){
+        for(Cart cart : listCards){
 
             // Type type = new TypeToken<List<Cart>>() {}.getType();
-            String add = gson.toJson(i);
+            String add = gson.toJson(cart);
             try {
                 jsonArrayProduct.put(new JSONObject(add));
                 editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
@@ -273,8 +339,4 @@ public class SessionManagement {
 //        }
 //
 //    }
-
-
-
-
 }
