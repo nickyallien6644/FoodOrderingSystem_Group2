@@ -4,6 +4,8 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.DAO.RestaurantDAO"%>
+<%@page import="Models.Entity.Restaurant"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Models.DAO.AccountDAO"%>
@@ -83,7 +85,7 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h2>ACCOUNT MANAGEMENT</h2>
+                                <h2>RESTAURANT MANAGEMENT</h2>
                                 <p class="text-subtitle text-muted">Let the admin check the system's account list</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -112,13 +114,13 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                Admin can edit profile as status, name, email, phone, city 
+                                Admin can edit profile restaurant. 
                             </div>
                             <div class="card-right" style="padding-right: 25px">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <div class="breadcrumb-item">
-                                            <a href="AddAccount.jsp"><button class="btn bg-light-success font-bold mx-2">Add new account</button></a>
+                                            <a href="AddRestaurant.jsp"><button class="btn bg-light-success font-bold mx-2">Add new restaurant</button></a>
                                         </div>
                                     </ol>
                                 </nav>
@@ -128,59 +130,29 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
+                                            <th>Name Restaurant</th>
+                                            <th>Open Time</th>
+                                            <th>Close Time</th>
                                             <th>Address</th>
-                                            <th>Role</th>
-                                            <th>Status</th>
+                                            <th>Phone</th>
+                                            <th>Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-                                            AccountDAO accountDAO = new AccountDAO();
-                                            ArrayList<Account> listAccount = new ArrayList<Account>();
-                                            listAccount = accountDAO.getAllAccount();
-                                            for (int i = 0; i < listAccount.size(); i++) {
+                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
+                                            ArrayList<Restaurant> listRestaurant = new ArrayList<Restaurant>();
+                                            listRestaurant = restaurantDAO.getAllRestaurant();
+                                            for (int i = 0; i < listRestaurant.size(); i++) {
                                         %>
                                         <tr>
-                                            <td class="use-address id" ><%=listAccount.get(i).getaID()%></td>
-                                            <td class="use-address"><%=listAccount.get(i).getaFirstname()%></td>
-                                            <td class="use-address"><%=listAccount.get(i).getAemail()%></td>
-                                            <td class="use-address"><%=listAccount.get(i).getaPhone()%></td>
-                                            <td class="use-address"><%=listAccount.get(i).getaAddress()%></td>
-                                            <%
-                                                if (listAccount.get(i).getRoleID() == 1) {
-                                            %>
-                                            <td class="use-address">Customer</td>
-                                            <%
-                                            } else if (listAccount.get(i).getRoleID() == 2) {
-
-                                            %>
-                                            <td class="use-address">Admin</td>
-                                            <%                                            } else if (listAccount.get(i).getRoleID() == 3) {
-                                            %>
-                                            <td class="use-address">Employee</td>
-                                            <%
-                                            } else if (listAccount.get(i).getRoleID() == 4) {
-                                            %>
-                                            <td class="use-address">Staff</td>
-                                            <%
-                                                }
-                                                if (listAccount.get(i).getaStatus() == 1) {
-
-                                            %>
-                                            <td class="use-address">
-                                                <span class="badge bg-success">Active</span>
-                                            </td>
-                                            <%                                            } else if (listAccount.get(i).getaStatus() == 0) {
-                                            %>
-                                            <td class="use-address">
-                                                <span class="badge bg-danger">Inactive</span>
-                                            </td>
-                                            <%
-                                                }
-                                            %>
+                                            <td class="use-address id" ><%=listRestaurant.get(i).getrId() %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrName() %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeOpen() %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeClose() %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrAddress() %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrPhone()  %></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrImage() %></td>
                                         </tr>
                                         <%
                                             }
@@ -220,7 +192,7 @@
                 var $text = $row.find(".id").text(); // Find the text
 
                 if ($text) {
-                    var url = "/AdminDashboard/UpdateProfile?id=" + $text;
+                    var url = "/AdminDashboard/UpdateRestaurant?id=" + $text;
                     window.location.href = url;
                 }
                 // Let's test it out

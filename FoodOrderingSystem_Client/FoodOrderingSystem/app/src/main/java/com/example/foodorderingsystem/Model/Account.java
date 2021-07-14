@@ -16,6 +16,14 @@ public class Account {
         this.aID = aID;
     }
 
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
+    }
+
     public int getRoleID() {
         return roleID;
     }
@@ -86,6 +94,9 @@ public class Account {
     @SerializedName("aID")
     @Expose
     private int aID;
+    @SerializedName("rID")
+    @Expose
+    private int rID;
     @SerializedName("roleID")
     @Expose
     private int roleID;

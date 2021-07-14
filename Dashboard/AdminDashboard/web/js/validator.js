@@ -17,7 +17,7 @@
         this.texts = this.extend({}, this.texts, this.settings.texts || {});
         this.settings.events && this.events();
     }
-    FormValidator.prototype = {texts: {invalid: 'inupt is not as expected', short: 'input is too short', long: 'input is too long', checked: 'must be checked', empty: 'please put something here', select: 'Please select an option', number_min: 'too low', number_max: 'too high', url: 'invalid URL', number: 'not a number', email: 'email address is invalid', email_repeat: 'emails do not match', date: 'invalid date', time: 'invalid time', password_repeat: 'passwords do not match', no_match: 'no match', complete: 'input is not complete'}, defaults: {alerts: true, events: false, regex: {url: /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})+\/?/, phone: /(^(09|03|07|08|05)+([0-9]{8})\b)/, password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, name: /^([a-zA-Z]{2,}(\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)?)/, numeric: /^[0-9]+$/i, alphanumeric: /^[a-zA-Z0-9]+$/i, email: {illegalChars: /[\(\)\<\>\,\;\:\\\/\"\[\]]/, filter: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}}, classes: {item: 'field', alert: 'alert', bad: 'bad'}}, tests: {sameAsPlaceholder: function (field, data) {
+    FormValidator.prototype = {texts: {invalid: 'input is not as expected', short: 'input is too short', long: 'input is too long', checked: 'must be checked', empty: 'please input something here', select: 'Please select an option', number_min: 'too low', number_max: 'too high', url: 'invalid URL', number: 'not a number', email: 'email address is invalid', email_repeat: 'emails do not match', date: 'invalid date', time: 'invalid time', password_repeat: 'passwords do not match', no_match: 'no match', complete: 'input is not complete'}, defaults: {alerts: true, events: false, regex: {url: /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})+\/?/, phone: /(^(09|03|07|08|05)+([0-9]{8})\b)/, password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, name: /^([a-zA-Z]{2,}(\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)?)/, numeric: /^[0-9]+$/i, alphanumeric: /^[a-zA-Z0-9]+$/i, email: {illegalChars: /[\(\)\<\>\,\;\:\\\/\"\[\]]/, filter: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}}, classes: {item: 'field', alert: 'alert', bad: 'bad'}}, tests: {sameAsPlaceholder: function (field, data) {
                 if (field.getAttribute('placeholder'))
                     return data.value != field.getAttribute('placeholder') || this.texts.empty;
                 else
@@ -124,13 +124,13 @@
                 } catch (er) {
                     return this.texts.date;
                 }
-            }, time: function (field, data) {
-                var pattern = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
-                if (pattern.test(data.value))
-                    return true;
-                else
-                    return this.texts.time;
-            }, url: function (field, data) {
+//            }, time: function (field, data) {
+//                var pattern = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+//                if (pattern.test(data.value))
+//                    return true;
+//                else
+//                    return this.texts.time;
+//            }, url: function (field, data) {
                 if (!this.settings.regex.url.test(data.value))
                     return this.texts.url;
                 return true;

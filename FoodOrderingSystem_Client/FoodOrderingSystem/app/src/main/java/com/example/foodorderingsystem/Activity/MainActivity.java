@@ -15,6 +15,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.CategoryAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
+import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
@@ -54,14 +55,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
-
         initation();
 
 
     }
 
     private void initation(){
-
 
         //Inside onCreate()
 
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Use the MenuItem given by this library and not the default one.
         //First parameter is the title of the menu item and then the second parameter is the image which will be the background of the menu item.
-
         menuItems.add(new MenuItem("Home",R.drawable.food_bg));
         menuItems.add(new MenuItem("My profile",R.drawable.profile_bg));
         menuItems.add(new MenuItem("Notification",R.drawable.noti_bg));
@@ -176,7 +174,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    public Account getdata(){
+        SessionManagement sessionManagement = new SessionManagement (MainActivity.this);
+        Account account = new Account();
+        account.setaID(sessionManagement.getSession());
+        account.setaEmail(sessionManagement.getSessionEmail());
+        account.setaPhone(sessionManagement.getSessionPhone());
+        account.setaFirstname(sessionManagement.getSessionFirstname());
+        account.setaLastName(sessionManagement.getSessionLastname());
+        return account;
+    }
     public void signout(){
         SessionManagement sessionManagement = new SessionManagement (MainActivity.this);
         sessionManagement.removeSession ();

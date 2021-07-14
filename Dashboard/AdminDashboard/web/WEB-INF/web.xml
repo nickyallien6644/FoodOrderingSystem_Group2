@@ -20,6 +20,18 @@
         <servlet-name>AddAccount</servlet-name>
         <servlet-class>UserController.AddAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddRestaurant</servlet-name>
+        <servlet-class>UserController.AddRestaurant</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRestaurant</servlet-name>
+        <servlet-class>UserController.UpdateRestaurant</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateResSQL</servlet-name>
+        <servlet-class>UserController.UpdateResSQL</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
         <url-pattern>/Signin</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
         <url-pattern>/AddAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRestaurant</servlet-name>
+        <url-pattern>/UpdateRestaurant</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateResSQL</servlet-name>
+        <url-pattern>/UpdateResSQL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRestaurant</servlet-name>
+        <url-pattern>/AddRestaurant</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

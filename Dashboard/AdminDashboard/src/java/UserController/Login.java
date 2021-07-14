@@ -23,35 +23,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -64,8 +35,35 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
+   PrintWriter out = response.getWriter();
+        //get User Name and password when Customer inptut
+        String username = request.getParameter("SigninName");
+        String password = request.getParameter("SigninPassword");
+        UserDAO us = new UserDAO(); // constructor User
+        User user = new User();
+        user = us.signIn(username, password); // call funtion to sinup
+            // if null it mean user not have exist and sendirect failed.jsp
+           if(user == null ){
+               //TODO : MAKE forget password
+               request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+               getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+           } else {
+            
+            //set session for login user
+            HttpSession session = request.getSession(true);
+            session.setAttribute("LoginUser", user);
+            session.setMaxInactiveInterval(60*15);
+            
+               if(user.getRoleID() != 1){
+                   System.out.println("ADMIN");
+                   response.sendRedirect("admin/index.jsp");   //admin
+               }
+                   
+               else {
+                   request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+                   getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+               }                  //user
+           }
     }
 
     /**
