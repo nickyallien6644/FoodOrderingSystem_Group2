@@ -3,6 +3,7 @@ package com.example.foodorderingsystem.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Model.Cart;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,9 +26,7 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>{
     private Context context;
     private List<Cart> cartList;
-    private int quantity;
-    private String pName, iURL;
-    int pPrice;
+    int totalPrice;
 
     public CartAdapter(Context context, List<Cart> cartList) {
         this.context = context;
@@ -40,45 +40,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         View view = LayoutInflater.from(context).inflate(R.layout.cart_recycler_items, parent, false);
         return new CartViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull @NotNull CartViewHolder holder, int position) {
-        Intent  intent = ((Activity)context).getIntent();
-        pName = intent.getStringExtra("pName");
-        pPrice = intent.getIntExtra("pPrice", 0);
-        iURL = intent.getStringExtra("iURL");
-        quantity = intent.getIntExtra("cartQuantity", 0);
-        holder.cartName.setText(pName);
-        holder.cartPrice.setText(pPrice);
-        Glide.with(context).load(iURL).into(holder.imgCart);
-        holder.imgPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quantity++;
-            }
-        });
-        holder.imgMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Integer.parseInt(holder.cartQuantity.getText().toString()) < 0) {
-                    Toast.makeText(context, "Can't quantity < 0", Toast.LENGTH_SHORT).show();
-                } else {
-                    quantity--;
-                }
-            }
-        });
+        holder.cartName.setText(cartList.get(position).getpName());
+        holder.cartPrice.setText(cartList.get(position).getpPrice() + " Bcoins");
+        Glide.with(context).load(cartList.get(position).getiURL()).into(holder.imgCart);
+        holder.cartQuantity.setText(String.valueOf(cartList.get(position).getCartQuantity()));
 
-        holder.cartQuantity.setText(quantity);
     }
 
     @Override
     public int getItemCount() {
-        return cartList.size();
+        if(cartList != null)    {
+            return cartList.size();
+        }
+        return 0;
     }
 
+
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgCart, imgPlus, imgMinus;
-        TextView cartName, cartPrice, cartQuantity;
+        ImageView imgCart;
+        TextView cartName, cartPrice, cartQuantity, finalPrice;
 
         public CartViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -87,8 +69,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cartName = itemView.findViewById(R.id.txt_product_name);
             cartPrice = itemView.findViewById(R.id.txt_product_price);
             cartQuantity = itemView.findViewById(R.id.quantity_product);
-            imgPlus = itemView.findViewById(R.id.img_plus);
-            imgMinus = itemView.findViewById(R.id.img_minus);
         }
     }
 }

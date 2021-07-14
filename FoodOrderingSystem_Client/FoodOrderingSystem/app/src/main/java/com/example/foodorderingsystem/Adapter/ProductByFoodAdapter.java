@@ -48,9 +48,11 @@ public class ProductByFoodAdapter extends RecyclerView.Adapter<ProductByFoodAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("pID", productList.get(position).getpID());
                 intent.putExtra("name", productList.get(position).getpName());
                 intent.putExtra("price", productList.get(position).getpPrice());
                 intent.putExtra("description", productList.get(position).getpDescription());
+                intent.putExtra("iID", productList.get(position).getiID());
                 intent.putExtra("image", productList.get(position).getiURL());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
