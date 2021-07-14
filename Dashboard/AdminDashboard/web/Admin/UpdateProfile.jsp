@@ -4,6 +4,9 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.Restaurant"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.DAO.RestaurantDAO"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -130,6 +133,23 @@
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
                                                     <input value="<%=account.getaPhone()%>" class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Restaurant<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select class="form-select" name="selectRestaurant">
+                                                        <%
+                                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
+                                                            ArrayList<Restaurant> listRestaurants = new ArrayList<Restaurant>();
+                                                            listRestaurants = restaurantDAO.getAllRestaurant();
+                                                            for(int i=0;i<listRestaurants.size();i++){
+                                                        %>
+                                                        <option value=<%=listRestaurants.get(i).getrId()%> selected><%=listRestaurants.get(i).getrName()%></option>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>

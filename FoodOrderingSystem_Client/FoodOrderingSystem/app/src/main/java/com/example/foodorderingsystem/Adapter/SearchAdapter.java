@@ -53,7 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         String nameRes = "";
         for (int i = 0; i < getNameRestaurants.size(); i++) {
             if (getNameRestaurants.get(i).getrID()==products.get(position).getrID()){
-                nameRes = getNameRestaurants.get(i).getrName();
+                nameRes = String.valueOf(getNameRestaurants.get(i).getrName().toString());
             }
         }
         return nameRes;

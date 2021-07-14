@@ -12,6 +12,7 @@ package Models.Entity;
 public class Account {
 
     private int aID;
+    private int rID;
     private int roleID;
     private String aemail;
     private String aPassword;
@@ -25,7 +26,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int aID, int roleID, String aemail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
+    public Account(int aID, int rID, int roleID, String aemail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
         this.aID = aID;
         this.roleID = roleID;
         this.aemail = aemail;
@@ -46,6 +47,14 @@ public class Account {
         this.aID = aID;
     }
 
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
+    }
+    
     public int getRoleID() {
         return roleID;
     }

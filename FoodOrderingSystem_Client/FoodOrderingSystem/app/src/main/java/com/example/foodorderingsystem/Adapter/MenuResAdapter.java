@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Activity.FoodDetail;
+import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Product;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +27,12 @@ import java.util.List;
 public class MenuResAdapter extends RecyclerView.Adapter<MenuResAdapter.MenuResViewHolder> {
     private Context context;
     private List<Product> menuList;
+    SessionManagement sessionManagement;
 
     public MenuResAdapter(Context context, List<Product> menuList) {
         this.context = context;
         this.menuList = menuList;
+        sessionManagement = new SessionManagement(context);
     }
     @NonNull
     @NotNull
@@ -46,14 +51,24 @@ public class MenuResAdapter extends RecyclerView.Adapter<MenuResAdapter.MenuResV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("pID", menuList.get(position).getpID());
                 intent.putExtra("name", menuList.get(position).getpName());
                 intent.putExtra("price", menuList.get(position).getpPrice());
                 intent.putExtra("description", menuList.get(position).getpDescription());
+                intent.putExtra("iID", menuList.get(position).getiID());
                 intent.putExtra("image", menuList.get(position).getiURL());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
+        holder.menuAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManagement.CheckCart(new Cart(1, 1 , menuList.get(position).getpID() ,menuList.get(position).getpName(), menuList.get(position).getpPrice(), menuList.get(position).getiID(), menuList.get(position).getiURL(), sessionManagement.getSession() ));
+                Toast.makeText(context, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

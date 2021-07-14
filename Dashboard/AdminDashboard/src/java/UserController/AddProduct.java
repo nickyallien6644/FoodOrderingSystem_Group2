@@ -6,7 +6,7 @@
 package UserController;
 
 import Models.DAO.AccountDAO;
-import Models.Entity.Account;
+import Models.DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-@WebServlet(name = "UpdateAccount", urlPatterns = {"/UpdateAccount"})
-public class UpdateAccount extends HttpServlet {
+@WebServlet(name = "AddProduct", urlPatterns = {"/AddProduct"})
+public class AddProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +33,6 @@ public class UpdateAccount extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,35 +62,28 @@ public class UpdateAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        int id = Integer.parseInt(request.getParameter("id"));
-        String first_name = request.getParameter("firstName").toString();
-        String last_name = request.getParameter("lastName").toString();
-        String phone = request.getParameter("phone").toString();
-        String address = request.getParameter("address").toString();
-        String email = request.getParameter("email").toString();
-        String status = request.getParameter("selectStatus").toString();
-        int rID = Integer.parseInt(request.getParameter("selectRestaurant").toString());
-        int selectStatus = -1;
-        if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
-            selectStatus = 1;
-        } else if (status.equalsIgnoreCase("Inactive") || status.equalsIgnoreCase("0")) {
-            selectStatus = 0;
-        }
-
-        AccountDAO accountDAO = new AccountDAO();
+        String name = request.getParameter("txtName").toString();
+        int price = Integer.parseInt(request.getParameter("txtPrice").toString());
+        String description = request.getParameter("txtDescription").toString();
+        int cID = Integer.parseInt(request.getParameter("selectCategory").toString());
+        String image = request.getParameter("txtImage").toString();
+        int rID = Integer.parseInt(request.getParameter("txtrID").toString());
+        ProductDAO productDAO = new ProductDAO();
+        
         boolean checkUpdate = false;
-        if (selectStatus != -1) {
-            checkUpdate = accountDAO.updateAccount(id,rID, first_name, last_name, phone, email, address, selectStatus);
-        }
+
+        checkUpdate = productDAO.insertProduct(rID, cID, name, description, price, image);
+
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
+            out.println("location='./Employee/productManagement.jsp';");
             out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
+            out.println("location='./Employee/AddProduct.jsp';");
             out.println("</script>");
         }
+
     }
 
     /**

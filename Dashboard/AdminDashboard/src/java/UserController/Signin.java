@@ -52,6 +52,7 @@ public class Signin extends HttpServlet {
             //set session for login user
             
             session.setAttribute("LoginUser", user);
+            session.setAttribute("rID", user.getrID());
             session.setMaxInactiveInterval(60*15);
             
                if(user.getRoleID() ==  2){
