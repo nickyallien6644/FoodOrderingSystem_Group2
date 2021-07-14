@@ -29,7 +29,7 @@ public class SessionManagement {
     String SESSION_USER_LASTNAME = "session_user_lastname";
     String SESSION_USER_ADDRESSNAME = "session_user_addressname";
     String SESSION_USER_EMAIL = "session_user_email";
-    String SESSION_USER_PHONE = "session_user_email";
+    String SESSION_USER_PHONE = "session_user_phone";
     String SESSION_CartList = "session_Cartlist";
 
     private static final String PRODUCT_TAG = "MyCart";
