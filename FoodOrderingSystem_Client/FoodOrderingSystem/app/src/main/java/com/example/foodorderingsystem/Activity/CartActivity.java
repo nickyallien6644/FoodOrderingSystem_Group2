@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public class CartActivity extends AppCompatActivity {
     int totalPrice = 0;
     private int quantity;
     private String pName, iURL;
-    int pPrice, iID, pID;
+    int pPrice, iID, pID,rID;
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class CartActivity extends AppCompatActivity {
         imgMinus = findViewById(R.id.img_minus);
         btn_order = findViewById(R.id.btn_order);
         pID = intent.getIntExtra("pID", 0);
+        rID = intent.getIntExtra("rID",0);
         pName = intent.getStringExtra("pName");
         pPrice = intent.getIntExtra("pPrice", 0);
         iID = intent.getIntExtra("iID", 0);
@@ -91,9 +93,16 @@ public class CartActivity extends AppCompatActivity {
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listOrderDetails.clear();
-                for(Cart cart : listCart){
-                    listOrderDetails.add(new OrderDetail(1,cart.getpID(),cart.getCartQuantity(),cart.getpPrice(),cart.getCartQuantity() * cart.getpPrice()));
+                if(listCart != null){
+                    listOrderDetails.clear();
+                    for(Cart cart : listCart){
+                        listOrderDetails.add(new OrderDetail(1,cart.getpID(),cart.getCartQuantity(),cart.getpPrice(),cart.getCartQuantity() * cart.getpPrice()));
+                    }
+                    Intent intent1 = new Intent(CartActivity.this, CheckoutActivity.class);
+                    intent1.putExtra("total",totalPrice);
+                    startActivity(intent1);
+                }else {
+                    Toast.makeText(CartActivity.this, "Your cart is empty, please add to cart", Toast.LENGTH_SHORT);
                 }
             }
         });
