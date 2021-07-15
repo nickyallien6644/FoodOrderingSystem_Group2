@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingsystem.Adapter.CartAdapter;
 import com.example.foodorderingsystem.Model.Cart;
+import com.example.foodorderingsystem.Model.OrderDetail;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.ApiInterface;
@@ -35,8 +38,10 @@ public class CartActivity extends AppCompatActivity {
     TextView cartQuantity, cartTotalPrice;
     SessionManagement session ;
     List<Cart> listCart;
+    List<OrderDetail> listOrderDetails;
     CartAdapter cartAdapter;
     SessionManagement sessionManagement;
+    AppCompatButton btn_order;
     ImageView backCart;
     int totalPrice = 0;
     private int quantity;
@@ -61,6 +66,7 @@ public class CartActivity extends AppCompatActivity {
         cartQuantity = findViewById(R.id.quantity_product);
         imgPlus = findViewById(R.id.img_plus);
         imgMinus = findViewById(R.id.img_minus);
+        btn_order = findViewById(R.id.btn_order);
         pID = intent.getIntExtra("pID", 0);
         pName = intent.getStringExtra("pName");
         pPrice = intent.getIntExtra("pPrice", 0);
@@ -68,6 +74,7 @@ public class CartActivity extends AppCompatActivity {
         iURL = intent.getStringExtra("iURL");
         quantity = intent.getIntExtra("cartQuantity", 0);
         listCart = new ArrayList<>();
+        listOrderDetails = new ArrayList<>();
         listCart = sessionManagement.getDataFromSharedPreferences();
         if(listCart != null) {
             for (Cart c : listCart) {
@@ -81,6 +88,15 @@ public class CartActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("clickAdd"));
         LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("clickMinus"));
         LocalBroadcastManager.getInstance(this).registerReceiver(mQuantityReceiver, new IntentFilter("deleteItemCart"));
+        btn_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listOrderDetails.clear();
+                for(Cart cart : listCart){
+                    listOrderDetails.add(new OrderDetail(1,cart.getpID(),cart.getCartQuantity(),cart.getpPrice(),cart.getCartQuantity() * cart.getpPrice()));
+                }
+            }
+        });
     }
 
     public BroadcastReceiver mQuantityReceiver = new BroadcastReceiver() {

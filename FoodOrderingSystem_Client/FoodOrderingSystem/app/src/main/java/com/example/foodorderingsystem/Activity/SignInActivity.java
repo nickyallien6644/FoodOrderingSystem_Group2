@@ -116,7 +116,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())) {
                     isAcount = true;
                     user = account;
-                    Toast.makeText (SignInActivity.this, "Yes", Toast.LENGTH_SHORT).show ();
+                    Toast.makeText (SignInActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show ();
                     break;
                 }
             }
@@ -128,7 +128,7 @@ public class SignInActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
                 txtError.setVisibility (View.VISIBLE);
-                Toast.makeText (SignInActivity.this, "Error", Toast.LENGTH_SHORT).show ();
+                Toast.makeText (SignInActivity.this, "Sign in fail", Toast.LENGTH_SHORT).show ();
             }
         }
 
