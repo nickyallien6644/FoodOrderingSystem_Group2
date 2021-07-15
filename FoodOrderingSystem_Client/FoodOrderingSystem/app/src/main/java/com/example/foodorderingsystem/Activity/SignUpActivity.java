@@ -166,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (inputPass.isEmpty ()){
             etxtPassword.setError ("Password is not empty");
             return false;
-        }else if(!Pattern.compile("^[A-Z]+[a-z0-9]{7,15}+").matcher (inputPass).matches ()){
+        }else if(!Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$").matcher (inputPass).matches ()){
             etxtPassword.setError ("Password must have 8-16 character, have uppercase character and special character");
             return false;
         }
