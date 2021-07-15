@@ -212,7 +212,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     public void clickSeeall(View v){
         listSeeAll(rID);
-        bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();
     }
 
