@@ -3,6 +3,8 @@ package com.example.foodorderingsystem.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.example.foodorderingsystem.Utils.Api;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.MessageDigest;
@@ -39,6 +42,8 @@ public class SignInActivity extends AppCompatActivity {
     boolean isAcount = false;
     TextInputLayout etxtMail;
     TextInputLayout etxtpass;
+    TextInputEditText etxtEmail;
+    TextInputEditText etxtPawrod;
     TextView txtError;
     SessionManagement sessionManagement;
 
@@ -49,28 +54,67 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-
+        etxtEmail = findViewById(R.id.etxt_Email);
+        txtError = findViewById (R.id.txtError);
+        etxtMail = findViewById(R.id.inputLayoutEmail);
+        etxtpass = findViewById(R.id.inputLayoutPass);
+        etxtPawrod = findViewById(R.id.etxt_Password);
         listAccounts = new ArrayList<> ();
         getUser ();
         checkSession();
+        etxtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 0) {
+                    String inputEmail = etxtEmail.getText ().toString ().trim ();
+                    if (inputEmail.isEmpty ()){
+                        etxtMail.setError ("Email not empty");
+                    }else if (!Patterns.EMAIL_ADDRESS.matcher (inputEmail).matches ()){
+                        etxtMail.setError ("Email invaluable please input again");
+                    }
+                    else {
+                        etxtMail.setError (null);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        etxtPawrod.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 0) {
+                    if (etxtPawrod.getText ().toString ().trim ().isEmpty ()){
+                        etxtpass.setError ("Pass not empty");
+                    }
+                    else {
+                        etxtpass.setError (null);
+                    }
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
-    private boolean validateEmail(){
-        String inputEmail = etxtMail.getEditText().getText ().toString ().trim ();
-        if (inputEmail.isEmpty ()){
-            etxtMail.setError ("Email not empty");
-            return false;
-        }else if (!Patterns.EMAIL_ADDRESS.matcher (inputEmail).matches ()){
-            etxtMail.setError ("Email invaluable please input again");
-            return false;
-        }
-        else {
-            etxtMail.setError (null);
-            return true;
-        }
-    }
     private boolean validatePass(){
-        if (etxtpass.getEditText().getText ().toString ().trim ().isEmpty ()){
+        if (etxtPawrod.getText ().toString ().trim ().isEmpty ()){
             etxtpass.setError ("Pass not empty");
             return false;
         }
@@ -79,6 +123,21 @@ public class SignInActivity extends AppCompatActivity {
             return true;
         }
     }
+    private boolean validateEmail(){
+        String inputEmail = etxtEmail.getText ().toString ().trim ();
+        if (inputEmail.isEmpty ()){
+            etxtMail.setError ("Email is not empty");
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher (inputEmail).matches ()){
+            etxtMail.setError ("Invalid email");
+            return false;
+        }
+        else {
+            etxtEmail.setError (null);
+            return true;
+        }
+    }
+
     public void getUser() {
         listAccounts = new ArrayList<> ();
         accountService= Api.getClients ();  // call Api get PersonService
@@ -103,35 +162,33 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
-    public void btnSignin(View v){
-        txtError = findViewById (R.id.txtError);
-        etxtMail = findViewById(R.id.inputLayoutEmail);
-        etxtpass = findViewById(R.id.inputLayoutPass);
-        if(!validateEmail () |!validatePass () | listAccounts == null || listAccounts.isEmpty ()){
-            return;
-        }else {
-            email = etxtMail.getEditText ().getText ().toString ().trim ();
-            password = md5 (etxtpass.getEditText ().getText ().toString ().trim ());
+    public void btnSignin(View v) {
+        email = etxtEmail.getText().toString().trim();
+        password = md5(etxtPawrod.getText().toString().trim());
+        if (!validateEmail()|!validatePass()| listAccounts == null || listAccounts.isEmpty()) {
+           return;
+        } else {
+
             for (Account account : listAccounts) {
-                if (email.equals (account.getaEmail ()) && password.equals (account.getaPassword ())) {
+                if (email.equals(account.getaEmail()) && password.equals(account.getaPassword())) {
                     isAcount = true;
                     user = account;
                     Toast.makeText (SignInActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show ();
                     break;
                 }
             }
-            if (isAcount) {
-                Intent intent = new Intent (SignInActivity.this, MainActivity.class);
-                sessionManagement = new SessionManagement (SignInActivity.this) ;
-                sessionManagement.saveSession (user);
-                startActivity (intent);
-                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+
+            if (isAcount == true) {
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                sessionManagement = new SessionManagement(SignInActivity.this);
+                sessionManagement.saveSession(user);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
                 txtError.setVisibility (View.VISIBLE);
                 Toast.makeText (SignInActivity.this, "Sign in fail", Toast.LENGTH_SHORT).show ();
             }
         }
-
     }
     public static String md5(final String s) {
         final String MD5 = "MD5";

@@ -23,16 +23,16 @@ public class SessionManagement {
     String SHARED_PREF_NAME = "session";
     String SESSION_KEY = "session_user";
     String SESSION_UBCOINS = "session_userCoins";
-    String SESSION_EmailForgot = "session_Emailforgot";
-    String SESSION_CodeForgot = "session_CodeForgot";
+    String SESSION_EMAILFORGOT = "session_Emailforgot";
+    String SESSION_CODEFORGOT = "session_CodeForgot";
     String SESSION_USER_FIRSTNAME = "session_user_fistname";
     String SESSION_USER_LASTNAME = "session_user_lastname";
     String SESSION_USER_ADDRESSNAME = "session_user_addressname";
     String SESSION_USER_EMAIL = "session_user_email";
     String SESSION_USER_PHONE = "session_user_email";
-    String SESSION_CartList = "session_Cartlist";
+    private static final String SESSION_CARTLIST = "session_Cartlist";
 
-    private static final String PRODUCT_TAG = "MyCart";
+
 
 
     public SessionManagement(Context context){
@@ -41,8 +41,8 @@ public class SessionManagement {
         this.context = context;
     }
     public void save(String emailforgot , String code){
-        editor.putString (SESSION_EmailForgot,emailforgot).commit ();
-        editor.putString (SESSION_CodeForgot,code).commit ();
+        editor.putString (SESSION_EMAILFORGOT,emailforgot).commit ();
+        editor.putString (SESSION_CODEFORGOT,code).commit ();
     }
     public void saveSession(Account account){
         int uId = account.getaID ();
@@ -59,8 +59,8 @@ public class SessionManagement {
     public int getBcoins(){
         return sharedPreferences.getInt (SESSION_UBCOINS, -1);
     }
-    public String getEmailforgot(){return sharedPreferences.getString (SESSION_EmailForgot, "");}
-    public String getCodeforgot(){return sharedPreferences.getString (SESSION_CodeForgot, "");}
+    public String getEmailforgot(){return sharedPreferences.getString (SESSION_EMAILFORGOT, "");}
+    public String getCodeforgot(){return sharedPreferences.getString (SESSION_CODEFORGOT, "");}
     public String getSessionAddress(){
         return sharedPreferences.getString (SESSION_USER_ADDRESSNAME,null);
     }
@@ -80,20 +80,20 @@ public class SessionManagement {
     public void removeSession(){
         editor.putInt (SESSION_KEY,-1).commit ();
         editor.putInt (SESSION_UBCOINS,-1).commit ();
-        editor.putString(SESSION_EmailForgot,"").commit();
-        editor.putString(SESSION_CodeForgot,"").commit();
-        editor.putString(PRODUCT_TAG,"").commit();
+        editor.putString(SESSION_EMAILFORGOT,"").commit();
+        editor.putString(SESSION_CODEFORGOT,"").commit();
+        editor.putString(SESSION_CARTLIST,"").commit();
 
     }
 
     public void removeCart(){
-        editor.putString(PRODUCT_TAG,"").commit();
+        editor.putString(SESSION_CARTLIST,"").commit();
     }
     public List<Cart> getDataFromSharedPreferences(){
         Gson gson = new Gson();
         List<Cart> productFromShared = new ArrayList<>();
         SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String jsonPreferences = sharedPref.getString(PRODUCT_TAG, "");
+        String jsonPreferences = sharedPref.getString(SESSION_CARTLIST, "");
 
         Type type = new TypeToken<List<Cart>>() {}.getType();
         productFromShared = gson.fromJson(jsonPreferences, type);
@@ -108,7 +108,7 @@ public class SessionManagement {
         SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        editor.putString(PRODUCT_TAG, jsonCurProduct);
+        editor.putString(SESSION_CARTLIST, jsonCurProduct);
         editor.commit();
     }
 
@@ -117,7 +117,7 @@ public class SessionManagement {
         Gson gson = new Gson();
         SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
-        String jsonSaved = sharedPref.getString(PRODUCT_TAG, "");
+        String jsonSaved = sharedPref.getString(SESSION_CARTLIST, "");
         String jsonNewproductToAdd = gson.toJson(productToAdd);
 
         JSONArray jsonArrayProduct= new JSONArray();
@@ -132,7 +132,7 @@ public class SessionManagement {
         }
 
         //SAVE NEW ARRAY
-        editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
+        editor.putString(SESSION_CARTLIST, String.valueOf(jsonArrayProduct));
         editor.commit();
     }
     public void CheckCart(Cart cart){
@@ -163,7 +163,7 @@ public class SessionManagement {
                     String strAdd = gson.toJson(c);
                     try {
                         jsonArrayProduct.put(new JSONObject(strAdd));
-                        editor.putString(PRODUCT_TAG,String.valueOf(jsonArrayProduct));
+                        editor.putString(SESSION_CARTLIST,String.valueOf(jsonArrayProduct));
                         editor.commit();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -204,7 +204,7 @@ public class SessionManagement {
                     String strAdd = gson.toJson(c);
                     try {
                         jsonArrayProduct.put(new JSONObject(strAdd));
-                        editor.putString(PRODUCT_TAG,String.valueOf(jsonArrayProduct));
+                        editor.putString(SESSION_CARTLIST,String.valueOf(jsonArrayProduct));
                         editor.commit();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -223,23 +223,29 @@ public class SessionManagement {
         JSONArray jsonArrayProduct= new JSONArray();
         for(Cart cart : listCards) {
             try{
-                if (cart.getpID() == pID && cart.getaID()==getSession() && listCards.size() > 1) {
+                if (cart.getpID() == pID && cart.getaID()==getSession() && listCards.size() > 0) {
                     listCards.remove(cart);
                     break;
                 }
             }catch (Exception e) {
                 e.printStackTrace();
             }
-        }for(Cart cart : listCards){
-            String add = gson.toJson(cart);
-            try {
-                jsonArrayProduct.put(new JSONObject(add));
-                editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
-                editor.commit();
-            } catch (JSONException e) {
-                e.printStackTrace();
+        }if(listCards.size() == 0){
+            editor.putString(SESSION_CARTLIST, null);
+            editor.commit();
+        }else {
+            for(Cart cart : listCards){
+                String add = gson.toJson(cart);
+                try {
+                    jsonArrayProduct.put(new JSONObject(add));
+                    editor.putString(SESSION_CARTLIST, String.valueOf(jsonArrayProduct));
+                    editor.commit();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
     public int increaseQuantity(int pID){
@@ -264,7 +270,7 @@ public class SessionManagement {
             String add = gson.toJson(cart);
             try {
                 jsonArrayProduct.put(new JSONObject(add));
-                editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
+                editor.putString(SESSION_CARTLIST, String.valueOf(jsonArrayProduct));
                 editor.commit();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -299,7 +305,7 @@ public class SessionManagement {
             String add = gson.toJson(cart);
             try {
                 jsonArrayProduct.put(new JSONObject(add));
-                editor.putString(PRODUCT_TAG, String.valueOf(jsonArrayProduct));
+                editor.putString(SESSION_CARTLIST, String.valueOf(jsonArrayProduct));
                 editor.commit();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -307,36 +313,4 @@ public class SessionManagement {
         }
         return quantity;
     }
-//    public void deleteCart(int idSale){
-//        Gson gson = new Gson();
-//        List<Cart> list= getDataFromSharedPreferences();
-//        JSONArray jsonArrayProduct= new JSONArray();
-//        for(Cart i :list) {
-//            System.out.println(idSale+"heeeeeeeeeeee"+i.getIdSale());
-//            if (i.getIdSale() == idSale&& i.getIdUser()==getIdSession()) {
-//                int index = list.indexOf(i);
-//                list.remove(index);
-//                System.out.println(list.size()+"kkkkkkkkkk");
-//                break;
-//            }
-//        }
-//        if(list.size()==0){
-//            editor.putString(SESSION_CART, null);
-//            editor.commit();
-//        }else{
-//            for(Cart i :list){
-//
-//                // Type type = new TypeToken<List<Cart>>() {}.getType();
-//                String add = gson.toJson(i);
-//                try {
-//                    jsonArrayProduct.put(new JSONObject(add));
-//                    editor.putString(SESSION_CART, String.valueOf(jsonArrayProduct));
-//                    editor.commit();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//    }
 }

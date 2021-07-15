@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class AllProductForRecommended extends AppCompatActivity {
 
     ImageView backRecommended, shoppingCartRecommended;
 
+    SearchView txtSearchProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class AllProductForRecommended extends AppCompatActivity {
 
         shoppingCartRecommended = findViewById(R.id.shoppingCartRecommended);
         shoppingCartRecommended.setOnClickListener(openCart());
+
+        txtSearchProduct = (SearchView) findViewById(R.id.resultSearch);
+        searchProduct();
     }
 
     private void listAllProductForRecommended() {
@@ -92,6 +98,25 @@ public class AllProductForRecommended extends AppCompatActivity {
                 finish();
             }
         };
+    }
+
+    public void searchProduct() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("search", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 //    @Override
