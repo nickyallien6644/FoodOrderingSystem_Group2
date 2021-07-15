@@ -5,21 +5,18 @@ public class OrderDetail {
     private int pID;
     private int oQuantity;
     private int oPrice;
-    private String oPaymentMethod;
-    private String oNote;
-    private String oCode;
+    private int oSubTotal;
+
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int oID, int pID, int oQuantity, int oPrice, String oPaymentMethod, String oNote, String oCode) {
+    public OrderDetail(int oID, int pID, int oQuantity, int oPrice, int oSubTotal) {
         this.oID = oID;
         this.pID = pID;
         this.oQuantity = oQuantity;
         this.oPrice = oPrice;
-        this.oPaymentMethod = oPaymentMethod;
-        this.oNote = oNote;
-        this.oCode = oCode;
+        this.oSubTotal = oSubTotal;
     }
 
     public int getoID() {
@@ -54,27 +51,11 @@ public class OrderDetail {
         this.oPrice = oPrice;
     }
 
-    public String getoPaymentMethod() {
-        return oPaymentMethod;
+    public int getoSubTotal() {
+        return oSubTotal;
     }
 
-    public void setoPaymentMethod(String oPaymentMethod) {
-        this.oPaymentMethod = oPaymentMethod;
-    }
-
-    public String getoNote() {
-        return oNote;
-    }
-
-    public void setoNote(String oNote) {
-        this.oNote = oNote;
-    }
-
-    public String getoCode() {
-        return oCode;
-    }
-
-    public void setoCode(String oCode) {
-        this.oCode = oCode;
+    public void setoSubTotal(int oSubTotal) {
+        this.oSubTotal = oSubTotal;
     }
 }

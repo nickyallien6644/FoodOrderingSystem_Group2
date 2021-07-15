@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.SearchForFoodActivity" />
+        <activity android:name=".Activity.SearchForDrinkActivity" />
+        <activity android:name=".Activity.SearchForCakeActivity" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.FoodDetail" />
         <activity
@@ -37,6 +40,7 @@
         <activity android:name=".Activity.AllProduct" />
         <activity android:name=".Activity.AllProductForRecommended" />
         <activity android:name=".Activity.RestaurantActivity" />
+        <activity android:name=".Activity.CheckoutActivity" />
     </application>
 
 </manifest>

@@ -16,6 +16,10 @@ public class Cart {
     @Expose
     private int pID;
 
+    @SerializedName("rID")
+    @Expose
+    private int rID;
+
     @SerializedName("pName")
     @Expose
     private String pName;
@@ -36,7 +40,7 @@ public class Cart {
     @Expose
     private int aID;
 
-    public Cart(int cartID, int cartQuantity, int pID, String pName, int pPrice, int iID, String iURL, int aID) {
+    public Cart(int cartID, int cartQuantity, int pID, String pName, int pPrice, int iID, String iURL, int aID,int rID) {
         this.cartID = cartID;
         this.cartQuantity = cartQuantity;
         this.pID = pID;
@@ -45,6 +49,7 @@ public class Cart {
         this.iID = iID;
         this.iURL = iURL;
         this.aID = aID;
+        this.rID = rID;
     }
 
     public int getCartID() {
@@ -109,5 +114,13 @@ public class Cart {
 
     public void setaID(int aID) {
         this.aID = aID;
+    }
+
+    public int getrID() {
+        return rID;
+    }
+
+    public void setrID(int rID) {
+        this.rID = rID;
     }
 }

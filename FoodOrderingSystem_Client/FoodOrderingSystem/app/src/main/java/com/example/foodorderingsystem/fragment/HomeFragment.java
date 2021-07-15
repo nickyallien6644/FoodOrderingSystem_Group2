@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -25,8 +26,10 @@ import com.example.foodorderingsystem.Activity.SearchActivity;
 import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
 import com.example.foodorderingsystem.Adapter.CategoryAdapter;
 import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
+import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.Product;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
 import com.example.foodorderingsystem.Utils.ApiInterface;
@@ -83,7 +86,6 @@ public class HomeFragment extends Fragment {
         bnv_Home.add(new MeowBottomNavigation.Model(1, R.drawable.outline_paid_24));
         bnv_Home.add(new MeowBottomNavigation.Model(2, R.drawable.home));
         bnv_Home.add(new MeowBottomNavigation.Model(3, R.drawable.outline_history_24));
-        bnv_Home.add(new MeowBottomNavigation.Model(4, R.drawable.outline_shopping_cart_24));
         bnv_Home.show(2, true);
         txtSearchProduct = (SearchView) v.findViewById(R.id.txtSearchProducts);
         searchProduct();
@@ -112,7 +114,7 @@ public class HomeFragment extends Fragment {
     public void listProducts() {
         apiInterface = Api.getClients();
 
-        Call<List<Product>> call = apiInterface.getProducts ();
+        Call<List<Product>> call = apiInterface.getProductAllProduct ();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -201,10 +203,6 @@ public class HomeFragment extends Fragment {
 
                     case 3:
                         replace(new HistoryFragment());
-                        break;
-
-                    case 4:
-                        replace(new CartFragment());
                         break;
                 }
                 return null;

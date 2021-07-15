@@ -4,10 +4,22 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.User"%>
+<%@page import="Models.Entity.Restaurant"%>
+<%@page import="Models.Entity.Order"%>
+<%@page import="Models.DAO.OrderDAO"%>
+<%@page import="Models.Entity.Account"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.DAO.RestaurantDAO"%>
+<%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+    <%
+        if (session.getAttribute("LoginUser") == null || session.getAttribute("rID") == null) {
+            response.sendRedirect("../../AdminDashboard/Login.jsp");
+        }
+    %>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,6 +69,13 @@
                                     <span>Product management</span>
                                 </a>
                             </li>
+
+                            <li class="sidebar-item  ">
+                                <a href="CategoryManagement.jsp" class='sidebar-link'>
+                                    <i class="bi bi-envelope-fill"></i>
+                                    <span>Category management</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -72,134 +91,115 @@
                 </header>
 
                 <div class="page-heading">
-                    <h3>Order management</h3>
-                </div>
                     <div class="page-title">
                         <div class="row">
-                            <div class="col-12 col-lg-9">
-                            <div class="row" >
-                                <div class="col-6 col-lg-6 col-md-6">
-                                    <div class="card" >
-                                        <div class="card-body "style="margin-bottom: 6px">
-                                            <div class="row" style="padding-top: 7px">
-                                                <div class="col-md-4 ">
-                                                    <div class="stats-icon purple">
-                                                        <i class="iconly-boldShow"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8" >
-                                                    <h6 class="text-muted font-semibold">Orders of Customer complete</h6>
-                                                    <h6 class="font-extrabold mb-0">999</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-lg-6 col-md-6">
-                                    <div class="card">
-                                        <div class="card-body"  style="margin-bottom: 6px">
-                                            <div class="row" style="padding-top: 7px">
-                                                <div class="col-md-4">
-                                                    <div class="stats-icon blue">
-                                                        <i class="iconly-boldProfile"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <h6 class="text-muted font-semibold">Orders of Customer incomplete</h6>
-                                                    <h6 class="font-extrabold mb-0">10</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h2>ORDER MANAGEMENT</h2>
+                                <p class="text-subtitle text-muted">Let the admin check the system's account list</p>
                             </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                            <div class="card">
-                                <div class="card-body py-4 px-5">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-xl">
-                                            <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
-                                        </div>
-                                        <div class="ms-3 name">
-                                            <h5 class="font-bold">EMPLOYEE01</h5>
-                                            <h6 class="text-muted mb-0">@KHANGNV</h6>
-                                        </div>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+                                <div class="card d-flex align-items-center" style="float: right; padding-bottom: 20px; padding-right: 20px;padding-left: 20px;padding-top: 20px;">
+                                    <div class="avatar avatar-xl">
+                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
+                                    </div>
+                                    <div class="ms-2 name">
+                                        <h5 class="font-bold">EMPLOYEE</h5>
+                                        <h6 class="text-muted mb-0"><%
+                                                if(session.getAttribute("LoginUser") != null){
+                                                User user = (User)session.getAttribute("LoginUser");
+                                                user.getaFirstname();
+                                            }
+                                            %></h6>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Information
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Account</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <a class="dropdown-item" href="../Login.jsp"><li>Logout</li></a>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>                           
                             </div>
                         </div>
                     </div>
                     <section class="section">
                         <div class="card">
+                            <div class="card-header">
+                                Admin can edit profile as status, name, email, phone, city 
+                            </div>
                             <div class="card-body">
-                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns"><div class="dataTable-top"><div class="dataTable-dropdown"><select class="dataTable-selector form-select"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select><label>entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div><div class="dataTable-container"><table class="table table-striped dataTable-table" id="table1">
-                            </table>
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Customer</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
+                                            <th>Account</th>
                                             <th>Total</th>
+                                            <th>Note</th>
+                                            <th>Code</th>
                                             <th>Date</th>
                                             <th>Status</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-                                            for(int i= 0;i<4;i++){
+                                            AccountDAO accountDAO = new AccountDAO();
+                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
+                                            Account account = new Account();
+                                            ArrayList<Order> listOrders = new ArrayList<Order>();
+                                            OrderDAO orderDAO = new OrderDAO();
+                                            if (session.getAttribute("rID") != null) {
+                                                int rID = ((Integer) session.getAttribute("rID")).intValue();
+                                                listOrders = orderDAO.getAllOrderByrID(rID);
+                                            }
+                                            for (int i = 0; i < listOrders.size(); i++) {
                                         %>
                                         <tr>
-                                            <td class="use-address id" ><%=i+1%></td>
-                                            <td class="use-address">Bach Nguyen Phuc Thinh<%=i+1%></td>
-                                            <td class="use-address">076 4820 8838</td>
-                                            <td class="use-address">Hau Giang</td>
-                                            <td class="use-address">100.000VND</td>
-                                            <td class="use-address">18/06/2021</td>
+                                            <td class="use-address id" ><%=listOrders.get(i).getoID()%></td>
+                                            <td class="use-address"><%=accountDAO.getAccountById(listOrders.get(i).getaID()).getAemail()%></td>
+                                            <td class="use-address"><%=listOrders.get(i).getoAmountTotal()%></td>
+                                            <td class="use-address"><%=listOrders.get(i).getoNote()%></td>
+                                            <td class="use-address"><%=listOrders.get(i).getoCode()%></td>
+                                            <td class="use-address"><%=listOrders.get(i).getoDateCreate()%></td>             
+
+                                            <%
+                                                if (listOrders.get(i).getoStatus() == 1) {
+                                            %>
                                             <td class="use-address">
-                                                <span class="badge bg-light-danger">Unconfimred</span>
+                                                <span class="badge bg-success">Paid</span>
                                             </td>
-                                            <td>
-                                                <button class="bg-light-primary">Confirm</button>
+                                            <td class="use-address">
                                             </td>
+                                            <%                                            } else if (listOrders.get(i).getoStatus() == 0) {
+                                            %>
+                                            <td class="use-address">
+                                                <span class="badge bg-danger">Unpaid</span>
+                                            </td>
+
+                                            <td class="use-address">
+                                                <button type="button" class="btn btn-light-warning">Confirm</button>
+                                            </td>
+                                            <%
+                                                }
+                                            %>
                                         </tr>
                                         <%
-                                                            }
-                                        %>
-                                        <%
-                                            for(int i= 4;i<9;i++){
-                                        %>
-                                        <tr>
-                                            <td class="use-address id" ><%=i+1%></td>
-                                            <td class="use-address">Hua Quoc Vinh<%=i+1%></td>
-                                            <td class="use-address">076 4820 8838</td>
-                                            <td class="use-address">Can Tho</td>
-                                            <td class="use-address">100.000VND</td>
-                                            <td class="use-address">18/06/2021</td>
-                                            <td class="use-address">
-                                                <span class="badge bg-light-success">Confimred</span>
-                                            </td>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                        <%
-                                                            }
+                                            }
                                         %>
                                     </tbody>
                                 </table>
-                                <div class="dataTable-bottom"><div class="dataTable-info">Showing 1 to 10 of 26 entries</div><ul class="pagination pagination-primary float-end dataTable-pagination"><li class="page-item pager"><a href="#" class="page-link" data-page="1">‹</a></li><li class="page-item active"><a href="#" class="page-link" data-page="1">1</a></li><li class="page-item"><a href="#" class="page-link" data-page="2">2</a></li><li class="page-item"><a href="#" class="page-link" data-page="3">3</a></li><li class="page-item pager"><a href="#" class="page-link" data-page="2">›</a></li></ul></div></div>
-
                             </div>
                         </div>
                     </section>
+                </div>
 
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2021 &copy; Group2</p>
+                            <p>2021 &copy; GROUP 2</p>
                         </div>
                         <div class="float-end">
                             <p>Create<span class="text-danger"><i class="bi bi-heart"></i></span> by <a
@@ -209,17 +209,17 @@
                 </footer>
             </div>
         </div>
-        <script src="js/perfect-scrollbar.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../js/perfect-scrollbar.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
 
-        <script src="js/simple-datatables.js"></script>
+        <script src="../js/simple-datatables.js"></script>
         <script>
             // Simple Datatable
             let table1 = document.querySelector('#table1');
             let dataTable = new simpleDatatables.DataTable(table1);
         </script>
 
-        <script src="js/main.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 
 </html>

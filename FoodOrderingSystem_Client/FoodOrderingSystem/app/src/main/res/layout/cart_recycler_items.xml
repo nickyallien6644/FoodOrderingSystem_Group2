@@ -60,6 +60,7 @@
                     android:textColor="@color/Cam"/>
                 <ImageView
                     android:id="@+id/img_minus"
+                    android:onClick="clickMinus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -78,6 +79,7 @@
 
                 <ImageView
                     android:id="@+id/img_plus"
+                    android:onClick="clickAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_plus" />

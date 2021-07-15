@@ -43,9 +43,12 @@ public class RecommendedResAdapter extends RecyclerView.Adapter<RecommendedResAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, FoodDetail.class);
+                intent.putExtra("pID", recommendedList.get(position).getpID());
+                intent.putExtra("rID", recommendedList.get(position).getrID());
                 intent.putExtra("name", recommendedList.get(position).getpName());
                 intent.putExtra("price", recommendedList.get(position).getpPrice());
                 intent.putExtra("description", recommendedList.get(position).getpDescription());
+                intent.putExtra("iID", recommendedList.get(position).getiID());
                 intent.putExtra("image", recommendedList.get(position).getiURL());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

@@ -1,7 +1,11 @@
 package com.example.foodorderingsystem.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +34,10 @@ public class AllProductForRecommended extends AppCompatActivity {
     List<Product> listAllProductForRecommended;
     AllProductForRecommendedAdapter allProductForRecommendedAdapter;
 
+    ImageView backRecommended, shoppingCartRecommended;
+
+    SearchView txtSearchProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,15 @@ public class AllProductForRecommended extends AppCompatActivity {
         allProductForRecommendedRecycler = findViewById(R.id.listAllProductForRecommendedRecycler);
         listAllProductForRecommended = new ArrayList<>();
         listAllProductForRecommended();
+
+        backRecommended = findViewById(R.id.backRecommended);
+        backRecommended.setOnClickListener(backAllProductForRecommended());
+
+        shoppingCartRecommended = findViewById(R.id.shoppingCartRecommended);
+        shoppingCartRecommended.setOnClickListener(openCart());
+
+        txtSearchProduct = (SearchView) findViewById(R.id.resultSearch);
+        searchProduct();
     }
 
     private void listAllProductForRecommended() {
@@ -63,6 +80,43 @@ public class AllProductForRecommended extends AppCompatActivity {
 
         allProductForRecommendedRecycler.setLayoutManager(layoutManager);
         allProductForRecommendedRecycler.setAdapter(allProductForRecommendedAdapter);
+    }
+
+    private View.OnClickListener openCart() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+            }
+        };
+    }
+
+    private View.OnClickListener backAllProductForRecommended() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+    }
+
+    public void searchProduct() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("search", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 //    @Override

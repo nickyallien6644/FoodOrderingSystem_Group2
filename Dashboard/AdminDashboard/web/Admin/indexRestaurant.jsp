@@ -21,7 +21,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DataTable - Mazer Admin Dashboard</title>
+        <title>Food Ordering System - Dashboard</title>
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="../css/app.css">
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
     </head>
 
     <body>
@@ -55,7 +56,7 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item active">
+                            <li class="sidebar-item">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     <span>Accounts</span>
@@ -94,7 +95,7 @@
                                         <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
                                     </div>
                                     <div class="ms-2 name">
-                                        <h5 class="font-bold">STAFF01</h5>
+                                        <h5 class="font-bold">ADMIN01</h5>
                                         <h6 class="text-muted mb-0">@ThinhBNP</h6>
                                     </div>
                                     <div class="btn-group">
@@ -104,7 +105,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">Account</a></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                            <li><a class="dropdown-item" href="../Login.jsp">Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>

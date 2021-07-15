@@ -70,6 +70,7 @@ public class UpdateAccount extends HttpServlet {
         String address = request.getParameter("address").toString();
         String email = request.getParameter("email").toString();
         String status = request.getParameter("selectStatus").toString();
+        int rID = Integer.parseInt(request.getParameter("selectRestaurant").toString());
         int selectStatus = -1;
         if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
             selectStatus = 1;
@@ -80,7 +81,7 @@ public class UpdateAccount extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO();
         boolean checkUpdate = false;
         if (selectStatus != -1) {
-            checkUpdate = accountDAO.updateAccount(id, first_name, last_name, phone, email, address, selectStatus);
+            checkUpdate = accountDAO.updateAccount(id,rID, first_name, last_name, phone, email, address, selectStatus);
         }
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");

@@ -50,6 +50,9 @@ public interface ApiInterface {
     @GET("product/listProducts")
     Call<List<Product>> getProducts();
 
+    @GET("product/listProductAllProduct")
+    Call<List<Product>> getProductAllProduct();
+
     @GET("product/listAllProductForAllCategory")
     Call<List<Product>> getAllProductForAllCategory();
 
