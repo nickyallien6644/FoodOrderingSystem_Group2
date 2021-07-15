@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class ProductByCategory extends AppCompatActivity {
     TextView txtTitle;
     ImageView backCategoryProduct, shoppingCartForCategoryOfProduct;
 
+    SearchView txtSearchProduct;
+
     int position;
 
     @Override
@@ -56,17 +59,22 @@ public class ProductByCategory extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.txtTitle);
 
+        txtSearchProduct = (SearchView) findViewById(R.id.resultSearch);
+
         Intent intent = getIntent();
         position = intent.getIntExtra("position", 0);
         if(position == 0) {
             txtTitle.setText("Food Category");
             listProductByFood();
+            searchProductForFood();
         } else if(position == 1) {
             txtTitle.setText("Drink Category");
             listProductByDrink();
+            searchProductForDrink();
         } else if(position == 2) {
             txtTitle.setText("Cake Category");
             listProductByCake();
+            searchProductForCake();
         }
 
         backCategoryProduct = findViewById(R.id.backCategoryProduct);
@@ -74,7 +82,6 @@ public class ProductByCategory extends AppCompatActivity {
 
         shoppingCartForCategoryOfProduct = findViewById(R.id.shoppingCartForCategoryOfProduct);
         shoppingCartForCategoryOfProduct.setOnClickListener(openCart());
-
     }
 
     private void listProductByFood() {
@@ -168,6 +175,63 @@ public class ProductByCategory extends AppCompatActivity {
                 finish();
             }
         };
+    }
+
+    public void searchProductForFood() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchForFoodActivity.class);
+                intent.putExtra("searchForFood", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    public void searchProductForDrink() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchForDrinkActivity.class);
+                intent.putExtra("searchForDrink", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    public void searchProductForCake() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchForCakeActivity.class);
+                intent.putExtra("searchForCake", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 //    @Override

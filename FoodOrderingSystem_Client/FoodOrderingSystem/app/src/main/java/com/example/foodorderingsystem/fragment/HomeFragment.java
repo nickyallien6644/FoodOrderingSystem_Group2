@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
     public void listProducts() {
         apiInterface = Api.getClients();
 
-        Call<List<Product>> call = apiInterface.getProducts ();
+        Call<List<Product>> call = apiInterface.getProductAllProduct ();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

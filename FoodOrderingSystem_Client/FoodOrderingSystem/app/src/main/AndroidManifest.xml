@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.SearchForFoodActivity" />
+        <activity android:name=".Activity.SearchForDrinkActivity" />
+        <activity android:name=".Activity.SearchForCakeActivity" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.FoodDetail" />
         <activity
