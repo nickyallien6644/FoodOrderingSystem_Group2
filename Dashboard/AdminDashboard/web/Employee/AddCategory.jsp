@@ -4,25 +4,26 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.DAO.CategoryDAO"%>
+<%@page import="Models.Entity.Category"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Models.Entity.Restaurant"%>
-<%@page import="Models.DAO.RestaurantDAO"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html><html lang=en>
-      <%
-      if (session.getAttribute("LoginUser") == null) {
-              response.sendRedirect("../../AdminDashboard/Login.jsp");
-      }
-  %>
+<!DOCTYPE html>
+<%
+    if (session.getAttribute("LoginUser") == null || session.getAttribute("rID") == null) {
+        response.sendRedirect("../../AdminDashboard/Login.jsp");
+    }
+%>
+<html lang=en>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Food Ordering System - Register</title>
+        <title>Food Ordering System - Add Product</title>
 
         <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -61,14 +62,24 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item active">
+                            <li class="sidebar-item">
                                 <a href="index.jsp" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Datatable</span>
+                                    <span>Order management</span>
                                 </a>
                             </li>
-
-
+                            <li class="sidebar-item active">
+                                <a href="productManagement.jsp" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <span>Product management</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="CategoryManagement.jsp" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <span>Category management</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -82,83 +93,56 @@
                                 <a href="/AdminDashboard/indexAdmin"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                            <h1>SIGN UP ACCOUNT</h1>
+                                <h1>ADD PRODUCT</h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
                                 <div class="x_panel">
                                     <div class="x_content">
-                                        <form class="" action="${pageContext.request.contextPath}/AddAccount" method="post" novalidate>
+                                        <form class="" action="${pageContext.request.contextPath}/AddProduct" method="post" novalidate>
                                             <span class="section"></span>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Name of product<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control"  data-validate-length-range="3"  name="firstName" placeholder="Ex. John f" required="required" />
+                                                    <input class="form-control"  data-validate-length-range="3"  name="txtName" placeholder="" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Last Name<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Price<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" data-validate-length-range="3"  name="lastName" placeholder="Ex. Kennedy" required="required" />
+                                                    <input class="form-control" data-validate-length-range="3"  name="txtPrice" placeholder="" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Description<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" name="email" class='email' title="Ex. john@gmail.com, jenny@gmail.com" placeholder="Ex. john@gmail.com" required="required" type="email" /></div>
+                                                    <input class="form-control" name="txtDescription" title="" placeholder="" required="required" type="text" /></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm email address<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="email" class='email' name="confirm_email" data-validate-linked='email' required='required' /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" class='address' name="address" placeholder="Ex. Los Angeles, California" required='required' /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="password" name="password" title="Ex. john@123, Jenny@123" placeholder="Ex. john@123, jenny@123" required='required' /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat password<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="password" name="password2" data-validate-linked='password' required='required' /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Role<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="selectStatus">
-                                                        <option value="4" selected>Staff</option>
-                                                        <option value="3">Employee</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Restaurant<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="selectRestaurant">
+                                                    <select class="form-select" name="selectCategory">
                                                         <%
-                                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
-                                                            ArrayList<Restaurant> listRestaurants = new ArrayList<Restaurant>();
-                                                            listRestaurants = restaurantDAO.getAllRestaurant();
-                                                            for(int i=0;i<listRestaurants.size();i++){
+                                                            ArrayList<Category> listsCategory = new ArrayList<Category>();
+                                                            CategoryDAO categoryDAO = new CategoryDAO();
+                                                            listsCategory = categoryDAO.getAllCategory();
+                                                            for (int i = 0; i < listsCategory.size(); i++) {
+
                                                         %>
-                                                        <option value="<%=listRestaurants.get(i).getrId()%>" selected><%=listRestaurants.get(i).getrName()%></option>
+                                                        <option value="<%=listsCategory.get(i).getcID()%>" selected><%=listsCategory.get(i).getcName()%></option>
                                                         <%
                                                             }
                                                         %>
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="text" name="txtImage" required='required' /></div>
+                                            </div>
+                                        <input class="form-control" type="hidden" name="txtrID" value="<%=((Integer) session.getAttribute("rID")).intValue()%>" /></div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">

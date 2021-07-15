@@ -43,7 +43,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         searchView = (SearchView) findViewById(R.id.resultSearch);
         searchProduct = new ArrayList<>();
-        getAllRes = new ArrayList<>();
         listProductSearch = new ArrayList<>();
         getResult(listProductSearch);
 

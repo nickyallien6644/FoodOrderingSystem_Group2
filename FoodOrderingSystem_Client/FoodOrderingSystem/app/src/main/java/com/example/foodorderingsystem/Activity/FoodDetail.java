@@ -7,6 +7,8 @@ import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +23,7 @@ import java.util.List;
 public class FoodDetail extends AppCompatActivity {
 
     String pName, pDescription, iURL;
-    int pPrice, iID, pID;
+    int pPrice, iID, pID,rID;
     int quantity;
 
     ImageView imageView, imagePlus, imageMinus, openCart;
@@ -41,6 +43,7 @@ public class FoodDetail extends AppCompatActivity {
 
         sessionManagement = new SessionManagement(getApplicationContext());
 
+
         Intent intent = getIntent();
         pID = intent.getIntExtra("pID", 0);
         pName = intent.getStringExtra("name");
@@ -48,6 +51,7 @@ public class FoodDetail extends AppCompatActivity {
         pDescription = intent.getStringExtra("description");
         iID = intent.getIntExtra("iID", 0);
         iURL = intent.getStringExtra("image");
+        rID = intent.getIntExtra("rID",0);
 
         imageView = findViewById(R.id.pDetailImage);
         itemName = findViewById(R.id.pDetailName);
@@ -76,9 +80,7 @@ public class FoodDetail extends AppCompatActivity {
         imageMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(quantity == 0) {
-                    Toast.makeText(FoodDetail.this, "Can't decrease quantity < 0", Toast.LENGTH_SHORT).show();
-                } else {
+                if(quantity > 1){
                     quantity--;
                     displayQuantity();
                 }
@@ -88,8 +90,36 @@ public class FoodDetail extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sessionManagement.CheckCart(new Cart(1, quantity , pID ,pName, pPrice, iID, iURL, sessionManagement.getSession() ));
-                Toast.makeText(getApplicationContext(), "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+                cartList = sessionManagement.getDataFromSharedPreferences();
+                if(cartList == null){
+                    sessionManagement.CheckCart(new Cart(1, quantity , pID ,pName, pPrice, iID, iURL, sessionManagement.getSession(),rID));
+                    Toast.makeText(getApplicationContext(), "Add to cart successful!", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(cartList.get(0).getrID() == rID){
+                        sessionManagement.CheckCart(new Cart(1, quantity , pID ,pName, pPrice, iID, iURL, sessionManagement.getSession(),rID));
+                        Toast.makeText(getApplicationContext(), "Add to cart successful!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(FoodDetail.this);
+
+                        builder.setMessage("Your product in different restaurant. Do you want to remove your cart and add new product ?")
+                                .setPositiveButton("Add to cart", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        sessionManagement.removeCart();
+                                        sessionManagement.CheckCart(new Cart(1, quantity , pID ,pName, pPrice, iID, iURL, sessionManagement.getSession(),rID));
+                                        Toast.makeText(getApplicationContext(), "Add to cart successful!", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        builder.create().show();
+
+                    }
+                }
+
             }
         });
     }
