@@ -63,6 +63,7 @@ public class ForgotPassword extends AppCompatActivity {
         txtlayoutEmail = findViewById (R.id.txtlayout_ForgEmail);
         etxtFotgEmail = findViewById(R.id.etxt_ForgEmail);
 
+
         etxtFotgEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,7 +74,7 @@ public class ForgotPassword extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     if( !validateEmail() ||listAccounts == null || listAccounts.isEmpty ()){
-                        txtlayoutEmail.setError ("loi ne 123");
+                        txtlayoutEmail.setError ("Invalid email");
                     }else {
                         ForgotEmail = txtlayoutEmail.getEditText().getText().toString().trim();
                         for (Account account : listAccounts) {
@@ -88,7 +89,7 @@ public class ForgotPassword extends AppCompatActivity {
                             isAcount = true;
                             txtlayoutEmail.setError (null);
                         }else {
-                            txtlayoutEmail.setError ("loi ne");
+                            txtlayoutEmail.setError ("Account have not exist");
                         }
                     }
 
@@ -111,7 +112,7 @@ public class ForgotPassword extends AppCompatActivity {
             fragmentTransaction.commit();
 
         }else {
-            txtlayoutEmail.setError ("loi ne 444");
+            txtlayoutEmail.setError ("Account have not exist");
         }
     }
     public void btnBack(View v){

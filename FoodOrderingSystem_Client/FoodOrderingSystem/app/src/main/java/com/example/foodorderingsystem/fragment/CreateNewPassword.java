@@ -69,7 +69,7 @@ public class CreateNewPassword extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     if (!validatePass()) {
-                        elayoutNewpass.setError("loi ne 333");
+                        elayoutNewpass.setError(" Password is not empty");
                     }else {
                         elayoutNewpass.setError(null);
                     }
@@ -92,7 +92,7 @@ public class CreateNewPassword extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     if (!validateConfirmPass()) {
-                        elayoutConfigrmNewpass.setError("loi ne 333");
+                        elayoutConfigrmNewpass.setError("Confirm Password is not equals Password");
                     }else {
                         elayoutConfigrmNewpass.setError(null);
                     }
