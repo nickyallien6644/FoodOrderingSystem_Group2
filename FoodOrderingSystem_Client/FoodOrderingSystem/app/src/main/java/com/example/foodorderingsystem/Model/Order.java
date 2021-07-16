@@ -1,21 +1,40 @@
 package com.example.foodorderingsystem.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Order {
+    @SerializedName("oID")
+    @Expose
     private int oID;
+    @SerializedName("aID")
+    @Expose
     private int aID;
+    @SerializedName("rID")
+    @Expose
     private int rID;
+    @SerializedName("oAmountTotal")
+    @Expose
     private int oAmountTotal;
-    private Date oDateCreate;
+    @SerializedName("oDateCreate")
+    @Expose
+    private String oDateCreate;
+    @SerializedName("oNote")
+    @Expose
     private String oNote;
+    @SerializedName("oCode")
+    @Expose
     private String oCode;
+    @SerializedName("oStatus")
+    @Expose
     private int oStatus;
 
     public Order() {
     }
 
-    public Order(int oID, int aID, int rID, int oAmountTotal, Date oDateCreate, int oStatus, String oNote, String oCode) {
+    public Order(int oID, int aID, int rID, int oAmountTotal, String oDateCreate, int oStatus, String oNote, String oCode) {
         this.oID = oID;
         this.aID = aID;
         this.rID = rID;
@@ -58,11 +77,11 @@ public class Order {
         this.oAmountTotal = oAmountTotal;
     }
 
-    public Date getoDateCreate() {
+    public String getoDateCreate() {
         return oDateCreate;
     }
 
-    public void setoDateCreate(Date oDateCreate) {
+    public void setoDateCreate(String oDateCreate) {
         this.oDateCreate = oDateCreate;
     }
 

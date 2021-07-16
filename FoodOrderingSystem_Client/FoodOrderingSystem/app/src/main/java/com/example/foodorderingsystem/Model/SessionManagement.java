@@ -85,6 +85,7 @@ public class SessionManagement {
         editor.putString(SESSION_CARTLIST,"").commit();
 
     }
+    public void removeSessionCoin(int coin){editor.putInt(SESSION_UBCOINS,coin).commit();}
 
     public void removeCart(){
         editor.putString(SESSION_CARTLIST,"").commit();
