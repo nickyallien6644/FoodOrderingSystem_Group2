@@ -79,9 +79,11 @@ public class SignUpActivity extends AppCompatActivity {
                 Intent intent =new Intent(SignUpActivity.this,SignInActivity.class);
                 startActivity(intent);
                 overridePendingTransition (R.anim.slide_in_left,R.anim.slide_out_right);
+                Toast.makeText (MainActivity.fragment.getContext(), "SignUp is successfull !!", Toast.LENGTH_SHORT).show ();
             }else{
                 return;
             }
+
         }
     }
     public void addPersona(Account p){
@@ -166,7 +168,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (inputPass.isEmpty ()){
             etxtPassword.setError ("Password is not empty");
             return false;
-        }else if(!Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$").matcher (inputPass).matches ()){
+        }else if(!Pattern.compile("^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}").matcher (inputPass).matches ()){
             etxtPassword.setError ("Password must have 8-16 character, have uppercase character and special character");
             return false;
         }
