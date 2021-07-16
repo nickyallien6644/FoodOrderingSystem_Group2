@@ -29,8 +29,8 @@ public class SessionManagement {
     String SESSION_USER_LASTNAME = "session_user_lastname";
     String SESSION_USER_ADDRESSNAME = "session_user_addressname";
     String SESSION_USER_EMAIL = "session_user_email";
-    String SESSION_USER_PHONE = "session_user_email";
-    private static final String SESSION_CARTLIST = "session_Cartlist";
+    String SESSION_USER_PHONE = "session_user_phone";
+    String SESSION_CARTLIST = "session_Cartlist";
 
 
 
@@ -85,6 +85,7 @@ public class SessionManagement {
         editor.putString(SESSION_CARTLIST,"").commit();
 
     }
+    public void removeSessionCoin(int coin){editor.putInt(SESSION_UBCOINS,coin).commit();}
 
     public void removeCart(){
         editor.putString(SESSION_CARTLIST,"").commit();

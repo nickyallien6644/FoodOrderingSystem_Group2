@@ -10,5 +10,8 @@
     <color name="Cam">#FA4A0C</color>
     <color name="Khang">#F5F5F5</color>
     <color name="Xanh">#BFF3BE</color>
+    <color name="red">#f55c51</color>
+    <color name="vang">#f5d151</color>
+    <color name="success">#319101</color>
 
 </resources>
