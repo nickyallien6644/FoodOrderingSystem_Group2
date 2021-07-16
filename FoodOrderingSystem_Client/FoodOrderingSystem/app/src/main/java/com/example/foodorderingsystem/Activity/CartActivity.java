@@ -94,10 +94,6 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(listCart != null){
-                    listOrderDetails.clear();
-                    for(Cart cart : listCart){
-                        listOrderDetails.add(new OrderDetail(1,cart.getpID(),cart.getCartQuantity(),cart.getpPrice(),cart.getCartQuantity() * cart.getpPrice()));
-                    }
                     Intent intent1 = new Intent(CartActivity.this, CheckoutActivity.class);
                     intent1.putExtra("total",totalPrice);
                     startActivity(intent1);
