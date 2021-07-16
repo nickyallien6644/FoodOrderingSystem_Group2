@@ -27,7 +27,7 @@ public class OrderController {
     }
 
     @GetMapping("/list")
-    public List<Map<String, Object>> listOrder() {
-        return orderService.getOrderID();
+    public List<Map<String, Object>> getOrders() {
+        return orderService.getOrders();
     }
 }

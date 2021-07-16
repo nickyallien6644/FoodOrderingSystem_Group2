@@ -98,10 +98,11 @@ public interface ApiInterface {
 
     @POST("order/add")
     Call<Order>addOrder(@Body Order order);
+
     @GET("order/list")
-    Call<List<Order>> getLastOrders();
+    Call<List<Order>> getOrders();
 
     @POST("orderdetail/add")
-    Call<OrderDetail> addOrderDetail(@Body List<OrderDetail> list);
+    Call<OrderDetail> addOrderDetail(@Body OrderDetail orderDetail);
 
 }

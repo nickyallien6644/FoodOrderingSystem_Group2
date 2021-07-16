@@ -2,9 +2,7 @@ package com.example.foodorderingsystem.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
@@ -12,42 +10,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.foodorderingsystem.Adapter.AllMenuAdapter;
-import com.example.foodorderingsystem.Adapter.CategoryAdapter;
 import com.example.foodorderingsystem.Adapter.CheckoutContentAdapter;
-import com.example.foodorderingsystem.Adapter.RecommendedAdapter;
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Order;
-import com.example.foodorderingsystem.Model.OrderDetail;
-import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.Model.Restaurant;
 import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
 import com.example.foodorderingsystem.Utils.Api;
 import com.example.foodorderingsystem.Utils.ApiInterface;
-import com.example.foodorderingsystem.fragment.BcoinsFragment;
-import com.example.foodorderingsystem.fragment.ConfirmEmail;
-import com.example.foodorderingsystem.fragment.HomeFragment;
-import com.example.foodorderingsystem.fragment.NotificationFragment;
-import com.example.foodorderingsystem.fragment.PrivacyFragment;
-import com.example.foodorderingsystem.fragment.ProfileFragment;
-import com.example.foodorderingsystem.fragment.QuestionsFragment;
-import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
-import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,8 +49,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
     List<Cart> listCart;
     List<Restaurant> resInfo;
-    List<Order> listOrders;
-    List<OrderDetail> listOrderDetails;
 
     SessionManagement sessionManagement;
 
@@ -96,8 +71,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
         listCart = new ArrayList<>();
         resInfo = new ArrayList<>();
-        listOrders = new ArrayList<>();
-        listOrderDetails = new ArrayList<>();
 
         listCart = sessionManagement.getDataFromSharedPreferences();
         total = intent.getIntExtra("total",0);
@@ -147,29 +120,6 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         });
     }
-    private void getLastOrders(){
-        apiInterface = Api.getClients();
-
-        Call<List<Order>> call = apiInterface.getLastOrders();
-        call.enqueue(new Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                listOrders = response.body();
-                listOrderDetails.clear();
-                for(Cart cart : listCart){
-                    listOrderDetails.add(new OrderDetail(listOrders.get(0).getoID(),cart.getpID(),cart.getCartQuantity(),cart.getpPrice(),cart.getCartQuantity() * cart.getpPrice()));
-                }
-                AddOrderDetail(listOrderDetails);
-            }
-
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Toast.makeText(CheckoutActivity.this, "Server is not responding.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
     public void UpdateCoins(Account account){
         apiInterface = Api.getClients ();
         Call<Account> call= apiInterface.updateBcoins(account);
@@ -196,7 +146,6 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if(response.isSuccessful()){
-                    getLastOrders();
                 }else {
                 }
             }
@@ -207,28 +156,6 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void AddOrderDetail(List<OrderDetail> list){
-        apiInterface = Api.getClients ();
-        Call<OrderDetail> call= apiInterface.addOrderDetail(list);
-        call.enqueue(new Callback<OrderDetail> () {
-            @Override
-            public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
-                if(response.isSuccessful()){
-                }else {
-                }
-            }
-            @Override
-            public void onFailure(Call<OrderDetail> call, Throwable t) {
-
-                Log.e("Error:",t.getMessage());
-            }
-        });
-
-    }
-    public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
-        return new java.sql.Date(date.getTime());
     }
     public void clickBackCheckout(View v){
         finish();
@@ -266,7 +193,6 @@ public class CheckoutActivity extends AppCompatActivity {
         order.setoStatus(0);
         AddOrder(order);
 
-        sessionManagement.removeCart();
         Account account = new Account();
         account.setaID(sessionManagement.getSession());
         account.setaCoins(bcoins - total);
