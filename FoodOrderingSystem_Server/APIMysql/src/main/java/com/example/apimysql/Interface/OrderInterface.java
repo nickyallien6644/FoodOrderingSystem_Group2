@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface OrderInterface {
     public int addOrder(Order order);
-    public List<Map<String, Object>> getOrderID();
+    public List<Map<String, Object>> getOrders();
 }

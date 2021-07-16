@@ -25,7 +25,7 @@ public class OrderDAO implements OrderInterface {
     }
 
     @Override
-    public List<Map<String, Object>> getOrderID() {
+    public List<Map<String, Object>> getOrders() {
         List<Map<String, Object>> query = template.queryForList("Select * FROM `order` ORDER BY `oID` DESC");
         return query;
     }

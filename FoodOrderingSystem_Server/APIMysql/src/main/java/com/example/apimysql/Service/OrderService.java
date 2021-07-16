@@ -23,7 +23,7 @@ public class OrderService implements OrderInterface {
     }
 
     @Override
-    public List<Map<String, Object>> getOrderID() {
-        return orderDAO.getOrderID();
+    public List<Map<String, Object>> getOrders() {
+        return orderDAO.getOrders();
     }
 }

@@ -20,11 +20,8 @@ public class OrderDetailController {
     OrderDetailService orderDetailService;
 
     @PostMapping("/add")
-    public String addOrder(@RequestBody List<OrderDetail> order) {
-        int id = 1;
-        for(OrderDetail orderDetail : order){
-            orderDetailService.add(orderDetail);
-        }
+    public String addOrder(@RequestBody OrderDetail orderDetail) {
+         int id =  orderDetailService.add(orderDetail);
         if(id==0) {
             return "Fail Add Order";
         }
