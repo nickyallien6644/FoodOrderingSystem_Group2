@@ -69,7 +69,7 @@ public class CreateNewPassword extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
                     if (!validatePass()) {
-                        elayoutNewpass.setError(" Password is not empty");
+                        elayoutNewpass.setError("Password must have 8-16 character, have uppercase character and special character");
                     }else {
                         elayoutNewpass.setError(null);
                     }
@@ -121,7 +121,7 @@ public class CreateNewPassword extends Fragment {
         if (inputPass.isEmpty ()){
             elayoutNewpass.setError ("Password is not empty");
             return false;
-        }else if(!Pattern.compile("^[A-Z]+[a-z0-9]{7,15}+").matcher (inputPass).matches ()){
+        }else if(!Pattern.compile("^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}").matcher (inputPass).matches ()){
             elayoutNewpass.setError ("Password must have 8-16 character, have uppercase character and special character");
             return false;
         }

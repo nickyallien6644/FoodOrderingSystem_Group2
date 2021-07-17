@@ -6,6 +6,8 @@ import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
+import com.example.foodorderingsystem.Model.Order;
+import com.example.foodorderingsystem.Model.OrderDetail;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
 import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.Model.Restaurant;
@@ -93,5 +95,14 @@ public interface ApiInterface {
     Call<List<Restaurant>> getRestaurantInfo(@Path("rID") int rID);
     @GET("restaurant/getAll")
     Call<List<Restaurant>> getAllRestaurantInfo();
+
+    @POST("order/add")
+    Call<Order>addOrder(@Body Order order);
+
+    @GET("order/list")
+    Call<List<Order>> getOrders();
+
+    @POST("orderdetail/add")
+    Call<OrderDetail> addOrderDetail(@Body OrderDetail orderDetail);
 
 }

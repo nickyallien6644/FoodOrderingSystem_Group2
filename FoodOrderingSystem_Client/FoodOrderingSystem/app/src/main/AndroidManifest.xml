@@ -41,6 +41,7 @@
         <activity android:name=".Activity.AllProductForRecommended" />
         <activity android:name=".Activity.RestaurantActivity" />
         <activity android:name=".Activity.CheckoutActivity" />
+        <activity android:name=".Activity.CheckoutCompleteActivity"/>
     </application>
 
 </manifest>

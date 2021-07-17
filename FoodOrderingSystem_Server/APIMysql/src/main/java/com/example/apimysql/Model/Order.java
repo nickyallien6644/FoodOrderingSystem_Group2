@@ -1,5 +1,7 @@
 package com.example.apimysql.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 
 public class Order {
@@ -7,6 +9,7 @@ public class Order {
     private int aID;
     private int rID;
     private int oAmountTotal;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date oDateCreate;
     private String oNote;
     private String oCode;

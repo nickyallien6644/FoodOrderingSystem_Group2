@@ -1,10 +1,23 @@
 package com.example.foodorderingsystem.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class OrderDetail {
+    @SerializedName("oID")
+    @Expose
     private int oID;
+    @SerializedName("pID")
+    @Expose
     private int pID;
+    @SerializedName("oQuantity")
+    @Expose
     private int oQuantity;
+    @SerializedName("oPrice")
+    @Expose
     private int oPrice;
+    @SerializedName("oSubTotal")
+    @Expose
     private int oSubTotal;
 
 
