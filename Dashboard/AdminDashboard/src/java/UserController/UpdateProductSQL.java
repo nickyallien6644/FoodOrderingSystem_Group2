@@ -5,15 +5,13 @@
  */
 package UserController;
 
-import Models.DAO.AccountDAO;
+import Models.DAO.ProductDAO;
 import Models.DAO.RestaurantDAO;
-import Models.Entity.Account;
-import Models.Entity.RestaurantName;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,8 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-@WebServlet(name = "UpdateAccount", urlPatterns = {"/UpdateAccount"})
-public class UpdateAccount extends HttpServlet {
+public class UpdateProductSQL extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +33,7 @@ public class UpdateAccount extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,44 +64,26 @@ public class UpdateAccount extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         int id = Integer.parseInt(request.getParameter("id"));
-        String first_name = request.getParameter("firstName").toString();
-        String last_name = request.getParameter("lastName").toString();
-        String phone = request.getParameter("phone").toString();
-        String address = request.getParameter("address").toString();
-        String email = request.getParameter("email").toString();
-        String status = request.getParameter("selectStatus").toString();
-        String resId = request.getParameter("selectRestaurant").toString();
-
-        int restaurantId = -1;
-        int selectStatus = -1;
-        RestaurantDAO resDAO = new RestaurantDAO();
-        ArrayList<RestaurantName> resNameList = new ArrayList<>();
-        resNameList = resDAO.getAllNameRes();
-
-        if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
-            selectStatus = 1;
-        } else if (status.equalsIgnoreCase("Inactive") || status.equalsIgnoreCase("0")) {
-            selectStatus = 0;
-        }
-
-        for (int i = 0; i < resNameList.size(); i++) {
-            if (resId.equalsIgnoreCase(resNameList.get(i).getrName()) || resId.equalsIgnoreCase(String.valueOf(resNameList.get(i).getrId()))) {
-                restaurantId = resNameList.get(i).getrId();
-            }
-        }
-
-        AccountDAO accountDAO = new AccountDAO();
+        //Format date
+        String name = request.getParameter("name").toString();
+        int price = Integer.parseInt(request.getParameter("price").toString());
+        String description = request.getParameter("description");
+        String image = request.getParameter("file").toString();
+        int cID = Integer.parseInt(request.getParameter("category").toString());
+        ProductDAO productDAO = new ProductDAO();
         boolean checkUpdate = false;
-        if (selectStatus != -1 && restaurantId != -1) {
-            checkUpdate = accountDAO.updateAccount(id, first_name, last_name, phone, email, address, selectStatus, restaurantId);
+        if (image != "") {
+            checkUpdate = productDAO.updateProduct(name, price, description, cID, id, image);
+        } else {
+            checkUpdate = productDAO.updateProductNoImage(name, price, description, cID, id);
         }
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id=" + id + "';");
+            out.println("location='./Employee/editProduct.jsp?id=" + id + "';");
             out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id=" + id + "';");
+            out.println("location='./Employee/editProduct.jsp?id=" + id + "';");
             out.println("</script>");
         }
     }

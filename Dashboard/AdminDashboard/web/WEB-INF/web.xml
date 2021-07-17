@@ -32,6 +32,38 @@
         <servlet-name>UpdateResSQL</servlet-name>
         <servlet-class>UserController.UpdateResSQL</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateResSQLInforPage</servlet-name>
+        <servlet-class>UserController.UpdateResSQLInforPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>UserController.logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusOrder</servlet-name>
+        <servlet-class>UserController.UpdateStatusOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>UserController.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductSQL</servlet-name>
+        <servlet-class>UserController.UpdateProductSQL</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductManagement</servlet-name>
+        <servlet-class>UserController.ProductManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>indexOrderManagement</servlet-name>
+        <servlet-class>UserController.indexOrderManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>UserController.AddProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
         <url-pattern>/Signin</url-pattern>
@@ -63,6 +95,38 @@
     <servlet-mapping>
         <servlet-name>AddRestaurant</servlet-name>
         <url-pattern>/AddRestaurant</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateResSQLInforPage</servlet-name>
+        <url-pattern>/UpdateResSQLInforPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusOrder</servlet-name>
+        <url-pattern>/UpdateStatusOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductSQL</servlet-name>
+        <url-pattern>/UpdateProductSQL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductManagement</servlet-name>
+        <url-pattern>/ProductManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>indexOrderManagement</servlet-name>
+        <url-pattern>/indexOrderManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

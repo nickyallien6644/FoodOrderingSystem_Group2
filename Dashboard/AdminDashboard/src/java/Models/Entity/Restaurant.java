@@ -6,7 +6,7 @@
 package Models.Entity;
 
 import java.sql.Time;
-import java.util.Date;
+
 
 /**
  *
@@ -16,8 +16,8 @@ public class Restaurant {
 
     private int rId;
     private String rName;
-    private Time rTimeOpen;
-    private Time rTimeClose;
+    private String rTimeOpen;
+    private String rTimeClose;
     private String rAddress;
     private String rPhone;
     private String rImage;
@@ -25,7 +25,7 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(int rId, String rName, Time rTimeOpen, Time rTimeClose, String rAddress, String rPhone, String rImage) {
+    public Restaurant(int rId, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone, String rImage) {
         this.rId = rId;
         this.rName = rName;
         this.rTimeOpen = rTimeOpen;
@@ -51,19 +51,19 @@ public class Restaurant {
         this.rName = rName;
     }
 
-    public Time getrTimeOpen() {
+    public String getrTimeOpen() {
         return rTimeOpen;
     }
 
-    public void setrTimeOpen(Time rTimeOpen) {
+    public void setrTimeOpen(String rTimeOpen) {
         this.rTimeOpen = rTimeOpen;
     }
 
-    public Time getrTimeClose() {
+    public String getrTimeClose() {
         return rTimeClose;
     }
 
-    public void setrTimeClose(Time rTimeClose) {
+    public void setrTimeClose(String rTimeClose) {
         this.rTimeClose = rTimeClose;
     }
 

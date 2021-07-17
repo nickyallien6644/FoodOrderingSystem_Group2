@@ -7,21 +7,18 @@ package Models.Entity;
 
 /**
  *
- * @author MSI
+ * @author phuct
  */
 public class Category {
     private int cID;
     private String cName;
-    private String cURL;
-
-    public Category(int cID, String cName, String cURL) {
-        this.cID = cID;
-        this.cName = cName;
-        this.cURL = cURL;
-    }
-    
 
     public Category() {
+    }
+
+    public Category(int cID, String cName) {
+        this.cID = cID;
+        this.cName = cName;
     }
 
     public int getcID() {
@@ -39,14 +36,7 @@ public class Category {
     public void setcName(String cName) {
         this.cName = cName;
     }
-
-    public String getcURL() {
-        return cURL;
-    }
-
-    public void setcURL(String cURL) {
-        this.cURL = cURL;
-    }
+    
     
     
 }

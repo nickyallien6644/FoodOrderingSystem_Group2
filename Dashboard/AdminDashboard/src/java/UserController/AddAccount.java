@@ -67,13 +67,14 @@ public class AddAccount extends HttpServlet {
         String address = request.getParameter("address").toString();
         String email = request.getParameter("email").toString();
         String password = request.getParameter("password").toString();
-        int rID = Integer.parseInt(request.getParameter("selectRestaurant").toString());
-        int role = Integer.parseInt(request.getParameter("selectStatus").toString());
+        int roleId = Integer.parseInt(request.getParameter("selectStatus").toString());
+        int restaurantId = Integer.parseInt(request.getParameter("selectRestaurant").toString());
+//        int role = 3;
         AccountDAO accountDAO = new AccountDAO();
         
         boolean checkUpdate = false;
 
-        checkUpdate = accountDAO.insertAccount(rID,first_name, last_name, phone, email, address, role, password);
+        checkUpdate = accountDAO.insertAccount(first_name, last_name, phone, email, address, roleId, password, restaurantId);
 
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");

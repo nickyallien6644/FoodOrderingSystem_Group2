@@ -11,7 +11,7 @@ package Models.Entity;
  */
 public class User implements Cloneable{
 
-    public User(int aID, int rID, int roleID, String aEmail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, String aStatus) {
+    public User(int aID, int roleID, String aEmail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, String aStatus, int rID) {
         this.aID = aID;
         this.rID = rID;
         this.roleID = roleID;
@@ -132,6 +132,5 @@ public class User implements Cloneable{
     private String aPhone;
     private String aAddress;
     private String aStatus;
-    
     
 }

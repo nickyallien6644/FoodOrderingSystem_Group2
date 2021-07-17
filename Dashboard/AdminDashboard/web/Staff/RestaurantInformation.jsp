@@ -4,39 +4,34 @@
     Author     : phuct
 --%>
 
-<%@page import="Models.Entity.Category"%>
-<%@page import="Models.DAO.ProductDAO"%>
-<%@page import="Models.Entity.GetProduct"%>
-<%@page import="Models.DAO.OrderDAO"%>
 <%@page import="Models.Entity.User"%>
 <%@page import="Models.Entity.RestaurantName"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="Models.Entity.Restaurant"%>
 <%@page import="Models.DAO.RestaurantDAO"%>
-<%@page import="Models.Entity.Account"%>
-<%@page import="Models.DAO.AccountDAO"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("LoginUser") == null) {
+        response.sendRedirect("../../AdminDashboard/Login.jsp");
+    } else {
+        User user = (User) session.getAttribute("LoginUser");
+        if (user != null) {
 
-<!DOCTYPE html><html lang=en>
-    <%
-        if (session.getAttribute("LoginUser") == null) {
-            response.sendRedirect("../../AdminDashboard/Login.jsp");
-        } else {
-            User user = (User) session.getAttribute("LoginUser");
-            if (user != null) {
-                if (user.getRoleID() == 2) {
-                    response.sendRedirect("../Admin/index.jsp");
-                } else if (user.getRoleID() == 4) {
-                    response.sendRedirect("../Staff/index.jsp");
-                }
+            if (user.getRoleID() == 2) {
+                response.sendRedirect("../Admin/index.jsp");
+            } else if (user.getRoleID() == 3) {
+                response.sendRedirect("../Employee/index.jsp");
             }
-    %>
+        }
+%>
+<!DOCTYPE html><html lang=en>
     <head>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Food Ordering System - Add New Product</title>
+        <title>Food Ordering System - UPDATE Restaurant</title>
 
         <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -54,6 +49,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/perfect-scrollbar.css">
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/bootstrap-icons/bootstrap-icons.css">
         <link href="${pageContext.request.contextPath}/css/custom.min.css" rel="stylesheet">
+
         <meta name="robots" content="noindex, nofollow">
     </head>
     <body class="nav-md">
@@ -75,98 +71,101 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item ">
-                                <a href="indexOrderManagement" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Order management</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item active">
-                                <a href="indexProductManagement" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Product management</span>
+                            <li class="sidebar-item  ">
+                                <a href="index.jsp" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Staff dashboard</span>
                                 </a>
                             </li>
 
-
+                            <li class="sidebar-item  active">
+                                <a href="RestaurantInformation.jsp" class='sidebar-link'>
+                                    <i class="bi bi-envelope-fill"></i>
+                                    <span>Restaurant information</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="main_container  col-9">
+            <div class="main_container  col-9" style=" margin-right: 50px">
 
-                <div class="right_col" role="main">
+                <div class="right_col" role="main" >
                     <div class="">
                         <div class="clearfix row">
                             <div class="col-2">
-                                <a href="/AdminDashboard/ProductManagement"><button type="button" class="btn btn-warning">Back</button></a>
+                                <a href="index.jsp"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                                <h1>ADD PRODUCT</h1>
+                                <h3>INFORMATION RESTAURANT</h3>
                             </div>
+                            <!--                            <div class="col-sm-2 imgUp">
+                                                            <div class="imagePreview">H</div>-->
+
+                            <!--                            <div class="col-sm-2 imgUp">
+                                                            <div class="imagePreview"></div>
+                                                            <label class="btn btn-primary">
+                                                                Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                                            </label>
+                                                        </div>-->
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
                                 <div class="x_panel">
                                     <div class="x_content">
-                                        <form class="" action="${pageContext.request.contextPath}/AddProduct" method="post" novalidate>
+                                        <form class="" action="${pageContext.request.contextPath}/UpdateResSQLInforPage" method="post" novalidate>
+                                            <%                                                    if (user != null) {
+                                                    RestaurantDAO restaurantDAO = new RestaurantDAO();
+                                                    Restaurant restaurant = restaurantDAO.getRestaurantByaId(user.getaID());
+                                            %>
                                             <span class="section"></span>
                                             <div class="field item form-group">
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" hidden="" value="<%=user.getrID()%>"  data-validate-length-range="6"  name="id" required="required" />
-                                                </div>
-                                            </div>                                            
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Product Name<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control"  data-validate-length-range="3"  name="name" required="required" />
+                                                    <input class="form-control" hidden="" value="<%=restaurant.getrId()%>"  data-validate-length-range="6"  name="id" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Price<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Name Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input name="price" class="form-control" data-validate-length-range="1" required="required" type="number" /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Description<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <textarea class="form-control" class='address'  name="description" required='required' ></textarea></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image Product<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="text" id="file" class='file'  name="file"  required='required'/></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="category">
-                                                        <%                                                            ProductDAO productDAO = new ProductDAO();
-                                                            ArrayList<Category> categoryList = new ArrayList<Category>();
-                                                            categoryList = productDAO.getCategoryById();
-                                                            for (int i = 0; i < categoryList.size(); i++) {
-                                                                if (i == 0) {
-                                                        %>
-                                                        <option value="<%=categoryList.get(i).getcID()%>" selected><%=categoryList.get(i).getcName()%></option>
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <option value="<%=categoryList.get(i).getcID()%>"><%=categoryList.get(i).getcName()%></option>
-                                                        <%
-                                                                }
-                                                            }
-                                                        %>
-                                                    </select>
+                                                    <input class="form-control" value="<%=restaurant.getrName()%>"  data-validate-length-range="3"  name="name" placeholder="Ex. Thinh Food, Texas Chicken" required="required" />
                                                 </div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Address<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" class='address' value="<%=restaurant.getrAddress()%>" name="address" placeholder="Ex. Los Angeles, California" required='required' /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Time Open<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" class='time' value="<%=restaurant.getrTimeOpen()%>" type="time" name="timeOpen" required='required'></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Time Close<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" class='time' value="<%=restaurant.getrTimeClose()%>" type="time" name="timeClose" required='required'></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Phone Restaurant<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="tel" class='tel' value="<%=restaurant.getrPhone()%>" name="phone" required='required' data-validate-length-range="8,20" /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class=" uploadFile img form-control " type="file" id="file" class='file' value="<%=restaurant.getrImage()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">ADD PRODUCT</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <%                                                }
+                                            %>
+
                                         </form>
                                     </div>
                                 </div>
@@ -180,7 +179,6 @@
                     </div>
                     <div class="clearfix"></div>
                 </footer>
-
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -207,6 +205,7 @@
                 if (this.checked)
                     $('form .alert').remove();
             }).prop('checked', false);
+
         </script>
 
         <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>
@@ -223,7 +222,6 @@
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
     </body>
 </html>
-
 <%
     }
 %>

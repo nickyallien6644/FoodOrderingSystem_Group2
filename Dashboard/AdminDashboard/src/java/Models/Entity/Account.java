@@ -22,11 +22,13 @@ public class Account {
     private String aPhone;
     private String aAddress;
     private int aStatus;
+    private int rId;
+    
 
     public Account() {
     }
 
-    public Account(int aID, int rID, int roleID, String aemail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus) {
+    public Account(int aID, int roleID, String aemail, String aPassword, double aCoins, String aFirstname, String aLastname, String aPhone, String aAddress, int aStatus, int rId) {
         this.aID = aID;
         this.roleID = roleID;
         this.aemail = aemail;
@@ -37,6 +39,7 @@ public class Account {
         this.aPhone = aPhone;
         this.aAddress = aAddress;
         this.aStatus = aStatus;
+        this.rId = rId;
     }
 
     public int getaID() {
@@ -125,6 +128,14 @@ public class Account {
 
     public void setaStatus(int aStatus) {
         this.aStatus = aStatus;
+    }
+
+    public int getrId() {
+        return rId;
+    }
+
+    public void setrId(int rId) {
+        this.rId = rId;
     }
     
     

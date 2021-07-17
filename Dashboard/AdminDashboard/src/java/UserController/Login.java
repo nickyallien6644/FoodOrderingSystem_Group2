@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -35,35 +34,33 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
         //get User Name and password when Customer inptut
         String username = request.getParameter("SigninName");
         String password = request.getParameter("SigninPassword");
         UserDAO us = new UserDAO(); // constructor User
         User user = new User();
         user = us.signIn(username, password); // call funtion to sinup
-            // if null it mean user not have exist and sendirect failed.jsp
-           if(user == null ){
-               //TODO : MAKE forget password
-               request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
-               getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-           } else {
-            
+        // if null it mean user not have exist and sendirect failed.jsp
+        if (user == null) {
+            //TODO : MAKE forget password
+            request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        } else {
+
             //set session for login user
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession();
             session.setAttribute("LoginUser", user);
-            session.setMaxInactiveInterval(60*15);
-            
-               if(user.getRoleID() != 1){
-                   System.out.println("ADMIN");
-                   response.sendRedirect("admin/index.jsp");   //admin
-               }
-                   
-               else {
-                   request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
-                   getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-               }                  //user
-           }
+            session.setMaxInactiveInterval(100 * 15);
+
+            if (user.getRoleID() != 1) {
+                System.out.println("ADMIN");
+                response.sendRedirect("admin/index.jsp");   //admin
+            } else {
+                request.setAttribute("message", "Cant't Login <br/> Wrong username or password .. ");
+                getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            }                  //user
+        }
     }
 
     /**

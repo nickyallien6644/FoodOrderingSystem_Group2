@@ -29,6 +29,7 @@
                     response.sendRedirect("../Staff/index.jsp");
                 }
             }
+
     %>
     <head>
 
@@ -36,7 +37,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Food Ordering System - Add New Product</title>
+        <title>Food Ordering System - Update</title>
 
         <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -82,7 +83,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-item active">
-                                <a href="indexProductManagement" class='sidebar-link'>
+                                <a href="ProductManagement" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                     <span>Product management</span>
                                 </a>
@@ -102,50 +103,59 @@
                                 <a href="/AdminDashboard/ProductManagement"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                                <h1>ADD PRODUCT</h1>
+                                <h1>UPDATE ACCOUNT</h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
                                 <div class="x_panel">
                                     <div class="x_content">
-                                        <form class="" action="${pageContext.request.contextPath}/AddProduct" method="post" novalidate>
+                                        <form class="" action="${pageContext.request.contextPath}/UpdateProductSQL" method="post" novalidate>
+                                            <%                                                int id = 0;
+                                                if (request.getParameter("id") != null) {
+                                                    id = Integer.parseInt(request.getParameter("id"));
+                                                }
+                                                if (id != 0) {
+                                                    ProductDAO productDAO = new ProductDAO();
+                                                    GetProduct product = productDAO.getProductById(id);
+
+                                            %>
                                             <span class="section"></span>
                                             <div class="field item form-group">
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" hidden="" value="<%=user.getrID()%>"  data-validate-length-range="6"  name="id" required="required" />
+                                                    <input class="form-control" hidden="" value="<%=product.getpID()%>"  data-validate-length-range="6"  name="id" required="required" />
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Product Name<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control"  data-validate-length-range="3"  name="name" required="required" />
+                                                    <input class="form-control" value="<%=product.getpName()%>"  data-validate-length-range="3"  name="name" placeholder="Ex. John f" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Price<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input name="price" class="form-control" data-validate-length-range="1" required="required" type="number" /></div>
+                                                    <input value="<%=product.getPrice()%>" name="price" class="form-control" data-validate-length-range="1" required="required" type="number" /></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Description<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <textarea class="form-control" class='address'  name="description" required='required' ></textarea></div>
+                                                    <textarea class="form-control" class='address'  name="description" required='required' ><%=product.getpDescription()%></textarea></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Product<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="text" id="file" class='file'  name="file"  required='required'/></div>
+                                                    <input class="form-control" type="file" id="file" class='file' value="<%=product.getiURL()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
                                                     <select class="form-select" name="category">
-                                                        <%                                                            ProductDAO productDAO = new ProductDAO();
+                                                        <%
                                                             ArrayList<Category> categoryList = new ArrayList<Category>();
                                                             categoryList = productDAO.getCategoryById();
                                                             for (int i = 0; i < categoryList.size(); i++) {
-                                                                if (i == 0) {
+                                                                if (categoryList.get(i).getcID() == product.getcId()) {
                                                         %>
                                                         <option value="<%=categoryList.get(i).getcID()%>" selected><%=categoryList.get(i).getcName()%></option>
                                                         <%
@@ -159,14 +169,18 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <%
+                                                }
+                                            %>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">ADD PRODUCT</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>

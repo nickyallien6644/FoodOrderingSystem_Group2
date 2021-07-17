@@ -5,18 +5,8 @@
  */
 package UserController;
 
-import Models.DAO.AccountDAO;
-import Models.DAO.RestaurantDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-public class AddRestaurant extends HttpServlet {
+public class indexOrderManagement extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +29,7 @@ public class AddRestaurant extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       response.sendRedirect("./Employee/index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,27 +58,7 @@ public class AddRestaurant extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        //Format date
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-        String timeOp = request.getParameter("timeOpen").toString();
-        String timeCl = request.getParameter("timeClose").toString();
-        String name = request.getParameter("name").toString();
-        String address = request.getParameter("address").toString();
-        String phone = request.getParameter("phone").toString();
-        String image = request.getParameter("file").toString();
-        RestaurantDAO restaurantDAO = new RestaurantDAO();
-        boolean checkUpdate = false;
-        checkUpdate = restaurantDAO.insertRestaurant(name, timeOp, timeCl, address, phone, image);
-        if (checkUpdate == true) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/indexRestaurant.jsp';");
-            out.println("</script>");
-        } else {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/AddRestaurant.jsp';");
-            out.println("</script>");
-        }
+        processRequest(request, response);
     }
 
     /**
