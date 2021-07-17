@@ -26,4 +26,10 @@ public class OrderService implements OrderInterface {
     public List<Map<String, Object>> getOrders() {
         return orderDAO.getOrders();
     }
+
+    @Override
+    public List<Map<String, Object>> getOrdersDate(String date) {
+        return orderDAO.getOrdersDate(date);
+    }
+
 }
