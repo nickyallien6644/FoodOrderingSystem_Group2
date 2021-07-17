@@ -47,11 +47,12 @@ public class RestaurantActivity extends AppCompatActivity {
     SeeAllResAdapter seeAllResAdapter;
     MenuResAdapter menuResAdapter;
     SearchView searchSeeAll;
+    BottomSheetDialog bottomSheetDialog;
 
     View bottomSheetView;
 
     TextView tv_restaurant, tv_timeOpen, tv_timeClose, tv_address,tv_phone;
-    ImageView iv_restaurant;
+    ImageView iv_restaurant,iv_cart;
 
     int rID;
     @Override
@@ -59,7 +60,7 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_detail_activity);
         bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_seeallmenu,(LinearLayout)findViewById(R.id.bottom_menu));
-
+        bottomSheetDialog = new BottomSheetDialog(RestaurantActivity.this, R.style.BottomSheatDialogTheme);
         Intent intent = getIntent();
         rID  = intent.getIntExtra("rID",0);
         resInfo = new ArrayList<>();
@@ -67,7 +68,6 @@ public class RestaurantActivity extends AppCompatActivity {
         listProducts = new ArrayList<>();
         listProducts(rID);
         listSeeAll = new ArrayList<>();
-        listSeeAll(rID);
     }
 
     private void getRestaurantMenu() {
@@ -172,13 +172,13 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     public void clickBack(View v){
-        Intent intent = new Intent(RestaurantActivity.this, SearchActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void listSeeAll(int rID){
         apiInterface = Api.getClients();
-        Call<List<Product>> call = apiInterface.getProductByRIDSeeAll(rID);
+            Call<List<Product>> call = apiInterface.getProductByRIDSeeAll(rID);
+        listSeeAll.clear();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -211,8 +211,12 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     public void clickSeeall(View v){
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(RestaurantActivity.this, R.style.BottomSheatDialogTheme);
-        bottomSheetDialog.setContentView(bottomSheetView);
+        listSeeAll(rID);
+            bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();
+    }
+
+    public void clickCart(View v){
+        startActivity(new Intent(getApplicationContext(), CartActivity.class));
     }
 }

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.CheckoutActivity"
+    android:padding="15dp"
+    android:background="@color/Khang">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:onClick="clickBackCheckout"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_back"/>
+                        <ImageView
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="90dp"
+                            android:src="@drawable/ig_logo"/>
+                    </LinearLayout>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="CUSTOMER: "
+                                    android:textStyle="italic" />
+
+                                <TextView
+                                    android:id="@+id/tv_customName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="AAAAAA "
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="PHONE: "
+                                    android:textStyle="italic" />
+
+                                <TextView
+                                    android:id="@+id/tv_customPhone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="AAAAAA "
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="STORE: "
+                                    android:textStyle="italic" />
+
+                                <TextView
+                                    android:id="@+id/tv_storeName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="AAAAAA "
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TableRow
+                                    android:background="@color/Khang"
+                                    android:padding="5dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center"
+                                        android:text="Food" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center"
+                                        android:text="Amount" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:text="Price" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center"
+                                        android:text="Total" />
+                                </TableRow>
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rcy_contentView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp" />
+                            </TableLayout>
+
+
+                            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="15dp">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="TOTAL: "
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="66dp"
+                                    android:layout_gravity="right"
+                                    android:text="10000"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="293dp"
+                                    android:text="BCOINS"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+                            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Note"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"/>
+                            <MultiAutoCompleteTextView
+                                android:id="@+id/tv_note"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"/>
+                            <TextView
+                                android:id="@+id/tv_errorcoin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Your account is not enough to pay, please add bcoins"
+                                android:textColor="@color/red"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_addBcoins"
+                                    android:onClick="clickBcoins"
+                                    android:layout_width="100dp"
+                                    android:layout_height="40dp"
+                                    android:background="@color/vang"
+                                    android:textSize="14dp"
+                                    android:text="Add Bcoins"/>
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btn_confirm"
+                                    android:onClick="clickConfirm"
+                                    android:layout_width="100dp"
+                                    android:layout_height="40dp"
+                                    android:background="@color/Xanh"
+                                    android:layout_marginLeft="150dp"
+                                    android:textSize="14dp"
+                                    android:text="Confirm"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

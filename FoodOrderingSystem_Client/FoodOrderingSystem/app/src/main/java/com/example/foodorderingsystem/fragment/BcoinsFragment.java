@@ -57,7 +57,6 @@ public class BcoinsFragment extends Fragment {
     int uID;
     int total;
     public BcoinsFragment() {
-
     }
 
 
@@ -152,7 +151,7 @@ public class BcoinsFragment extends Fragment {
             }
         });
         session = new SessionManagement (getActivity()) ;
-        session.saveSession (account);
+        session.removeSessionCoin(account.getaCoins());
         Intent intent =new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
 

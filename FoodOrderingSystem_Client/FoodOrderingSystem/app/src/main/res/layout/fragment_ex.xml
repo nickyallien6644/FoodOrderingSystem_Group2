@@ -6,120 +6,150 @@
     android:layout_height="match_parent"
     android:background="@drawable/box">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header">
+    <Button
+        android:id="@+id/btnSaveChange"
+        android:layout_width="220dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:text="Save" />
 
-        <Button
-            android:id="@+id/btnSaveChange"
-            android:layout_width="220dp"
-            android:layout_height="59dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="300dp"
-            android:text="Save" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="185dp"
+        android:layout_height="124dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="260dp"
+        android:background="@drawable/buttom_radius"
+        android:src="@drawable/box"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="244dp"
-            android:layout_height="160dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="200dp"
-            android:background="@drawable/buttom_radius"
-            android:src="@drawable/box"
-            tools:srcCompat="@tools:sample/avatars" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtFirtname"
+        android:layout_width="293dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="150dp"
+        android:text="name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtLastname"
+        android:layout_width="293dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="90dp"
+        android:text="name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="293dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:text="Email"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtPhone"
+        android:layout_width="293dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Phone"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="305dp"
+        android:layout_height="99dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:hint="Password"
+        app:boxStrokeColor="@color/Cam"
+        app:helperText=" "
+        app:helperTextTextColor="@color/Cam"
+        app:hintTextColor="@color/Cam"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtFirtname"
-            android:layout_width="293dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="60dp"
-            android:text="name"
+            android:layout_width="290dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:drawablePadding="12dp"
+            android:ems="15"
+            android:inputType="textPassword"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="18dp"></com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtConfirmPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="299dp"
+        android:layout_height="119dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="220dp"
+        android:hint="Confirm Password"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/Cam"
+        app:helperText=" "
+        app:helperTextTextColor="@color/Cam"
+        app:hintTextColor="@color/Cam"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtLastname"
-            android:layout_width="293dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="0dp"
-            android:text="name"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:layout_width="290dp"
+            android:layout_height="68dp"
+            android:drawablePadding="12dp"
+            android:ems="15"
+            android:inputType="textPassword"
+            android:textSize="18dp"></com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/txtEmail"
-            android:layout_width="293dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="-60dp"
-            android:text="Email"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="175dp"
+        android:background="@drawable/backgroundall"
+        app:srcCompat="@drawable/ic_baseline_email_24" />
 
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="150dp"
+        android:layout_marginRight="175dp"
+        app:srcCompat="@drawable/person" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPhone"
-            android:layout_width="293dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="120dp"
-            android:text="Phone"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-30dp"
+        android:layout_marginRight="175dp"
+        app:srcCompat="@android:drawable/stat_sys_phone_call" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="293dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="180dp"
-            android:hint="Password"
-            app:boxStrokeColor="@color/Cam"
-            app:helperText=" "
-            app:helperTextTextColor="@color/Cam"
-            app:hintTextColor="@color/Cam"
-            app:passwordToggleEnabled="true">
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-90dp"
+        android:layout_marginRight="175dp"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:drawablePadding="12dp"
-                android:ems="15"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textSize="18dp"></com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtConfirmPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="293dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="240dp"
-            android:hint="Confirm Password"
-            android:textColorHint="@color/black"
-            app:boxStrokeColor="@color/Cam"
-            app:helperText=" "
-            app:helperTextTextColor="@color/Cam"
-            app:hintTextColor="@color/Cam"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:drawablePadding="12dp"
-                android:ems="15"
-                android:inputType="textPassword"
-                android:textSize="18dp"></com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-    </ScrollView>
 </FrameLayout>

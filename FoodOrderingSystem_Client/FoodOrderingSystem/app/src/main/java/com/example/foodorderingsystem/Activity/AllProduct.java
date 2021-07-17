@@ -3,6 +3,9 @@ package com.example.foodorderingsystem.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,10 @@ public class AllProduct extends AppCompatActivity {
     List<Product> listAllProduct;
     AllProductAdapter allProductAdapter;
 
+    SearchView txtSearchProduct;
+
+    ImageView backAllProduct, shoppingCartAllProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,15 @@ public class AllProduct extends AppCompatActivity {
         allProductRecycler = findViewById(R.id.listAllProductRecycler);
         listAllProduct = new ArrayList<>();
         listAllProduct();
+
+        backAllProduct = findViewById(R.id.backAllProduct);
+        backAllProduct.setOnClickListener(backAllProduct());
+
+        shoppingCartAllProduct = findViewById(R.id.shoppingCartAllProduct);
+        shoppingCartAllProduct.setOnClickListener(openCart());
+
+        txtSearchProduct = (SearchView) findViewById(R.id.resultSearch);
+        searchProduct();
     }
 
     private void listAllProduct() {
@@ -63,6 +79,43 @@ public class AllProduct extends AppCompatActivity {
 
         allProductRecycler.setLayoutManager(layoutManager);
         allProductRecycler.setAdapter(allProductAdapter);
+    }
+
+    private View.OnClickListener openCart() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+            }
+        };
+    }
+
+    private View.OnClickListener backAllProduct() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+    }
+
+    public void searchProduct() {
+        txtSearchProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("search", query);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 //    @Override

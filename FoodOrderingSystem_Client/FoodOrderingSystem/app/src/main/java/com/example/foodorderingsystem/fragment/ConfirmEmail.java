@@ -37,11 +37,11 @@ public class ConfirmEmail extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_confirm_email, container, false);
-        session = new SessionManagement(getActivity().getApplication());
+        session = new SessionManagement(getActivity());
         sstxtEmail = v.findViewById(R.id.txt_ssEmail);
         txtError = v.findViewById(R.id.txt_ErrorForgot);
         String Emailconfign = session.getEmailforgot();
-        sstxtEmail.setText("Email has been sent ' " + Emailconfign + " '");
+        sstxtEmail.setText("' " + Emailconfign.toString() + " '");
         eTxtNum1 = v.findViewById(R.id.edit_Num1);
         eTxtNum2 = v.findViewById(R.id.edit_Num2);
         eTxtNum3 = v.findViewById(R.id.edit_Num3);

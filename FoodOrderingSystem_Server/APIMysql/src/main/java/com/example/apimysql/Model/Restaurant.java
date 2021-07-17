@@ -1,6 +1,8 @@
 package com.example.apimysql.Model;
 
 
+import java.sql.Time;
+
 public class Restaurant {
     private int rID;
     private String rName;
@@ -8,17 +10,19 @@ public class Restaurant {
     private String rTimeClose;
     private String rAddress;
     private String rPhone;
+    private String rImage;
 
     public Restaurant() {
     }
 
-    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone, int pID) {
+    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone, String rImage) {
         this.rID = rID;
         this.rName = rName;
         this.rTimeOpen = rTimeOpen;
         this.rTimeClose = rTimeClose;
         this.rAddress = rAddress;
         this.rPhone = rPhone;
+        this.rImage = rImage;
     }
 
     public int getrID() {
@@ -67,5 +71,13 @@ public class Restaurant {
 
     public void setrPhone(String rPhone) {
         this.rPhone = rPhone;
+    }
+
+    public String getrImage() {
+        return rImage;
+    }
+
+    public void setrImage(String rImage) {
+        this.rImage = rImage;
     }
 }

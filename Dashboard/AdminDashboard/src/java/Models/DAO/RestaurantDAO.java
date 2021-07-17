@@ -32,15 +32,14 @@ public class RestaurantDAO {
     public ArrayList<Restaurant> listRestaurant;
 
     public RestaurantDAO() {
-        DBConnection db = new DBConnection();
-        this.conn = db.getConnect();
         restaurant = new Restaurant();
         listRestaurant = new ArrayList<>();
     }
 
     public ArrayList<Restaurant> getAllRestaurant() {
         try {
-
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant`");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -69,6 +68,8 @@ public class RestaurantDAO {
     public boolean insertRestaurant(String name, Time timeOpen, Time timeClose, String address, String phone, String image) {
 
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("INSERT INTO `restaurant`(`rName`, `rTimeOpen`, `rTimeClose`, `rAddress`, `rPhone`, `rImage`) VALUES (?,?,?,?,?,?)");
             pst.setString(1, name);
             pst.setTime(2, timeOpen);
@@ -78,6 +79,10 @@ public class RestaurantDAO {
             pst.setString(6, image);
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;
@@ -86,6 +91,8 @@ public class RestaurantDAO {
     public Restaurant getRestaurantById(int id) {
         Restaurant restaurant = null;
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant` WHERE rID = ?");
             pst.setInt(1, id);
 
@@ -116,6 +123,8 @@ public class RestaurantDAO {
     public boolean updateRestaurant(int id, String name, Time timeOpen, Time timeClose, String address, String phone, String image) {
 
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("UPDATE `restaurant` SET `rName`=?,`rTimeOpen`=?,`rTimeClose`=?,`rAddress`=?,`rPhone`=?,`rImage`=? WHERE `rID`=?");
             pst.setString(1, name);
             pst.setTime(2, timeOpen);
@@ -126,6 +135,10 @@ public class RestaurantDAO {
             pst.setInt(7, id);
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -133,6 +146,8 @@ public class RestaurantDAO {
     public boolean updateRestaurantNoImage(int id, String name, Time timeOpen, Time timeClose, String address, String phone) {
 
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("UPDATE `restaurant` SET `rName`=?,`rTimeOpen`=?,`rTimeClose`=?,`rAddress`=?,`rPhone`=? WHERE `rID`=?");
             pst.setString(1, name);
             pst.setTime(2, timeOpen);
@@ -142,6 +157,10 @@ public class RestaurantDAO {
             pst.setInt(6, id);
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
