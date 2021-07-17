@@ -98,7 +98,7 @@ public class CartActivity extends AppCompatActivity {
                     intent1.putExtra("total",totalPrice);
                     startActivity(intent1);
                 }else {
-                    Toast.makeText(CartActivity.this, "Your cart is empty, please add to cart", Toast.LENGTH_SHORT);
+                    Toast.makeText(CartActivity.this, "Your cart is empty, please add to cart", Toast.LENGTH_SHORT).show();
                 }
             }
         });

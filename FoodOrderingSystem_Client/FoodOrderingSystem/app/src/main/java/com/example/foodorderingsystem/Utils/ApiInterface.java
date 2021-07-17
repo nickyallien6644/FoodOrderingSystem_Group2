@@ -14,6 +14,7 @@ import com.example.foodorderingsystem.Model.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Date;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -98,10 +99,21 @@ public interface ApiInterface {
 
     @POST("order/add")
     Call<Order>addOrder(@Body Order order);
+
     @GET("order/list")
-    Call<List<Order>> getLastOrders();
+    Call<List<Order>> getOrders();
 
     @POST("orderdetail/add")
-    Call<OrderDetail> addOrderDetail(@Body List<OrderDetail> list);
+    Call<OrderDetail> addOrderDetail(@Body OrderDetail orderDetail);
+
+    @GET("orderdetail/list/{oID}")
+    Call<List<OrderDetail>> getOrderDetail(@Path("oID") int oID);
+
+    @GET("orderdetail/list")
+    Call<List<OrderDetail>> getAllOrderDetail();
+
+    @GET("order/list/{date}")
+    Call<List<Order>> getOrdersDate(@Path("date")String date);
+
 
 }

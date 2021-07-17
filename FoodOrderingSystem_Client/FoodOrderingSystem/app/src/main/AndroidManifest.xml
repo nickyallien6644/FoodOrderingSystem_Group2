@@ -42,6 +42,7 @@
         <activity android:name=".Activity.RestaurantActivity" />
         <activity android:name=".Activity.CheckoutActivity" />
         <activity android:name=".Activity.CheckoutCompleteActivity"/>
+        <activity android:name=".Activity.OrderHistoryDetailActivity"/>
     </application>
 
 </manifest>

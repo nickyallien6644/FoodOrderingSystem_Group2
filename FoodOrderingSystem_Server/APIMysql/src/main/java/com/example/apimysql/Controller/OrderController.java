@@ -27,7 +27,12 @@ public class OrderController {
     }
 
     @GetMapping("/list")
-    public List<Map<String, Object>> listOrder() {
-        return orderService.getOrderID();
+    public List<Map<String, Object>> getOrders() {
+        return orderService.getOrders();
+    }
+
+    @GetMapping("/list/{date}")
+    public List<Map<String, Object>> getOrdersDate(@PathVariable("date")String date) {
+        return orderService.getOrdersDate(date);
     }
 }

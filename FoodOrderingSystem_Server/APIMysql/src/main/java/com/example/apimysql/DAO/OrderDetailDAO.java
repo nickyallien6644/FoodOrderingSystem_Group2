@@ -21,4 +21,16 @@ public class OrderDetailDAO implements OrderDetailInterface {
         String sql = "insert into `orderdetail` (oID,pID,oQuantity,oPrice,oSubTotal)values(?,?,?,?,?)";
         return template.update(sql, orderDetail.getoID(), orderDetail.getpID(),orderDetail.getoQuantity(), orderDetail.getoPrice(), orderDetail.getoSubTotal());
     }
+
+    @Override
+    public List<Map<String, Object>> getOrdersDetail(String oID) {
+        List<Map<String, Object>> query = template.queryForList("Select * FROM `orderdetail` WHERE `oID` = "+oID+" ORDER BY `oID` DESC");
+        return query;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllOrdersDetail() {
+        List<Map<String, Object>> query = template.queryForList("Select * FROM `orderdetail` ORDER BY `oID` DESC");
+        return query;
+    }
 }
