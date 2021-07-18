@@ -53,11 +53,15 @@ public class NoficationAdapter extends RecyclerView.Adapter<NoficationAdapter.No
             }
         }
 
-
-
         if(listNotification.get(position).getNoStatus() >= 1){
             holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.Xanh));
-        }else holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.Cam));
+            holder.tv_content.setText("Your order has been confirmed by the administrator");
+        }
+        else
+        {
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.Cam));
+            holder.tv_content.setText("Your order not yet confirmed wait the administrator confirm");
+        }
     }
 
     @Override

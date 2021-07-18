@@ -183,7 +183,7 @@
                                             <span class="badge bg-light-danger">Unconfimred</span>
                                         </td>
                                         <td>
-                                            <a href="../UpdateStatusOrder?id=<%=orderShowList.get(i).getoID()%>" ><button class="btn btn-success">Confirm</button></a>
+                                            <a href="../UpdateStatusOrder?id=<%=orderShowList.get(i).getoID()%>&&aid=<%=user.getaID()%>" ><button class="btn btn-success">Confirm</button></a>
                                         </td>
                                         <%                                            } else {
                                         %>
