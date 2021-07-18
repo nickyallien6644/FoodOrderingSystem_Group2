@@ -118,7 +118,6 @@ public class AllProductAdapter extends RecyclerView.Adapter<AllProductAdapter.Al
 
         public AllProductViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-
             addOne = itemView.findViewById(R.id.btnAddOneForAllProduct);
             allProductImage = itemView.findViewById(R.id.allProduct_image);
             allProductName = itemView.findViewById(R.id.allProduct_name);

@@ -48,7 +48,7 @@ public class OrderDetailContentAdapter extends RecyclerView.Adapter<OrderDetailC
             }
         }
         holder.tv_amountrow.setText(String.valueOf(listOrderDetails.get(position).getoQuantity()));
-        holder.tv_pricerow.setText(String.valueOf(listOrderDetails.get(position).getoPrice()));
+        holder.tv_pricerow.setText(String.valueOf((int)listOrderDetails.get(position).getoPrice()));
         holder.tv_totalrow.setText(String.valueOf(listOrderDetails.get(position).getoSubTotal()));
     }
 

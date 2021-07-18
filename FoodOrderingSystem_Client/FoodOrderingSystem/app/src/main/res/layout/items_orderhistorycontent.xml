@@ -8,18 +8,19 @@
 
         <TextView
             android:id="@+id/tv_foodrow"
+            android:layout_width="158dp"
             android:layout_column="1"
-            android:gravity="left"
             android:padding="10dp"
             android:text="Food"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="16dp" />
         <TextView
             android:id="@+id/tv_amountrow"
             android:padding="10dp"
             android:textSize="16dp"
-            android:text="Amount"
-            android:gravity="center"
+            android:text="Quantity"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:layout_column="1"/>
         <TextView
@@ -27,7 +28,7 @@
             android:padding="10dp"
             android:textSize="16dp"
             android:text="Price"
-            android:gravity="center"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:layout_column="1"/>
         <TextView
@@ -35,7 +36,7 @@
             android:padding="10dp"
             android:textSize="16dp"
             android:text="Total"
-            android:gravity="center"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:layout_column="1"/>
     </TableRow>

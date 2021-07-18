@@ -4,22 +4,33 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.User"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
-      <%
-      if (session.getAttribute("LoginUser") == null) {
-              response.sendRedirect("../../AdminDashboard/Login.jsp");
-      }
-  %>
+    <%
+        if (session.getAttribute("LoginUser") == null) {
+            response.sendRedirect("../../AdminDashboard/Login.jsp");
+        } else {
+            User user = (User) session.getAttribute("LoginUser");
+            if (user != null) {
+                if (user.getRoleID() == 3) {
+                    response.sendRedirect("../Employee/index.jsp");
+                } else if (user.getRoleID() == 4) {
+                    response.sendRedirect("../Staff/index.jsp");
+                }
+            }
+
+    %>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Food Ordering System - ADD restaurant</title>
+        <meta name="robots" content="noindex, nofollow">
 
         <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,7 +50,7 @@
         <link href="../css/custom.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
         <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
-        <meta name="robots" content="noindex, nofollow">
+
     </head>
     <body class="nav-md">
         <div class="container body row">
@@ -60,15 +71,15 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item active">
+                            <li class="sidebar-item ">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>
@@ -125,12 +136,12 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="file" class='file' name="file" required='required' accept="image/png, image/jpg, image/jpeg" /></div>
+                                                    <input class="form-control" type="text" class='file' name="file" required='required' accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">ADD</button>
+                                                        <button type='submit' class="btn btn-primary">ADD ACCOUNT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
@@ -175,21 +186,17 @@
                 if (this.checked)
                     $('form .alert').remove();
             }).prop('checked', false);
-            
-            
+
+
         </script>
-
         <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>
-
         <script src="https://colorlib.com/polygon/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
         <script src="https://colorlib.com/polygon/vendors/fastclick/lib/fastclick.js"></script>
-
         <script src="https://colorlib.com/polygon/vendors/nprogress/nprogress.js"></script>
-
-
 
         <script src="../js/custom.min.js"></script>
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
     </body>
 </html>
+<%    }
+%>

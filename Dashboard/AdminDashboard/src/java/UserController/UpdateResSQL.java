@@ -65,43 +65,31 @@ public class UpdateResSQL extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            PrintWriter out = response.getWriter();
-            int id = Integer.parseInt(request.getParameter("id"));
-            //Format date
-            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-            String timeOp = request.getParameter("timeOpen").toString() + ":00";
-            String timeCl = request.getParameter("timeClose").toString() + ":00";
-            Date dateClose = dateFormat.parse(timeCl);
-            Date dateOpen = dateFormat.parse(timeOp);
-
-            String name = request.getParameter("name").toString();
-            Time timeOpen = new Time(dateOpen.getHours(), dateOpen.getMinutes(), dateOpen.getSeconds());
-            Time timeClose = new Time(dateClose.getHours(), dateClose.getMinutes(), dateClose.getSeconds());
-            String address = request.getParameter("address").toString();
-            String phone = request.getParameter("phone").toString();
-            String image = request.getParameter("file").toString();
-
-            RestaurantDAO restaurantDAO = new RestaurantDAO();
-
-            boolean checkUpdate = false;
-            if (image != "") {
-                checkUpdate = restaurantDAO.updateRestaurant(id, name, timeOpen, timeClose, address, phone, image);
-            } else {
-                checkUpdate = restaurantDAO.updateRestaurantNoImage(id, name, timeOpen, timeClose, address, phone);
-            }
-
-            if (checkUpdate == true) {
-                out.println("<script type=\"text/javascript\">");
-                out.println("location='./Admin/UpdateRestaurant.jsp?id=" + id + "';");
-                out.println("</script>");
-            } else {
-                out.println("<script type=\"text/javascript\">");
-                out.println("location='./Admin/UpdateRestaurant.jsp?id=" + id + "';");
-                out.println("</script>");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(AddRestaurant.class.getName()).log(Level.SEVERE, null, ex);
+        PrintWriter out = response.getWriter();
+        int id = Integer.parseInt(request.getParameter("id"));
+        //Format date
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        String timeOp = request.getParameter("timeOpen").toString();
+        String timeCl = request.getParameter("timeClose").toString();
+        String name = request.getParameter("name").toString();
+        String address = request.getParameter("address").toString();
+        String phone = request.getParameter("phone").toString();
+        String image = request.getParameter("file").toString();
+        RestaurantDAO restaurantDAO = new RestaurantDAO();
+        boolean checkUpdate = false;
+        if (image != "") {
+            checkUpdate = restaurantDAO.updateRestaurant(id, name, timeOp, timeCl, address, phone, image);
+        } else {
+            checkUpdate = restaurantDAO.updateRestaurantNoImage(id, name, timeOp, timeCl, address, phone);
+        }
+        if (checkUpdate == true) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("location='./Admin/UpdateRestaurant.jsp?id=" + id + "';");
+            out.println("</script>");
+        } else {
+            out.println("<script type=\"text/javascript\">");
+            out.println("location='./Admin/UpdateRestaurant.jsp?id=" + id + "';");
+            out.println("</script>");
         }
     }
 
