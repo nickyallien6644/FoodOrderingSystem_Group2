@@ -37,7 +37,6 @@ public class OrderDAO {
     ArrayList<OrderMostBranch> orderMostBranchList;
     ArrayList<TotalRevenue> totalRevenueList;
     ArrayList<OrderShow> orderShowList;
-   
 
     public OrderDAO() {
         DBConnection db = new DBConnection();
@@ -326,5 +325,18 @@ public class OrderDAO {
         return false;
     }
 
+    public boolean updateStatusNofication(int aID) {
+
+        try {
+
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement("UPDATE `notification` SET `noStatus`= 1 WHERE `aID`= ?");
+            pst.setInt(1, aID);
+  
+
+            return pst.executeUpdate() > 0;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 
 }

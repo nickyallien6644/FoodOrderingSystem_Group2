@@ -9,7 +9,7 @@ public class Order {
     private int aID;
     private int rID;
     private int oAmountTotal;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date oDateCreate;
     private String oNote;
     private String oCode;

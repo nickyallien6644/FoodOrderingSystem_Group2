@@ -16,20 +16,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:cardCornerRadius="10dp">
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_selectdate"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="10dp">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_refesh"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="REFESH"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@color/Cam"/>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="SELECT DATE"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@color/Cam"/>
+                    android:layout_marginLeft="10dp"
+                    app:cardCornerRadius="10dp">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_selectdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="SELECT DATE"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@color/Cam"/>
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/datetime"
                 android:layout_width="match_parent"
@@ -40,6 +61,7 @@
                 android:textStyle="bold"
                 android:text="16/07/2021"
                 />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcy_orderhistory"
                 android:layout_width="match_parent"

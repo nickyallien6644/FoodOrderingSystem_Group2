@@ -49,7 +49,7 @@ import retrofit2.Response;
  */
 public class HistoryFragment extends Fragment {
 
-    AppCompatButton btn_selectdate;
+    AppCompatButton btn_selectdate,btn_refesh;
     TextView datetime;
     RecyclerView rcy_orderhistory;
     List<Order> listOrders;
@@ -73,6 +73,7 @@ public class HistoryFragment extends Fragment {
 
         rcy_orderhistory = v.findViewById(R.id.rcy_orderhistory);
         btn_selectdate = v.findViewById(R.id.btn_selectdate);
+        btn_refesh = v.findViewById(R.id.btn_refesh);
         datetime = v.findViewById(R.id.datetime);
 
         Date date = new Date();
@@ -104,6 +105,21 @@ public class HistoryFragment extends Fragment {
                     }
                 },year,month,day);
                 datePickerDialog.show();
+            }
+        });
+
+        btn_refesh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date = new Date();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                getAllOrderDetail();
+                getRestaurantInfo();
+
+                getLastOrders(df.format(date));
+
+                DateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+                datetime.setText(df2.format(date));
             }
         });
 

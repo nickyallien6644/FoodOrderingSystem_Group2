@@ -173,7 +173,7 @@ public class CheckoutActivity extends AppCompatActivity {
         intent.putExtra("note",note.getText().toString());
         intent.putExtra("time", String.valueOf(LocalDateTime.now()));
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String stringDate= dateFormat.format(date);
 
         String day = String.valueOf(date.getDay());

@@ -24,13 +24,13 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:src="@drawable/logo"
+            android:src="@drawable/ig_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.083"
-            tools:srcCompat="@drawable/logo" />
+            tools:srcCompat="@drawable/ig_logo" />
 
         <LinearLayout
             android:layout_marginTop="5dp"
