@@ -5,6 +5,8 @@
 --%>
 
 <%@page import="Models.Entity.Restaurant"%>
+<%@page import="Models.Entity.User"%>
+<%@page import="Models.Entity.RestaurantName"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Models.DAO.RestaurantDAO"%>
 <%@page import="Models.Entity.Account"%>
@@ -12,11 +14,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
-      <%
-      if (session.getAttribute("LoginUser") == null) {
-              response.sendRedirect("../../AdminDashboard/Login.jsp");
-      }
-  %>
+    <%String check = "";
+        if (request.getParameter("check") != null) {
+            check = request.getParameter("check");
+        }
+        if (session.getAttribute("LoginUser") == null) {
+            response.sendRedirect("../../AdminDashboard/Login.jsp");
+        } else {
+            User user = (User) session.getAttribute("LoginUser");
+            if (user != null) {
+                if (user.getRoleID() == 3 && check == "") {
+                    response.sendRedirect("../Employee/index.jsp");
+                } else if (user.getRoleID() == 4 && check == "") {
+                    response.sendRedirect("../Staff/index.jsp");
+                }
+            }
+
+    %>
     <head>
 
         <meta charset="UTF-8">
@@ -63,9 +77,15 @@
                             <li class="sidebar-title">Menu</li>
 
                             <li class="sidebar-item active">
-                                <a href="index.jsp" class='sidebar-link'>
+                                <a href="indexAdmin" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Datatable</span>
+                                    <span>Accounts</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="IndexRestaurant" class='sidebar-link'>
+                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <span>Restaurants</span>
                                 </a>
                             </li>
 
@@ -91,8 +111,7 @@
                                 <div class="x_panel">
                                     <div class="x_content">
                                         <form class="" action="${pageContext.request.contextPath}/UpdateAccount" method="post" novalidate>
-                                            <%
-                                                int id = 0;
+                                            <%                                                int id = 0;
                                                 if (request.getParameter("id") != null) {
                                                     id = Integer.parseInt(request.getParameter("id"));
                                                 }
@@ -110,7 +129,7 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" value="<%=account.getaFirstname()%>"  data-validate-length-range="3"  name="firstName" placeholder="Ex. John f" required="required" />
+                                                    <input class="form-control" value="<%=account.getaFirstname()%>"  data-validate-length-range="2"  name="firstName" placeholder="Ex. John f" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
@@ -135,21 +154,14 @@
                                                     <input value="<%=account.getaPhone()%>" class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Restaurant<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">New Password<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="selectRestaurant">
-                                                        <%
-                                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
-                                                            ArrayList<Restaurant> listRestaurants = new ArrayList<Restaurant>();
-                                                            listRestaurants = restaurantDAO.getAllRestaurant();
-                                                            for(int i=0;i<listRestaurants.size();i++){
-                                                        %>
-                                                        <option value=<%=listRestaurants.get(i).getrId()%> selected><%=listRestaurants.get(i).getrName()%></option>
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </select>
-                                                </div>
+                                                    <input class="form-control" type="password" name="password" title="Ex. john@123, Jenny@123" placeholder="Ex. john@123, jenny@123"/></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat New password<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="password" name="password2" data-validate-length-range="0" data-validate-linked='password'/></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
@@ -172,13 +184,39 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Restaurant<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select class="form-select" name="selectRestaurant">
+                                                        <%
+                                                            RestaurantDAO resDAO = new RestaurantDAO();
+                                                            ArrayList<RestaurantName> nameResAll = new ArrayList<RestaurantName>();
+                                                            nameResAll = resDAO.getAllNameRes();
+                                                            for (int i = 0; i < nameResAll.size(); i++) {
+                                                                if (account.getrId() == nameResAll.get(i).getrId()) {
+                                                        %>
+                                                        <option value="<%=nameResAll.get(i).getrId()%>" selected><%=nameResAll.get(i).getrName()%></option>
+                                                        <%
+                                                        } else {
+                                                        %>
+
+                                                        <option value="<%=nameResAll.get(i).getrId()%>" ><%=nameResAll.get(i).getrName()%></option>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
+                                                    </select>
+
+                                                </div>
+                                            </div>
                                             <%
                                                 }
                                             %>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE ACCOUNT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
@@ -240,3 +278,7 @@
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
     </body>
 </html>
+
+<%
+    }
+%>

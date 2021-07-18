@@ -242,20 +242,20 @@ var optionsIndonesia = {
 }
 
 
-
-var chartProfileVisitWeek = new ApexCharts(document.querySelector("#chart-profile-visit-Week"), optionsProfileVisitWeek);
-var chartProfileVisitMonth = new ApexCharts(document.querySelector("#chart-profile-visit-Month"), optionsProfileVisitMonth);
-var chartProfileVisitYear = new ApexCharts(document.querySelector("#chart-profile-visit-Year"), optionsProfileVisitYear);
-
-var chartVisitorsProfile = new ApexCharts(document.querySelector("#chart-visitors-profile"), optionsVisitorsProfile);
-var chartEurope = new ApexCharts(document.querySelector("#chart-europe"), optionsEurope);
-var chartAmerica = new ApexCharts(document.querySelector("#chart-america"), optionsAmerica);
-var chartIndonesia = new ApexCharts(document.querySelector("#chart-indonesia"), optionsIndonesia);
-
-chartIndonesia.render();
-chartAmerica.render();
-chartEurope.render();
-chartProfileVisitWeek.render();
-chartProfileVisitMonth.render();
-chartProfileVisitYear.render();
-chartVisitorsProfile.render();
+//
+//var chartProfileVisitWeek = new ApexCharts(document.querySelector("#chart-profile-visit-Week"), optionsProfileVisitWeek);
+//var chartProfileVisitMonth = new ApexCharts(document.querySelector("#chart-profile-visit-Month"), optionsProfileVisitMonth);
+//var chartProfileVisitYear = new ApexCharts(document.querySelector("#chart-profile-visit-Year"), optionsProfileVisitYear);
+//
+//var chartVisitorsProfile = new ApexCharts(document.querySelector("#chart-visitors-profile"), optionsVisitorsProfile);
+//var chartEurope = new ApexCharts(document.querySelector("#chart-europe"), optionsEurope);
+//var chartAmerica = new ApexCharts(document.querySelector("#chart-america"), optionsAmerica);
+//var chartIndonesia = new ApexCharts(document.querySelector("#chart-indonesia"), optionsIndonesia);
+//
+//chartIndonesia.render();
+//chartAmerica.render();
+//chartEurope.render();
+//chartProfileVisitWeek.render();
+//chartProfileVisitMonth.render();
+//chartProfileVisitYear.render();
+//chartVisitorsProfile.render();

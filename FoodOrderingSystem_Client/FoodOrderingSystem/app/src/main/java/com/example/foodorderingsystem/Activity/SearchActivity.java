@@ -40,11 +40,13 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getAllRes = new ArrayList<>();
         getAllRes();
 
         setContentView(R.layout.activity_search);
         searchView = (SearchView) findViewById(R.id.resultSearch);
         searchProduct = new ArrayList<>();
+
         listProductSearch = new ArrayList<>();
         getResult(listProductSearch);
 

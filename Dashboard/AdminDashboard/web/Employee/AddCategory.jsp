@@ -4,6 +4,7 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.User"%>
 <%@page import="Models.DAO.CategoryDAO"%>
 <%@page import="Models.Entity.Category"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,9 +14,17 @@
 
 <!DOCTYPE html>
 <%
-    if (session.getAttribute("LoginUser") == null || session.getAttribute("rID") == null) {
+    if (session.getAttribute("LoginUser") == null) {
         response.sendRedirect("../../AdminDashboard/Login.jsp");
-    }
+    } else {
+        User user = (User) session.getAttribute("LoginUser");
+        if (user != null) {
+            if (user.getRoleID() == 2) {
+                response.sendRedirect("../Admin/index.jsp");
+            } else if (user.getRoleID() == 4) {
+                response.sendRedirect("../Staff/index.jsp");
+            }
+        }
 %>
 <html lang=en>
     <head>
@@ -64,19 +73,19 @@
 
                             <li class="sidebar-item">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-calendar-check"></i>
                                     <span>Order management</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item active">
+                            <li class="sidebar-item ">
                                 <a href="productManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-shop"></i>
                                     <span>Product management</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item">
+                            <li class="sidebar-item active">
                                 <a href="CategoryManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-grid-fill"></i>
                                     <span>Category management</span>
                                 </a>
                             </li>
@@ -90,63 +99,33 @@
                     <div class="">
                         <div class="clearfix row">
                             <div class="col-2">
-                                <a href="/AdminDashboard/indexAdmin"><button type="button" class="btn btn-warning">Back</button></a>
+                                <a href="/AdminDashboard/CategoryManagement"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                                <h1>ADD PRODUCT</h1>
+                                <h1>ADD CATEGORY</h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
                                 <div class="x_panel">
                                     <div class="x_content">
-                                        <form class="" action="${pageContext.request.contextPath}/AddProduct" method="post" novalidate>
+                                        <form class="" action="${pageContext.request.contextPath}/AddCategory" method="post" novalidate>
                                             <span class="section"></span>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Name of product<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Name Category<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control"  data-validate-length-range="3"  name="txtName" placeholder="" required="required" />
+                                                    <input class="form-control"  data-validate-length-range="3"  name="name" placeholder="" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Price<span class="required">*</span></label>
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image Category<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" data-validate-length-range="3"  name="txtPrice" placeholder="" required="required" />
-                                                </div>
+                                                    <input class="form-control" type="text" id="file" class='file' name="file" required="required"/></div>
                                             </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Description<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" name="txtDescription" title="" placeholder="" required="required" type="text" /></div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <select class="form-select" name="selectCategory">
-                                                        <%
-                                                            ArrayList<Category> listsCategory = new ArrayList<Category>();
-                                                            CategoryDAO categoryDAO = new CategoryDAO();
-                                                            listsCategory = categoryDAO.getAllCategory();
-                                                            for (int i = 0; i < listsCategory.size(); i++) {
-
-                                                        %>
-                                                        <option value="<%=listsCategory.get(i).getcID()%>" selected><%=listsCategory.get(i).getcName()%></option>
-                                                        <%
-                                                            }
-                                                        %>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="field item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image<span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="text" name="txtImage" required='required' /></div>
-                                            </div>
-                                        <input class="form-control" type="hidden" name="txtrID" value="<%=((Integer) session.getAttribute("rID")).intValue()%>" /></div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">ADD</button>
+                                                        <button type='submit' class="btn btn-primary">ADD CATEGORY</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
@@ -207,3 +186,6 @@
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
     </body>
 </html>
+<%
+    }
+%>

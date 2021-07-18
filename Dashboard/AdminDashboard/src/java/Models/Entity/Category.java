@@ -7,46 +7,78 @@ package Models.Entity;
 
 /**
  *
- * @author MSI
+ * @author phuct
  */
 public class Category {
+
     private int cID;
     private String cName;
-    private String cURL;
+    private String iURL;
 
-    public Category(int cID, String cName, String cURL) {
-        this.cID = cID;
-        this.cName = cName;
-        this.cURL = cURL;
-    }
-    
-
+    /**
+     *Constructor
+     */
     public Category() {
     }
 
+    /**
+     *
+     * @param cID
+     * @param cName
+     * @param iURL
+     */
+    public Category(int cID, String cName, String iURL) {
+        this.cID = cID;
+        this.cName = cName;
+        this.iURL = iURL;
+    }
+
+    /**
+     *
+     * @return cID
+     */
     public int getcID() {
         return cID;
     }
 
+    /**
+     *
+     * @param cID
+     */
     public void setcID(int cID) {
         this.cID = cID;
     }
 
+    /**
+     *
+     * @return cName
+     */
     public String getcName() {
         return cName;
     }
 
+    /**
+     *
+     * @param cName
+     */
     public void setcName(String cName) {
         this.cName = cName;
     }
 
-    public String getcURL() {
-        return cURL;
+    /**
+     *
+     * @return iURL
+     */
+    public String getiURL() {
+        return iURL;
     }
 
-    public void setcURL(String cURL) {
-        this.cURL = cURL;
+    /**
+     *
+     * @param iURL
+     */
+    public void setiURL(String iURL) {
+        this.iURL = iURL;
     }
-    
-    
+
 }
