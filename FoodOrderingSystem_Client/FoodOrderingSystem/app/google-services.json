@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "667140661720",
+    "project_id": "secret-helper-314702",
+    "storage_bucket": "secret-helper-314702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667140661720:android:d2e621d037a6e00ac252ad",
+        "android_client_info": {
+          "package_name": "com.example.foodorderingsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667140661720-6eb9oaoesb5bdjb9s5uu2arato3u37vr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWx9ad_n_rv3UDiiPQ3WgBAbv0n7agUIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667140661720-6eb9oaoesb5bdjb9s5uu2arato3u37vr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

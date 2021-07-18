@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -68,7 +69,9 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
-
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
