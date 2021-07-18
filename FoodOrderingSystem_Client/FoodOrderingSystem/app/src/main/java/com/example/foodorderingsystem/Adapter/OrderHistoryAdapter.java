@@ -2,14 +2,11 @@ package com.example.foodorderingsystem.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -18,24 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodorderingsystem.Activity.OrderHistoryDetailActivity;
-import com.example.foodorderingsystem.Activity.RestaurantActivity;
 import com.example.foodorderingsystem.Model.Order;
 import com.example.foodorderingsystem.Model.OrderDetail;
-import com.example.foodorderingsystem.Model.Product;
 import com.example.foodorderingsystem.Model.Restaurant;
-import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
-import com.example.foodorderingsystem.Utils.Api;
-import com.example.foodorderingsystem.Utils.ApiInterface;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHistoryViewHolder> {
     Context context;
@@ -116,10 +104,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         public OrderHistoryViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             iv_store = itemView.findViewById(R.id.iv_store);
-            tv_namestore = itemView.findViewById(R.id.tv_namestore);
+            tv_namestore = itemView.findViewById(R.id.txt_nametore);
             tv_amountitem = itemView.findViewById(R.id.tv_amountitem);
             tv_price = itemView.findViewById(R.id.tv_price);
-            tv_Date = itemView.findViewById(R.id.tv_Date);
+            tv_Date = itemView.findViewById(R.id.txt_content);
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
