@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodorderingsystem.Adapter.CheckoutContentAdapter;
 import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.Model.Cart;
+import com.example.foodorderingsystem.Model.Notification;
 import com.example.foodorderingsystem.Model.Order;
 import com.example.foodorderingsystem.Model.Restaurant;
 import com.example.foodorderingsystem.Model.SessionManagement;
@@ -183,6 +184,7 @@ public class CheckoutActivity extends AppCompatActivity {
         String second = String.valueOf(date.getSeconds());
         intent.putExtra("code", String.valueOf(sessionManagement.getSessionFirstname().substring(0,1)+day+month+year+hour+minues+second));
 
+
         Order order = new Order();
         order.setaID(sessionManagement.getSession());
         order.setrID(listCart.get(0).getrID());
@@ -193,6 +195,8 @@ public class CheckoutActivity extends AppCompatActivity {
         order.setoStatus(0);
         AddOrder(order);
 
+        Notification  notification = new Notification(1,sessionManagement.getSession(),listCart.get(0).getrID(),"Your order has been confirmed by the administrator",0);
+        addNofi(notification);
         Account account = new Account();
         account.setaID(sessionManagement.getSession());
         account.setaCoins(bcoins - total);
@@ -205,4 +209,25 @@ public class CheckoutActivity extends AppCompatActivity {
         Intent intent2 = new Intent(CheckoutActivity.this, MainActivity.class);
         startActivity(intent2);
     }
+
+
+    public void addNofi (Notification notification){
+        apiInterface = Api.getClients();
+        Call<Notification> call= apiInterface.addNofication(notification);
+        call.enqueue(new Callback<Notification>() {
+            @Override
+            public void onResponse(Call<Notification> call, Response<Notification> response) {
+                if(response.isSuccessful()){
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Notification> call, Throwable t) {
+                Log.e("Error:",t.getMessage());
+            }
+        });
+
+    }
+
+
 }

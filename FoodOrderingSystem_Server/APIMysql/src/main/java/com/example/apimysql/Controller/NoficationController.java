@@ -1,6 +1,8 @@
 package com.example.apimysql.Controller;
 
 import com.example.apimysql.Model.Account;
+import com.example.apimysql.Model.Cart;
+import com.example.apimysql.Model.Notification;
 import com.example.apimysql.Service.AccountService;
 import com.example.apimysql.Service.NoficationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,15 @@ public class NoficationController {
     @GetMapping("/list/{ID}")
     public List<Map<String, Object>> ListNofication(@PathVariable("ID") String ID) {
         return noficationService.ListNofication(ID);
+    }
+
+    @PostMapping("/add")
+    public String add(@RequestBody Notification notification) {
+        int id = noficationService.addNofication(notification);
+        if(id == 0) {
+            return "Faile Add notification ";
+        }
+        return "Add notification is success";
     }
 
 }

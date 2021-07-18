@@ -1,13 +1,13 @@
 package com.example.foodorderingsystem.Model;
 
 public class Notification {
-    private int noID;
-    private int aID;
-    private int rID;
-    private String noContent;
-    private int noStatus;
+   private int noID;
+            private int aID;
+            private int rID;
+            private String noContent;
+            private int noStatus;
 
-    public Notification() {
+            public Notification() {
     }
 
     public Notification(int noID, int aID, int rID, String noContent, int noStatus) {

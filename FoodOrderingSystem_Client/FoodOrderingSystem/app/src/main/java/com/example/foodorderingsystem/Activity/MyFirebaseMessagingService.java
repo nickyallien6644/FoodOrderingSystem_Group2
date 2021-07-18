@@ -16,12 +16,30 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.example.foodorderingsystem.Model.Cart;
+import com.example.foodorderingsystem.Model.SessionManagement;
 import com.example.foodorderingsystem.R;
+import com.example.foodorderingsystem.Utils.Api;
+import com.example.foodorderingsystem.Utils.ApiInterface;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class MyFirebaseMessagingService   extends FirebaseMessagingService {
+import java.util.List;
+import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MyFirebaseMessagingService  extends FirebaseMessagingService {
+    String content;
+    public String status;
+    public int aid;
+    int rid;
+    List<Cart> listCart;
+    ApiInterface apiInterface;
+    com.example.foodorderingsystem.Model.Notification notification;
+    SessionManagement sessionManagement;
     private  static final  String TAG  = MyFirebaseMessagingService.class.getSimpleName();
     @Override
     public void onNewToken(@NonNull String token) {
@@ -37,14 +55,26 @@ public class MyFirebaseMessagingService   extends FirebaseMessagingService {
             createNotificationChannel();
         }
         Log.d(TAG,"Nofication: " + remoteMessage.getFrom());
-
-
+        sessionManagement = new SessionManagement(this);
+        aid = sessionManagement.getSession();
         if (remoteMessage.getNotification() != null){
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
             Log.d(TAG,"Nofication title:" +title + " - Body: " + body);
             sendNotification(remoteMessage.getNotification().getBody());
         }
+        
+        if(remoteMessage.getData().size() > 0){
+            for (Map.Entry<String,String> entry :remoteMessage.getData().entrySet()){
+                if (entry.getKey().equals("content")) {
+                    content = entry.getValue();
+                }else if(entry.getKey().equals("status")){
+                    status = entry.getValue();
+                }
+            }
+        }
+//        listCart = sessionManagement.getDataFromSharedPreferences();
+//        sessionManagement.addnofication(aid,content,1,listCart.get(0).getrID());
     }
 
     private void sendNotification(String messageBody) {
