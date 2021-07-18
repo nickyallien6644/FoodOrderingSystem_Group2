@@ -5,12 +5,15 @@
  */
 package UserController;
 
+import Models.DAO.AccountDAO;
 import Models.DAO.RestaurantDAO;
+import Models.Entity.Account;
+import Models.Entity.RestaurantName;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-public class AddRestaurant extends HttpServlet {
+@WebServlet(name = "UpdateAccount", urlPatterns = {"/UpdateAccount"})
+public class UpdateProfileSQL extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,24 +66,54 @@ public class AddRestaurant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        //ADD restaurant
-        String timeOp = request.getParameter("timeOpen").toString();
-        String timeCl = request.getParameter("timeClose").toString();
-        String name = request.getParameter("name").toString();
-        String address = request.getParameter("address").toString();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String first_name = request.getParameter("firstName").toString();
+        String last_name = request.getParameter("lastName").toString();
         String phone = request.getParameter("phone").toString();
-        String image = request.getParameter("file").toString();
-        RestaurantDAO restaurantDAO = new RestaurantDAO();
+        String address = request.getParameter("address").toString();
+        String email = request.getParameter("email").toString();
+
+        String newPass = request.getParameter("password").toString();
+
+        String status = request.getParameter("selectStatus").toString();
+        String resId = request.getParameter("selectRestaurant").toString();
+
+        int restaurantId = -1;
+        int selectStatus = -1;
+        RestaurantDAO resDAO = new RestaurantDAO();
+        ArrayList<RestaurantName> resNameList = new ArrayList<>();
+        resNameList = resDAO.getAllNameRes();
+
+        if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
+            selectStatus = 1;
+        } else if (status.equalsIgnoreCase("Inactive") || status.equalsIgnoreCase("0")) {
+            selectStatus = 0;
+        }
+
+        for (int i = 0; i < resNameList.size(); i++) {
+            if (resId.equalsIgnoreCase(resNameList.get(i).getrName()) || resId.equalsIgnoreCase(String.valueOf(resNameList.get(i).getrId()))) {
+                restaurantId = resNameList.get(i).getrId();
+            }
+        }
+
+        AccountDAO accountDAO = new AccountDAO();
         boolean checkUpdate = false;
-        //If insert success or no success, will redirect indexRestaurant.jsp
-        checkUpdate = restaurantDAO.insertRestaurant(name, timeOp, timeCl, address, phone, image);
+
+        if (selectStatus != -1 && restaurantId != -1 && newPass != "") {
+            checkUpdate = accountDAO.updateProfile(id, first_name, last_name, phone, email, address, selectStatus, restaurantId, newPass);
+        } else if (selectStatus != -1 && restaurantId != -1) {
+            checkUpdate = accountDAO.updateAccount(id, first_name, last_name, phone, email, address, selectStatus, restaurantId);
+        }
+        /*
+        &&check=pass
+         */
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/indexRestaurant.jsp';");
+            out.println("location='./Admin/UpdateProfile.jsp?id=" + id + "&&check=pass';");
             out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/AddRestaurant.jsp';");
+            out.println("location='./Admin/UpdateProfile.jsp?id=" + id + "&&check=pass';");
             out.println("</script>");
         }
     }

@@ -316,7 +316,7 @@
                                             <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Account</a></li>
+                                                <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="../logout">Logout</a></li>
                                             </ul>

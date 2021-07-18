@@ -119,13 +119,37 @@ public class AccountDAO {
         }
         return false;
     }
+    
+    public boolean updateProfile(int id, String first_name, String last_name, String phone, String email, String address, int status, int restaurantId, String newPass) {
+
+        try {
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement("UPDATE `account` SET `aEmail`=?, `aPassword`= MD5(?), `aFirstname`=?,`aLastname`=?,`aPhone`=?,`aAddress`=?,`aStatus`=?,`rID`=? WHERE `aID`=?");
+            pst.setString(1, email);
+            pst.setString(2, newPass);
+            pst.setString(3, first_name);
+            pst.setString(4, last_name);
+            pst.setString(5, phone);
+            pst.setString(6, address);
+            pst.setInt(7, status);
+            pst.setInt(8, restaurantId);
+            pst.setInt(9, id);
+            return pst.executeUpdate() > 0;
+        } catch (Exception e) {
+        }
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public boolean insertAccount(String first_name, String last_name, String phone, String email, String address, int role, String password, int restaurantId) {
 
         try {
             PreparedStatement pst = (PreparedStatement) con.prepareStatement("INSERT INTO `account`(`rID`, `roleID`, `aEmail`, `aPassword`, `aFirstname`, `aLastname`, `aPhone`, `aAddress`) VALUES (?,?,?,MD5(?),?,?,?,?)");
-            pst.setInt(1, role);
-            pst.setInt(2, restaurantId);
+            pst.setInt(1, restaurantId);
+            pst.setInt(2, role);
             pst.setString(3, email);
             pst.setString(4, password);
             pst.setString(5, first_name);

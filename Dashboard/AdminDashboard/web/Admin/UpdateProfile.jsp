@@ -14,15 +14,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
-    <%
+    <%String check = "";
+        if (request.getParameter("check") != null) {
+            check = request.getParameter("check");
+        }
         if (session.getAttribute("LoginUser") == null) {
             response.sendRedirect("../../AdminDashboard/Login.jsp");
         } else {
             User user = (User) session.getAttribute("LoginUser");
             if (user != null) {
-                if (user.getRoleID() == 3) {
+                if (user.getRoleID() == 3 && check == "") {
                     response.sendRedirect("../Employee/index.jsp");
-                } else if (user.getRoleID() == 4) {
+                } else if (user.getRoleID() == 4 && check == "") {
                     response.sendRedirect("../Staff/index.jsp");
                 }
             }
@@ -126,7 +129,7 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" value="<%=account.getaFirstname()%>"  data-validate-length-range="3"  name="firstName" placeholder="Ex. John f" required="required" />
+                                                    <input class="form-control" value="<%=account.getaFirstname()%>"  data-validate-length-range="2"  name="firstName" placeholder="Ex. John f" required="required" />
                                                 </div>
                                             </div>
                                             <div class="field item form-group">
@@ -149,6 +152,16 @@
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
                                                     <input value="<%=account.getaPhone()%>" class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">New Password<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="password" name="password" title="Ex. john@123, Jenny@123" placeholder="Ex. john@123, jenny@123"/></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat New password<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="password" name="password2" data-validate-length-range="0" data-validate-linked='password'/></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Status<span class="required">*</span></label>
@@ -191,7 +204,6 @@
                                                         <option value="<%=nameResAll.get(i).getrId()%>" ><%=nameResAll.get(i).getrName()%></option>
                                                         <%
                                                                 }
-
                                                             }
                                                         %>
                                                     </select>
@@ -204,7 +216,7 @@
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE ACCOUNT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>

@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateAccount</servlet-name>
-        <servlet-class>UserController.UpdateAccount</servlet-class>
+        <servlet-class>UserController.UpdateProfileSQL</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>indexAdmin</servlet-name>
@@ -63,6 +63,30 @@
     <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>UserController.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryManagement</servlet-name>
+        <servlet-class>UserController.CategoryManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategory</servlet-name>
+        <servlet-class>UserController.UpdateCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategorySQL</servlet-name>
+        <servlet-class>UserController.UpdateCategorySQL</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCategory</servlet-name>
+        <servlet-class>UserController.AddCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountSQL</servlet-name>
+        <servlet-class>UserController.UpdateAccountSQL</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccounts</servlet-name>
+        <servlet-class>UserController.UpdateAccount</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Signin</servlet-name>
@@ -127,6 +151,30 @@
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
         <url-pattern>/AddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryManagement</servlet-name>
+        <url-pattern>/CategoryManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategory</servlet-name>
+        <url-pattern>/UpdateCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategorySQL</servlet-name>
+        <url-pattern>/UpdateCategorySQL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCategory</servlet-name>
+        <url-pattern>/AddCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountSQL</servlet-name>
+        <url-pattern>/UpdateAccountSQL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccounts</servlet-name>
+        <url-pattern>/UpdateAccounts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

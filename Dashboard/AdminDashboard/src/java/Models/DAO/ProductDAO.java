@@ -67,10 +67,7 @@ public class ProductDAO {
                 getProduct.setCategory(rs.getInt("cID"));
                 getProduct.setPrice(rs.getInt("pPrice"));
                 getProduct.setpDescription(rs.getString("pDescription"));
-                getProduct.setpID(rs.getInt("rID"));
                 getProduct.setiURL(rs.getString("iURL"));
-                //iURL
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);

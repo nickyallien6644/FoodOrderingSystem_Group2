@@ -64,21 +64,20 @@
                             <li class="sidebar-title">Menu</li>
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-calendar-check"></i>
                                     <span>Order management</span>
                                 </a>
                             </li>
-
                             <li class="sidebar-item  ">
                                 <a href="productManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-envelope-fill"></i>
+                                    <i class="bi bi-shop"></i>
                                     <span>Product management</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item  ">
                                 <a href="CategoryManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-envelope-fill"></i>
+                                    <i class="bi bi-grid-fill"></i>
                                     <span>Category management</span>
                                 </a>
                             </li>
@@ -96,7 +95,7 @@
                 </header>
 
                 <div class="page-heading">
-                    <h3>Order management</h3>
+                    <h2>ORDER MANAGEMENT</h2>
                 </div>
                 <div class="page-title">
                     <div class="row">
@@ -137,7 +136,7 @@
                                             <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Account</a></li>
+                                                <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="../logout">Logout</a></li>
                                             </ul>
@@ -151,9 +150,6 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-body">
-                            <div class="">
-                                <button class="btn btn-primary" onclick="reload()" style="margin-left: 10px; font-size: 80%">Refresh</button>
-                            </div>
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>

@@ -99,15 +99,6 @@
                             <div class="col-5 ml-5 pl-4">
                                 <h3>INFORMATION RESTAURANT</h3>
                             </div>
-                            <!--                            <div class="col-sm-2 imgUp">
-                                                            <div class="imagePreview">H</div>-->
-
-                            <!--                            <div class="col-sm-2 imgUp">
-                                                            <div class="imagePreview"></div>
-                                                            <label class="btn btn-primary">
-                                                                Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
-                                                            </label>
-                                                        </div>-->
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-10">
@@ -153,7 +144,7 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class=" uploadFile img form-control " type="file" id="file" class='file' value="<%=restaurant.getrImage()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
+                                                    <input class=" uploadFile img form-control " type="text" id="file" class='file' value="<%=restaurant.getrImage()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">

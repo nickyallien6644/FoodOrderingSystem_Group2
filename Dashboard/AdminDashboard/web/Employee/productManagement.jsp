@@ -64,21 +64,22 @@
                     <div class="sidebar-menu">
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
-                            <li class="sidebar-item ">
+                            <li class="sidebar-item">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-calendar-check"></i>
                                     <span>Order management</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="productManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-shop"></i>
                                     <span>Product management</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item">
+
+                            <li class="sidebar-item  ">
                                 <a href="CategoryManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-grid-fill"></i>
                                     <span>Category management</span>
                                 </a>
                             </li>
@@ -96,7 +97,7 @@
                 </header>
 
                 <div class="page-heading">
-                    <h3>Order management</h3>
+                    <h2>PRODUCT MANAGEMENT</h2>
                 </div>
                 <div class="page-title">
                     <div class="row">
@@ -137,7 +138,7 @@
                                             <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Account</a></li>
+                                                <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="../logout">Logout</a></li>
                                             </ul>
@@ -152,10 +153,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row" style="margin-bottom: -5px">
-                                <div class="col-7" >
-                                    <button class="btn btn-primary" onclick="reload()" style="margin-left: 10px; font-size: 80%">Refresh</button>
-                                </div>
-                                <div class="col-5" style="text-align: right">
+                                <div class="col-12" style="text-align: right">
                                     <a href="AddProduct.jsp"><button class="btn bg-light-success font-bold mx-2">Add new product</button></a>
                                 </div>
                             </div>

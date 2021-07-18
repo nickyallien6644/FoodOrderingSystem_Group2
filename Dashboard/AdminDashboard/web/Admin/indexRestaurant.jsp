@@ -68,13 +68,13 @@
 
                             <li class="sidebar-item ">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>
@@ -110,7 +110,7 @@
                                             Information
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Account</a></li>
+                                            <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item logout"  href="../logout">Logout</a></li>
                                         </ul>

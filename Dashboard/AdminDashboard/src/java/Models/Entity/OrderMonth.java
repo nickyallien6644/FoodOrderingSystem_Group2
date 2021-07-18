@@ -16,26 +16,50 @@ public class OrderMonth {
     private Date month;
     private int count;
 
+    /**
+     *
+     */
     public OrderMonth() {
     }
 
+    /**
+     *
+     * @param date
+     * @param count
+     */
     public OrderMonth(Date date, int count) {
         this.month = date;
         this.count = count;
     }
 
+    /**
+     *
+     * @return month
+     */
     public Date getMonth() {
         return month;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setMonth(Date date) {
         this.month = date;
     }
 
+    /**
+     *
+     * @return count
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     *
+     * @param count
+     */
     public void setCount(int count) {
         this.count = count;
     }

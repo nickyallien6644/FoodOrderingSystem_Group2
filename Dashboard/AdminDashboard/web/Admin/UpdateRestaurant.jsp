@@ -149,12 +149,12 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="file" id="file" class='file' value="<%=restaurant.getrImage()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
+                                                    <input class="form-control" type="text" id="file" class='file' value="<%=restaurant.getrImage()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE RESTAURANT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>

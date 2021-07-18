@@ -16,26 +16,50 @@ public class OrderWeek {
     private int count;
     private Date dayOfWeek;
 
+    /**
+     * Constructor
+     */
     public OrderWeek() {
     }
 
+    /**
+     *
+     * @param dayOfWeek
+     * @param count
+     */
     public OrderWeek(Date dayOfWeek, int count) {
         this.dayOfWeek = dayOfWeek;
         this.count = count;
     }
 
+    /**
+     *
+     * @return dayOfWeek
+     */
     public Date getDayOfWeek() {
         return dayOfWeek;
     }
 
+    /**
+     *
+     * @param dayOfWeek
+     */
     public void setDayOfWeek(Date dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
+    /**
+     *
+     * @return count
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     *
+     * @param count
+     */
     public void setCount(int count) {
         this.count = count;
     }

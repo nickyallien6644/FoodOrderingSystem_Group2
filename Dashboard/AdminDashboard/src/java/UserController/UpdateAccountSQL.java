@@ -5,9 +5,12 @@
  */
 package UserController;
 
-import Models.DAO.ProductDAO;
+import Models.DAO.AccountDAO;
+import Models.DAO.RestaurantDAO;
+import Models.Entity.RestaurantName;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-public class AddProduct extends HttpServlet {
+public class UpdateAccountSQL extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,37 +62,50 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //ADD product
         PrintWriter out = response.getWriter();
-        //Inclue rId, pName, pPrice, description, image, category
-        int rId = Integer.parseInt(request.getParameter("id").toString());
-        String pName = request.getParameter("name").toString();
-        int pPrice = Integer.parseInt(request.getParameter("price").toString());
-        String description = request.getParameter("description").toString();
-        String image = request.getParameter("file").toString();
-        int category = Integer.parseInt(request.getParameter("category").toString());
-        //init ProductDAO
-        ProductDAO productDAO = new ProductDAO();
-        //if insert product success will return Max(pId)
-        int checkInsert = 0;
-        boolean check = false;
+        int id = Integer.parseInt(request.getParameter("id"));
+        String first_name = request.getParameter("firstName").toString();
+        String last_name = request.getParameter("lastName").toString();
+        String phone = request.getParameter("phone").toString();
+        String address = request.getParameter("address").toString();
+        String email = request.getParameter("email").toString();
+        String status = request.getParameter("selectStatus").toString();
+        String resId = request.getParameter("selectRestaurant").toString();
 
-        checkInsert = productDAO.insertProduct(pName, pPrice, description, category, rId);
-        if (checkInsert != 0) {
-            //If check insert !=0, will continue insert image
-            check = productDAO.insertImage(checkInsert, image);
-            if (check == true) {
-                out.println("<script type=\"text/javascript\">");
-                out.println("location='./Employee/productManagement.jsp';");
-                out.println("</script>");
-            } else {
-                out.println("<script type=\"text/javascript\">");
-                out.println("location='./Employee/AddProduct.jsp';");
-                out.println("</script>");
+        int restaurantId = -1;
+        int selectStatus = -1;
+        RestaurantDAO resDAO = new RestaurantDAO();
+        ArrayList<RestaurantName> resNameList = new ArrayList<>();
+        resNameList = resDAO.getAllNameRes();
+
+        if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
+            selectStatus = 1;
+        } else if (status.equalsIgnoreCase("Inactive") || status.equalsIgnoreCase("0")) {
+            selectStatus = 0;
+        }
+
+        for (int i = 0; i < resNameList.size(); i++) {
+            if (resId.equalsIgnoreCase(resNameList.get(i).getrName()) || resId.equalsIgnoreCase(String.valueOf(resNameList.get(i).getrId()))) {
+                restaurantId = resNameList.get(i).getrId();
             }
+        }
+
+        AccountDAO accountDAO = new AccountDAO();
+        boolean checkUpdate = false;
+
+        if (selectStatus != -1 && restaurantId != -1) {
+            checkUpdate = accountDAO.updateAccount(id, first_name, last_name, phone, email, address, selectStatus, restaurantId);
+        }
+        /*
+        &&check=pass
+         */
+        if (checkUpdate == true) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("location='./Admin/UpdateAccount.jsp?id=" + id + "';");
+            out.println("</script>");
         } else {
             out.println("<script type=\"text/javascript\">");
-            out.println("location='./Employee/AddProduct.jsp';");
+            out.println("location='./Admin/UpdateAccount.jsp?id=" + id + "';");
             out.println("</script>");
         }
     }

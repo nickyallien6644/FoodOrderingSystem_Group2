@@ -74,13 +74,13 @@
 
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>

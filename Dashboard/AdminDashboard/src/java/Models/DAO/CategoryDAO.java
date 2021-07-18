@@ -41,6 +41,7 @@ public class CategoryDAO {
                 Category category = new Category();
                 category.setcID(rs.getInt("cID"));
                 category.setcName(rs.getString("cName"));
+                category.setiURL(rs.getString("cURL"));
                 listCategorys.add(category);
             }
 
@@ -67,6 +68,7 @@ public class CategoryDAO {
                 category = new Category();
                 category.setcID(rs.getInt("cID"));
                 category.setcName(rs.getString("cName"));
+                category.setiURL(rs.getString("cURL"));
             }
 
         } catch (SQLException ex) {

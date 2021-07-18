@@ -78,18 +78,22 @@
 
                             <li class="sidebar-item ">
                                 <a href="indexOrderManagement" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-calendar-check"></i>
                                     <span>Order management</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="ProductManagement" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-shop"></i>
                                     <span>Product management</span>
                                 </a>
                             </li>
-
-
+                            <li class="sidebar-item  ">
+                                <a href="CategoryManagement" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Category management</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -103,7 +107,7 @@
                                 <a href="/AdminDashboard/ProductManagement"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                                <h1>UPDATE ACCOUNT</h1>
+                                <h1>UPDATE PRODUCT</h1>
                             </div>
                         </div>
                         <div class="row">
@@ -118,6 +122,7 @@
                                                 if (id != 0) {
                                                     ProductDAO productDAO = new ProductDAO();
                                                     GetProduct product = productDAO.getProductById(id);
+                                                    System.out.println("imageeeeeee " + product.getiURL());
 
                                             %>
                                             <span class="section"></span>
@@ -145,7 +150,7 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Product<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="file" id="file" class='file' value="<%=product.getiURL()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
+                                                    <input class="form-control" type="text" id="file" class='file' value="<%=product.getiURL()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
@@ -155,7 +160,7 @@
                                                             ArrayList<Category> categoryList = new ArrayList<Category>();
                                                             categoryList = productDAO.getCategoryById();
                                                             for (int i = 0; i < categoryList.size(); i++) {
-                                                                if (categoryList.get(i).getcID() == product.getcId()) {
+                                                                if (categoryList.get(i).getcID() == product.getCategory()) {
                                                         %>
                                                         <option value="<%=categoryList.get(i).getcID()%>" selected><%=categoryList.get(i).getcName()%></option>
                                                         <%
@@ -175,7 +180,7 @@
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">UPDATE</button>
+                                                        <button type='submit' class="btn btn-primary">UPDATE PRODUCT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>

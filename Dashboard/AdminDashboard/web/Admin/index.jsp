@@ -65,13 +65,13 @@
 
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>
@@ -107,7 +107,7 @@
                                             Information
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Account</a></li>
+                                            <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item logout"  href="../logout">Logout</a></li>
                                         </ul>
@@ -226,7 +226,7 @@
                 var $text = $row.find(".id").text(); // Find the text
 
                 if ($text) {
-                    var url = "/AdminDashboard/UpdateProfile?id=" + $text;
+                    var url = "/AdminDashboard/UpdateAccounts?id=" + $text;
                     window.location.href = url;
                 }
                 // Let's test it out

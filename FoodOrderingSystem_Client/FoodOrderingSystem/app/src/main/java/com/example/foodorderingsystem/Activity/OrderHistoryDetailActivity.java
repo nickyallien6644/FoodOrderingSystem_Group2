@@ -101,7 +101,7 @@ public class OrderHistoryDetailActivity extends AppCompatActivity {
         tv_code.setText(oCode);
         if(oStatus == 1){
             tv_status.setText("CONFIRMED");
-            tv_status.setTextColor(ContextCompat.getColor(OrderHistoryDetailActivity.this, R.color.Xanh));
+            tv_status.setTextColor(ContextCompat.getColor(OrderHistoryDetailActivity.this, R.color.confirm));
         }else{
             tv_status.setText("UNCONFIRMED");
             tv_status.setTextColor(ContextCompat.getColor(OrderHistoryDetailActivity.this, R.color.red));

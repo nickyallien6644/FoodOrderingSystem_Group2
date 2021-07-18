@@ -73,13 +73,13 @@
 
                             <li class="sidebar-item ">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>
@@ -136,12 +136,12 @@
                                             <div class="field item form-group">
                                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Image Restaurant<span class="required">*</span></label>
                                                 <div class="col-md-6 col-sm-6">
-                                                    <input class="form-control" type="file" class='file' name="file" required='required' accept="image/png, image/jpg, image/jpeg" /></div>
+                                                    <input class="form-control" type="text" class='file' name="file" required='required' accept="image/png, image/jpg, image/jpeg" /></div>
                                             </div>
                                             <div class="ln_solid">
                                                 <div class="form-group">
                                                     <div class="col-md-6 offset-md-3">
-                                                        <button type='submit' class="btn btn-primary">ADD</button>
+                                                        <button type='submit' class="btn btn-primary">ADD ACCOUNT</button>
                                                         <button type='reset' class="btn btn-success">Reset</button>
                                                     </div>
                                                 </div>
