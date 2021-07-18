@@ -29,4 +29,10 @@ public class OrderDAO implements OrderInterface {
         List<Map<String, Object>> query = template.queryForList("Select * FROM `order` ORDER BY `oID` DESC");
         return query;
     }
+
+    @Override
+    public List<Map<String, Object>> getOrdersDate(String date) {
+        List<Map<String, Object>> query = template.queryForList("Select * FROM `order` WHERE `oDateCreate` BETWEEN  '"+date+" 00:00:00' AND '"+date+" 23:59:59' ORDER BY `oID` DESC");
+        return query;
+    }
 }

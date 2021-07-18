@@ -30,4 +30,9 @@ public class OrderController {
     public List<Map<String, Object>> getOrders() {
         return orderService.getOrders();
     }
+
+    @GetMapping("/list/{date}")
+    public List<Map<String, Object>> getOrdersDate(@PathVariable("date")String date) {
+        return orderService.getOrdersDate(date);
+    }
 }
