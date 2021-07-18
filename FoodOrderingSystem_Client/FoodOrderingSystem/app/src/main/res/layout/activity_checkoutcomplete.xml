@@ -234,6 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/Cam"
+            android:backgroundTint="@color/Cam"
             app:icon="@drawable/outline_home_24"
             app:iconSize="50dp"
             app:iconGravity="top"/>

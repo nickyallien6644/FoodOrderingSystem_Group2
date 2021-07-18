@@ -3,6 +3,8 @@ package com.example.foodorderingsystem.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Time;
+
 
 public class Restaurant {
     @SerializedName("rID")

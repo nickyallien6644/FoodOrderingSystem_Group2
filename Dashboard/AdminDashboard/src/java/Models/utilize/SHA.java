@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Class SHA
- * @autor tú
+ * @autor Tu
  */
 
 public class SHA {
