@@ -7,8 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+<%
+    session.invalidate();
+%>
 <html lang="en">
-        <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Food Ordering System - Dashboard</title>
@@ -23,80 +26,80 @@
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     </head>
-              <script text="text/javascript">
-                    $(document).ready(function () {
-                        $("#form").validate({
-                            errorClass: 'error',
-                            rules: {
-                                //check username input cannot null, min length 8 and max length 30
-                                 SigninName: {
-                                   required: true,
-                                    checkemail: true
-                                   
-                                },
-                                /**
-                                 * check password input cannot null, min length 8 and max length 30, 
-                                 * and check password must have uuppercase letter , has a digit and special characters
-                                 */
-                                SigninPassword: {
-                                    required: true,
-                                    minlength: 8,
-                                    maxlength: 20,
-                                    checkpass: true
-                                },
-                            },
-                            messages: {
-                                //message warning input username
-                                SigninName: {
-                                    required: "<span class='text-danger'>Please enter email</span>",
-                                    checkemail: " <span class='text-danger '>Invalid Email</span>"
-                                    
-                                },
-                                //message warning input password
-                               SigninPassword: {
-                                    required: "<span class='text-danger '>Please enter password</span>",
-                                    minlength: "<span class='text-danger '>Password must be greater than 8 characters</span>",
-                                    maxlength: "<span class='text-danger '>Password must be smaller than 20 characters</span>",
-                                    checkpass: "<span class='text-danger '>Password must be has a uppercase letter , has a digit and special characters !</span>"
-                                },  
-                            }
-                        });
-                        $.validator.addMethod("checkpass", function (value) {
-                            var passReg = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;// regex check password
-                            return passReg.test(value);
-                        });
-                        $.validator.addMethod("checkemail", function (value) {
-                            var emailReg = /^[a-zA-z0-9]+([.\-\_][a-zA-z0-9]+)*@[a-zA-z0-9]+([.\-\_][a-zA-z0-9]+)*(.[a-zA-z0-9]{2,})+$/; // regex check email
-                            return emailReg.test(value);
-                        });
-                        $.validator.addMethod("checkurl", function (value) {
-                            var webReg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/; // regex check url website 
-                            
-                            return webReg.test(value);
-                        });
-                       
-                          $.validator.addMethod("checktxtuser", function (value) {
-                            var webReg = /^[A-Za-z]+(()[A-Za-z]+)$/;
-        //                    let  r  = /^[A-Za-z]+(( )[A-Za-z]+*) +(( )?[A-Za-z]*)$/;
-                            if(webReg.test(value)){
-                                return true;
-                            }else
-                                return  false;
-                        });
-                    });
-                </script>
+    <script text="text/javascript">
+        $(document).ready(function () {
+            $("#form").validate({
+                errorClass: 'error',
+                rules: {
+                    //check username input cannot null, min length 8 and max length 30
+                    SigninName: {
+                        required: true,
+                        checkemail: false
 
+                    },
+                    /**
+                     * check password input cannot null, min length 8 and max length 30, 
+                     * and check password must have uuppercase letter , has a digit and special characters
+                     */
+                    SigninPassword: {
+                        required: true,
+//                                    minlength: 8,
+//                                    maxlength: 20,
+//                                    checkpass: true
+                    },
+                },
+                messages: {
+                    //message warning input username
+                    SigninName: {
+                        required: "<span class='text-danger'>Please enter email</span>",
+//                                    checkemail: " <span class='text-danger '>Invalid Email</span>"
 
-  <%
-      if (request.getAttribute("message") != null) {
-              String s =  request.getAttribute("message").toString();
-          %>
-    <script>
-        alert("Cant't Login \n Wrong username or password ..");   
+                    },
+                    //message warning input password
+                    SigninPassword: {
+                        required: "<span class='text-danger '>Please enter password</span>",
+//                                    minlength: "<span class='text-danger '>Password must be greater than 8 characters</span>",
+//                                    maxlength: "<span class='text-danger '>Password must be smaller than 20 characters</span>",
+//                                    checkpass: "<span class='text-danger '>Password must be has a uppercase letter , has a digit and special characters !</span>"
+                    },
+                }
+            });
+//                        $.validator.addMethod("checkpass", function (value) {
+//                            var passReg = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;// regex check password
+//                            return passReg.test(value);
+//                        });
+//                        $.validator.addMethod("checkemail", function (value) {
+//                            var emailReg = /^[a-zA-z0-9]+([.\-\_][a-zA-z0-9]+)*@[a-zA-z0-9]+([.\-\_][a-zA-z0-9]+)*(.[a-zA-z0-9]{2,})+$/; // regex check email
+//                            return emailReg.test(value);
+//                        });
+            $.validator.addMethod("checkurl", function (value) {
+                var webReg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/; // regex check url website 
+
+                return webReg.test(value);
+            });
+
+            $.validator.addMethod("checktxtuser", function (value) {
+                var webReg = /^[A-Za-z]+(()[A-Za-z]+)$/;
+                //                    let  r  = /^[A-Za-z]+(( )[A-Za-z]+*) +(( )?[A-Za-z]*)$/;
+                if (webReg.test(value)) {
+                    return true;
+                } else
+                    return  false;
+            });
+        });
     </script>
-  <%
-      }
-  %>
+
+
+    <%
+        if (request.getAttribute("message") != null) {
+            String s = request.getAttribute("message").toString();
+    %>
+    <script>
+        alert("Cant't Login \n Wrong username or password ..");
+    </script>
+    <%
+        }
+    %>
     <body>
         <div id="auth">
 
@@ -111,7 +114,7 @@
 
                         <form action="Signin" id="form" method="POST" onsubmit="validateMyForm();">
                             <div class="form-group position-relative has-icon-left mb-4">
-                                
+
                                 <input type="text" class="form-control form-control-xl" id="SigninName" name="SigninName"  required placeholder="Email">
                             </div>
                             <div class="form-group position-relative has-icon-left mb-4">

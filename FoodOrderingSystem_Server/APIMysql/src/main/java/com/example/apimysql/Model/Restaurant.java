@@ -1,24 +1,28 @@
 package com.example.apimysql.Model;
 
 
+import java.sql.Time;
+
 public class Restaurant {
     private int rID;
     private String rName;
-    private String rTimeOpen;
-    private String rTimeClose;
+    private Time rTimeOpen;
+    private Time rTimeClose;
     private String rAddress;
     private String rPhone;
+    private String rImage;
 
     public Restaurant() {
     }
 
-    public Restaurant(int rID, String rName, String rTimeOpen, String rTimeClose, String rAddress, String rPhone, int pID) {
+    public Restaurant(int rID, String rName, Time rTimeOpen, Time rTimeClose, String rAddress, String rPhone, int pID) {
         this.rID = rID;
         this.rName = rName;
         this.rTimeOpen = rTimeOpen;
         this.rTimeClose = rTimeClose;
         this.rAddress = rAddress;
         this.rPhone = rPhone;
+        this.rImage = rImage;
     }
 
     public int getrID() {
@@ -37,19 +41,19 @@ public class Restaurant {
         this.rName = rName;
     }
 
-    public String getrTimeOpen() {
+    public Time getrTimeOpen() {
         return rTimeOpen;
     }
 
-    public void setrTimeOpen(String rTimeOpen) {
+    public void setrTimeOpen(Time rTimeOpen) {
         this.rTimeOpen = rTimeOpen;
     }
 
-    public String getrTimeClose() {
+    public Time getrTimeClose() {
         return rTimeClose;
     }
 
-    public void setrTimeClose(String rTimeClose) {
+    public void setrTimeClose(Time rTimeClose) {
         this.rTimeClose = rTimeClose;
     }
 
@@ -67,5 +71,13 @@ public class Restaurant {
 
     public void setrPhone(String rPhone) {
         this.rPhone = rPhone;
+    }
+
+    public String getrImage() {
+        return rImage;
+    }
+
+    public void setrImage(String rImage) {
+        this.rImage = rImage;
     }
 }

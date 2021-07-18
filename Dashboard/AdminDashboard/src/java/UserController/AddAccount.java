@@ -60,6 +60,7 @@ public class AddAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //ADD new account for staff and employee
         PrintWriter out = response.getWriter();
         String first_name = request.getParameter("firstName").toString();
         String last_name = request.getParameter("lastName").toString();
@@ -67,14 +68,16 @@ public class AddAccount extends HttpServlet {
         String address = request.getParameter("address").toString();
         String email = request.getParameter("email").toString();
         String password = request.getParameter("password").toString();
-//        int role = Integer.parseInt(request.getParameter("selectStatus").toString());
-        int role = 3;
+        int roleId = Integer.parseInt(request.getParameter("selectStatus").toString());
+        int restaurantId = Integer.parseInt(request.getParameter("selectRestaurant").toString());
+
         AccountDAO accountDAO = new AccountDAO();
-        
+
         boolean checkUpdate = false;
 
-        checkUpdate = accountDAO.insertAccount(first_name, last_name, phone, email, address, role, password);
+        checkUpdate = accountDAO.insertAccount(first_name, last_name, phone, email, address, roleId, password, restaurantId);
 
+        //senRedirect to index.jsp when update success or not success
         if (checkUpdate == true) {
             out.println("<script type=\"text/javascript\">");
             out.println("location='./Admin/index.jsp';");
@@ -84,7 +87,6 @@ public class AddAccount extends HttpServlet {
             out.println("location='./Admin/AddAccount.jsp';");
             out.println("</script>");
         }
-
     }
 
     /**

@@ -4,16 +4,30 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.User"%>
+<%@page import="Models.Entity.RestaurantName"%>
+<%@page import="Models.DAO.RestaurantDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.Entity.Restaurant"%>
 <%@page import="Models.Entity.Account"%>
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
-      <%
-      if (session.getAttribute("LoginUser") == null) {
-              response.sendRedirect("../../AdminDashboard/Login.jsp");
-      }
-  %>
+    <%
+        if (session.getAttribute("LoginUser") == null) {
+            response.sendRedirect("../../AdminDashboard/Login.jsp");
+        } else {
+            User user = (User) session.getAttribute("LoginUser");
+            if (user != null) {
+                if (user.getRoleID() == 3) {
+                    response.sendRedirect("../Employee/index.jsp");
+                } else if (user.getRoleID() == 4) {
+                    response.sendRedirect("../Staff/index.jsp");
+                }
+            }
+
+    %>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -60,8 +74,14 @@
 
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                    <span>Datatable</span>
+                                    <i class="bi bi-person-badge"></i>
+                                    <span>Accounts</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="indexRestaurant.jsp" class='sidebar-link'>
+                                    <i class="bi bi-house"></i>
+                                    <span>Restaurants</span>
                                 </a>
                             </li>
 
@@ -79,7 +99,7 @@
                                 <a href="/AdminDashboard/indexAdmin"><button type="button" class="btn btn-warning">Back</button></a>
                             </div>
                             <div class="col-5 ml-5 pl-4">
-                            <h1>SIGN UP ACCOUNT</h1>
+                                <h1>SIGN UP ACCOUNT</h1>
                             </div>
                         </div>
                         <div class="row">
@@ -136,6 +156,30 @@
                                                     <select class="form-select" name="selectStatus">
                                                         <option value="4" selected>Staff</option>
                                                         <option value="3">Employee</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Restaurant<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select class="form-select" name="selectRestaurant">
+                                                        <%                                                            RestaurantDAO resDAO = new RestaurantDAO();
+                                                            ArrayList<RestaurantName> nameResAll = new ArrayList<RestaurantName>();
+                                                            nameResAll = resDAO.getAllNameRes();
+                                                            for (int i = 0; i < nameResAll.size(); i++) {
+                                                                if (i == 0) {
+                                                        %>
+                                                        <option value="<%=nameResAll.get(i).getrId()%>" selected><%=nameResAll.get(i).getrName()%></option>
+                                                        <%
+                                                        } else {
+                                                        %>
+
+                                                        <option value="<%=nameResAll.get(i).getrId()%>" ><%=nameResAll.get(i).getrName()%></option>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
                                                     </select>
                                                 </div>
                                             </div>
@@ -203,3 +247,6 @@
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
     </body>
 </html>
+<%
+    }
+%>

@@ -32,18 +32,21 @@ public class SearchActivity extends AppCompatActivity {
     List<Product> searchProduct;
     List<Product> resultSearch;
     List<Restaurant> getAllRes;
+    List<Product> listProductSearch;
+    List<Product> listProductSearchForFood;
     boolean checkResult = false, checkChangeText = false;
     String search = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getAllRes = new ArrayList<>();
         getAllRes();
-        List<Product> listProductSearch;
+
         setContentView(R.layout.activity_search);
         searchView = (SearchView) findViewById(R.id.resultSearch);
         searchProduct = new ArrayList<>();
-        getAllRes = new ArrayList<>();
+
         listProductSearch = new ArrayList<>();
         getResult(listProductSearch);
 
@@ -133,6 +136,78 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void getResultForFood(List<Product> listProductSearchForFood) {
+        apiInterface = Api.getClients();
+
+        resultSearch = new ArrayList<>();
+        Intent intent = getIntent();
+        if (intent.getStringExtra("searchForFood") != null) {
+            search = intent.getStringExtra("searchForFood");
+        }
+        Call<List<Product>> call = apiInterface.getProductByFood();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                resultSearch = (ArrayList) response.body();
+                if (!search.equals(null)) {
+                    searchView.setQuery(search, false);
+                    for (Product product : resultSearch) {
+                        if (product.getpName().toLowerCase().contains(search.toLowerCase())) {
+                            listProductSearchForFood.add(product);
+                            checkResult = true;
+                        }
+                    }
+                    if (listProductSearchForFood.size() == 0) {
+                        Toast.makeText(SearchActivity.this, "Couldn't find the matching result you were searching for!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        searchProduct.clear();
+                        if (resultSearch.size() != 0) {
+                            for (Product product : resultSearch) {
+                                if (product.getpName().toLowerCase().contains(newText.toLowerCase())) {
+                                    searchProduct.add(product);
+                                } else if (newText.equals("")) {
+                                    searchProduct.add(product);
+                                }
+                            }
+                            checkChangeText = true;
+                            searchResult(searchProduct);
+                        }
+                        return false;
+                    }
+                });
+                if (checkResult == true) {
+                    searchResult(listProductSearchForFood);
+                    checkResult = false;
+                }
+
+            }
+
+            public void searchResult(List<Product> listResult) {
+                RecyclerView recyclerView = findViewById(R.id.ListRecycleSearch);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(linearLayoutManager);
+                SearchAdapter searchAdapter = new SearchAdapter(getApplicationContext(), listResult, getAllRes);
+                recyclerView.setAdapter(searchAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Server is not responding.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void main(View v) {
 //        finish();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -4,133 +4,245 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.Category"%>
+<%@page import="Models.DAO.ProductDAO"%>
+<%@page import="Models.Entity.GetProduct"%>
+<%@page import="Models.DAO.OrderDAO"%>
+<%@page import="Models.Entity.User"%>
+<%@page import="Models.Entity.RestaurantName"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.DAO.RestaurantDAO"%>
+<%@page import="Models.Entity.Account"%>
+<%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html><html lang=en>
-    <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-        <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/choices.js/choices.min.css" />
-
-        <title>Add Product</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-
-
-        <hr>
-        <div class="container bootstrap snippet">
-            <div class="row">
-                <div class="col-sm-10"><h1>Add Product</h1></div>
-                <div class="col-sm-2"><a href="index.jsp" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="../img/logo.png"></a></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3"><!--left col-->
-
-
-                    <div class="text-center">
-                        <img src="https://www.pngfind.com/pngs/m/330-3309459_food-logo-transparent-background-hd-png-download.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                        <h6>Upload a different photo...</h6>
-                        <input type="file" class="text-center center-block file-upload">
-                    </div><br>
-                </div><!--/col-3-->
-                <div class="col-sm-9">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home">
-                            <form class="form" action="indexAdmin.jsp" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>Product name</h4></label>
-                                        <input type="text" class="form-control first_name" name="product name" id="first_name" placeholder="product name" title="enter your first name if any.">
-                                    </div>
-                                </div>
-                                
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Price</h4></label>
-                                        <input type="text" class="form-control" name="price of product" id="phone" placeholder="price of product" title="enter your phone number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Description</h4></label>
-                                        <textarea  type="email" class="form-control" name="description" id="email" placeholder="description" title="enter your email."></textarea>
-                                    </div>
-                                </div>
-                               <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Category</h4></label>
-                                        <select class="custom-select" id="gender2">
-                                            <option selected>Choose...</option>
-                                            <option value="1">Food</option>
-                                            <option value="2">Drinks</option>
-                                        </select> 
-                                    </div>
-                                </div>
-                            </form>
-                            <hr>
-                        </div><!--/tab-pane-->
-                    </div><!--/tab-pane-->
-                </div><!--/tab-content-->
-            </div><!--/col-9-->
-        </div><!--/row-->
-        <script>
-            $(document).ready(function () {
-
-
-                var readURL = function (input) {
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('.avatar').attr('src', e.target.result);
-                        }
-
-                        reader.readAsDataURL(input.files[0]);
-                    }
+    <%
+        if (session.getAttribute("LoginUser") == null) {
+            response.sendRedirect("../../AdminDashboard/Login.jsp");
+        } else {
+            User user = (User) session.getAttribute("LoginUser");
+            if (user != null) {
+                if (user.getRoleID() == 2) {
+                    response.sendRedirect("../Admin/index.jsp");
+                } else if (user.getRoleID() == 4) {
+                    response.sendRedirect("../Staff/index.jsp");
                 }
+            }
 
+    %>
+    <head>
 
-                $(".file-upload").on('change', function () {
-                    readURL(this);
-                });
-            });
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Food Ordering System - Update</title>
 
-//            $(".saveData").click(function () {
-////                var $row = $(this).closest("tr");    // Find the row
-////                var $text = $row.find(".id").text(); // Find the text
-//               var $firstName = document.getElementById("first_name").value;
-//                if ($firstName) {
-////                    var url = "/AdminDashboard/UpdateProfile?id=" + $firstName;
-//                      var url = "/AdminDashboard/indexAdmin.jsp";
-//
-////                    alert("Hello " +$firstName);
-//                    window.location.href = url;
-//                }
-//                // Let's test it out
-//
-//            });
+        <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+        <link href="https://colorlib.com/polygon/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+        <link href="https://colorlib.com/polygon/vendors/nprogress/nprogress.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css">
+        <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/perfect-scrollbar.css">
+        <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+        <link href="${pageContext.request.contextPath}/css/custom.min.css" rel="stylesheet">
+        <meta name="robots" content="noindex, nofollow">
+    </head>
+    <body class="nav-md">
+        <div class="container body row">
+            <div class=" col-3" style="margin-right: -80px">
+                <div class="sidebar-wrapper active">
+                    <div class="sidebar-header">
+                        <div class="d-flex justify-content-between">
+                            <div class="logo">
+                                <a href="index.jsp"><img  src="${pageContext.request.contextPath}/img/logo.png" alt="Logo" class="w-50 h-50" srcset=""></a>
+                                <h2 class="page-heading"style="font-size: 32px;">FOOD ORDERING MANAGEMENTS</h2>
+                            </div>
+                            <div class="toggler">
+                                <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-menu">
+                        <ul class="menu">
+                            <li class="sidebar-title">Menu</li>
+
+                            <li class="sidebar-item ">
+                                <a href="indexOrderManagement" class='sidebar-link'>
+                                    <i class="bi bi-calendar-check"></i>
+                                    <span>Order management</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item active">
+                                <a href="ProductManagement" class='sidebar-link'>
+                                    <i class="bi bi-shop"></i>
+                                    <span>Product management</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="CategoryManagement" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Category management</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main_container  col-9">
+
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="clearfix row">
+                            <div class="col-2">
+                                <a href="/AdminDashboard/ProductManagement"><button type="button" class="btn btn-warning">Back</button></a>
+                            </div>
+                            <div class="col-5 ml-5 pl-4">
+                                <h1>UPDATE PRODUCT</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-sm-10">
+                                <div class="x_panel">
+                                    <div class="x_content">
+                                        <form class="" action="${pageContext.request.contextPath}/UpdateProductSQL" method="post" novalidate>
+                                            <%                                                int id = 0;
+                                                if (request.getParameter("id") != null) {
+                                                    id = Integer.parseInt(request.getParameter("id"));
+                                                }
+                                                if (id != 0) {
+                                                    ProductDAO productDAO = new ProductDAO();
+                                                    GetProduct product = productDAO.getProductById(id);
+                                                    System.out.println("imageeeeeee " + product.getiURL());
+
+                                            %>
+                                            <span class="section"></span>
+                                            <div class="field item form-group">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" hidden="" value="<%=product.getpID()%>"  data-validate-length-range="6"  name="id" required="required" />
+                                                </div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Product Name<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" value="<%=product.getpName()%>"  data-validate-length-range="3"  name="name" placeholder="Ex. John f" required="required" />
+                                                </div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Price<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input value="<%=product.getPrice()%>" name="price" class="form-control" data-validate-length-range="1" required="required" type="number" /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Description<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <textarea class="form-control" class='address'  name="description" required='required' ><%=product.getpDescription()%></textarea></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Image Product<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <input class="form-control" type="text" id="file" class='file' value="<%=product.getiURL()%>" name="file" accept="image/png, image/jpg, image/jpeg" /></div>
+                                            </div>
+                                            <div class="field item form-group">
+                                                <label class="col-form-label col-md-3 col-sm-3  label-align">Category<span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select class="form-select" name="category">
+                                                        <%
+                                                            ArrayList<Category> categoryList = new ArrayList<Category>();
+                                                            categoryList = productDAO.getCategoryById();
+                                                            for (int i = 0; i < categoryList.size(); i++) {
+                                                                if (categoryList.get(i).getcID() == product.getCategory()) {
+                                                        %>
+                                                        <option value="<%=categoryList.get(i).getcID()%>" selected><%=categoryList.get(i).getcName()%></option>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <option value="<%=categoryList.get(i).getcID()%>"><%=categoryList.get(i).getcName()%></option>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <%
+                                                }
+                                            %>
+                                            <div class="ln_solid">
+                                                <div class="form-group">
+                                                    <div class="col-md-6 offset-md-3">
+                                                        <button type='submit' class="btn btn-primary">UPDATE PRODUCT</button>
+                                                        <button type='reset' class="btn btn-success">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <div class="pull-right">
+                        GROUP 02
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://colorlib.com/polygon/vendors/validator/multifield.js"></script>
+        <script src="${pageContext.request.contextPath}/js/validator.js"></script>
+        <script>
+            // initialize a validator instance from the "FormValidator" constructor.
+            // A "<form>" element is optionally passed as an argument, but is not a must
+            var validator = new FormValidator({"events": ['blur', 'input', 'change']}, document.forms[0]);
+            // on form "submit" event
+            document.forms[0].onsubmit = function (e) {
+                var submit = true,
+                        validatorResult = validator.checkAll(this);
+                console.log(validatorResult);
+                return !!validatorResult.valid;
+            };
+            // on form "reset" event
+            document.forms[0].onreset = function (e) {
+                validator.reset();
+            };
+            // stuff related ONLY for this demo page:
+            $('.toggleValidationTooltips').change(function () {
+                validator.settings.alerts = !this.checked;
+                if (this.checked)
+                    $('form .alert').remove();
+            }).prop('checked', false);
         </script>
-    </body>
 
+        <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>
+
+        <script src="https://colorlib.com/polygon/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://colorlib.com/polygon/vendors/fastclick/lib/fastclick.js"></script>
+
+        <script src="https://colorlib.com/polygon/vendors/nprogress/nprogress.js"></script>
+
+
+
+        <script src="${pageContext.request.contextPath}/js/custom.min.js"></script>
+        <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66c22f881b172f64","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.6.0","si":10}'></script>
+    </body>
 </html>
+
+<%
+    }
+%>

@@ -5,12 +5,10 @@
  */
 package UserController;
 
-import Models.DAO.AccountDAO;
-import Models.Entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-@WebServlet(name = "UpdateAccount", urlPatterns = {"/UpdateAccount"})
 public class UpdateAccount extends HttpServlet {
 
     /**
@@ -33,7 +30,11 @@ public class UpdateAccount extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id").toString();
 
+        request.setAttribute("id", id);
+        RequestDispatcher rd = request.getRequestDispatcher("./Admin/UpdateAccount.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,35 +63,7 @@ public class UpdateAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        int id = Integer.parseInt(request.getParameter("id"));
-        String first_name = request.getParameter("firstName").toString();
-        String last_name = request.getParameter("lastName").toString();
-        String phone = request.getParameter("phone").toString();
-        String address = request.getParameter("address").toString();
-        String email = request.getParameter("email").toString();
-        String status = request.getParameter("selectStatus").toString();
-        int selectStatus = -1;
-        if (status.equalsIgnoreCase("Active") || status.equalsIgnoreCase("1")) {
-            selectStatus = 1;
-        } else if (status.equalsIgnoreCase("Inactive") || status.equalsIgnoreCase("0")) {
-            selectStatus = 0;
-        }
-
-        AccountDAO accountDAO = new AccountDAO();
-        boolean checkUpdate = false;
-        if (selectStatus != -1) {
-            checkUpdate = accountDAO.updateAccount(id, first_name, last_name, phone, email, address, selectStatus);
-        }
-        if (checkUpdate == true) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
-            out.println("</script>");
-        } else {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Admin/UpdateProfile.jsp?id="+id+"';");
-            out.println("</script>");
-        }
+        processRequest(request, response);
     }
 
     /**

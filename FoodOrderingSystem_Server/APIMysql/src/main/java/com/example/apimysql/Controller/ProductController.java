@@ -21,6 +21,11 @@ public class ProductController {
         return productService.listProducts();
     }
 
+    @GetMapping("/listProductAllProduct")
+    public List<Map<String, Object>> listProductAllProduct() {
+        return productService.listProductAllProduct();
+    }
+
     @GetMapping("/listAllProductForAllCategory")
     public List<Map<String, Object>> listAllProductForAllCategory() {
         return productService.listAllProductForAllCategory();

@@ -99,6 +99,9 @@ public class ProfileFragment extends Fragment{
                             Log.e("Error: tú tú ",t.getMessage());
                         }
                     });
+                    Toast.makeText (MainActivity.fragment.getContext(), "Update is successfull !!", Toast.LENGTH_SHORT).show ();
+                    txtPassword.getEditText().setText("");
+                    txtConfirmpassword.getEditText().setText("");
                 }
             }
         });
@@ -136,7 +139,7 @@ public class ProfileFragment extends Fragment{
         if (inputPass.isEmpty ()){
             txtPassword.setError ("Password is not empty");
             return false;
-        }else if(!Pattern.compile("^[A-Z]+[a-z0-9]{7,15}+").matcher (inputPass).matches ()){
+        }else if(!Pattern.compile("^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}").matcher (inputPass).matches ()){
             txtPassword.setError ("Password must have 8-16 character, have uppercase character and special character");
             return false;
         }
@@ -147,7 +150,7 @@ public class ProfileFragment extends Fragment{
     }
     private boolean validateConfirmPass(){
         String inputCpass = txtConfirmpassword.getEditText().getText ().toString ().trim ();
-        String password = txtConfirmpassword.getEditText().getText ().toString ().trim ();
+        String password = txtPassword.getEditText().getText ().toString ().trim ();
 
         if (inputCpass.isEmpty ()){
             txtConfirmpassword.setError ("Confirm Password is not empty");

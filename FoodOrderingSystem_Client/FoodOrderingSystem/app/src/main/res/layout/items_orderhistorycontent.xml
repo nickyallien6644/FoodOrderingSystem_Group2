@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3,4">
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv_foodrow"
+            android:layout_width="158dp"
+            android:layout_column="1"
+            android:padding="10dp"
+            android:text="Food"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/tv_amountrow"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:text="Quantity"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:layout_column="1"/>
+        <TextView
+            android:id="@+id/tv_pricerow"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:text="Price"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:layout_column="1"/>
+        <TextView
+            android:id="@+id/tv_totalrow"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:text="Total"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:layout_column="1"/>
+    </TableRow>
+</TableLayout>

@@ -4,6 +4,7 @@
     Author     : phuct
 --%>
 
+<%@page import="Models.Entity.User"%>
 <%@page import="Models.DAO.RestaurantDAO"%>
 <%@page import="Models.Entity.Restaurant"%>
 <%@page import="Models.Entity.Account"%>
@@ -11,17 +12,26 @@
 <%@page import="Models.DAO.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-  <%
-      if (session.getAttribute("LoginUser") == null) {
-              response.sendRedirect("../../AdminDashboard/Login.jsp");
-      }
-  %>
+<%
+    if (session.getAttribute("LoginUser") == null) {
+        response.sendRedirect("../../AdminDashboard/Login.jsp");
+    } else {
+        User user = (User) session.getAttribute("LoginUser");
+        if (user != null) {
+            if (user.getRoleID() == 3) {
+                response.sendRedirect("../Employee/index.jsp");
+            } else if (user.getRoleID() == 4) {
+                response.sendRedirect("../Staff/index.jsp");
+            }
+        }
+
+%>
 <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DataTable - Mazer Admin Dashboard</title>
+        <title>Food Ordering System - Dashboard</title>
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -34,6 +44,7 @@
         <link rel="stylesheet" href="../css/app.css">
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
     </head>
 
     <body>
@@ -55,15 +66,15 @@
                         <ul class="menu">
                             <li class="sidebar-title">Menu</li>
 
-                            <li class="sidebar-item active">
+                            <li class="sidebar-item ">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-person-badge"></i>
                                     <span>Accounts</span>
                                 </a>
                             </li>
                             <li class="sidebar-item active">
                                 <a href="indexRestaurant.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-house"></i>
                                     <span>Restaurants</span>
                                 </a>
                             </li>
@@ -90,21 +101,18 @@
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <div class="card d-flex align-items-center" style="float: right; padding-bottom: 20px; padding-right: 20px;padding-left: 20px;padding-top: 20px;">
-                                    <div class="avatar avatar-xl">
-                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
-                                    </div>
                                     <div class="ms-2 name">
-                                        <h5 class="font-bold">STAFF01</h5>
-                                        <h6 class="text-muted mb-0">@ThinhBNP</h6>
+                                        <h5 class="font-bold">ADMIN</h5>
+                                        <h6 class="text-muted mb-0"><%=user.getaFirstname()%></h6>
                                     </div>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             Information
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Account</a></li>
+                                            <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                            <li><a class="dropdown-item logout"  href="../logout">Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -139,20 +147,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%
-                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
+                                        <%                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
                                             ArrayList<Restaurant> listRestaurant = new ArrayList<Restaurant>();
                                             listRestaurant = restaurantDAO.getAllRestaurant();
                                             for (int i = 0; i < listRestaurant.size(); i++) {
                                         %>
                                         <tr>
-                                            <td class="use-address id" ><%=listRestaurant.get(i).getrId() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrName() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeOpen() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeClose() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrAddress() %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrPhone()  %></td>
-                                            <td class="use-address"><%=listRestaurant.get(i).getrImage() %></td>
+                                            <td class="use-address id" ><%=listRestaurant.get(i).getrId()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrName()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeOpen()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrTimeClose()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrAddress()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrPhone()%></td>
+                                            <td class="use-address"><%=listRestaurant.get(i).getrImage()%></td>
                                         </tr>
                                         <%
                                             }
@@ -205,3 +212,6 @@
     </body>
 
 </html>
+<%
+    }
+%>

@@ -7,6 +7,7 @@ package Models.DAO;
 
 import Models.Entity.Account;
 import Models.Entity.Restaurant;
+import Models.Entity.RestaurantName;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,36 +24,28 @@ import java.util.logging.Logger;
  */
 public class RestaurantDAO {
 
-    public Restaurant restaurant;
-
     public Connection conn;
 
     public boolean b = false;
 
     public ArrayList<Restaurant> listRestaurant;
+    public ArrayList<RestaurantName> listRestaurantName;
 
     public RestaurantDAO() {
         DBConnection db = new DBConnection();
         this.conn = db.getConnect();
-        restaurant = new Restaurant();
-        listRestaurant = new ArrayList<>();
     }
 
-    public ArrayList<Restaurant> getAllRestaurant() {
+    public ArrayList<RestaurantName> getAllNameRes() {
         try {
-
-            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant`");
+            listRestaurantName = new ArrayList<>();
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT rID, rName FROM `restaurant`");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Restaurant restaurant = new Restaurant();
+                RestaurantName restaurant = new RestaurantName();
                 restaurant.setrId(rs.getInt("rID"));
                 restaurant.setrName(rs.getString("rName"));
-                restaurant.setrTimeOpen(rs.getTime("rTimeOpen"));
-                restaurant.setrTimeClose(rs.getTime("rTimeClose"));
-                restaurant.setrAddress(rs.getString("rAddress"));
-                restaurant.setrPhone(rs.getString("rPhone"));
-                restaurant.setrImage(rs.getString("rImage"));
-                listRestaurant.add(restaurant);
+                listRestaurantName.add(restaurant);
             }
 
         } catch (SQLException e) {
@@ -62,40 +55,23 @@ public class RestaurantDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listRestaurant;
+        return listRestaurantName;
 
     }
 
-    public boolean insertRestaurant(String name, Time timeOpen, Time timeClose, String address, String phone, String image) {
-
+    public Restaurant getRestaurantByaId(int aId) {
+        Restaurant restaurant = new Restaurant();
         try {
-            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("INSERT INTO `restaurant`(`rName`, `rTimeOpen`, `rTimeClose`, `rAddress`, `rPhone`, `rImage`) VALUES (?,?,?,?,?,?)");
-            pst.setString(1, name);
-            pst.setTime(2, timeOpen);
-            pst.setTime(3, timeClose);
-            pst.setString(4, address);
-            pst.setString(5, phone);
-            pst.setString(6, image);
-            return pst.executeUpdate() > 0;
-        } catch (Exception e) {
-        }
-
-        return false;
-    }
-
-    public Restaurant getRestaurantById(int id) {
-        Restaurant restaurant = null;
-        try {
-            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant` WHERE rID = ?");
-            pst.setInt(1, id);
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT r.rID, r.rName, r.rTimeOpen, r.rTimeClose, r.rAddress, r.rPhone, r.rImage FROM `restaurant` AS r INNER JOIN `account` AS a ON r.rID = a.rID WHERE a.aID = ? LIMIT 1");
+            pst.setInt(1, aId);
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 restaurant = new Restaurant();
                 restaurant.setrId(rs.getInt("rID"));
                 restaurant.setrName(rs.getString("rName"));
-                restaurant.setrTimeOpen(rs.getTime("rTimeOpen"));
-                restaurant.setrTimeClose(rs.getTime("rTimeClose"));
+                restaurant.setrTimeOpen(rs.getString("rTimeOpen"));
+                restaurant.setrTimeClose(rs.getString("rTimeClose"));
                 restaurant.setrAddress(rs.getString("rAddress"));
                 restaurant.setrPhone(rs.getString("rPhone"));
                 restaurant.setrImage(rs.getString("rImage"));
@@ -113,35 +89,130 @@ public class RestaurantDAO {
         return restaurant;
     }
 
-    public boolean updateRestaurant(int id, String name, Time timeOpen, Time timeClose, String address, String phone, String image) {
+    public ArrayList<Restaurant> getAllRestaurant() {
+        try {
+            listRestaurant = new ArrayList<>();
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant`");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Restaurant restaurant = new Restaurant();
+                restaurant.setrId(rs.getInt("rID"));
+                restaurant.setrName(rs.getString("rName"));
+                restaurant.setrTimeOpen(rs.getString("rTimeOpen"));
+                restaurant.setrTimeClose(rs.getString("rTimeClose"));
+                restaurant.setrAddress(rs.getString("rAddress"));
+                restaurant.setrPhone(rs.getString("rPhone"));
+                restaurant.setrImage(rs.getString("rImage"));
+                listRestaurant.add(restaurant);
+            }
+
+        } catch (SQLException e) {
+        }
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listRestaurant;
+
+    }
+
+    public boolean insertRestaurant(String name, String timeOpen, String timeClose, String address, String phone, String image) {
 
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("INSERT INTO `restaurant`(`rName`, `rTimeOpen`, `rTimeClose`, `rAddress`, `rPhone`, `rImage`) VALUES (?,?,?,?,?,?)");
+            pst.setString(1, name);
+            pst.setString(2, timeOpen);
+            pst.setString(3, timeClose);
+            pst.setString(4, address);
+            pst.setString(5, phone);
+            pst.setString(6, image);
+            return pst.executeUpdate() > 0;
+        } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public Restaurant getRestaurantById(int id) {
+        Restaurant restaurant = null;
+        try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement("SELECT * FROM `restaurant` WHERE rID = ?");
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                restaurant = new Restaurant();
+                restaurant.setrId(rs.getInt("rID"));
+                restaurant.setrName(rs.getString("rName"));
+                restaurant.setrTimeOpen(rs.getString("rTimeOpen"));
+                restaurant.setrTimeClose(rs.getString("rTimeClose"));
+                restaurant.setrAddress(rs.getString("rAddress"));
+                restaurant.setrPhone(rs.getString("rPhone"));
+                restaurant.setrImage(rs.getString("rImage"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return restaurant;
+    }
+
+    public boolean updateRestaurant(int id, String name, String timeOpen, String timeClose, String address, String phone, String image) {
+
+        try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("UPDATE `restaurant` SET `rName`=?,`rTimeOpen`=?,`rTimeClose`=?,`rAddress`=?,`rPhone`=?,`rImage`=? WHERE `rID`=?");
             pst.setString(1, name);
-            pst.setTime(2, timeOpen);
-            pst.setTime(3, timeClose);
+            pst.setString(2, timeOpen);
+            pst.setString(3, timeClose);
             pst.setString(4, address);
             pst.setString(5, phone);
             pst.setString(6, image);
             pst.setInt(7, id);
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public boolean updateRestaurantNoImage(int id, String name, Time timeOpen, Time timeClose, String address, String phone) {
+    public boolean updateRestaurantNoImage(int id, String name, String timeOpen, String timeClose, String address, String phone) {
 
         try {
+            DBConnection db = new DBConnection();
+            this.conn = db.getConnect();
             PreparedStatement pst = (PreparedStatement) conn.prepareStatement("UPDATE `restaurant` SET `rName`=?,`rTimeOpen`=?,`rTimeClose`=?,`rAddress`=?,`rPhone`=? WHERE `rID`=?");
             pst.setString(1, name);
-            pst.setTime(2, timeOpen);
-            pst.setTime(3, timeClose);
+            pst.setString(2, timeOpen);
+            pst.setString(3, timeClose);
             pst.setString(4, address);
             pst.setString(5, phone);
             pst.setInt(6, id);
             return pst.executeUpdate() > 0;
         } catch (Exception e) {
+        }try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

@@ -31,24 +31,35 @@
 
                         <ImageView
                             android:id="@+id/btnBack"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="8dp"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_back"
                             android:onClick="clickBack"/>
                         <TextView
                             android:id="@+id/tv_restaurant"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:layout_marginLeft="70dp"
-                            android:layout_marginTop="12dp"
+                            android:textAlignment="center"
                             android:text="aaaa"
                             android:textSize="25dp"
                             android:textStyle="bold"/>
+
+                        <ImageView
+                            android:id="@+id/btnCart"
+                            android:layout_marginTop="3dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="70dp"
+                            android:src="@drawable/outline_shopping_cart_24"
+                            android:onClick="clickCart"/>
                     </LinearLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="380dp"
-                        android:layout_height="300dp"
+                        android:layout_height="290dp"
                         android:layout_marginTop="50dp"
                         android:background="@drawable/restaurant_detail_title">
                         <LinearLayout
@@ -59,40 +70,9 @@
                             <ImageView
                                 android:id="@+id/iv_restaurant"
                                 android:layout_width="380dp"
-                                android:layout_height="100dp"
+                                android:layout_height="150dp"
                                 android:scaleType="centerCrop"
                                 android:src="@color/Cam" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="10dp">
-                                <TextView
-                                    android:id="@+id/tv_timeOpen"
-                                    android:layout_width="50dp"
-                                    android:layout_height="30dp"
-                                    android:textSize="18dp"
-                                    android:layout_marginLeft="100dp"
-                                    android:textStyle="bold"
-                                    android:text="aaaa"/>
-                                <TextView
-                                    android:layout_width="10dp"
-                                    android:layout_height="30dp"
-                                    android:textSize="18dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:textStyle="bold"
-                                    android:text="-"/>
-                                <TextView
-                                    android:id="@+id/tv_timeClose"
-                                    android:layout_width="50dp"
-                                    android:layout_height="30dp"
-                                    android:textStyle="bold"
-                                    android:textSize="18dp"
-                                    android:layout_marginLeft="15dp"
-                                    android:text="aaaa"/>
-
-                            </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -115,12 +95,40 @@
 
                                 <TextView
                                     android:id="@+id/tv_phone"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="180dp"
                                     android:layout_height="wrap_content"
                                     android:textSize="18dp"
                                     android:text="aaaaa"/>
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:src="@drawable/outline_schedule_24"/>
+                                    <TextView
+                                        android:id="@+id/tv_timeOpen"
+                                        android:layout_width="50dp"
+                                        android:layout_height="30dp"
+                                        android:textSize="18dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:textStyle="bold"
+                                        android:text="aaaa"/>
+                                    <TextView
+                                        android:layout_width="10dp"
+                                        android:layout_height="30dp"
+                                        android:textSize="18dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:textStyle="bold"
+                                        android:text="-"/>
+                                    <TextView
+                                        android:id="@+id/tv_timeClose"
+                                        android:layout_width="50dp"
+                                        android:layout_height="30dp"
+                                        android:textStyle="bold"
+                                        android:textSize="18dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="aaaa"/>
 
                             </LinearLayout>
+
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
