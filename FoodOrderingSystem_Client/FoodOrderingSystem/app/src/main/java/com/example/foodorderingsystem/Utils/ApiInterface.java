@@ -6,6 +6,7 @@ import com.example.foodorderingsystem.Model.Account;
 import com.example.foodorderingsystem.Model.Cart;
 import com.example.foodorderingsystem.Model.Category;
 import com.example.foodorderingsystem.Model.FrequentlyAskedQuestion;
+import com.example.foodorderingsystem.Model.Notification;
 import com.example.foodorderingsystem.Model.Order;
 import com.example.foodorderingsystem.Model.OrderDetail;
 import com.example.foodorderingsystem.Model.PrivacyPolicy;
@@ -43,6 +44,9 @@ public interface ApiInterface {
     Call<Account>updateBcoins(@Body Account account);
     @PUT("account/forgotPassword")
     Call<Account>forgotPassword(@Body Account account);
+
+    @POST("nofication/add")
+    Call<Notification> addNofication(@Body Notification notification);
 
     @POST("cart/addCart")
     Call<Cart>addCart(@Body Cart cart);
@@ -97,6 +101,9 @@ public interface ApiInterface {
     @GET("restaurant/getAll")
     Call<List<Restaurant>> getAllRestaurantInfo();
 
+    @GET("nofication/list/{ID}")
+    Call<List<Notification>> ListNofication(@Path("ID") int ID);
+
     @POST("order/add")
     Call<Order>addOrder(@Body Order order);
 
@@ -114,6 +121,7 @@ public interface ApiInterface {
 
     @GET("order/list/{date}")
     Call<List<Order>> getOrdersDate(@Path("date")String date);
+
 
 
 }

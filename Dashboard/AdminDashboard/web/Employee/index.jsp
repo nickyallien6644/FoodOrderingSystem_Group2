@@ -4,22 +4,29 @@
     Author     : phuct
 --%>
 
-<%@page import="Models.Entity.User"%>
-<%@page import="Models.Entity.Restaurant"%>
-<%@page import="Models.Entity.Order"%>
 <%@page import="Models.DAO.OrderDAO"%>
-<%@page import="Models.Entity.Account"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Models.DAO.RestaurantDAO"%>
-<%@page import="Models.DAO.AccountDAO"%>
+<%@page import="Models.Entity.OrderShow"%>
+<%@page import="Models.Entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
-    <%
-        if (session.getAttribute("LoginUser") == null || session.getAttribute("rID") == null) {
-            response.sendRedirect("../../AdminDashboard/Login.jsp");
+<%
+    if (session.getAttribute("LoginUser") == null) {
+        response.sendRedirect("../../AdminDashboard/Login.jsp");
+    } else {
+        User user = (User) session.getAttribute("LoginUser");
+        if (user != null) {
+
+            if (user.getRoleID() == 2) {
+                response.sendRedirect("../Admin/index.jsp");
+            } else if (user.getRoleID() == 4) {
+                response.sendRedirect("../Staff/index.jsp");
+            }
         }
-    %>
+
+%>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,14 +35,13 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/bootstrap.css">
-
         <link rel="stylesheet" href="../css/style.css">
-
         <link rel="stylesheet" href="../css/perfect-scrollbar.css">
         <link rel="stylesheet" href="https://zuramai.github.io/mazer/demo/assets/vendors/bootstrap-icons/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/app.css">
         <link rel="shortcut icon" href="https://zuramai.github.io/mazer/demo/assets/images/favicon.svg" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </head>
 
     <body>
@@ -58,21 +64,20 @@
                             <li class="sidebar-title">Menu</li>
                             <li class="sidebar-item active">
                                 <a href="index.jsp" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                    <i class="bi bi-calendar-check"></i>
                                     <span>Order management</span>
                                 </a>
                             </li>
-
                             <li class="sidebar-item  ">
                                 <a href="productManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-envelope-fill"></i>
+                                    <i class="bi bi-shop"></i>
                                     <span>Product management</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item  ">
                                 <a href="CategoryManagement.jsp" class='sidebar-link'>
-                                    <i class="bi bi-envelope-fill"></i>
+                                    <i class="bi bi-grid-fill"></i>
                                     <span>Category management</span>
                                 </a>
                             </li>
@@ -82,7 +87,6 @@
                 </div>
             </div>
 
-
             <div id="main">
                 <header class="mb-3">
                     <a href="#" class="burger-btn d-block d-xl-none">
@@ -91,110 +95,114 @@
                 </header>
 
                 <div class="page-heading">
-                    <div class="page-title">
-                        <div class="row">
-                            <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h2>ORDER MANAGEMENT</h2>
-                                <p class="text-subtitle text-muted">Let the admin check the system's account list</p>
-                            </div>
-                            <div class="col-12 col-md-6 order-md-2 order-first">
-                                <div class="card d-flex align-items-center" style="float: right; padding-bottom: 20px; padding-right: 20px;padding-left: 20px;padding-top: 20px;">
-                                    <div class="avatar avatar-xl">
-                                        <img src="https://zuramai.github.io/mazer/demo/assets/images/faces/1.jpg" alt="Face 1">
+                    <h2>ORDER MANAGEMENT</h2>
+                </div>
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-lg-9">
+                            <div class="row" >
+                                <%                                    OrderDAO orderDAO = new OrderDAO();
+                                    int count[] = orderDAO.countAllOrder();
+                                %>
+                                <div class="col-6 col-lg-6 col-md-6">
+                                    <div class="card" style="padding-bottom: 8px">
+                                        <div class="card-body ">
+                                            <div class="text-center" style="margin-top: 20px;">
+                                                <h5 class="text-muted font-semibold">Orders of Customer complete: <b style="color: black"><%=count[0]%></b></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="ms-2 name">
-                                        <h5 class="font-bold">EMPLOYEE</h5>
-                                        <h6 class="text-muted mb-0"><%
-                                                if(session.getAttribute("LoginUser") != null){
-                                                User user = (User)session.getAttribute("LoginUser");
-                                                user.getaFirstname();
-                                            }
-                                            %></h6>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Information
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Account</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <a class="dropdown-item" href="../Login.jsp"><li>Logout</li></a>
-                                        </ul>
+                                </div>
+                                <div class="col-6 col-lg-6 col-md-6">
+                                    <div class="card" style="padding-bottom: 8px">
+                                        <div class="card-body" >
+                                            <div class="text-center" style="margin-top: 20px;">
+                                                <h5  class="text-muted font-semibold">Orders of Customer incomplete: <b style="color: black"><%=count[1]%></b></h5>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <section class="section">
-                        <div class="card">
-                            <div class="card-header">
-                                Admin can edit profile as status, name, email, phone, city 
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-striped" id="table1">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Account</th>
-                                            <th>Total</th>
-                                            <th>Note</th>
-                                            <th>Code</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%
-                                            AccountDAO accountDAO = new AccountDAO();
-                                            RestaurantDAO restaurantDAO = new RestaurantDAO();
-                                            Account account = new Account();
-                                            ArrayList<Order> listOrders = new ArrayList<Order>();
-                                            OrderDAO orderDAO = new OrderDAO();
-                                            if (session.getAttribute("rID") != null) {
-                                                int rID = ((Integer) session.getAttribute("rID")).intValue();
-                                                listOrders = orderDAO.getAllOrderByrID(rID);
-                                            }
-                                            for (int i = 0; i < listOrders.size(); i++) {
-                                        %>
-                                        <tr>
-                                            <td class="use-address id" ><%=listOrders.get(i).getoID()%></td>
-                                            <td class="use-address"><%=accountDAO.getAccountById(listOrders.get(i).getaID()).getAemail()%></td>
-                                            <td class="use-address"><%=listOrders.get(i).getoAmountTotal()%></td>
-                                            <td class="use-address"><%=listOrders.get(i).getoNote()%></td>
-                                            <td class="use-address"><%=listOrders.get(i).getoCode()%></td>
-                                            <td class="use-address"><%=listOrders.get(i).getoDateCreate()%></td>             
-
-                                            <%
-                                                if (listOrders.get(i).getoStatus() == 1) {
-                                            %>
-                                            <td class="use-address">
-                                                <span class="badge bg-success">Paid</span>
-                                            </td>
-                                            <td class="use-address">
-                                            </td>
-                                            <%                                            } else if (listOrders.get(i).getoStatus() == 0) {
-                                            %>
-                                            <td class="use-address">
-                                                <span class="badge bg-danger">Unpaid</span>
-                                            </td>
-
-                                            <td class="use-address">
-                                                <button type="button" class="btn btn-light-warning">Confirm</button>
-                                            </td>
-                                            <%
-                                                }
-                                            %>
-                                        </tr>
-                                        <%
-                                            }
-                                        %>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="col-12 col-lg-3">
+                            <div class="card">
+                                <div class="card-body"style="margin-bottom: -10px">
+                                    <div class="d-flex align-items-center row">
+                                        <div class="ms-2 name col-8">
+                                            <h5 class="font-bold">EMPLOYEE</h5>
+                                            <h6 class="text-muted mb-0"><%=user.getaFirstname()%></h6>
+                                        </div>
+                                        <div class="btn-group col-3">
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/AdminDashboard/UpdateProfile?id=<%=user.getaID()%>&&check=pass">Account</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="../logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                           
                         </div>
-                    </section>
+                    </div>
                 </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Customer</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Total</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        ArrayList<OrderShow> orderShowList = new ArrayList<OrderShow>();
+                                        orderShowList = orderDAO.showAllOrder(user.getrID());
+                                        if (orderShowList.size() != 0) {
+                                            for (int i = 0; i < orderShowList.size(); i++) {
+                                    %>
+                                    <tr>
+                                        <td class="use-address id" ><%=orderShowList.get(i).getoID()%></td>
+                                        <td class="use-address"><%=orderShowList.get(i).getaFirstname()%></td>
+                                        <td class="use-address"><%=orderShowList.get(i).getaPhone()%></td>
+                                        <td class="use-address"><%=orderShowList.get(i).getaAddress()%></td>
+                                        <td class="use-address"><%=orderShowList.get(i).getoAmountTotal()%> </td>
+                                        <td class="use-address"><%=orderShowList.get(i).getoDateCreate()%></td>
+                                        <%
+                                            if (orderShowList.get(i).getoStatus() == 0) {
+                                        %>
+                                        <td class="use-address">
+                                            <span class="badge bg-light-danger">Unconfimred</span>
+                                        </td>
+                                        <td>
+                                            <a href="../UpdateStatusOrder?id=<%=orderShowList.get(i).getoID()%>&&aid=<%=user.getaID()%>" ><button class="btn btn-success">Confirm</button></a>
+                                        </td>
+                                        <%                                            } else {
+                                        %>
+                                        <td class="use-address">
+                                            <span class="badge bg-light-success">Confimred</span>
+                                        </td>
+                                        <%
+                                            }
+                                        %>
+                                    </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
 
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
@@ -214,12 +222,21 @@
 
         <script src="../js/simple-datatables.js"></script>
         <script>
-            // Simple Datatable
-            let table1 = document.querySelector('#table1');
-            let dataTable = new simpleDatatables.DataTable(table1);
+                                    // Simple Datatable
+                                    let table1 = document.querySelector('#table1');
+                                    let dataTable = new simpleDatatables.DataTable(table1);
+
+                                    function reload() {
+                                        location.reload();
+                                        return false;
+                                    }
+
         </script>
 
         <script src="../js/main.js"></script>
     </body>
 
 </html>
+<%
+    }
+%>

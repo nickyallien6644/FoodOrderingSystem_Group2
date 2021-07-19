@@ -5,12 +5,10 @@
  */
 package UserController;
 
-import Models.DAO.AccountDAO;
 import Models.DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author phuct
  */
-@WebServlet(name = "AddProduct", urlPatterns = {"/AddProduct"})
 public class AddProduct extends HttpServlet {
 
     /**
@@ -33,6 +30,7 @@ public class AddProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,29 +59,39 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //ADD product
         PrintWriter out = response.getWriter();
-        String name = request.getParameter("txtName").toString();
-        int price = Integer.parseInt(request.getParameter("txtPrice").toString());
-        String description = request.getParameter("txtDescription").toString();
-        int cID = Integer.parseInt(request.getParameter("selectCategory").toString());
-        String image = request.getParameter("txtImage").toString();
-        int rID = Integer.parseInt(request.getParameter("txtrID").toString());
+        //Inclue rId, pName, pPrice, description, image, category
+        int rId = Integer.parseInt(request.getParameter("id").toString());
+        String pName = request.getParameter("name").toString();
+        int pPrice = Integer.parseInt(request.getParameter("price").toString());
+        String description = request.getParameter("description").toString();
+        String image = request.getParameter("file").toString();
+        int category = Integer.parseInt(request.getParameter("category").toString());
+        //init ProductDAO
         ProductDAO productDAO = new ProductDAO();
-        
-        boolean checkUpdate = false;
+        //if insert product success will return Max(pId)
+        int checkInsert = 0;
+        boolean check = false;
 
-        checkUpdate = productDAO.insertProduct(rID, cID, name, description, price, image);
-
-        if (checkUpdate == true) {
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='./Employee/productManagement.jsp';");
-            out.println("</script>");
+        checkInsert = productDAO.insertProduct(pName, pPrice, description, category, rId);
+        if (checkInsert != 0) {
+            //If check insert !=0, will continue insert image
+            check = productDAO.insertImage(checkInsert, image);
+            if (check == true) {
+                out.println("<script type=\"text/javascript\">");
+                out.println("location='./Employee/productManagement.jsp';");
+                out.println("</script>");
+            } else {
+                out.println("<script type=\"text/javascript\">");
+                out.println("location='./Employee/AddProduct.jsp';");
+                out.println("</script>");
+            }
         } else {
             out.println("<script type=\"text/javascript\">");
             out.println("location='./Employee/AddProduct.jsp';");
             out.println("</script>");
         }
-
     }
 
     /**

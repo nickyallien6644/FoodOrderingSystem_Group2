@@ -40,7 +40,7 @@
                         android:layout_margin="5dp"
                         >
                     <TextView
-                        android:id="@+id/tv_namestore"
+                        android:id="@+id/txt_nametore"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:text="AAAAA"
@@ -64,7 +64,7 @@
                             android:textColor="@color/black"
                             android:textStyle="bold"/>
                         <TextView
-                            android:id="@+id/tv_Date"
+                            android:id="@+id/txt_content"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             android:gravity="right"
