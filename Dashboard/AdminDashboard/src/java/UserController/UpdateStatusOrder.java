@@ -32,12 +32,13 @@ public class UpdateStatusOrder extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         int oID = Integer.parseInt(request.getParameter("id"));
+        int aID =Integer.parseInt(request.getParameter("aid"));
         int oStatus = 1;
         boolean check = true;
         OrderDAO orderDAO = new OrderDAO();
-
+        boolean  chek = orderDAO.updateStatusNofication(aID);
         check = orderDAO.updateStatusOrder(oID, oStatus);
-        if (check != true) {
+        if (check != true && chek != true) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Confirm order not success, try again please);");
             out.println("</script>");

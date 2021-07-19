@@ -45,6 +45,9 @@ public interface ApiInterface {
     @PUT("account/forgotPassword")
     Call<Account>forgotPassword(@Body Account account);
 
+    @POST("nofication/add")
+    Call<Notification> addNofication(@Body Notification notification);
+
     @POST("cart/addCart")
     Call<Cart>addCart(@Body Cart cart);
 
@@ -118,6 +121,7 @@ public interface ApiInterface {
 
     @GET("order/list/{date}")
     Call<List<Order>> getOrdersDate(@Path("date")String date);
+
 
 
 }
